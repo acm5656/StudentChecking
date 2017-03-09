@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 case 0:
                     Toast.makeText(MainActivity.this,(String)msg.obj,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,ScheduleActivity.class);
+                    Intent intent = new Intent(MainActivity.this,StudentScheduleActivity.class);
                     startActivity(intent);
                     break;
             }

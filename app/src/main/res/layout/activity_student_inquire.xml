@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:background="#999999"
+        >
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="80dp"
+        android:orientation="horizontal"
+        android:background="#536bc1"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="学习"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_button"
+            android:textColor="#c5cdea"
+
+            android:layout_centerHorizontal="true"
+            android:id="@+id/schedule_study"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            style="@style/button_animotion"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="查询"
+            android:textColor="#fffffe"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:id="@+id/schedule_query"
+            android:background="@drawable/bottom_button"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="我"
+            android:textColor="#c5cdea"
+            android:background="@drawable/bottom_button"
+            android:layout_weight="1"
+            android:id="@+id/schedule_mine"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+
