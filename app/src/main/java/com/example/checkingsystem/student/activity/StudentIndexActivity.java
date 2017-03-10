@@ -55,7 +55,8 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                 return list.size();
             }
         });
-
+        studentIndexChooseWeek.setText("课表");
+        studentIndexChooseWeek.setOnClickListener(this);
         viewPager.setCurrentItem(0);
         studentIndexMine.setOnClickListener(this);
         studentIndexInquire.setOnClickListener(this);

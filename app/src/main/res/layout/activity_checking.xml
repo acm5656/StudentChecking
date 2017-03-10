@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    android:weightSum="10"
+    android:weightSum="11"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#536bc1"
+        android:background="@color/actionBarBackgroundColor"
         android:orientation="horizontal"
         >
         <TextView
@@ -30,6 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
+        android:background="#f5f2f2"
         >
 
         <TextView
@@ -37,7 +38,6 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/AskForLeave"
-            android:background="#536bc1"
             android:gravity="center"
             style="@style/OnClickText"
             android:textSize="20dp"
@@ -48,7 +48,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#536bc1"
             style="@style/unClickText"
             android:gravity="center"
             android:text="@string/checking"
@@ -60,7 +59,7 @@
         androdi:id="@+id/checking_fragment_container"
         androdi:layout_width="match_parent"
         androdi:layout_height="0dp"
-        androdi:layout_weight="8"
+        androdi:layout_weight="9"
 
         >
     </android.support.v4.view.ViewPager>

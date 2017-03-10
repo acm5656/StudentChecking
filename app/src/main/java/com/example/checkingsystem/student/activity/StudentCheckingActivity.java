@@ -45,9 +45,14 @@ public class StudentCheckingActivity extends FragmentActivity {
                 return list.size();
             }
         });
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
                 if(position==1)
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -63,11 +68,6 @@ public class StudentCheckingActivity extends FragmentActivity {
                     }
 
                 }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
             }
 
             @Override

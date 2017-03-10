@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:weightSum="11"
+    android:background="#ebebeb"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#536bc1"
+        android:background="@color/actionBarBackgroundColor"
         android:orientation="horizontal"
         >
         <TextView
@@ -21,8 +22,7 @@
             android:text="@string/please_choose"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:textStyle="bold"
+            android:textSize="20dp"
             android:paddingLeft="20dp"
             />
     </RelativeLayout>
@@ -40,7 +40,8 @@
         android:layout_weight="1"
         android:minHeight="80dp"
         android:orientation="horizontal"
-        android:background="#536bc1"
+        android:background="#fcfcfc"
+        android:layout_marginTop="1sp"
         >
 
         <TextView
@@ -49,9 +50,6 @@
             android:text="学习"
             android:layout_weight="1"
             android:background="@drawable/bottom_button"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#fffffe"
             android:layout_centerHorizontal="true"
             android:id="@+id/student_index_study"
             android:layout_margin="0dp"
@@ -63,7 +61,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="查询"
-            android:textColor="#c5cdea"
             android:layout_weight="1"
             android:id="@+id/student_index_inquire"
             android:background="@drawable/bottom_button"
@@ -73,7 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="我"
-            android:textColor="#c5cdea"
             android:background="@drawable/bottom_button"
             android:layout_weight="1"
             android:id="@+id/student_index_mine"
