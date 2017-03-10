@@ -1,4 +1,4 @@
-package com.example.checkingsystem;
+package com.example.checkingsystem.beans;
 
 /**
  * Created by 那年盛夏 on 2017/2/5.

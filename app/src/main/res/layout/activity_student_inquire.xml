@@ -37,10 +37,9 @@
             android:textColor="#c5cdea"
 
             android:layout_centerHorizontal="true"
-            android:id="@+id/schedule_study"
+            android:id="@+id/inquire_study"
             android:layout_margin="0dp"
             android:padding="0dp"
-            style="@style/button_animotion"
             />
 
         <Button
@@ -51,7 +50,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:id="@+id/schedule_query"
+            android:id="@+id/inquire_query"
             android:background="@drawable/bottom_button"
             />
         <Button
@@ -61,7 +60,7 @@
             android:textColor="#c5cdea"
             android:background="@drawable/bottom_button"
             android:layout_weight="1"
-            android:id="@+id/schedule_mine"
+            android:id="@+id/inquire_mine"
             />
 
     </LinearLayout>

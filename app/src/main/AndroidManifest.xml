@@ -18,10 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".StudentScheduleActivity"/>
-        <activity android:name=".StudentInquireActivity">
+        <activity android:name=".StudentActivity.StudentScheduleActivity"/>
+        <activity android:name=".StudentActivity.StudentInquireActivity">
         </activity>
-        <activity android:name=".StudentMineActivity">
+        <activity android:name=".StudentActivity.StudentMineActivity">
+        </activity>
+        <activity android:name=".student.activity.StudentCheckingActivity">
+        </activity>
+        <activity android:name=".student.activity.StudentIndexActivity">
         </activity>
     </application>
 

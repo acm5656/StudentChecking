@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:weightSum="10"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#536bc1"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/schedule_study_choose_week"
+            android:text="@string/checking"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:paddingLeft="20dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/AskForLeave"
+            android:background="#536bc1"
+            android:gravity="center"
+            style="@style/OnClickText"
+            android:textSize="20dp"
+            android:id="@+id/ask_for_leave"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#536bc1"
+            style="@style/unClickText"
+            android:gravity="center"
+            android:text="@string/checking"
+            android:id="@+id/checking"
+            />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        xmlns:androdi="http://schemas.android.com/apk/res/android"
+        androdi:id="@+id/checking_fragment_container"
+        androdi:layout_width="match_parent"
+        androdi:layout_height="0dp"
+        androdi:layout_weight="8"
+
+        >
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

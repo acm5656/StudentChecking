@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.checkingsystem.beans.Student;
+import com.example.checkingsystem.student.activity.StudentIndexActivity;
+
 import util.HttpCallbackListener;
 import util.HttpUtil;
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 case 0:
                     Toast.makeText(MainActivity.this,(String)msg.obj,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,StudentScheduleActivity.class);
+                    Intent intent = new Intent(MainActivity.this,StudentIndexActivity.class);
                     startActivity(intent);
                     break;
             }

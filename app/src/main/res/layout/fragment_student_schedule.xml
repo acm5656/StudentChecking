@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#999999"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#eeeeee"
+        android:orientation="horizontal"
+        android:minHeight="40dp"
+        android:weightSum="22"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:text="1"
+            style="@style/ScheduleToptBar"
+            />
+
+        <TextView
+
+            android:layout_height="match_parent"
+            android:text="2"
+            style="@style/ScheduleToptBar"
+            />
+        <TextView
+
+            android:layout_height="match_parent"
+            android:text="3"
+            style="@style/ScheduleToptBar"
+            />
+        <TextView
+
+            android:layout_height="match_parent"
+            android:text="4"
+            style="@style/ScheduleToptBar"
+            />
+
+        <TextView
+
+            android:layout_height="match_parent"
+            style="@style/ScheduleToptBar"
+            android:text="5"
+            />
+
+        <TextView
+
+            android:layout_height="match_parent"
+            android:text="6"
+            style="@style/ScheduleToptBar"
+            />
+
+        <TextView
+
+            android:layout_height="match_parent"
+            style="@style/ScheduleToptBar"
+            android:text="7"
+            />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_marginBottom="1px"
+                    android:weightSum="22"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="0"
+                        style="@style/ScheduleLefttBar"
+                        />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="操作系统\n艾成铭"
+                        android:id="@+id/WeekOneClassOne"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="2"
+                        android:id="@+id/WeekTwoClassOne"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="3"
+                        android:id="@+id/WeekThreeClassOne"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="4"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="5"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="6"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="7"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_marginBottom="1px"
+                    android:weightSum="22"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="0"
+                        style="@style/ScheduleLefttBar"
+                        />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="操作系统\n艾成铭"
+                        android:id="@+id/WeekOneClassTwo"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="2"
+                        android:id="@+id/WeekTwoClassTwo"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="3"
+                        android:id="@+id/WeekThreeClassTwo"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="4"
+                        android:id="@+id/WeekFourClassTwo"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="5"
+                        android:id="@+id/WeekFiveClassTwo"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="6"
+                        android:id="@+id/WeekSixClassTwo"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="7"
+                        android:id="@+id/WeekSevenClassTwo"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_marginBottom="1px"
+                    android:weightSum="22"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="0"
+                        style="@style/ScheduleLefttBar"
+                        />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="操作系统\n艾成铭"
+                        android:id="@+id/WeekOneClassThree"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="2"
+                        android:id="@+id/WeekTwoClassThree"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="3"
+                        android:id="@+id/WeekThreeClassThree"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="4"
+                        android:id="@+id/WeekFourClassThree"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="5"
+                        android:id="@+id/WeekFiveClassThree"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="6"
+                        android:id="@+id/WeekSixClassThree"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="7"
+                        android:id="@+id/WeekSevenClassThree"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_marginBottom="1px"
+                    android:weightSum="22"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="0"
+                        style="@style/ScheduleLefttBar"
+                        />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="操作系统\n艾成铭"
+                        android:id="@+id/WeekOneClassFour"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="2"
+                        android:id="@+id/WeekTwoClassFour"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="3"
+                        android:id="@+id/WeekThreeClassFour"
+                        />
+
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="4"
+                        android:id="@+id/WeekFourClassFour"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="5"
+                        android:id="@+id/WeekFiveClassFour"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="6"
+                        android:id="@+id/WeekSixClassFour"
+                        />
+                    <TextView
+
+                        android:layout_height="match_parent"
+                        style="@style/Schedule"
+                        android:text="7"
+                        android:id="@+id/WeekSevenClassFour"
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>
