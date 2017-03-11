@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.checkingsystem.R;
-import com.example.checkingsystem.StudentActivity.StudentScheduleActivity;
 import com.example.checkingsystem.student.activity.StudentCheckingActivity;
 
 public class StudentScheduleFragment extends Fragment implements View.OnClickListener{

@@ -25,7 +25,7 @@ public class StudentCheckingActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checking);
+        setContentView(R.layout.activity_student_checking);
         initUI();
         StudentAskForLeaveFragment studentAskForLeaveFragment = new StudentAskForLeaveFragment();
         StudentCheckingFragment studentCheckingFragment = new StudentCheckingFragment();

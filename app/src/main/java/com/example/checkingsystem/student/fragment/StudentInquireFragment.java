@@ -14,6 +14,8 @@ import com.example.checkingsystem.beans.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ItemAdapter;
+
 public class StudentInquireFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;

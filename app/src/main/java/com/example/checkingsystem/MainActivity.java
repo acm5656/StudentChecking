@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.checkingsystem.beans.Student;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
+import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
 
 import util.HttpCallbackListener;
 import util.HttpUtil;
@@ -33,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
             {
                 case 0:
                     Toast.makeText(MainActivity.this,(String)msg.obj,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,StudentIndexActivity.class);
-                    startActivity(intent);
+                    if(roleStr.equals("学生")) {
+                        Intent intent = new Intent(MainActivity.this, StudentIndexActivity.class);
+                        startActivity(intent);
+                    }
+                    if(roleStr.equals("教师")) {
+                        Intent intent = new Intent(MainActivity.this, TeacherIndexActivity.class);
+                        startActivity(intent);
+                    }
                     break;
             }
         }

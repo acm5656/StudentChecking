@@ -4,11 +4,109 @@
              android:layout_height="match_parent"
              tools:context="com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#000000"
-        android:text="@string/hello_blank_fragment"/>
+        android:background="@color/backgroundColor"
+        >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="1sp"
+                android:background="@color/itemBackgroundColor"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="课程名称"
+                    android:textColor="@color/textUnClickColor"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/title_text_size"
+                    android:layout_marginLeft="30dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="操作系统"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/title_text_size"
+                    android:textColor="#000000"
+                    android:layout_marginRight="30dp"
+                    />
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:background="@color/itemBackgroundColor"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="上课时间"
+                android:textColor="@color/textUnClickColor"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="周一第1节"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="#000000"
+                android:layout_marginRight="30dp"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="请假理由"
+                android:textColor="#8c8a8a"
+                android:textSize="13dp"
+                android:layout_marginLeft="10dp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ask_for_leave_edit"
+                android:hint="请输入请假理由"
+                android:textColorHint="@color/textUnClickColor"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                />
+
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
+            android:layout_marginTop="40dp"
+            android:text="提交操作"
+            android:textSize="17dp"
+            android:background="#4890cf"
+            />
+    </LinearLayout>
 
 </FrameLayout>

@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    android:weightSum="11"
+    android:weightSum="44"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:background="@color/actionBarBackgroundColor"
         android:orientation="horizontal"
         >
@@ -21,14 +21,14 @@
             android:text="@string/checking"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:paddingLeft="20dp"
             />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="3.7"
         android:orientation="horizontal"
         android:background="#f5f2f2"
         >
@@ -59,7 +59,7 @@
         androdi:id="@+id/checking_fragment_container"
         androdi:layout_width="match_parent"
         androdi:layout_height="0dp"
-        androdi:layout_weight="9"
+        androdi:layout_weight="37"
 
         >
     </android.support.v4.view.ViewPager>
