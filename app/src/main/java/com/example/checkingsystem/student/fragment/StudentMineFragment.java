@@ -31,14 +31,11 @@ public class StudentMineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_student_mine, container, false);
-        initItem();
 
         return view;
     }
 
-    private void initItem() {
 
-    }
 
     public interface OnFragmentInteractionListener {
 

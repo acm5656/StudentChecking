@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:weightSum="44"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@color/actionBarBackgroundColor"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/schedule_study_choose_week"
+            android:text="@string/checking"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.7"
+        android:orientation="horizontal"
+        android:background="#f5f2f2"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/AskForLeaveInfo"
+            android:gravity="center"
+            style="@style/OnClickText"
+            android:id="@+id/teacher_ask_for_leave_info"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/unClickText"
+            android:gravity="center"
+            android:text="@string/checking"
+            android:id="@+id/teacher_checking"
+            />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        xmlns:androdi="http://schemas.android.com/apk/res/android"
+        androdi:id="@+id/teacher_checking_fragment_container"
+        androdi:layout_width="match_parent"
+        androdi:layout_height="0dp"
+        androdi:layout_weight="37"
+
+        >
+    </android.support.v4.view.ViewPager>
+
 
 </LinearLayout>

@@ -25,12 +25,13 @@ public class StudentScheduleFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_student_schedule, container, false);
         initUI();
-        weekOneClassOne.setOnClickListener(this);
+
         return view;
     }
 
     private void initUI() {
         weekOneClassOne = (TextView) view.findViewById(R.id.WeekOneClassOne);
+        weekOneClassOne.setOnClickListener(this);
     }
 
     @Override

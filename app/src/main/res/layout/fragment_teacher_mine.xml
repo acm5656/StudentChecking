@@ -1,13 +1,145 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.checkingsystem.teacher.fragment.TeacherMineFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content"
+        android:background="@color/itemBackgroundColor"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:civ_border_width="1px"
+            app:civ_border_color="#FF000000"
+            android:src="@drawable/icon_head"
+            android:layout_margin="10dp"
+            />
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工号：2014214318"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名：艾成铭"
+                android:textColor="#838181"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="15dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="操作"
+            android:textColor="#8c8a8a"
+            android:textSize="13dp"
+            android:layout_marginLeft="10dp"
+
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/itemBackgroundColor"
+        android:orientation="horizontal"
+        android:id="@+id/relativeLayout_change_password"
+        >
+        <ImageView
+            android:id="@+id/imageview_change_password"
+            android:layout_marginLeft="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/search_icon"
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true"
+            />
+        <TextView
+            android:layout_toRightOf="@id/imageview_change_password"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="修改密码"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/itemBackgroundColor"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:id="@+id/relativeLayout_mineInfo"
+        >
+        <ImageView
+            android:id="@+id/imageview_mine_info"
+            android:layout_marginLeft="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/search_icon"
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true"
+            />
+        <TextView
+            android:layout_toRightOf="@id/imageview_mine_info"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="个人信息"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注销"
+        android:background="#fd6464"
+        android:textSize="16dp"
+        />
+
+
+
+
+
+</LinearLayout>
