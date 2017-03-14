@@ -6,6 +6,10 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by 那年盛夏 on 2017/2/22.
@@ -85,5 +89,26 @@ public class BitmapUtil {
 
 
         return canvasBitmap;
+    }
+
+    public static void saveMyBitmap(Bitmap mBitmap,String bitName)  {
+        File f = new File( "/sdcard/"+bitName + ".jpg");
+        FileOutputStream fOut = null;
+        try {
+            fOut = new FileOutputStream(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+        try {
+            fOut.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -19,6 +19,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.example.checkingsystem.student.fragment.StudentCheckingFragment;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import util.BitmapUtil;
 import util.FaceRect;
@@ -70,12 +72,22 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
     private int isAlign = 0;
 
-    private boolean isGetImage;
+    private AtomicBoolean isGetImage = new AtomicBoolean(false);
 
     private int i = 0;
 
-    private boolean isVerfiFace = false;
+    private AtomicBoolean isVerfiFace = new AtomicBoolean(false);
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        closeCamera();
+        super.finish();
+    }
 
     private RequestListener mRequestListener = new RequestListener() {
 
@@ -85,7 +97,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         @Override
         public void onBufferReceived(byte[] buffer) {
-            isVerfiFace = true;
+
             Log.d("VerifyFaceActivity---","------------onBufferReceived1");
             String result = null;
             try {
@@ -114,12 +126,13 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         @Override
         public void onCompleted(SpeechError error) {
-            isVerfiFace = false;
-            isGetImage = false;
-            Log.d("VerifyFaceActivity---","------------onCompleted");
-            if(error == null)
+
+            if(error != null)
             {
-                Log.d("VerifyFaceActivity---","------------error null");
+                isVerfiFace.set(false);
+                isGetImage.set(false);
+                Log.e("boolen","-4--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
+                Log.d("VerifyFaceActivity---","------------error!=null");
             }
         }
     };
@@ -135,7 +148,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         authid = getIntent().getStringExtra("authid");
-        Toast.makeText(VerifyFaceActivity.this,authid, Toast.LENGTH_SHORT).show();
+
         authid = "123";
         Log.e("test-----",authid);
 
@@ -177,7 +190,13 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
 
     private void closeCamera() {
-
+        if (null != mcamera) {
+            mcamera.setPreviewCallback(null);
+            mcamera.stopPreview();
+            mcamera.release();
+            mcamera = null;
+            Log.e("test","-----------camera finish");
+        }
 
     }
 
@@ -212,15 +231,14 @@ public class VerifyFaceActivity extends AppCompatActivity {
                 {
                     nv21 = new byte[data.length];
                 }
-
-                if(!isGetImage)
+                if(!isGetImage.get())
                 {
                     System.arraycopy(data, 0, nv21, 0, data.length);
                     Log.d("VerifyFaceActivity---","---------------获取图像");
-                    isGetImage = true;
+                    isGetImage.set(true);
                 }
 
-                if(isGetImage&&(!isVerfiFace))
+                if(isGetImage.get()&&(!isVerfiFace.get()))
                 {
 
                     Log.d("VerifyFaceActivity---","---------------获取图像成功");
@@ -245,15 +263,15 @@ public class VerifyFaceActivity extends AppCompatActivity {
                             Log.d("VerifyFaceActivity---", "result:"+result);
                             FaceRect[] faceRect = ParseResult.parseResult(result);
 
-                            if(faceRect.length!=0&&i<5)
+                            if(faceRect.length!=0)
                             {
+                                Log.e("boolen","-2--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
                                 Log.d("VerifyFaceActivity---","------------verfiFace--1");
-                                isVerfiFace = true;
+                                isVerfiFace.set(true);
                                 mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
                                 mFaceRequest.setParameter(SpeechConstant.WFR_SST, "verify");
                                 mFaceRequest.sendRequest(mface, mRequestListener);
                                 Log.d("VerifyFaceActivity---","------------verfiFace--2");
-                                i++;
                             }
                             Log.d("VerifyFaceActivity---","------------verfiFace--3");
 
@@ -286,21 +304,26 @@ public class VerifyFaceActivity extends AppCompatActivity {
         int ret = obj.getInt("ret");
         if (ret != 0) {
             showTip("验证失败");
-            isVerfiFace = false;
-            isGetImage = false;
+            isVerfiFace.set(false);
+            isGetImage.set(false);
             return;
         }
+        Log.e("boolen","-3--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
         if ("success".equals(obj.get("rst"))) {
             if (obj.getBoolean("verf")) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(VerifyFaceActivity.this, StudentIndexActivity.class);
                 intent.putExtra("data_return","考勤成功，请好好听课");
-                setResult(StudentCheckingFragment.FACE_VERIFY_RESULT,intent);
+                setResult(RESULT_OK,intent);
                 this.finish();
             } else {
                 showTip("验证不通过");
+                isGetImage.set(false);
+                isVerfiFace.set(false);
             }
         } else {
             showTip("验证失败");
+            isGetImage.set(false);
+            isVerfiFace.set(false);
         }
     }
 

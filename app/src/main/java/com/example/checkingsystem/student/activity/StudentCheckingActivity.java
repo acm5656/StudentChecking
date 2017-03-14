@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ public class StudentCheckingActivity extends FragmentActivity {
     private ViewPager viewPager;
     private TextView askForLeave;
     private TextView checking;
+    private FragmentManager fragmentManager;
+    private List<Fragment> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,8 @@ public class StudentCheckingActivity extends FragmentActivity {
         initUI();
         StudentAskForLeaveFragment studentAskForLeaveFragment = new StudentAskForLeaveFragment();
         StudentCheckingFragment studentCheckingFragment = new StudentCheckingFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final List<Fragment> list = new ArrayList<Fragment>();
+        fragmentManager = getSupportFragmentManager();
+        list = new ArrayList<Fragment>();
         list.add(studentAskForLeaveFragment);
         list.add(studentCheckingFragment);
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
@@ -89,17 +93,20 @@ public class StudentCheckingActivity extends FragmentActivity {
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode)
-        {
-            case StudentCheckingFragment.FACE_VERIFY_RESULT:
-                if(resultCode == RESULT_OK) {
-                    String dataStr = data.getStringExtra("data_return");
-                    Toast.makeText(StudentCheckingActivity.this,dataStr,Toast.LENGTH_SHORT).show();
-                }
-
-                break;
-        }
-
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Log.e("toast","----------"+requestCode+"   "+resultCode+"  "+RESULT_OK);
+//
+//        switch (requestCode)
+//        {
+//            case StudentCheckingFragment.FACE_VERIFY_RESULT:
+//                if(resultCode == RESULT_OK) {
+//                    String dataStr = data.getStringExtra("data_return");
+//                    Log.e("toast","---------------2");
+//                    Toast.makeText(this,dataStr,Toast.LENGTH_SHORT).show();
+//                }
+//
+//                break;
+//        }
+//    }
 }
