@@ -1,5 +1,6 @@
 package com.example.checkingsystem.student.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment;
@@ -84,6 +86,20 @@ public class StudentCheckingActivity extends FragmentActivity {
         viewPager = (ViewPager)findViewById(R.id.checking_fragment_container);
         askForLeave = (TextView)findViewById(R.id.ask_for_leave);
         checking = (TextView)findViewById(R.id.checking);
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode)
+        {
+            case StudentCheckingFragment.FACE_VERIFY_RESULT:
+                if(resultCode == RESULT_OK) {
+                    String dataStr = data.getStringExtra("data_return");
+                    Toast.makeText(StudentCheckingActivity.this,dataStr,Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+        }
 
     }
 }
