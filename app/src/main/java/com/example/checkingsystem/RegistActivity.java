@@ -20,6 +20,8 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 
+import com.example.checkingsystem.student.activity.StudentIndexActivity;
+import com.example.checkingsystem.student.fragment.StudentMineFragment;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
 import com.iflytek.cloud.RequestListener;
@@ -35,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import util.ActivityColectorUtil;
 import util.BitmapUtil;
 import util.FaceRect;
 import util.ParseResult;
@@ -71,12 +74,9 @@ public class RegistActivity extends AppCompatActivity {
 
     private int isAlign = 0;
 
-    private boolean isGetImage;
-
-    private int i = 0;
+    private boolean isGetImage = false;
 
     private boolean isVerfiFace = false;
-
 
     private RequestListener mRequestListener = new RequestListener() {
 
@@ -86,15 +86,12 @@ public class RegistActivity extends AppCompatActivity {
 
         @Override
         public void onBufferReceived(byte[] buffer) {
-            isVerfiFace = true;
-            Log.e("RegistActivity---","------------onBufferReceived1");
             String result = null;
             try {
                 result = new String(buffer, "utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            Log.e("RegistActivity---","------------onBufferReceived2");
 
             JSONObject object = null;
             try {
@@ -115,14 +112,14 @@ public class RegistActivity extends AppCompatActivity {
 
         @Override
         public void onCompleted(SpeechError error) {
-            isVerfiFace = false;
-            i--;
+
             Log.e("RegistActivity---","------------onCompleted");
             if(error == null)
             {
                 Log.e("RegistActivity---","------------error null");
             }
             else {
+                isVerfiFace = false;
                 Log.e("RegistActivity---",new Integer(error.getErrorCode()).toString());
             }
         }
@@ -132,14 +129,15 @@ public class RegistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_face);
+        ActivityColectorUtil.addActivity(this);
+
         SpeechUtility.createUtility(RegistActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        authid = getIntent().getStringExtra("authid");
-        Log.e("RegistActivity---","--------"+authid);
+        authid = MainActivity.studentStatic.getStudentNo();
 
         PREVIEW_WIDTH = metrics.widthPixels;
 
@@ -148,7 +146,6 @@ public class RegistActivity extends AppCompatActivity {
 
         initUI();
 
-        nv21 = new byte[3110400];
         buffer = new byte[PREVIEW_WIDTH * PREVIEW_HEIGHT];
 
         mAcc = new Accelerometer(RegistActivity.this);
@@ -219,6 +216,10 @@ public class RegistActivity extends AppCompatActivity {
 
             @Override
             public void onPreviewFrame(byte[] data, Camera camera) {
+                if(nv21==null)
+                {
+                    nv21 = new byte[data.length];
+                }
                 if(!isGetImage&&(!isVerfiFace))
                 {
                     System.arraycopy(data, 0, nv21, 0, data.length);
@@ -228,6 +229,7 @@ public class RegistActivity extends AppCompatActivity {
 
                 if(isGetImage&&(!isVerfiFace))
                 {
+
                     Log.e("RegistActivity---","---------------获取图像成功");
                     Camera.Size size = mcamera.getParameters().getPreviewSize();
                         YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
@@ -249,18 +251,12 @@ public class RegistActivity extends AppCompatActivity {
                             String result = mFaceDetector.detectARGB(bmp);
                             Log.e("RegistActivity---", "result:"+result);
                             FaceRect[] faceRect = ParseResult.parseResult(result);
-
-                            if(faceRect.length!=0&&i<=0)
-                            {
-                                Log.e("RegistActivity---","------------verfiFace--1");
+                            if(faceRect.length!=0) {
                                 isVerfiFace = true;
                                 mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
                                 mFaceRequest.setParameter(SpeechConstant.WFR_SST, "reg");
                                 mFaceRequest.sendRequest(mface, mRequestListener);
-                                Log.e("RegistActivity---","------------verfiFace--2");
-                                i++;
                             }
-                            Log.e("RegistActivity---","------------verfiFace--3");
 
                             bmp.recycle();
 
@@ -297,9 +293,12 @@ public class RegistActivity extends AppCompatActivity {
             return;
         }
         if ("success".equals(obj.get("rst"))) {
-            finish();
+            Intent intent = new Intent(RegistActivity.this, StudentIndexActivity.class);
+            intent.putExtra("data_return","恭喜你注册成功");
+            setResult(RESULT_OK,intent);
             showTip("注册成功");
         } else {
+            isVerfiFace = false;
             showTip("注册失败");
         }
     }
@@ -314,5 +313,11 @@ public class RegistActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         closeCamera();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityColectorUtil.removeActivity(this);
     }
 }

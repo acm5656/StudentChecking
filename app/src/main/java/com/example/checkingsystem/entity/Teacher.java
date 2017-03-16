@@ -1,5 +1,8 @@
 package com.example.checkingsystem.entity;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.sql.Timestamp;
 
 import java.io.Serializable;
@@ -13,7 +16,7 @@ import java.io.Serializable;
  * @author Ren Gui Jie 812022339@qq.com
  * @since 2017-03-13
  */
-//Name("t_teacher")
+@DatabaseTable
 public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,87 +24,87 @@ public class Teacher implements Serializable {
     /**
      * 主键-sequence-id
      */
-	//Id("teacher_id")
+	@DatabaseField(id = true)
 	private Long teacherId;
     /**
      * 人脸ID
      */
-	//("teacher_face_id")
+	@DatabaseField
 	private String teacherFaceId;
     /**
      * 声纹ID
      */
-	//("teacher_voiceprint_id")
+	@DatabaseField
 	private String teacherVoiceprintId;
     /**
      * 教师手机号码
      */
-	//("teacher_tel")
+	@DatabaseField
 	private String teacherTel;
     /**
      * 密码-md5
      */
-	//("teacher_password")
+	@DatabaseField
 	private String teacherPassword;
     /**
      * 教师编号
      */
-	//("teacher_no")
+	@DatabaseField
 	private String teacherNo;
     /**
      * 教师姓名
      */
-	//("teacher_name")
+	@DatabaseField
 	private String teacherName;
     /**
      * 教师昵称
      */
-	//("teacher_nickname")
+	@DatabaseField
 	private String teacherNickname;
     /**
      * 教师邮箱
      */
-	//("teacher_email")
+	@DatabaseField
 	private String teacherEmail;
     /**
      * 教师头像URL
      */
-	//("teacher_headimage_url")
+	@DatabaseField
 	private String teacherHeadimageUrl;
     /**
      * 性别
      */
-	//("teacher_gender")
+	@DatabaseField
 	private String teacherGender;
     /**
      * 教师所在系/部门
      */
-	//("teacher_ department")
+	@DatabaseField
 	private String teacherDepartment;
     /**
      * 教师教务管理系统用户名
      */
-	//("teacher_school_username")
+	@DatabaseField
 	private String teacherSchoolUsername;
     /**
      * 教师教务管理系统密码
      */
-	//("teacher_school_password")
+	@DatabaseField
 	private String teacherSchoolPassword;
     /**
      * 记录创建时间
      */
-	//("teacher_gmt_created")
+	@DatabaseField
 	private Timestamp teacherGmtCreated;
     /**
      * 记录修改时间
      */
-	//("teacher_gmt_modified")
+	@DatabaseField
 	private Timestamp teacherGmtModified;
     /**
      * 教师状态
      */
-	//("teacher_status")
+	@DatabaseField
 	private String teacherStatus;
 
 
@@ -241,4 +244,26 @@ public class Teacher implements Serializable {
 		this.teacherStatus = teacherStatus;
 	}
 
+	@Override
+	public String toString() {
+		return "Teacher{" +
+				"teacherId=" + teacherId +
+				", teacherFaceId='" + teacherFaceId + '\'' +
+				", teacherVoiceprintId='" + teacherVoiceprintId + '\'' +
+				", teacherTel='" + teacherTel + '\'' +
+				", teacherPassword='" + teacherPassword + '\'' +
+				", teacherNo='" + teacherNo + '\'' +
+				", teacherName='" + teacherName + '\'' +
+				", teacherNickname='" + teacherNickname + '\'' +
+				", teacherEmail='" + teacherEmail + '\'' +
+				", teacherHeadimageUrl='" + teacherHeadimageUrl + '\'' +
+				", teacherGender='" + teacherGender + '\'' +
+				", teacherDepartment='" + teacherDepartment + '\'' +
+				", teacherSchoolUsername='" + teacherSchoolUsername + '\'' +
+				", teacherSchoolPassword='" + teacherSchoolPassword + '\'' +
+				", teacherGmtCreated=" + teacherGmtCreated +
+				", teacherGmtModified=" + teacherGmtModified +
+				", teacherStatus='" + teacherStatus + '\'' +
+				'}';
+	}
 }

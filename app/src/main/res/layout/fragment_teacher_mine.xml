@@ -136,6 +136,7 @@
         android:text="注销"
         android:background="#fd6464"
         android:textSize="16dp"
+        android:id="@+id/teacher_fragment_mine_exit"
         />
 
 

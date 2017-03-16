@@ -1,5 +1,8 @@
 package com.example.checkingsystem.entity;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.sql.Timestamp;
 
 import java.io.Serializable;
@@ -13,7 +16,7 @@ import java.io.Serializable;
  * @author Ren Gui Jie 812022339@qq.com
  * @since 2017-03-13
  */
-//Name("t_student")
+@DatabaseTable
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,87 +24,87 @@ public class Student implements Serializable {
     /**
      * 主键,一个生成全局唯一Sequence ID
      */
-	//Id("student_id")
+	@DatabaseField(id = true)
 	private Long studentId;
     /**
      * 外键-学生所属班级
      */
-	//("student_class_id")
+
 	private Long studentClassId;
     /**
      * 人脸验证id
      */
-	//("student_facecode")
+	@DatabaseField
 	private String studentFacecode;
     /**
      * 声纹id
      */
-	//("student_voiceprint_id")
+	@DatabaseField
 	private String studentVoiceprintId;
     /**
      * 学生手机号
      */
-	//("student_tel")
+	@DatabaseField
 	private String studentTel;
     /**
      * 学生密码
      */
-	//("student_password")
+	@DatabaseField
 	private String studentPassword;
     /**
      * 学生学号
      */
-	//("student_no")
+	@DatabaseField
 	private String studentNo;
     /**
      * 学生真实姓名
      */
-	//("student_name")
+	@DatabaseField
 	private String studentName;
     /**
      * 学生昵称
      */
-	//("student_nickname")
+	@DatabaseField
 	private String studentNickname;
     /**
      * 学生email地址
      */
-	//("student_email")
+	@DatabaseField
 	private String studentEmail;
     /**
      * 学生头像URL
      */
-	//("student_headimage_url")
+	@DatabaseField
 	private String studentHeadimageUrl;
     /**
      * 学生性别
      */
-	//("student_gender")
+	@DatabaseField
 	private String studentGender;
     /**
      * 教务系统帐号
      */
-	//("student_school_username")
+	@DatabaseField
 	private String studentSchoolUsername;
     /**
      * 教务系统密码
      */
-	//("student_school_password")
+	@DatabaseField
 	private String studentSchoolPassword;
     /**
      * 记录修改时间
      */
-	//("student_gmt_modified")
+	@DatabaseField
 	private Timestamp studentGmtModified;
     /**
      * 记录创建时间
      */
-	//("student_gmt_created")
+	@DatabaseField
 	private Timestamp studentGmtCreated;
     /**
      * 记录状态
      */
-	//("student_status")
+	@DatabaseField
 	private String studentStatus;
 
 
@@ -241,4 +244,26 @@ public class Student implements Serializable {
 		this.studentStatus = studentStatus;
 	}
 
+	@Override
+	public String toString() {
+		return "Student{" +
+				"studentId=" + studentId +
+				", studentClassId=" + studentClassId +
+				", studentFacecode='" + studentFacecode + '\'' +
+				", studentVoiceprintId='" + studentVoiceprintId + '\'' +
+				", studentTel='" + studentTel + '\'' +
+				", studentPassword='" + studentPassword + '\'' +
+				", studentNo='" + studentNo + '\'' +
+				", studentName='" + studentName + '\'' +
+				", studentNickname='" + studentNickname + '\'' +
+				", studentEmail='" + studentEmail + '\'' +
+				", studentHeadimageUrl='" + studentHeadimageUrl + '\'' +
+				", studentGender='" + studentGender + '\'' +
+				", studentSchoolUsername='" + studentSchoolUsername + '\'' +
+				", studentSchoolPassword='" + studentSchoolPassword + '\'' +
+				", studentGmtModified=" + studentGmtModified +
+				", studentGmtCreated=" + studentGmtCreated +
+				", studentStatus='" + studentStatus + '\'' +
+				'}';
+	}
 }

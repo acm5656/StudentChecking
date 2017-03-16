@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import util.ActivityColectorUtil;
 import util.BitmapUtil;
 import util.FaceRect;
 import util.ParseResult;
@@ -141,6 +142,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_face);
+        ActivityColectorUtil.addActivity(this);
         SpeechUtility.createUtility(VerifyFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
@@ -149,7 +151,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         authid = getIntent().getStringExtra("authid");
 
-        authid = "123";
+        authid = MainActivity.studentStatic.getStudentNo();
         Log.e("test-----",authid);
 
         PREVIEW_WIDTH = metrics.widthPixels;
@@ -333,8 +335,9 @@ public class VerifyFaceActivity extends AppCompatActivity {
         mToast.show();
     }
 
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityColectorUtil.removeActivity(this);
+    }
 }

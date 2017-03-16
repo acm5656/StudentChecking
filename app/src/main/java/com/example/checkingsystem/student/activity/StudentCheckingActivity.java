@@ -20,6 +20,8 @@ import com.example.checkingsystem.student.fragment.StudentCheckingFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ActivityColectorUtil;
+
 public class StudentCheckingActivity extends FragmentActivity {
 
     private ViewPager viewPager;
@@ -32,6 +34,7 @@ public class StudentCheckingActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_checking);
+        ActivityColectorUtil.addActivity(this);
         initUI();
         StudentAskForLeaveFragment studentAskForLeaveFragment = new StudentAskForLeaveFragment();
         StudentCheckingFragment studentCheckingFragment = new StudentCheckingFragment();
@@ -109,4 +112,11 @@ public class StudentCheckingActivity extends FragmentActivity {
 //                break;
 //        }
 //    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityColectorUtil.removeActivity(this);
+    }
 }

@@ -20,6 +20,8 @@ import com.example.checkingsystem.student.fragment.StudentScheduleFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ActivityColectorUtil;
+
 public class StudentIndexActivity extends AppCompatActivity implements View.OnClickListener,ChooseWeekFragment.CallBackValue {
 
     private ViewPager viewPager;
@@ -34,6 +36,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_index);
+        ActivityColectorUtil.addActivity(this);
         initUI();
         final List<Fragment> list = new ArrayList<>();
         StudentInquireFragment studentInquireFragment = new StudentInquireFragment();
@@ -151,5 +154,11 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void SendMessageValue(String strValue) {
         Toast.makeText(StudentIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityColectorUtil.finishAll();
     }
 }

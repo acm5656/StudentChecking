@@ -22,6 +22,8 @@ import com.example.checkingsystem.teacher.fragment.TeacherScheduleFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ActivityColectorUtil;
+
 /**
  * Created by 那年.盛夏 on 2017/3/11.
  */
@@ -39,6 +41,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_index);
+        ActivityColectorUtil.addActivity(this);
         list = new ArrayList<>();
         initUI();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -150,5 +153,11 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void SendMessageValue(String strValue) {
         Toast.makeText(TeacherIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityColectorUtil.finishAll();
     }
 }

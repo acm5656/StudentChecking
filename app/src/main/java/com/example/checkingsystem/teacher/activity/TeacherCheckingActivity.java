@@ -18,6 +18,8 @@ import com.example.checkingsystem.teacher.fragment.TeacherCheckingFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ActivityColectorUtil;
+
 /**
  * Created by 那年.盛夏 on 2017/3/11.
  */
@@ -31,6 +33,7 @@ public class TeacherCheckingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_checking);
+        ActivityColectorUtil.addActivity(this);
         initUI();
         list = new ArrayList<>();
 
@@ -62,5 +65,11 @@ public class TeacherCheckingActivity extends AppCompatActivity {
         teacherCheckingFragmentContainer = (ViewPager)findViewById(R.id.teacher_checking_fragment_container);
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityColectorUtil.removeActivity(this);
     }
 }
