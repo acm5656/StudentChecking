@@ -22,7 +22,7 @@ public class Class implements Serializable {
      * 主键-sequenceid
      */
 	//Id("class_id")
-	private Long classId;
+	private String classId;
     /**
      * 班级所属导员的id
      */
@@ -70,11 +70,11 @@ public class Class implements Serializable {
 	private String classStatus;
 
 
-	public Long getClassId() {
+	public String getClassId() {
 		return classId;
 	}
 
-	public void setClassId(Long classId) {
+	public void setClassId(String classId) {
 		this.classId = classId;
 	}
 

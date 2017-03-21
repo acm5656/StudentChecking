@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -39,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 
 import util.ActivityColectorUtil;
 import util.BitmapUtil;
+import util.CosUtil;
 import util.FaceRect;
 import util.ParseResult;
 import util.SurfaceViewCircle;
@@ -77,6 +79,8 @@ public class RegistActivity extends AppCompatActivity {
     private boolean isGetImage = false;
 
     private boolean isVerfiFace = false;
+
+    private Bitmap bmp = null;
 
     private RequestListener mRequestListener = new RequestListener() {
 
@@ -137,7 +141,7 @@ public class RegistActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        authid = MainActivity.studentStatic.getStudentNo();
+        authid = MainActivity.studentStatic.getStudentFacecode();
 
         PREVIEW_WIDTH = metrics.widthPixels;
 
@@ -239,7 +243,7 @@ public class RegistActivity extends AppCompatActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             image.compressToJpeg(new Rect(0, 0, size.width, size.height),
                                     80, stream);
-                            Bitmap bmp = BitmapFactory.decodeByteArray(
+                            bmp = BitmapFactory.decodeByteArray(
                                     stream.toByteArray(), 0, stream.size());
 
                             bmp = BitmapUtil.zoomBitmap(bmp,size.width/2,size.height/2);
@@ -258,7 +262,7 @@ public class RegistActivity extends AppCompatActivity {
                                 mFaceRequest.sendRequest(mface, mRequestListener);
                             }
 
-                            bmp.recycle();
+
 
                             isGetImage = false;
                         }
@@ -293,9 +297,21 @@ public class RegistActivity extends AppCompatActivity {
             return;
         }
         if ("success".equals(obj.get("rst"))) {
+
+            if(bmp!=null) {
+                BitmapUtil.saveMyBitmap(bmp,MainActivity.studentStatic.getStudentFacecode());
+            }
+            bmp.recycle();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+MainActivity.path,MainActivity.studentStatic.getStudentFacecode()+".jpg",getApplicationContext());
+                }
+            }).start();
             Intent intent = new Intent(RegistActivity.this, StudentIndexActivity.class);
             intent.putExtra("data_return","恭喜你注册成功");
             setResult(RESULT_OK,intent);
+            finish();
             showTip("注册成功");
         } else {
             isVerfiFace = false;
@@ -320,4 +336,5 @@ public class RegistActivity extends AppCompatActivity {
         super.onDestroy();
         ActivityColectorUtil.removeActivity(this);
     }
+
 }

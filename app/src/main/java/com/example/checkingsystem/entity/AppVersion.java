@@ -22,7 +22,7 @@ public class AppVersion implements Serializable {
      * 主键-sequence-id
      */
 	//Id("app_version_id")
-	private Long appVersionId;
+	private String appVersionId;
     /**
      * 外键-app_id
      */
@@ -60,11 +60,11 @@ public class AppVersion implements Serializable {
 	private String appVersionStatus;
 
 
-	public Long getAppVersionId() {
+	public String getAppVersionId() {
 		return appVersionId;
 	}
 
-	public void setAppVersionId(Long appVersionId) {
+	public void setAppVersionId(String appVersionId) {
 		this.appVersionId = appVersionId;
 	}
 

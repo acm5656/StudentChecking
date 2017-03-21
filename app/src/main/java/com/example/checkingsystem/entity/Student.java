@@ -25,7 +25,7 @@ public class Student implements Serializable {
      * 主键,一个生成全局唯一Sequence ID
      */
 	@DatabaseField(id = true)
-	private Long studentId;
+	private String studentId;
     /**
      * 外键-学生所属班级
      */
@@ -108,11 +108,11 @@ public class Student implements Serializable {
 	private String studentStatus;
 
 
-	public Long getStudentId() {
+	public String getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(Long studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 

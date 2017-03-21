@@ -22,7 +22,7 @@ public class CourseLeave implements Serializable {
      * 主键-sequenceid
      */
 	//Id("course_leave_id")
-	private Long courseLeaveId;
+	private String courseLeaveId;
     /**
      * 外键-学生id
      */
@@ -65,11 +65,11 @@ public class CourseLeave implements Serializable {
 	private String courseLeaveStatus;
 
 
-	public Long getCourseLeaveId() {
+	public String getCourseLeaveId() {
 		return courseLeaveId;
 	}
 
-	public void setCourseLeaveId(Long courseLeaveId) {
+	public void setCourseLeaveId(String courseLeaveId) {
 		this.courseLeaveId = courseLeaveId;
 	}
 

@@ -23,7 +23,7 @@ public class Course implements Serializable {
      * 课程-sequence-id
      */
 	//Id("course_id")
-	private Long courseId;
+	private String courseId;
     /**
      * 外键-先修课ID
      */
@@ -65,12 +65,11 @@ public class Course implements Serializable {
 	//("course_status")
 	private String courseStatus;
 
-
-	public Long getCourseId() {
+	public String getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(Long courseId) {
+	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
 

@@ -22,7 +22,7 @@ public class StudentFaceVerifyPic implements Serializable {
      * 主键-sequenceid
      */
 	//Id("student_face_verify_pic_id")
-	private Long studentFaceVerifyPicId;
+	private String studentFaceVerifyPicId;
     /**
      * 外键-student_id
      */
@@ -49,12 +49,11 @@ public class StudentFaceVerifyPic implements Serializable {
 	//("student_face_verify_pic_status")
 	private String studentFaceVerifyPicStatus;
 
-
-	public Long getStudentFaceVerifyPicId() {
+	public String getStudentFaceVerifyPicId() {
 		return studentFaceVerifyPicId;
 	}
 
-	public void setStudentFaceVerifyPicId(Long studentFaceVerifyPicId) {
+	public void setStudentFaceVerifyPicId(String studentFaceVerifyPicId) {
 		this.studentFaceVerifyPicId = studentFaceVerifyPicId;
 	}
 

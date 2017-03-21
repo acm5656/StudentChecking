@@ -22,7 +22,7 @@ public class AppFeedback implements Serializable {
      * 主键-sequenceid
      */
 	//Id("app_feedback_id")
-	private Long appFeedbackId;
+	private String appFeedbackId;
     /**
      * 外键-app_id
      */
@@ -75,11 +75,11 @@ public class AppFeedback implements Serializable {
 	private String appFeedbackStatus;
 
 
-	public Long getAppFeedbackId() {
+	public String getAppFeedbackId() {
 		return appFeedbackId;
 	}
 
-	public void setAppFeedbackId(Long appFeedbackId) {
+	public void setAppFeedbackId(String appFeedbackId) {
 		this.appFeedbackId = appFeedbackId;
 	}
 

@@ -23,7 +23,7 @@ public class Attendance implements Serializable {
      * 主键-sequenceid
      */
 	//Id("attendance_id")
-	private Long attendanceId;
+	private String attendanceId;
     /**
      * 外键-课程时间表-对应课表上的某节课
      */
@@ -76,11 +76,11 @@ public class Attendance implements Serializable {
 	private String attendanceStatus;
 
 
-	public Long getAttendanceId() {
+	public String getAttendanceId() {
 		return attendanceId;
 	}
 
-	public void setAttendanceId(Long attendanceId) {
+	public void setAttendanceId(String attendanceId) {
 		this.attendanceId = attendanceId;
 	}
 

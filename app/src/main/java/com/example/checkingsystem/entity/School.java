@@ -22,7 +22,7 @@ public class School implements Serializable {
      * 主键-sequenceid
      */
 	//Id("school_id")
-	private Long schoolId;
+	private String schoolId;
     /**
      * 外键-地理位置id
      */
@@ -59,12 +59,11 @@ public class School implements Serializable {
 	//("school_status")
 	private String schoolStatus;
 
-
-	public Long getSchoolId() {
+	public String getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(Long schoolId) {
+	public void setSchoolId(String schoolId) {
 		this.schoolId = schoolId;
 	}
 

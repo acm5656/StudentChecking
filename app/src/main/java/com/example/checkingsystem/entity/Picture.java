@@ -22,7 +22,7 @@ public class Picture implements Serializable {
      * 主键-sequenceid
      */
 	//Id("picture_id")
-	private Long pictureId;
+	private String pictureId;
     /**
      * 图片URL
      */
@@ -50,11 +50,11 @@ public class Picture implements Serializable {
 	private String pictureStatus;
 
 
-	public Long getPictureId() {
+	public String getPictureId() {
 		return pictureId;
 	}
 
-	public void setPictureId(Long pictureId) {
+	public void setPictureId(String pictureId) {
 		this.pictureId = pictureId;
 	}
 

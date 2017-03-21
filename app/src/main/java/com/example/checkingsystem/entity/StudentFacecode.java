@@ -23,7 +23,7 @@ public class StudentFacecode implements Serializable {
      * 主键-sequenceid
      */
 	//Id("student_facecode_id")
-	private Long studentFacecodeId;
+	private String studentFacecodeId;
     /**
      * 外键-student_id
      */
@@ -56,11 +56,11 @@ public class StudentFacecode implements Serializable {
 	private String studentFacecodeStatus;
 
 
-	public Long getStudentFacecodeId() {
+	public String getStudentFacecodeId() {
 		return studentFacecodeId;
 	}
 
-	public void setStudentFacecodeId(Long studentFacecodeId) {
+	public void setStudentFacecodeId(String studentFacecodeId) {
 		this.studentFacecodeId = studentFacecodeId;
 	}
 

@@ -22,7 +22,7 @@ public class Assistant implements Serializable {
      * 主键-sequence-id
      */
 	//Id("assistant_id")
-	private Long assistantId;
+	private String assistantId;
     /**
      * 导员电话号码
      */
@@ -85,11 +85,11 @@ public class Assistant implements Serializable {
 	private String assistantStatus;
 
 
-	public Long getAssistantId() {
+	public String getAssistantId() {
 		return assistantId;
 	}
 
-	public void setAssistantId(Long assistantId) {
+	public void setAssistantId(String assistantId) {
 		this.assistantId = assistantId;
 	}
 

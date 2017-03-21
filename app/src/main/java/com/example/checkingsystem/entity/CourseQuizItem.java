@@ -23,7 +23,7 @@ public class CourseQuizItem implements Serializable {
      * 主键-sequenceid
      */
 	//Id("course_quiz_item_id")
-	private Long courseQuizItemId;
+	private String courseQuizItemId;
     /**
      * 外键-student_id
      */
@@ -61,11 +61,11 @@ public class CourseQuizItem implements Serializable {
 	private String courseQuizItemStatus;
 
 
-	public Long getCourseQuizItemId() {
+	public String getCourseQuizItemId() {
 		return courseQuizItemId;
 	}
 
-	public void setCourseQuizItemId(Long courseQuizItemId) {
+	public void setCourseQuizItemId(String courseQuizItemId) {
 		this.courseQuizItemId = courseQuizItemId;
 	}
 

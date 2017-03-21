@@ -25,7 +25,7 @@ public class Teacher implements Serializable {
      * 主键-sequence-id
      */
 	@DatabaseField(id = true)
-	private Long teacherId;
+	private String teacherId;
     /**
      * 人脸ID
      */
@@ -107,12 +107,11 @@ public class Teacher implements Serializable {
 	@DatabaseField
 	private String teacherStatus;
 
-
-	public Long getTeacherId() {
+	public String getTeacherId() {
 		return teacherId;
 	}
 
-	public void setTeacherId(Long teacherId) {
+	public void setTeacherId(String teacherId) {
 		this.teacherId = teacherId;
 	}
 

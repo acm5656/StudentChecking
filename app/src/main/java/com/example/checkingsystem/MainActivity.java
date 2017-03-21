@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     public static Student studentStatic;
     public static Teacher teacherStatic;
 
+    public static final String path="/com.acm.checkingsystem";
+
     static String roleStr;
     private Handler handler = new Handler(){
         @Override
@@ -49,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("mainActivity","------3");
                         studentStatic.setStudentPassword("123");
                         studentStatic.setStudentNo("123");
-                        studentStatic.setStudentId(123l);
+                        studentStatic.setStudentId("123");
+                        studentStatic.setStudentFacecode("201421431811113");
                         studentDao.addStudent(studentStatic);
 
                         Intent intent = new Intent(MainActivity.this, StudentIndexActivity.class);
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     if(roleStr.equals("教师")) {
                         Log.e("mainActivity","------4");
                         teacherStatic.setTeacherNo("123");
-                        teacherStatic.setTeacherId(123l);
+                        teacherStatic.setTeacherId("123");
                         teacherStatic.setTeacherPassword("123");
                         teacherDao.addTeacher(teacherStatic);
 

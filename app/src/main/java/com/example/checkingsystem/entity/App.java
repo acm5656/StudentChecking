@@ -21,7 +21,7 @@ public class App implements Serializable {
     /**
      * 主键-sequenceid
      */
-	private Long appId;
+	private String appId;
     /**
      * app名称
      */
@@ -69,11 +69,11 @@ public class App implements Serializable {
 	private String appStatus;
 
 
-	public Long getAppId() {
+	public String getAppId() {
 		return appId;
 	}
 
-	public void setAppId(Long appId) {
+	public void setAppId(String appId) {
 		this.appId = appId;
 	}
 

@@ -23,7 +23,7 @@ public class CourseTime implements Serializable {
      * 主键sequence-id
      */
 	//Id("course_time_id")
-	private Long courseTimeId;
+	private String courseTimeId;
     /**
      * 外键-课程计划id
      */
@@ -66,11 +66,11 @@ public class CourseTime implements Serializable {
 	private String courseTimeStatus;
 
 
-	public Long getCourseTimeId() {
+	public String getCourseTimeId() {
 		return courseTimeId;
 	}
 
-	public void setCourseTimeId(Long courseTimeId) {
+	public void setCourseTimeId(String courseTimeId) {
 		this.courseTimeId = courseTimeId;
 	}
 

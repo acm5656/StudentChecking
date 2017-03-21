@@ -22,7 +22,7 @@ public class AppMessage implements Serializable {
      * app消息id
      */
 	//Id("app_message_id")
-	private Long appMessageId;
+	private String appMessageId;
     /**
      * app消息类型(如系统消息,特定用户类型的消息,特定用户的消息)
      */
@@ -55,11 +55,11 @@ public class AppMessage implements Serializable {
 	private String appMessageStatus;
 
 
-	public Long getAppMessageId() {
+	public String getAppMessageId() {
 		return appMessageId;
 	}
 
-	public void setAppMessageId(Long appMessageId) {
+	public void setAppMessageId(String appMessageId) {
 		this.appMessageId = appMessageId;
 	}
 

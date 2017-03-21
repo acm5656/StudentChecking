@@ -22,7 +22,7 @@ public class AttendanceItem implements Serializable {
      * 主键-sequenceid
      */
 	//Id("attendance_item_id")
-	private Long attendanceItemId;
+	private String attendanceItemId;
     /**
      * 外键-student-id
      */
@@ -55,11 +55,11 @@ public class AttendanceItem implements Serializable {
 	private String attendanceItemStatus;
 
 
-	public Long getAttendanceItemId() {
+	public String getAttendanceItemId() {
 		return attendanceItemId;
 	}
 
-	public void setAttendanceItemId(Long attendanceItemId) {
+	public void setAttendanceItemId(String attendanceItemId) {
 		this.attendanceItemId = attendanceItemId;
 	}
 

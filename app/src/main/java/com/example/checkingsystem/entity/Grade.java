@@ -22,7 +22,7 @@ public class Grade implements Serializable {
      * 主键-sequenceid
      */
 	//Id("grade_id")
-	private Long gradeId;
+	private String gradeId;
     /**
      * 外键-student-id
      */
@@ -58,12 +58,11 @@ public class Grade implements Serializable {
 	//("grade_status")
 	private String gradeStatus;
 
-
-	public Long getGradeId() {
+	public String getGradeId() {
 		return gradeId;
 	}
 
-	public void setGradeId(Long gradeId) {
+	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
 	}
 

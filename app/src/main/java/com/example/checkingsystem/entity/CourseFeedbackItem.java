@@ -22,7 +22,7 @@ public class CourseFeedbackItem implements Serializable {
      * 主键-sequenceid
      */
 	//Id("course_feedback_item_id")
-	private Long courseFeedbackItemId;
+	private String courseFeedbackItemId;
     /**
      * 外键-student_id
      */
@@ -50,11 +50,11 @@ public class CourseFeedbackItem implements Serializable {
 	private String courseFeedbackItemStatus;
 
 
-	public Long getCourseFeedbackItemId() {
+	public String getCourseFeedbackItemId() {
 		return courseFeedbackItemId;
 	}
 
-	public void setCourseFeedbackItemId(Long courseFeedbackItemId) {
+	public void setCourseFeedbackItemId(String courseFeedbackItemId) {
 		this.courseFeedbackItemId = courseFeedbackItemId;
 	}
 
