@@ -79,13 +79,26 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
     private AtomicBoolean isVerfiFace = new AtomicBoolean(false);
 
+    private boolean runBool = false;
+    private Thread thread;
+
+    private long starTime;
+    private long endTime;
+
     @Override
     public void onBackPressed() {
+
         finish();
     }
 
     @Override
     public void finish() {
+        runBool = true;
+        endTime = System.currentTimeMillis();
+        while (((endTime-starTime)/1000)<1)
+        {
+            endTime = System.currentTimeMillis();
+        }
         closeCamera();
         super.finish();
     }
@@ -133,19 +146,73 @@ public class VerifyFaceActivity extends AppCompatActivity {
                 isVerfiFace.set(false);
                 isGetImage.set(false);
                 Log.e("boolen","-4--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
-                Log.d("VerifyFaceActivity---","------------error!=null");
+                Log.e("VerifyFaceActivity---",error.getMessage());
             }
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_face);
         ActivityColectorUtil.addActivity(this);
         SpeechUtility.createUtility(VerifyFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!runBool)
+                {
+                    starTime = System.currentTimeMillis();
+                    if(isGetImage.get()&&(!isVerfiFace.get()))
+                    {
+
+                        Camera.Size size = mcamera.getParameters().getPreviewSize();
+                        YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
+                                size.height, null);
+                        if (image != null) {
+
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            image.compressToJpeg(new Rect(0, 0, size.width, size.height),
+                                    80, stream);
+                            Bitmap bmp = BitmapFactory.decodeByteArray(
+                                    stream.toByteArray(), 0, stream.size());
+
+                            bmp = BitmapUtil.zoomBitmap(bmp,size.width/2,size.height/2);
+
+                            bmp = BitmapUtil.rotateBitmapByDegree(bmp, -90);
+
+                            byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
+
+                            String result = mFaceDetector.detectARGB(bmp);
+                            Log.d("VerifyFaceActivity---", "result:"+result);
+                            FaceRect[] faceRect = ParseResult.parseResult(result);
+
+                            if(faceRect.length!=0)
+                            {
+                                Log.e("boolen","-2--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
+                                Log.d("VerifyFaceActivity---","------------verfiFace--1");
+                                isVerfiFace.set(true);
+                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
+                                mFaceRequest.setParameter(SpeechConstant.WFR_SST, "verify");
+                                mFaceRequest.sendRequest(mface, mRequestListener);
+                                Log.e("VerifyFaceActivity---","------------verfiFace--2");
+                            }
+                            else {
+                                isGetImage.set(false);
+                            }
+                            Log.e("VerifyFaceActivity---","------------verfiFace--3");
+
+                            bmp.recycle();
+                        }
+                    }
+                }
+            }
+        });
+        thread.start();
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -236,49 +303,8 @@ public class VerifyFaceActivity extends AppCompatActivity {
                 if(!isGetImage.get())
                 {
                     System.arraycopy(data, 0, nv21, 0, data.length);
-                    Log.d("VerifyFaceActivity---","---------------获取图像");
+                    Log.e("VerifyFaceActivity---","---------------获取图像");
                     isGetImage.set(true);
-                }
-
-                if(isGetImage.get()&&(!isVerfiFace.get()))
-                {
-
-                    Log.d("VerifyFaceActivity---","---------------获取图像成功");
-                    Camera.Size size = mcamera.getParameters().getPreviewSize();
-                        YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
-                                size.height, null);
-                        if (image != null) {
-
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            image.compressToJpeg(new Rect(0, 0, size.width, size.height),
-                                    80, stream);
-                            Bitmap bmp = BitmapFactory.decodeByteArray(
-                                    stream.toByteArray(), 0, stream.size());
-
-                            bmp = BitmapUtil.zoomBitmap(bmp,size.width/2,size.height/2);
-
-                            bmp = BitmapUtil.rotateBitmapByDegree(bmp, -90);
-
-                            byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
-
-                            String result = mFaceDetector.detectARGB(bmp);
-                            Log.d("VerifyFaceActivity---", "result:"+result);
-                            FaceRect[] faceRect = ParseResult.parseResult(result);
-
-                            if(faceRect.length!=0)
-                            {
-                                Log.e("boolen","-2--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
-                                Log.d("VerifyFaceActivity---","------------verfiFace--1");
-                                isVerfiFace.set(true);
-                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
-                                mFaceRequest.setParameter(SpeechConstant.WFR_SST, "verify");
-                                mFaceRequest.sendRequest(mface, mRequestListener);
-                                Log.d("VerifyFaceActivity---","------------verfiFace--2");
-                            }
-                            Log.d("VerifyFaceActivity---","------------verfiFace--3");
-
-                            bmp.recycle();
-                        }
                 }
 
             }
@@ -313,6 +339,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
         Log.e("boolen","-3--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
         if ("success".equals(obj.get("rst"))) {
             if (obj.getBoolean("verf")) {
+                runBool = true;
                 Intent intent = new Intent(VerifyFaceActivity.this, StudentIndexActivity.class);
                 intent.putExtra("data_return","考勤成功，请好好听课");
                 setResult(RESULT_OK,intent);
@@ -340,4 +367,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
         super.onDestroy();
         ActivityColectorUtil.removeActivity(this);
     }
+
+
 }
