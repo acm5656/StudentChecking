@@ -1,6 +1,7 @@
 package com.example.checkingsystem;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,7 +21,6 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
-import com.example.checkingsystem.student.fragment.StudentCheckingFragment;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
 import com.iflytek.cloud.RequestListener;
@@ -153,13 +153,14 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Log.e("test_ren","--------------1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_face);
         ActivityColectorUtil.addActivity(this);
         SpeechUtility.createUtility(VerifyFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
+        Log.e("test_ren","--------------2");
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -212,13 +213,13 @@ public class VerifyFaceActivity extends AppCompatActivity {
             }
         });
         thread.start();
-
+        Log.e("test_ren","--------------2");
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         authid = getIntent().getStringExtra("authid");
 
-        authid = MainActivity.studentStatic.getStudentNo();
+        authid = LoginActivity.studentStatic.getStudentNo();
         Log.e("test-----",authid);
 
         PREVIEW_WIDTH = metrics.widthPixels;
@@ -227,7 +228,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         initUI();
         buffer = new byte[PREVIEW_WIDTH * PREVIEW_HEIGHT];
-
+        Log.e("test_ren","--------------3");
         mAcc = new Accelerometer(VerifyFaceActivity.this);
 
 
@@ -290,12 +291,13 @@ public class VerifyFaceActivity extends AppCompatActivity {
 //        params.setPictureSize(PREVIEW_WIDTH,PREVIEW_HEIGHT);
 
         mcamera.setParameters(params);
-
+        Log.e("test_ren","--------------4");
         mcamera.setDisplayOrientation(90);
         mcamera.setPreviewCallback(new Camera.PreviewCallback() {
 
             @Override
             public void onPreviewFrame(byte[] data, Camera camera) {
+                Log.e("test_ren","--------------5");
                 if(nv21==null)
                 {
                     nv21 = new byte[data.length];

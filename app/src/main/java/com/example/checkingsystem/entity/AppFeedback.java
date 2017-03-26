@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_app_feedback")
 public class AppFeedback implements Serializable {
@@ -19,59 +21,59 @@ public class AppFeedback implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("app_feedback_id")
 	private String appFeedbackId;
     /**
      * 外键-app_id
      */
-	//("app_feedback_app_id")
-	private Long appFeedbackAppId;
+	//Field("app_feedback_app_id")
+	private String appFeedbackAppId;
     /**
      * 外键-user_id
      */
-	//("app_feedback_user_id")
-	private Long appFeedbackUserId;
+	//Field("app_feedback_user_id")
+	private String appFeedbackUserId;
     /**
      * 外键-processor_id(外键处理者id,未实现)
      */
-	//("app_feedback_processor_id")
-	private Long appFeedbackProcessorId;
+	//Field("app_feedback_processor_id")
+	private String appFeedbackProcessorId;
     /**
      * 反馈用户的手机号
      */
-	//("app_feedback_user_tel")
+	//Field("app_feedback_user_tel")
 	private String appFeedbackUserTel;
     /**
      * 反馈的用户email
      */
-	//("app_feedback_user_email")
+	//Field("app_feedback_user_email")
 	private String appFeedbackUserEmail;
     /**
      * 反馈用户的姓名
      */
-	//("app_feedback_user_name")
+	//Field("app_feedback_user_name")
 	private String appFeedbackUserName;
     /**
      * 反馈的内容
      */
-	//("app_feedback_content")
+	//Field("app_feedback_content")
 	private String appFeedbackContent;
     /**
      * 反馈的创建时间
      */
-	//("app_feedback_gmt_created")
+	//Field("app_feedback_gmt_created")
 	private Timestamp appFeedbackGmtCreated;
     /**
      * 反馈的修改时间
      */
-	//("app_feedback_gmt_modified")
+	//Field("app_feedback_gmt_modified")
 	private Timestamp appFeedbackGmtModified;
     /**
      * 反馈的状态
      */
-	//("app_feedback_status")
+	//Field("app_feedback_status")
 	private String appFeedbackStatus;
 
 
@@ -83,27 +85,27 @@ public class AppFeedback implements Serializable {
 		this.appFeedbackId = appFeedbackId;
 	}
 
-	public Long getAppFeedbackAppId() {
+	public String getAppFeedbackAppId() {
 		return appFeedbackAppId;
 	}
 
-	public void setAppFeedbackAppId(Long appFeedbackAppId) {
+	public void setAppFeedbackAppId(String appFeedbackAppId) {
 		this.appFeedbackAppId = appFeedbackAppId;
 	}
 
-	public Long getAppFeedbackUserId() {
+	public String getAppFeedbackUserId() {
 		return appFeedbackUserId;
 	}
 
-	public void setAppFeedbackUserId(Long appFeedbackUserId) {
+	public void setAppFeedbackUserId(String appFeedbackUserId) {
 		this.appFeedbackUserId = appFeedbackUserId;
 	}
 
-	public Long getAppFeedbackProcessorId() {
+	public String getAppFeedbackProcessorId() {
 		return appFeedbackProcessorId;
 	}
 
-	public void setAppFeedbackProcessorId(Long appFeedbackProcessorId) {
+	public void setAppFeedbackProcessorId(String appFeedbackProcessorId) {
 		this.appFeedbackProcessorId = appFeedbackProcessorId;
 	}
 

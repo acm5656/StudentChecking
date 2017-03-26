@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_assistant")
 public class Assistant implements Serializable {
@@ -26,62 +28,62 @@ public class Assistant implements Serializable {
     /**
      * 导员电话号码
      */
-	//("assistant_tel")
+	//Field("assistant_tel")
 	private String assistantTel;
     /**
      * 导员密码
      */
-	//("assistant_password")
+	//Field("assistant_password")
 	private String assistantPassword;
     /**
      * 导员编号(工作证ID)
      */
-	//("assistant_no")
+	//Field("assistant_no")
 	private String assistantNo;
     /**
      * 导员姓名
      */
-	//("assistant_name")
+	//Field("assistant_name")
 	private String assistantName;
     /**
      * 导员邮箱
      */
-	//("assistant_email")
+	//Field("assistant_email")
 	private String assistantEmail;
     /**
      * 导员头像URL
      */
-	//("assistant_headimage_url")
+	//Field("assistant_headimage_url")
 	private String assistantHeadimageUrl;
     /**
      * 导员性别
      */
-	//("assistant_gender")
+	//Field("assistant_gender")
 	private String assistantGender;
     /**
      * 导员教务系统用户名
      */
-	//("assistant_school_username")
+	//Field("assistant_school_username")
 	private String assistantSchoolUsername;
     /**
      * 导员教务系统密码
      */
-	//("assistant_school_password")
+	//Field("assistant_school_password")
 	private String assistantSchoolPassword;
     /**
      * 记录创建时间
      */
-	//("assistant_gmt_created")
+	//Field("assistant_gmt_created")
 	private Timestamp assistantGmtCreated;
     /**
      * 记录更改时间
      */
-	//("assistant_gmt_modified")
+	//Field("assistant_gmt_modified")
 	private Timestamp assistantGmtModified;
     /**
      * 导员信息状态码
      */
-	//("assistant_status")
+	//Field("assistant_status")
 	private String assistantStatus;
 
 

@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="actionBarBackgroundColor">#3a3b40</color>
+
+    <!--<color name="actionBarBackgroundColor">#14b7f5</color>-->
     <color name="itemBackgroundColor">#ffffff</color>
     <color name="textUnClickColor">#939393</color>
     <color name="backgroundColor">#ebebeb</color>
-
+    <!--<color name="backgroundColor">#f8f8fa</color>-->
 </resources>

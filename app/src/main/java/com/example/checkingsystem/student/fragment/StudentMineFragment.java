@@ -11,15 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.checkingsystem.MainActivity;
+import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.RegistActivity;
 import com.example.checkingsystem.beans.Item;
+import com.example.checkingsystem.student.activity.StudentChangeInfoActivity;
+import com.example.checkingsystem.ChangePasswordActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +36,10 @@ public class StudentMineFragment extends Fragment {
     private ListView listView;
     private List<Item> listItem;
     private Button quitButton;
-    private TextView registTextView;
     public static final int FACE_REGIST_REQUEST_CODE = 1;
+    private RelativeLayout registRelativeLayout;
+    private RelativeLayout changeIngoRelativeLayout;
+    private RelativeLayout changePasswordRelativeLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,20 +50,37 @@ public class StudentMineFragment extends Fragment {
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.studentDao.deleteStudent(MainActivity.studentStatic);
-                MainActivity.studentStatic = null;
-                Intent intent = new Intent(getActivity(),MainActivity.class);
+                LoginActivity.studentDao.deleteStudent(LoginActivity.studentStatic);
+                LoginActivity.studentStatic = null;
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
             }
         });
-        registTextView = (TextView) view.findViewById(R.id.fragment_student_mine_regist_face);
-        registTextView.setOnClickListener(new View.OnClickListener() {
+        registRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_regist_face);
+        registRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RegistActivity.class);
                 startActivityForResult(intent,FACE_REGIST_REQUEST_CODE);
             }
         });
+        changeIngoRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_mineInfo);
+        changeIngoRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudentChangeInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+        changePasswordRelativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout_change_password);
+        changePasswordRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

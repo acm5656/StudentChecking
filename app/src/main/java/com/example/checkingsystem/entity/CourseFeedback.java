@@ -1,6 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_course_feedback")
 public class CourseFeedback implements Serializable {
@@ -19,54 +22,54 @@ public class CourseFeedback implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("course_feedback_id")
 	private String courseFeedbackId;
     /**
      * 外键-course_time_id
      */
-	//("course_feedback_ctime_id")
-	private Long courseFeedbackCtimeId;
+	//Field("course_feedback_ctime_id")
+	private String courseFeedbackCtimeId;
     /**
      * 备注
      */
-	//("course_feedback_note")
+	//Field("course_feedback_note")
 	private String courseFeedbackNote;
     /**
      * 记录创建时间
      */
-	//("course_feedback_gmt_created")
+	//Field("course_feedback_gmt_created")
 	private Timestamp courseFeedbackGmtCreated;
     /**
      * 记录修改时间
      */
-	//("course_feedback_gmt_modified")
+	//Field("course_feedback_gmt_modified")
 	private Timestamp courseFeedbackGmtModified;
     /**
      * 计数-认为简单的人数
      */
-	//("course_feedback_easy_count")
+	//Field("course_feedback_easy_count")
 	private Integer courseFeedbackEasyCount;
     /**
      * 计数-认为难的人数
      */
-	//("course_feedback_difficulty_count")
+	//Field("course_feedback_difficulty_count")
 	private Integer courseFeedbackDifficultyCount;
     /**
      * 计数-认为难度一般的人数
      */
-	//("course_feedback_general_count")
+	//Field("course_feedback_general_count")
 	private Integer courseFeedbackGeneralCount;
     /**
      * 计数-没有反馈或其他难度的人数
      */
-	//("course_feedback_other_count")
+	//Field("course_feedback_other_count")
 	private Integer courseFeedbackOtherCount;
     /**
      * 课程难易反馈记录状态
      */
-	//("course_feedback_status")
+	//Field("course_feedback_status")
 	private String courseFeedbackStatus;
 
 
@@ -78,11 +81,11 @@ public class CourseFeedback implements Serializable {
 		this.courseFeedbackId = courseFeedbackId;
 	}
 
-	public Long getCourseFeedbackCtimeId() {
+	public String getCourseFeedbackCtimeId() {
 		return courseFeedbackCtimeId;
 	}
 
-	public void setCourseFeedbackCtimeId(Long courseFeedbackCtimeId) {
+	public void setCourseFeedbackCtimeId(String courseFeedbackCtimeId) {
 		this.courseFeedbackCtimeId = courseFeedbackCtimeId;
 	}
 

@@ -35,24 +35,24 @@
 
         <TextView
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/OnClickText"
+            android:gravity="center"
+            android:text="@string/checking"
+            android:id="@+id/activity_student_checking_page"
+            />
+        <TextView
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/AskForLeave"
             android:gravity="center"
-            style="@style/OnClickText"
-            android:textSize="20dp"
-            android:id="@+id/ask_for_leave"
+            style="@style/unClickText"
+            android:id="@+id/activity_student_checking_ask_for_leave_page"
             />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            style="@style/unClickText"
-            android:gravity="center"
-            android:text="@string/checking"
-            android:id="@+id/checking"
-            />
+
     </LinearLayout>
     <android.support.v4.view.ViewPager
         xmlns:androdi="http://schemas.android.com/apk/res/android"

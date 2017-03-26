@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_picture")
 public class Picture implements Serializable {
@@ -19,34 +21,44 @@ public class Picture implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("picture_id")
 	private String pictureId;
     /**
      * 图片URL
      */
-	//("picture_url")
+	//Field("picture_url")
 	private String pictureUrl;
     /**
      * 图片CDN加速地址
      */
-	//("picture_cdn")
+	//Field("picture_cdn")
 	private String pictureCdn;
+    /**
+     * 照片名称
+     */
+	//Field("picture_name")
+	private String pictureName;
+    /**
+     * 图片备注
+     */
+	//Field("picture_note")
+	private String pictureNote;
     /**
      * 记录创建时间
      */
-	//("picture_gmt_created")
+	//Field("picture_gmt_created")
 	private Timestamp pictureGmtCreated;
     /**
      * 记录修改时间
      */
-	//("picture_gmt_modified")
+	//Field("picture_gmt_modified")
 	private Timestamp pictureGmtModified;
     /**
      * 记录的状态
      */
-	//("picture_status")
+	//Field("picture_status")
 	private String pictureStatus;
 
 
@@ -72,6 +84,22 @@ public class Picture implements Serializable {
 
 	public void setPictureCdn(String pictureCdn) {
 		this.pictureCdn = pictureCdn;
+	}
+
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	public String getPictureNote() {
+		return pictureNote;
+	}
+
+	public void setPictureNote(String pictureNote) {
+		this.pictureNote = pictureNote;
 	}
 
 	public Timestamp getPictureGmtCreated() {

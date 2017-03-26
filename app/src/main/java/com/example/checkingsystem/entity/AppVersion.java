@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_app_version")
 public class AppVersion implements Serializable {
@@ -26,37 +28,37 @@ public class AppVersion implements Serializable {
     /**
      * 外键-app_id
      */
-	//("app_version_app_id")
-	private Long appVersionAppId;
+	//Field("app_version_app_id")
+	private String appVersionAppId;
     /**
      * 版本编号
      */
-	//("app_version_code")
+	//Field("app_version_code")
 	private String appVersionCode;
     /**
      * 版本名
      */
-	//("app_version_name")
+	//Field("app_version_name")
 	private String appVersionName;
     /**
      * 版本日志
      */
-	//("app_version_log")
+	//Field("app_version_log")
 	private String appVersionLog;
     /**
      * 版本记录创建时间
      */
-	//("app_version_fmt_created")
+	//Field("app_version_fmt_created")
 	private Timestamp appVersionFmtCreated;
     /**
      * 版本记录修改时间
      */
-	//("app_version_fmt_modified")
+	//Field("app_version_fmt_modified")
 	private Timestamp appVersionFmtModified;
     /**
      * 版本状态
      */
-	//("app_version_status")
+	//Field("app_version_status")
 	private String appVersionStatus;
 
 
@@ -68,11 +70,11 @@ public class AppVersion implements Serializable {
 		this.appVersionId = appVersionId;
 	}
 
-	public Long getAppVersionAppId() {
+	public String getAppVersionAppId() {
 		return appVersionAppId;
 	}
 
-	public void setAppVersionAppId(Long appVersionAppId) {
+	public void setAppVersionAppId(String appVersionAppId) {
 		this.appVersionAppId = appVersionAppId;
 	}
 

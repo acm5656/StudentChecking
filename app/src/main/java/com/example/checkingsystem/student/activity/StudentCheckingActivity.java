@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 import util.ActivityColectorUtil;
 
-public class StudentCheckingActivity extends FragmentActivity {
+public class StudentCheckingActivity extends FragmentActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private TextView askForLeave;
@@ -40,8 +41,9 @@ public class StudentCheckingActivity extends FragmentActivity {
         StudentCheckingFragment studentCheckingFragment = new StudentCheckingFragment();
         fragmentManager = getSupportFragmentManager();
         list = new ArrayList<Fragment>();
-        list.add(studentAskForLeaveFragment);
         list.add(studentCheckingFragment);
+        list.add(studentAskForLeaveFragment);
+
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
@@ -91,32 +93,30 @@ public class StudentCheckingActivity extends FragmentActivity {
 
     private void initUI() {
         viewPager = (ViewPager)findViewById(R.id.checking_fragment_container);
-        askForLeave = (TextView)findViewById(R.id.ask_for_leave);
-        checking = (TextView)findViewById(R.id.checking);
-
+        askForLeave = (TextView)findViewById(R.id.activity_student_checking_ask_for_leave_page);
+        checking = (TextView)findViewById(R.id.activity_student_checking_page);
+        askForLeave.setOnClickListener(this);
+        checking.setOnClickListener(this);
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        Log.e("toast","----------"+requestCode+"   "+resultCode+"  "+RESULT_OK);
-//
-//        switch (requestCode)
-//        {
-//            case StudentCheckingFragment.FACE_VERIFY_RESULT:
-//                if(resultCode == RESULT_OK) {
-//                    String dataStr = data.getStringExtra("data_return");
-//                    Log.e("toast","---------------2");
-//                    Toast.makeText(this,dataStr,Toast.LENGTH_SHORT).show();
-//                }
-//
-//                break;
-//        }
-//    }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ActivityColectorUtil.removeActivity(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.activity_student_checking_page:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.activity_student_checking_ask_for_leave_page:
+                viewPager.setCurrentItem(1);
+                break;
+        }
     }
 }

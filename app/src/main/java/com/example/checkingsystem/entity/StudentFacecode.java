@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_student_facecode")
 public class StudentFacecode implements Serializable {
@@ -20,39 +22,39 @@ public class StudentFacecode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("student_facecode_id")
 	private String studentFacecodeId;
     /**
      * 外键-student_id
      */
-	//("student_facecode_stu_id")
-	private Long studentFacecodeStuId;
+	//Field("student_facecode_stu_id")
+	private String studentFacecodeStuId;
     /**
      * 外键_picture_id
      */
-	//("student_facecode_pic_id")
-	private Long studentFacecodePicId;
+	//Field("student_facecode_pic_id")
+	private String studentFacecodePicId;
     /**
      * 人脸ID-36位UUID
      */
-	//("student_facecode")
+	//Field("student_facecode")
 	private String studentFacecode;
     /**
      * 记录创建时间
      */
-	//("student_facecode_gmt_created")
+	//Field("student_facecode_gmt_created")
 	private Timestamp studentFacecodeGmtCreated;
     /**
      * 记录修改时间
      */
-	//("student_facecode_gmt_modified")
+	//Field("student_facecode_gmt_modified")
 	private Timestamp studentFacecodeGmtModified;
     /**
      * 记录状态
      */
-	//("student_facecode_status")
+	//Field("student_facecode_status")
 	private String studentFacecodeStatus;
 
 
@@ -64,19 +66,19 @@ public class StudentFacecode implements Serializable {
 		this.studentFacecodeId = studentFacecodeId;
 	}
 
-	public Long getStudentFacecodeStuId() {
+	public String getStudentFacecodeStuId() {
 		return studentFacecodeStuId;
 	}
 
-	public void setStudentFacecodeStuId(Long studentFacecodeStuId) {
+	public void setStudentFacecodeStuId(String studentFacecodeStuId) {
 		this.studentFacecodeStuId = studentFacecodeStuId;
 	}
 
-	public Long getStudentFacecodePicId() {
+	public String getStudentFacecodePicId() {
 		return studentFacecodePicId;
 	}
 
-	public void setStudentFacecodePicId(Long studentFacecodePicId) {
+	public void setStudentFacecodePicId(String studentFacecodePicId) {
 		this.studentFacecodePicId = studentFacecodePicId;
 	}
 

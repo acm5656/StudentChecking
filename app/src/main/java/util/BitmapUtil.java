@@ -6,7 +6,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Environment;
 
-import com.example.checkingsystem.MainActivity;
+import com.example.checkingsystem.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -95,12 +95,12 @@ public class BitmapUtil {
     }
 
     public static void saveMyBitmap(Bitmap mBitmap,String bitName)  {
-        File file = new File(Environment.getExternalStorageDirectory()+ MainActivity.path);
+        File file = new File(Environment.getExternalStorageDirectory()+ LoginActivity.path);
         if(!file.exists())
         {
             file.mkdir();
         }
-        File f = new File(Environment.getExternalStorageDirectory()+MainActivity.path+"/"+bitName + ".jpg");
+        File f = new File(Environment.getExternalStorageDirectory()+ LoginActivity.path+"/"+bitName + ".jpg");
         FileOutputStream fOut = null;
         try {
             fOut = new FileOutputStream(f);

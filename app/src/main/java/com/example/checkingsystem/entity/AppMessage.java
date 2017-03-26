@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_app_message")
 public class AppMessage implements Serializable {
@@ -19,39 +21,39 @@ public class AppMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * app消息id
+     * 主键-uuid-32
      */
 	//Id("app_message_id")
 	private String appMessageId;
     /**
      * app消息类型(如系统消息,特定用户类型的消息,特定用户的消息)
      */
-	//("app_message_type")
+	//Field("app_message_type")
 	private String appMessageType;
     /**
      * app消息优先级(0-9优先级从低到高)
      */
-	//("app_message_priority")
+	//Field("app_message_priority")
 	private Integer appMessagePriority;
     /**
      * app消息内容
      */
-	//("app_message_content")
+	//Field("app_message_content")
 	private String appMessageContent;
     /**
      * app消息创建时间
      */
-	//("app_message_gmt_created")
+	//Field("app_message_gmt_created")
 	private Timestamp appMessageGmtCreated;
     /**
      * app消息修改时间
      */
-	//("app_message_gmt_modified")
+	//Field("app_message_gmt_modified")
 	private Timestamp appMessageGmtModified;
     /**
      * app消息状态
      */
-	//("app_message_status")
+	//Field("app_message_status")
 	private String appMessageStatus;
 
 

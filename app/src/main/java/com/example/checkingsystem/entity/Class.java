@@ -1,6 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_class")
 public class Class implements Serializable {
@@ -19,54 +22,54 @@ public class Class implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("class_id")
 	private String classId;
     /**
      * 班级所属导员的id
      */
-	//("class_assistant_id")
-	private Long classAssistantId;
+	//Field("class_assistant_id")
+	private String classAssistantId;
     /**
      * 班级所属学校id
      */
-	//("class_school_id")
-	private Long classSchoolId;
+	//Field("class_school_id")
+	private String classSchoolId;
     /**
      * 班级所在系(院)
      */
-	//("class_department")
+	//Field("class_department")
 	private String classDepartment;
     /**
      * 班级所属专业(如软件工程)
      */
-	//("class_major")
+	//Field("class_major")
 	private String classMajor;
     /**
      * 班级所属级(如2014)
      */
-	//("class_year")
+	//Field("class_year")
 	private String classYear;
     /**
      * 班级编号(如1)
      */
-	//("class_no")
+	//Field("class_no")
 	private String classNo;
     /**
      * 记录创建时间
      */
-	//("class_gmt_created")
+	//Field("class_gmt_created")
 	private Timestamp classGmtCreated;
     /**
      * 记录修改时间
      */
-	//("class_gmt_modified")
+	//Field("class_gmt_modified")
 	private Timestamp classGmtModified;
     /**
      * 记录状态
      */
-	//("class_status")
+	//Field("class_status")
 	private String classStatus;
 
 
@@ -78,19 +81,19 @@ public class Class implements Serializable {
 		this.classId = classId;
 	}
 
-	public Long getClassAssistantId() {
+	public String getClassAssistantId() {
 		return classAssistantId;
 	}
 
-	public void setClassAssistantId(Long classAssistantId) {
+	public void setClassAssistantId(String classAssistantId) {
 		this.classAssistantId = classAssistantId;
 	}
 
-	public Long getClassSchoolId() {
+	public String getClassSchoolId() {
 		return classSchoolId;
 	}
 
-	public void setClassSchoolId(Long classSchoolId) {
+	public void setClassSchoolId(String classSchoolId) {
 		this.classSchoolId = classSchoolId;
 	}
 

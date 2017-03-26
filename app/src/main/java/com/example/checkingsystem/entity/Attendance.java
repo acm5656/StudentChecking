@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_attendance")
 public class Attendance implements Serializable {
@@ -20,116 +22,116 @@ public class Attendance implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
-	//Id("attendance_id")
-	private String attendanceId;
+	//Id("course_attendance_id")
+	private String courseAttendanceId;
     /**
      * 外键-课程时间表-对应课表上的某节课
      */
-	//("attendance_course_time_id")
-	private Long attendanceCourseTimeId;
+	//Field("course_attendance_course_time_id")
+	private String courseAttendanceCourseTimeId;
     /**
      * 考勤开始时间
      */
-	//("attendance_gmt_begin")
-	private Timestamp attendanceGmtBegin;
+	//Field("course_attendance_gmt_begin")
+	private Timestamp courseAttendanceGmtBegin;
     /**
      * 考勤结束时间
      */
-	//("attendance_gmt_end")
-	private Timestamp attendanceGmtEnd;
+	//Field("course_attendance_gmt_end")
+	private Timestamp courseAttendanceGmtEnd;
     /**
      * 记录创建时间
      */
-	//("attendance_gmt_created")
-	private Timestamp attendanceGmtCreated;
+	//Field("course_attendance_gmt_created")
+	private Timestamp courseAttendanceGmtCreated;
     /**
      * 记录修改时间
      */
-	//("attendance_gmt_modified")
-	private Timestamp attendanceGmtModified;
+	//Field("course_attendance_gmt_modified")
+	private Timestamp courseAttendanceGmtModified;
     /**
      * 备注
      */
-	//("attendance_note")
-	private String attendanceNote;
+	//Field("course_attendance_note")
+	private String courseAttendanceNote;
     /**
      * 缺勤总数
      */
-	//("attendance_absent_count")
+	//Field("attendance_absent_count")
 	private Integer attendanceAbsentCount;
     /**
      * 总人数
      */
-	//("attendance_total_count")
+	//Field("attendance_total_count")
 	private Integer attendanceTotalCount;
     /**
      * 出勤总数
      */
-	//("attendance_present_count")
+	//Field("attendance_present_count")
 	private Integer attendancePresentCount;
     /**
      * 考勤记录状态
      */
-	//("attendance_status")
+	//Field("attendance_status")
 	private String attendanceStatus;
 
 
-	public String getAttendanceId() {
-		return attendanceId;
+	public String getCourseAttendanceId() {
+		return courseAttendanceId;
 	}
 
-	public void setAttendanceId(String attendanceId) {
-		this.attendanceId = attendanceId;
+	public void setCourseAttendanceId(String courseAttendanceId) {
+		this.courseAttendanceId = courseAttendanceId;
 	}
 
-	public Long getAttendanceCourseTimeId() {
-		return attendanceCourseTimeId;
+	public String getCourseAttendanceCourseTimeId() {
+		return courseAttendanceCourseTimeId;
 	}
 
-	public void setAttendanceCourseTimeId(Long attendanceCourseTimeId) {
-		this.attendanceCourseTimeId = attendanceCourseTimeId;
+	public void setCourseAttendanceCourseTimeId(String courseAttendanceCourseTimeId) {
+		this.courseAttendanceCourseTimeId = courseAttendanceCourseTimeId;
 	}
 
-	public Timestamp getAttendanceGmtBegin() {
-		return attendanceGmtBegin;
+	public Timestamp getCourseAttendanceGmtBegin() {
+		return courseAttendanceGmtBegin;
 	}
 
-	public void setAttendanceGmtBegin(Timestamp attendanceGmtBegin) {
-		this.attendanceGmtBegin = attendanceGmtBegin;
+	public void setCourseAttendanceGmtBegin(Timestamp courseAttendanceGmtBegin) {
+		this.courseAttendanceGmtBegin = courseAttendanceGmtBegin;
 	}
 
-	public Timestamp getAttendanceGmtEnd() {
-		return attendanceGmtEnd;
+	public Timestamp getCourseAttendanceGmtEnd() {
+		return courseAttendanceGmtEnd;
 	}
 
-	public void setAttendanceGmtEnd(Timestamp attendanceGmtEnd) {
-		this.attendanceGmtEnd = attendanceGmtEnd;
+	public void setCourseAttendanceGmtEnd(Timestamp courseAttendanceGmtEnd) {
+		this.courseAttendanceGmtEnd = courseAttendanceGmtEnd;
 	}
 
-	public Timestamp getAttendanceGmtCreated() {
-		return attendanceGmtCreated;
+	public Timestamp getCourseAttendanceGmtCreated() {
+		return courseAttendanceGmtCreated;
 	}
 
-	public void setAttendanceGmtCreated(Timestamp attendanceGmtCreated) {
-		this.attendanceGmtCreated = attendanceGmtCreated;
+	public void setCourseAttendanceGmtCreated(Timestamp courseAttendanceGmtCreated) {
+		this.courseAttendanceGmtCreated = courseAttendanceGmtCreated;
 	}
 
-	public Timestamp getAttendanceGmtModified() {
-		return attendanceGmtModified;
+	public Timestamp getCourseAttendanceGmtModified() {
+		return courseAttendanceGmtModified;
 	}
 
-	public void setAttendanceGmtModified(Timestamp attendanceGmtModified) {
-		this.attendanceGmtModified = attendanceGmtModified;
+	public void setCourseAttendanceGmtModified(Timestamp courseAttendanceGmtModified) {
+		this.courseAttendanceGmtModified = courseAttendanceGmtModified;
 	}
 
-	public String getAttendanceNote() {
-		return attendanceNote;
+	public String getCourseAttendanceNote() {
+		return courseAttendanceNote;
 	}
 
-	public void setAttendanceNote(String attendanceNote) {
-		this.attendanceNote = attendanceNote;
+	public void setCourseAttendanceNote(String courseAttendanceNote) {
+		this.courseAttendanceNote = courseAttendanceNote;
 	}
 
 	public Integer getAttendanceAbsentCount() {

@@ -1,6 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_attendance_item")
 public class AttendanceItem implements Serializable {
@@ -19,39 +22,39 @@ public class AttendanceItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("attendance_item_id")
 	private String attendanceItemId;
     /**
      * 外键-student-id
      */
-	//("attendance_item_student_id")
-	private Long attendanceItemStudentId;
+	//Field("attendance_item_student_id")
+	private String attendanceItemStudentId;
     /**
      * 外键-attendance_id
      */
-	//("attendance_id")
-	private Long attendanceId;
+	//Field("attendance_id")
+	private String attendanceId;
     /**
      * 记录创建时间
      */
-	//("attendance_item_gmt_created")
+	//Field("attendance_item_gmt_created")
 	private Timestamp attendanceItemGmtCreated;
     /**
      * 记录修改时间
      */
-	//("attendance_item_gmt_modified")
+	//Field("attendance_item_gmt_modified")
 	private Timestamp attendanceItemGmtModified;
     /**
      * 考勤结果
      */
-	//("attendance_item_result")
+	//Field("attendance_item_result")
 	private String attendanceItemResult;
     /**
      * 考勤记录状态
      */
-	//("attendance_item_status")
+	//Field("attendance_item_status")
 	private String attendanceItemStatus;
 
 
@@ -63,19 +66,19 @@ public class AttendanceItem implements Serializable {
 		this.attendanceItemId = attendanceItemId;
 	}
 
-	public Long getAttendanceItemStudentId() {
+	public String getAttendanceItemStudentId() {
 		return attendanceItemStudentId;
 	}
 
-	public void setAttendanceItemStudentId(Long attendanceItemStudentId) {
+	public void setAttendanceItemStudentId(String attendanceItemStudentId) {
 		this.attendanceItemStudentId = attendanceItemStudentId;
 	}
 
-	public Long getAttendanceId() {
+	public String getAttendanceId() {
 		return attendanceId;
 	}
 
-	public void setAttendanceId(Long attendanceId) {
+	public void setAttendanceId(String attendanceId) {
 		this.attendanceId = attendanceId;
 	}
 

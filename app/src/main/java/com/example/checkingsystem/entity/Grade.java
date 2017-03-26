@@ -1,6 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_grade")
 public class Grade implements Serializable {
@@ -19,44 +22,45 @@ public class Grade implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("grade_id")
 	private String gradeId;
     /**
      * 外键-student-id
      */
-	//("grade_student_id")
-	private Long gradeStudentId;
+	//Field("grade_student_id")
+	private String gradeStudentId;
     /**
      * 外键-course_plan_id
      */
-	//("grade_course_plan_id")
-	private Long gradeCoursePlanId;
+	//Field("grade_course_plan_id")
+	private String gradeCoursePlanId;
     /**
      * 成绩类型-表明使用score还是level记录成绩
      */
-	//("grade_type")
+	//Field("grade_type")
 	private String gradeType;
     /**
      * 成绩分数
      */
-	//("grade_score")
+	//Field("grade_score")
 	private Integer gradeScore;
     /**
      * 成绩级别(一种记录分数的方式如优良中差)
      */
-	//("grade_level")
+	//Field("grade_level")
 	private String gradeLevel;
-	//("grade_gmt_created")
+	//Field("grade_gmt_created")
 	private Timestamp gradeGmtCreated;
-	//("grade_gmt_modified")
+	//Field("grade_gmt_modified")
 	private Timestamp gradeGmtModified;
     /**
      * 成绩记录的状态
      */
-	//("grade_status")
+	//Field("grade_status")
 	private String gradeStatus;
+
 
 	public String getGradeId() {
 		return gradeId;
@@ -66,19 +70,19 @@ public class Grade implements Serializable {
 		this.gradeId = gradeId;
 	}
 
-	public Long getGradeStudentId() {
+	public String getGradeStudentId() {
 		return gradeStudentId;
 	}
 
-	public void setGradeStudentId(Long gradeStudentId) {
+	public void setGradeStudentId(String gradeStudentId) {
 		this.gradeStudentId = gradeStudentId;
 	}
 
-	public Long getGradeCoursePlanId() {
+	public String getGradeCoursePlanId() {
 		return gradeCoursePlanId;
 	}
 
-	public void setGradeCoursePlanId(Long gradeCoursePlanId) {
+	public void setGradeCoursePlanId(String gradeCoursePlanId) {
 		this.gradeCoursePlanId = gradeCoursePlanId;
 	}
 

@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_course_time")
 public class CourseTime implements Serializable {
@@ -27,42 +29,42 @@ public class CourseTime implements Serializable {
     /**
      * 外键-课程计划id
      */
-	//("course_time_plan_id")
-	private Long courseTimePlanId;
+	//Field("course_time_plan_id")
+	private String courseTimePlanId;
     /**
      * 上课的周
      */
-	//("course_time_week")
+	//Field("course_time_week")
 	private Integer courseTimeWeek;
     /**
      * 上课的星期几
      */
-	//("course_time_day")
+	//Field("course_time_day")
 	private Integer courseTimeDay;
     /**
      * 课开始的时间
      */
-	//("course_time_gmt_begin")
+	//Field("course_time_gmt_begin")
 	private Timestamp courseTimeGmtBegin;
     /**
      * 课结束的时间
      */
-	//("course_time_gmt_end")
+	//Field("course_time_gmt_end")
 	private Timestamp courseTimeGmtEnd;
     /**
      * 创建时间
      */
-	//("course_time_gmt_created")
+	//Field("course_time_gmt_created")
 	private Timestamp courseTimeGmtCreated;
     /**
      * 修改时间
      */
-	//("course_time_gmt_modified")
+	//Field("course_time_gmt_modified")
 	private Timestamp courseTimeGmtModified;
     /**
      * 课程时间记录状态
      */
-	//("course_time_status")
+	//Field("course_time_status")
 	private String courseTimeStatus;
 
 
@@ -74,11 +76,11 @@ public class CourseTime implements Serializable {
 		this.courseTimeId = courseTimeId;
 	}
 
-	public Long getCourseTimePlanId() {
+	public String getCourseTimePlanId() {
 		return courseTimePlanId;
 	}
 
-	public void setCourseTimePlanId(Long courseTimePlanId) {
+	public void setCourseTimePlanId(String courseTimePlanId) {
 		this.courseTimePlanId = courseTimePlanId;
 	}
 

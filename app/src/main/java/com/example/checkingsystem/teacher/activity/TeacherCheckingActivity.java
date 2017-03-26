@@ -1,6 +1,5 @@
 package com.example.checkingsystem.teacher.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,9 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.example.checkingsystem.MainActivity;
 import com.example.checkingsystem.R;
-import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.example.checkingsystem.teacher.fragment.TeacherAskForLeaveInfoFragment;
 import com.example.checkingsystem.teacher.fragment.TeacherCheckingFragment;
 

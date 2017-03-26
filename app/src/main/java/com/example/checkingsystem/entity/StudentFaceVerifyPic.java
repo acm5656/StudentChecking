@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_student_face_verify_pic")
 public class StudentFaceVerifyPic implements Serializable {
@@ -19,35 +21,36 @@ public class StudentFaceVerifyPic implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
 	//Id("student_face_verify_pic_id")
 	private String studentFaceVerifyPicId;
     /**
      * 外键-student_id
      */
-	//("student_face_verify_pic_stu_id")
-	private Long studentFaceVerifyPicStuId;
+	//Field("student_face_verify_pic_stu_id")
+	private String studentFaceVerifyPicStuId;
     /**
      * 外键-picture_id
      */
-	//("student_face_verify_pic_pic_id")
-	private Long studentFaceVerifyPicPicId;
+	//Field("student_face_verify_pic_pic_id")
+	private String studentFaceVerifyPicPicId;
     /**
      * 记录创建时间
      */
-	//("student_face_verify_pic_gmt_created")
+	//Field("student_face_verify_pic_gmt_created")
 	private Timestamp studentFaceVerifyPicGmtCreated;
     /**
      * 记录修改时间
      */
-	//("student_face_verify_pic_gmt_modified")
+	//Field("student_face_verify_pic_gmt_modified")
 	private Timestamp studentFaceVerifyPicGmtModified;
     /**
      * 记录的状态
      */
-	//("student_face_verify_pic_status")
+	//Field("student_face_verify_pic_status")
 	private String studentFaceVerifyPicStatus;
+
 
 	public String getStudentFaceVerifyPicId() {
 		return studentFaceVerifyPicId;
@@ -57,19 +60,19 @@ public class StudentFaceVerifyPic implements Serializable {
 		this.studentFaceVerifyPicId = studentFaceVerifyPicId;
 	}
 
-	public Long getStudentFaceVerifyPicStuId() {
+	public String getStudentFaceVerifyPicStuId() {
 		return studentFaceVerifyPicStuId;
 	}
 
-	public void setStudentFaceVerifyPicStuId(Long studentFaceVerifyPicStuId) {
+	public void setStudentFaceVerifyPicStuId(String studentFaceVerifyPicStuId) {
 		this.studentFaceVerifyPicStuId = studentFaceVerifyPicStuId;
 	}
 
-	public Long getStudentFaceVerifyPicPicId() {
+	public String getStudentFaceVerifyPicPicId() {
 		return studentFaceVerifyPicPicId;
 	}
 
-	public void setStudentFaceVerifyPicPicId(Long studentFaceVerifyPicPicId) {
+	public void setStudentFaceVerifyPicPicId(String studentFaceVerifyPicPicId) {
 		this.studentFaceVerifyPicPicId = studentFaceVerifyPicPicId;
 	}
 

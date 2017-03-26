@@ -1,6 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_course_plan")
 public class CoursePlan implements Serializable {
@@ -26,47 +29,47 @@ public class CoursePlan implements Serializable {
     /**
      * 外键-教师id
      */
-	//("course_plan_teacher_id")
-	private Long coursePlanTeacherId;
+	//Field("course_plan_teacher_id")
+	private String coursePlanTeacherId;
     /**
      * 外键-课程id
      */
-	//("course_plan_course_id")
-	private Long coursePlanCourseId;
+	//Field("course_plan_course_id")
+	private String coursePlanCourseId;
     /**
      * 教学班号
      */
-	//("course_plan_class_no")
+	//Field("course_plan_class_no")
 	private String coursePlanClassNo;
     /**
      * 班级容量
      */
-	//("course_plan_capacity")
+	//Field("course_plan_capacity")
 	private Integer coursePlanCapacity;
     /**
      * 学期开始时间
      */
-	//("course_plan_gmt_term_begin")
+	//Field("course_plan_gmt_term_begin")
 	private Timestamp coursePlanGmtTermBegin;
     /**
      * 学期结束时间
      */
-	//("course_plan_gmt_term_end")
+	//Field("course_plan_gmt_term_end")
 	private Timestamp coursePlanGmtTermEnd;
     /**
      * 计划创建时间
      */
-	//("course_plan_gmt_created")
+	//Field("course_plan_gmt_created")
 	private Timestamp coursePlanGmtCreated;
     /**
      * 计划修改时间
      */
-	//("course_plan_gmt_modified")
+	//Field("course_plan_gmt_modified")
 	private Timestamp coursePlanGmtModified;
     /**
      * 课程计划状态
      */
-	//("course_plan_status")
+	//Field("course_plan_status")
 	private String coursePlanStatus;
 
 
@@ -78,19 +81,19 @@ public class CoursePlan implements Serializable {
 		this.coursePlanId = coursePlanId;
 	}
 
-	public Long getCoursePlanTeacherId() {
+	public String getCoursePlanTeacherId() {
 		return coursePlanTeacherId;
 	}
 
-	public void setCoursePlanTeacherId(Long coursePlanTeacherId) {
+	public void setCoursePlanTeacherId(String coursePlanTeacherId) {
 		this.coursePlanTeacherId = coursePlanTeacherId;
 	}
 
-	public Long getCoursePlanCourseId() {
+	public String getCoursePlanCourseId() {
 		return coursePlanCourseId;
 	}
 
-	public void setCoursePlanCourseId(Long coursePlanCourseId) {
+	public void setCoursePlanCourseId(String coursePlanCourseId) {
 		this.coursePlanCourseId = coursePlanCourseId;
 	}
 

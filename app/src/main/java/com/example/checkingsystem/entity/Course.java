@@ -2,6 +2,9 @@ package com.example.checkingsystem.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -12,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
 //Name("t_course")
 public class Course implements Serializable {
@@ -27,43 +30,44 @@ public class Course implements Serializable {
     /**
      * 外键-先修课ID
      */
-	//("precourse_id")
-	private Long precourseId;
+	//Field("precourse_id")
+	private String precourseId;
     /**
      * 课程名称
      */
-	//("course_name")
+	//Field("course_name")
 	private String courseName;
     /**
      * 课程代码
      */
-	//("course_code")
+	//Field("course_code")
 	private String courseCode;
     /**
      * 课程类型
      */
-	//("course_type")
+	//Field("course_type")
 	private String courseType;
     /**
      * 课程学分
      */
-	//("course_credit")
+	//Field("course_credit")
 	private BigDecimal courseCredit;
     /**
      * 课程创建时间
      */
-	//("course_gmt_created")
+	//Field("course_gmt_created")
 	private Timestamp courseGmtCreated;
     /**
      * 课程修改时间
      */
-	//("course_gmt_modified")
+	//Field("course_gmt_modified")
 	private Timestamp courseGmtModified;
     /**
      * 课程状态
      */
-	//("course_status")
+	//Field("course_status")
 	private String courseStatus;
+
 
 	public String getCourseId() {
 		return courseId;
@@ -73,11 +77,11 @@ public class Course implements Serializable {
 		this.courseId = courseId;
 	}
 
-	public Long getPrecourseId() {
+	public String getPrecourseId() {
 		return precourseId;
 	}
 
-	public void setPrecourseId(Long precourseId) {
+	public void setPrecourseId(String precourseId) {
 		this.precourseId = precourseId;
 	}
 

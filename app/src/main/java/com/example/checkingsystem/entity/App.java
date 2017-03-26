@@ -1,7 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
+//.mybatisplus.annotations.TableId;
+//.mybatisplus.annotations.TableField;
+//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -11,61 +13,67 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-13
+ * @since 2017-03-19
  */
-
+//Name("t_app")
 public class App implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键-sequenceid
+     * 主键-uuid-32
      */
+	//Id("app_id")
 	private String appId;
     /**
      * app名称
      */
+	//Field("app_name")
 	private String appName;
     /**
      * APP功能
      */
-
+	//Field("app_function")
 	private String appFunction;
     /**
      * APP用户指导
      */
-
+	//Field("app_direction")
 	private String appDirection;
     /**
      * APP服务条款
      */
+	//Field("app_terms")
 	private String appTerms;
     /**
      * APP版权信息
      */
+	//Field("app_ copyright_info")
 	private String appCopyrightInfo;
     /**
      * APP官方网站
      */
+	//Field("app_website")
 	private String appWebsite;
     /**
      * APP声明
      */
+	//Field("app_statement")
 	private String appStatement;
     /**
      * 记录创建时间
      */
-
+	//Field("app_gmt_created")
 	private Timestamp appGmtCreated;
     /**
      * 记录最新修改时间
      */
-	//("app_gmt_modified")
+	//Field("app_gmt_modified")
 	private Timestamp appGmtModified;
     /**
      * APP状态
      */
-	//("app_status")
+	//Field("app_status")
 	private String appStatus;
 
 

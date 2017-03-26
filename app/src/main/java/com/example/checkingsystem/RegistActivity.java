@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
-import com.example.checkingsystem.student.fragment.StudentMineFragment;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
 import com.iflytek.cloud.RequestListener;
@@ -141,7 +140,7 @@ public class RegistActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        authid = MainActivity.studentStatic.getStudentFacecode();
+        authid = LoginActivity.studentStatic.getStudentFacecode();
 
         PREVIEW_WIDTH = metrics.widthPixels;
 
@@ -299,13 +298,13 @@ public class RegistActivity extends AppCompatActivity {
         if ("success".equals(obj.get("rst"))) {
 
             if(bmp!=null) {
-                BitmapUtil.saveMyBitmap(bmp,MainActivity.studentStatic.getStudentFacecode());
+                BitmapUtil.saveMyBitmap(bmp, LoginActivity.studentStatic.getStudentFacecode());
             }
             bmp.recycle();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+MainActivity.path,MainActivity.studentStatic.getStudentFacecode()+".jpg",getApplicationContext());
+                    CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path, LoginActivity.studentStatic.getStudentFacecode()+".jpg",getApplicationContext());
                 }
             }).start();
             Intent intent = new Intent(RegistActivity.this, StudentIndexActivity.class);
