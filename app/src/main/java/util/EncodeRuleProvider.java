@@ -7,6 +7,19 @@ import java.sql.Timestamp;
  */
 public class EncodeRuleProvider {
     public static String getRuleByTimestamp(Timestamp timestamp){
-        return String.valueOf(timestamp.getTime());
+        String ruleStr = String.valueOf(timestamp.getTime());
+        if(ruleStr.length()<16)
+        {
+            int shortLength = 16 - ruleStr.length();
+            byte []shortBytes = new byte[shortLength];
+            for(int i = 0 ; i<shortLength ;i++)
+                shortBytes[i] = '0';
+            ruleStr+=new String(shortBytes);
+        }
+        if(ruleStr.length()>16)
+        {
+            ruleStr = ruleStr.substring(0,16);
+        }
+        return ruleStr;
     }
 }

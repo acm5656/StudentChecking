@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
-import com.example.checkingsystem.RegistActivity;
+import com.example.checkingsystem.RegistFaceActivity;
 import com.example.checkingsystem.beans.Item;
 import com.example.checkingsystem.student.activity.StudentChangeInfoActivity;
 import com.example.checkingsystem.ChangePasswordActivity;
@@ -60,7 +60,7 @@ public class StudentMineFragment extends Fragment {
         registRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegistActivity.class);
+                Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
                 startActivityForResult(intent,FACE_REGIST_REQUEST_CODE);
             }
         });

@@ -36,7 +36,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity
-            android:name=".RegistActivity"
+            android:name=".RegistFaceActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity android:name=".IndexActivity">
@@ -44,6 +44,8 @@
         <activity android:name=".student.activity.StudentChangeInfoActivity">
         </activity>
         <activity android:name=".ChangePasswordActivity">
+        </activity>
+        <activity android:name=".RegistActivity">
         </activity>
     </application>
 

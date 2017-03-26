@@ -262,4 +262,26 @@ public class Student implements Serializable {
 		this.studentStatus = studentStatus;
 	}
 
+	@Override
+	public String toString() {
+		return "Student{" +
+				"studentId='" + studentId + '\'' +
+				", studentClassId='" + studentClassId + '\'' +
+				", studentFacecode='" + studentFacecode + '\'' +
+				", studentVoiceprintId='" + studentVoiceprintId + '\'' +
+				", studentTel='" + studentTel + '\'' +
+				", studentPassword='" + studentPassword + '\'' +
+				", studentNo='" + studentNo + '\'' +
+				", studentName='" + studentName + '\'' +
+				", studentNickname='" + studentNickname + '\'' +
+				", studentEmail='" + studentEmail + '\'' +
+				", studentHeadimageUrl='" + studentHeadimageUrl + '\'' +
+				", studentGender='" + studentGender + '\'' +
+				", studentSchoolUsername='" + studentSchoolUsername + '\'' +
+				", studentSchoolPassword='" + studentSchoolPassword + '\'' +
+				", studentGmtModified=" + studentGmtModified +
+				", studentGmtCreated=" + studentGmtCreated +
+				", studentStatus='" + studentStatus + '\'' +
+				'}';
+	}
 }

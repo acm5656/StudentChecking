@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.print.PrinterId;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.dao.StudentDao;
@@ -27,7 +29,7 @@ import util.ActivityColectorUtil;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Spinner rolesSpinner;
     EditText usernameText;
@@ -39,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     public static Teacher teacherStatic;
     public static String token;
     private LoginActivity loginActivity;
-
+    private TextView forgetPassword;
+    private TextView regist;
 
     public static final String path="/com.acm.checkingsystem";
 
@@ -59,31 +62,9 @@ public class LoginActivity extends AppCompatActivity {
         initResourse();
         loginActivity = this;
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameText.getText().toString();
-                String password = passwordText.getText().toString();
-                roleStr = (String)rolesSpinner.getSelectedItem();
-                if((username!=null)&&(password!=null)&&(!username.trim().equals(""))&&(!password.trim().equals("")))
-                {
-                    LoginNet loginNet = new LoginNet();
-                    if("学生".equals(roleStr))
-                    {
-//                        Log.e("netLogin",roleStr+" "+username+" "+password);
-                        //loginNet.studentSendInfo(loginActivity,username,password);
-                        Intent intent = new Intent(LoginActivity.this,StudentIndexActivity.class);
-                        startActivity(intent);
-                    }
-                    if("教师".equals(roleStr))
-                    {
-                        Intent intent = new Intent(LoginActivity.this,TeacherIndexActivity.class);
-                        startActivity(intent);
-                    }
-                }
-
-            }
-        });
+        submitButton.setOnClickListener(this);
+        regist.setOnClickListener(this);
+        forgetPassword.setOnClickListener(this);
 
     }
 
@@ -95,11 +76,47 @@ public class LoginActivity extends AppCompatActivity {
         usernameText = (EditText)findViewById(R.id.login_usernameEdit);
         passwordText = (EditText)findViewById(R.id.login_passwordEdit);
         submitButton = (Button)findViewById(R.id.login_submit);
+        regist = (TextView) findViewById(R.id.activity_login_regist);
+        forgetPassword = (TextView)findViewById(R.id.activity_login_forget_password);
 
     }
 
     @Override
     public void onBackPressed() {
         ActivityColectorUtil.finishAll();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.login_submit:
+                String username = usernameText.getText().toString();
+                String password = passwordText.getText().toString();
+                roleStr = (String)rolesSpinner.getSelectedItem();
+                if((username!=null)&&(password!=null)&&(!username.trim().equals(""))&&(!password.trim().equals("")))
+                {
+                    LoginNet loginNet = new LoginNet();
+                    if("学生".equals(roleStr))
+                    {
+                        Log.e("netLogin",roleStr+" "+username+" "+password);
+                        loginNet.studentSendInfo(loginActivity,username,password);
+
+                    }
+                    if("教师".equals(roleStr))
+                    {
+                        Intent intent = new Intent(LoginActivity.this,TeacherIndexActivity.class);
+                        startActivity(intent);
+                    }
+                }
+                break;
+            case R.id.activity_login_regist:
+                Intent intent = new Intent(this,RegistActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.activity_login_forget_password:
+
+                break;
+        }
     }
 }

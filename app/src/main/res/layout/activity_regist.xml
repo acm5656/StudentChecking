@@ -13,16 +13,16 @@
         android:layout_weight="1"
         android:background="#14b7f5"
         android:orientation="horizontal"
+        android:gravity="center"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/teacher_index_choose_week"
-            android:text="修改密码"
+            android:text="新用户注册"
             android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:paddingLeft="20dp"
             />
     </RelativeLayout>
     <LinearLayout
@@ -35,13 +35,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_marginTop="25dp"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="请设置密码,请确保能够收到验证短信,请勿将验证短信随意转发。"
+                android:text="请输入手机号和密码,此手机号将用来今后登录和修改密码"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="17dp"
@@ -50,8 +50,76 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:id="@+id/activity_regist_radioGroup"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="教师"
+                    android:background="@null"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/activity_regist_role_teacher"
+                    android:checked="true"
+
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="学生"
+                    android:background="@null"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/activity_regist_role_student"
+                    />
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:text="手机号"
+                android:textColor="#878787"
+                android:layout_marginLeft="20dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/input_change_password"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <EditText
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="请输入手机号"
+                android:textSize="16dp"
+                android:background="@null"
+                android:textColorHint="#a9a9a9"
+                android:id="@+id/activity_regist_tel"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="新密码"
@@ -78,7 +146,7 @@
                 android:textSize="16dp"
                 android:background="@null"
                 android:textColorHint="#a9a9a9"
-                android:id="@+id/change_password_input_password"
+                android:id="@+id/activity_regist_input_password"
                 />
 
         </LinearLayout>
@@ -113,7 +181,7 @@
                 android:textColorHint="#a9a9a9"
                 android:background="@null"
                 android:textSize="16dp"
-                android:id="@+id/change_password_checking_input_password"
+                android:id="@+id/activity_regist_input_checking_password"
                 />
 
         </LinearLayout>
@@ -152,7 +220,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
-                android:id="@+id/change_password_input_verifycode"
+                android:id="@+id/activity_regist_verifycode"
 
                 />
 
@@ -165,7 +233,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:textColor="#ffffff"
-                android:id="@+id/change_password_get_verifycode_button"/>
+                android:id="@+id/activity_regist_get_verifycode_button"/>
 
         </RelativeLayout>
         <Button
@@ -178,7 +246,7 @@
             android:layout_marginRight="20dp"
             android:text="确认"
             android:textColor="#ffffff"
-            android:id="@+id/change_password_submit"
+            android:id="@+id/acticity_regist_submit"
             />
 
     </LinearLayout>

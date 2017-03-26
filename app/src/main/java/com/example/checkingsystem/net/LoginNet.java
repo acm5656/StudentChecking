@@ -25,6 +25,7 @@ import java.util.Date;
 
 
 import Decoder.BASE64Encoder;
+import util.AES;
 import util.EncodeRuleProvider;
 import util.HttpCallbackListener;
 import util.HttpUtil;
@@ -68,11 +69,13 @@ public class LoginNet {
                             Log.e("test","----"+EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())));
                             String token = null;
                             try {
-                                token = SimpleCrypto.decrypt(
+                                token = AES.decode(
                                         EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())),
                                         resultObj.getData().getUuid());
                             } catch (Exception e) {
+                                Log.e("test----",e.getMessage());
                                 e.printStackTrace();
+
                             }
                             Log.e("test","----"+token);
                             LoginActivity.token = token;
