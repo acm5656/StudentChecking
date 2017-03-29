@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView regist;
 
     public static final String path="/com.acm.checkingsystem";
+    public static final int REGIST_RESULT = 1;
 
     public static String roleStr;
 
@@ -112,11 +113,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.activity_login_regist:
                 Intent intent = new Intent(this,RegistActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REGIST_RESULT);
                 break;
             case R.id.activity_login_forget_password:
 
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK)
+        {
+            switch (requestCode)
+            {
+                case REGIST_RESULT:
+                    Toast.makeText(this,"恭喜你，注册成功",Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 }

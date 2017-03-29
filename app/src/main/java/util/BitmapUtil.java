@@ -100,7 +100,7 @@ public class BitmapUtil {
         {
             file.mkdir();
         }
-        File f = new File(Environment.getExternalStorageDirectory()+ LoginActivity.path+"/"+bitName + ".jpg");
+        File f = new File(Environment.getExternalStorageDirectory()+ LoginActivity.path+"/"+bitName);
         FileOutputStream fOut = null;
         try {
             fOut = new FileOutputStream(f);

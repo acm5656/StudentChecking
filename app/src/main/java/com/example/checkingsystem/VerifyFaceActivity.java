@@ -145,8 +145,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
             {
                 isVerfiFace.set(false);
                 isGetImage.set(false);
-                Log.e("boolen","-4--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
-                Log.e("VerifyFaceActivity---",error.getMessage());
             }
         }
     };
@@ -219,7 +217,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         authid = getIntent().getStringExtra("authid");
 
-        authid = LoginActivity.studentStatic.getStudentNo();
+        authid = LoginActivity.studentStatic.getStudentFacecode();
         Log.e("test-----",authid);
 
         PREVIEW_WIDTH = metrics.widthPixels;

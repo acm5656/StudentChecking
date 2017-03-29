@@ -14,6 +14,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.checkingsystem.net.RegistNet;
+import com.example.checkingsystem.net.SendVerifyCodeNet;
+
 public class RegistActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RadioGroup roleRadioGroup;
@@ -31,6 +34,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     private String verifyStr;
     public static final int IS_GET_VERIFYCODE = 1;
     public static final int IS_AFTER_TIME = 2;
+    Thread thread;
     Handler handler = new Handler()
     {
         @Override
@@ -83,7 +87,8 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 tel = inputTel.getText().toString();
                 if(tel!=null&&!tel.trim().equals("")) {
                     changeGetVerifyCodeStyle();
-
+                    SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                    sendVerifyCodeNet.sendStudentRegistVerifyCode(tel,this);
                 }else {
                     Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
                 }
@@ -109,8 +114,16 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                     judge = false;
                     Toast.makeText(this,"请选择角色",Toast.LENGTH_SHORT).show();
                 }
-
-
+                if(verifyStr==null||verifyStr.trim().equals(""))
+                {
+                    judge = false;
+                    Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
+                }
+                if(roleStr.equals("学生")&&judge)
+                {
+                    RegistNet registNet = new RegistNet();
+                    registNet.studentRegist(tel,verifyStr,password,this);
+                }
                 break;
         }
     }
@@ -120,7 +133,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             getVerifyCode.setBackground(getResources().getDrawable(R.drawable.unclick_button));
         }
-        new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 long beginTime = System.currentTimeMillis();
@@ -144,6 +157,23 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 message.obj = "true";
                 handler.sendMessage(message);
             }
-        }).start();
+        });
+        thread.start();
+    }
+
+    @Override
+    public void finish() {
+        if(thread!=null)
+        {
+            thread.stop();
+        }
+
+        super.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

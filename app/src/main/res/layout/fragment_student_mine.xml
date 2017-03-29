@@ -36,7 +36,7 @@
                             android:textSize="16dp"
                             android:layout_weight="1"
                             android:gravity="bottom"
-                            android:id="@+id/fragment_student_school_username"
+                            android:id="@+id/fragment_student_mine_school_id"
                             />
                         <TextView
                             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:textSize="15dp"
-                            android:id="@+id/fragment_student_name"
+                            android:id="@+id/fragment_student_mine_name"
                             />
                 </LinearLayout>
 

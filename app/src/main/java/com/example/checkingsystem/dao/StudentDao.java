@@ -76,4 +76,13 @@ public class StudentDao {
         return studentList;
     }
 
+    public void updateStudent(Student student)
+    {
+        try {
+            studentDao.updateBuilder().updateColumnValue("studentFacecode",student.getStudentFacecode()).where().eq("studentId",student.getStudentId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

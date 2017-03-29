@@ -10,4 +10,5 @@
     <color name="textUnClickColor">#939393</color>
     <!--<color name="backgroundColor">#ebebeb</color>-->
     <color name="backgroundColor">#f8f8fa</color>
+    <color name="changeInfoBackGroundCollor">#f9f9fb</color>
 </resources>

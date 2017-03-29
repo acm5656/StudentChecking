@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
@@ -33,13 +34,13 @@ public class StudentMineFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View view;
-    private ListView listView;
-    private List<Item> listItem;
     private Button quitButton;
     public static final int FACE_REGIST_REQUEST_CODE = 1;
     private RelativeLayout registRelativeLayout;
     private RelativeLayout changeIngoRelativeLayout;
     private RelativeLayout changePasswordRelativeLayout;
+    private TextView schoolIDTextView;
+    private TextView studentName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +81,10 @@ public class StudentMineFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        schoolIDTextView = (TextView)view.findViewById(R.id.fragment_student_mine_school_id);
+        schoolIDTextView.setText(LoginActivity.studentStatic.getStudentId());
+        schoolIDTextView.setText(LoginActivity.studentStatic.getStudentTel());
 
 
         return view;

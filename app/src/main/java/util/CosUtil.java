@@ -37,6 +37,8 @@ public class CosUtil {
     public static String cosPath = "UserImage";
     private static final String HMAC_SHA1 = "HmacSHA1";
     private static final String PATH_DELIMITER = "/";
+    public static String urlFace = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
+    public static String urlHeaderImage = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
 
 
     public static void upLoad(String path, String srcName, Context context)
@@ -54,13 +56,12 @@ public class CosUtil {
         } catch (AbstractCosException e) {
             e.printStackTrace();
         }
-
+        Log.e("test","---------sing："+sign);
 
         PutObjectRequest putObjectRequest = new PutObjectRequest();
         putObjectRequest.setBucket(bucket);
         putObjectRequest.setCosPath(cosPath+"/"+srcName);
         putObjectRequest.setSrcPath(srcPath+"/"+srcName);
-        putObjectRequest.setSign(sign);
         putObjectRequest.setSign(sign);
         putObjectRequest.setListener(new IUploadTaskListener() {
             @Override

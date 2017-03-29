@@ -21,6 +21,9 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 
+import com.example.checkingsystem.entity.Picture;
+import com.example.checkingsystem.entity.ResultObj;
+import com.example.checkingsystem.entity.StudentFacecode;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
@@ -36,12 +39,17 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 import util.ActivityColectorUtil;
 import util.BitmapUtil;
+import util.ChangeTypeUtil;
 import util.CosUtil;
 import util.FaceRect;
+import util.HttpCallbackListener;
+import util.HttpUtil;
 import util.ParseResult;
+import util.PathUtil;
 import util.SurfaceViewCircle;
 
 public class RegistFaceActivity extends AppCompatActivity {
@@ -80,6 +88,60 @@ public class RegistFaceActivity extends AppCompatActivity {
     private boolean isVerfiFace = false;
 
     private Bitmap bmp = null;
+    private String name = null;
+    private String uuid = null;
+
+    HttpCallbackListener httpCallbackListenerPicture = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+            ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
+            String data = (String) resultObj.getData();
+            Log.e("test","response:   "+response);
+            if(resultObj.getMeta().getResult()) {
+                Log.e("test---","face----do");
+                StudentFacecode facecode = new StudentFacecode();
+                facecode.setStudentFacecodeStuId(LoginActivity.studentStatic.getStudentId());
+                facecode.setStudentFacecodePicId(data);
+                facecode.setStudentFacecode(uuid);
+                String path = HttpUtil.urlIp+ PathUtil.STUDENT_FACE_CODE;
+                Log.e("test---","data：  "+ChangeTypeUtil.getJSONString(facecode));
+                HttpUtil.sendHttpPostRequest(
+                        path,
+                        httpCallbackListenerFaceCode,
+                        ChangeTypeUtil.getJSONString(facecode),
+                        HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON
+                );
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    };
+    HttpCallbackListener httpCallbackListenerFaceCode = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+            ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
+            Log.e("test---",response);
+            if(resultObj.getMeta().getResult()) {
+                LoginActivity.studentStatic.setStudentFacecode(resultObj.getData().toString());
+                Intent intent = new Intent(RegistFaceActivity.this, StudentIndexActivity.class);
+                intent.putExtra("data_return", "恭喜你注册成功");
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            else {
+                Toast.makeText(RegistFaceActivity.this,"注册失败，请稍后重试",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            Log.e("test---",e.getMessage());
+            Log.e("test---",e.toString());
+        }
+    };
 
     private RequestListener mRequestListener = new RequestListener() {
 
@@ -133,17 +195,18 @@ public class RegistFaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_face);
         ActivityColectorUtil.addActivity(this);
-
+        uuid = "a"+UUID.randomUUID().toString().substring(0,15);
+        uuid = uuid.replaceAll("-","_");
+        Log.e("test","uuid-----"+uuid);
         SpeechUtility.createUtility(RegistFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        authid = LoginActivity.studentStatic.getStudentFacecode();
 
         PREVIEW_WIDTH = metrics.widthPixels;
-
+        authid = uuid;
 
         PREVIEW_HEIGHT = metrics.heightPixels;
 
@@ -261,8 +324,6 @@ public class RegistFaceActivity extends AppCompatActivity {
                                 mFaceRequest.sendRequest(mface, mRequestListener);
                             }
 
-
-
                             isGetImage = false;
                         }
                 }
@@ -296,22 +357,20 @@ public class RegistFaceActivity extends AppCompatActivity {
             return;
         }
         if ("success".equals(obj.get("rst"))) {
-
+            name = uuid+".jpg";
             if(bmp!=null) {
-                BitmapUtil.saveMyBitmap(bmp, LoginActivity.studentStatic.getStudentFacecode());
+                BitmapUtil.saveMyBitmap(bmp,name);
             }
             bmp.recycle();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path, LoginActivity.studentStatic.getStudentFacecode()+".jpg",getApplicationContext());
-                }
-            }).start();
-            Intent intent = new Intent(RegistFaceActivity.this, StudentIndexActivity.class);
-            intent.putExtra("data_return","恭喜你注册成功");
-            setResult(RESULT_OK,intent);
-            finish();
-            showTip("注册成功");
+
+
+            CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path,name ,getApplicationContext());
+            String url = HttpUtil.urlIp + PathUtil.SAVE_PICTURE;
+            Picture picture = new Picture();
+            picture.setPictureName(name);
+            picture.setPictureUrl(CosUtil.urlFace+name);
+//            HttpUtil.sendHttpPostRequest(url,httpCallbackListenerPicture, "picture="+ChangeTypeUtil.getJSONString(picture));
+            HttpUtil.sendHttpPostRequest(url,httpCallbackListenerPicture,ChangeTypeUtil.getJSONString(picture),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
         } else {
             isVerfiFace = false;
             showTip("注册失败");

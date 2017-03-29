@@ -2,6 +2,7 @@ package com.example.checkingsystem.net;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Path;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -18,19 +19,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-import java.security.MessageDigest;
-
 import java.sql.Timestamp;
 import java.util.Date;
 
 
-import Decoder.BASE64Encoder;
 import util.AES;
 import util.EncodeRuleProvider;
 import util.HttpCallbackListener;
 import util.HttpUtil;
-import util.SimpleCrypto;
-import util.SymmetricEncoderUtil;
+import util.Md5Util;
+import util.PathUtil;
 
 /**
  * Created by 那年.盛夏 on 2017/3/21.
@@ -119,40 +117,26 @@ public class LoginNet {
     public void studentSendInfo(Activity activity, String username, String password)
     {
         this.activity = activity;
-        final String address = HttpUtil.urlIp+"api/attendance-provider-user/student/login";
+        final String address = HttpUtil.urlIp+ PathUtil.STUDENT_LOGIN;
 
         String data = loginEncode(address,username,password);
         Log.e("sendInfo","-----------1");
-        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data);
+        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 
     String loginEncode(String url,String username,String password)
     {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String md5Password = EncoderByMd5(password);
+        String md5Password = Md5Util.EncoderByMd5(password);
         String param = "username="+username+"&password="+md5Password+"&timestamp="+timestamp.toString();
         String urlCon = url+"?"+param;
 
-        String sign = EncoderByMd5(urlCon);
+        String sign = Md5Util.EncoderByMd5(urlCon);
 
         String urlFinal = param+"&sign="+sign;
         Log.e("netData",urlFinal);
 
         return urlFinal;
     }
-    public String EncoderByMd5(String str)  {
-        //确定计算方法
-        MessageDigest md5= null;
-        String newstr = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-            BASE64Encoder base64en = new BASE64Encoder();
-            //加密后的字符串
-            newstr =base64en.encode(md5.digest(str.getBytes("utf-8")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return newstr;
-    }
 }
