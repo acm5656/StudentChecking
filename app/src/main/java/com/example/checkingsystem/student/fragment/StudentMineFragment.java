@@ -83,7 +83,6 @@ public class StudentMineFragment extends Fragment {
         });
 
         schoolIDTextView = (TextView)view.findViewById(R.id.fragment_student_mine_school_id);
-        schoolIDTextView.setText(LoginActivity.studentStatic.getStudentId());
         schoolIDTextView.setText(LoginActivity.studentStatic.getStudentTel());
 
 

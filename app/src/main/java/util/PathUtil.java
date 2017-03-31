@@ -14,4 +14,11 @@ public class PathUtil {
     public static final String SAVE_PICTURE = "api/attendance-provider-picture/picture";
     public static final String GET_PICTURE = "api/attendance-provider-picture/picture/";
     public static final String GET_STUDENT_CHANGE_PASSWORD_TEL_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/student/password";
+    public static final String TEACHER_REGIST = "api/attendance-provider-user/teacher";
+    public static final String TEACHER_LOGIN = "api/attendance-provider-user/teacher/login";
+    public static final String TEACHER_CHANGE_INFO = "api/attendance-provider-user/teacher/nonsensitive/info";
+    public static final String TEACHER_CHANGE_PASSWORD ="api/attendance-provider-user/teacher/sensitive/password";
+    public static final String GET_TEACHER_REGIST_TEL_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/register/teacher";
+    public static final String GET_TEACHER_CHANGE_PASSWORD_TEL_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/teacher/password";
+
 }

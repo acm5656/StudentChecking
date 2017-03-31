@@ -106,8 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                     if("教师".equals(roleStr))
                     {
-                        Intent intent = new Intent(LoginActivity.this,TeacherIndexActivity.class);
-                        startActivity(intent);
+                        loginNet.teacherLogin(this,username,password);
                     }
                 }
                 break;

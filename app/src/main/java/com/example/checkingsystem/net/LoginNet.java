@@ -12,6 +12,7 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentVo;
 import com.example.checkingsystem.entity.Teacher;
+import com.example.checkingsystem.entity.TeacherVo;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -51,11 +52,7 @@ public class LoginNet {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        /**
-                         *
-                         *用来存放将要得到的数据
-                         *
-                         */
+
                         if(resultObj.getMeta().getResult()) {
                             LoginActivity.studentStatic = resultObj.getData().getStudent();
 
@@ -89,13 +86,44 @@ public class LoginNet {
                         }
                     }
                     if(LoginActivity.roleStr.equals("教师")) {
-                        ResultObj<Teacher> resultObj = new ResultObj<>();
+                        ResultObj<TeacherVo> resultObj = new ResultObj<>();
+                        try {
+                            resultObj = objectMapper.readValue(msg.obj.toString().getBytes(),new TypeReference<ResultObj<TeacherVo>>() {});
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if(resultObj.getMeta().getResult()) {
+                            LoginActivity.teacherStatic = resultObj.getData().getTeacher();
 
+                            Long longTime = new Long(resultObj.getData().getTimestamp());
 
-                        LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
+                            Date date = new Date(longTime);
 
-                        Intent intent = new Intent(activity, TeacherIndexActivity.class);
-                        activity.startActivity(intent);
+                            Log.e("test","----"+msg.obj.toString());
+                            Log.e("test","----"+EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())));
+                            String token = null;
+                            try {
+                                token = AES.decode(
+                                        EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())),
+                                        resultObj.getData().getUuid());
+                            } catch (Exception e) {
+                                Log.e("test----",e.getMessage());
+                                e.printStackTrace();
+
+                            }
+                            Log.e("test","----"+token);
+                            LoginActivity.token = token;
+                            LoginActivity.teacherStatic.setTeacherPassword(token);
+                            Log.e("test--",LoginActivity.studentStatic.toString());
+                            LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
+
+                            Intent intent = new Intent(activity, TeacherIndexActivity.class);
+                            activity.startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     break;
             }
@@ -123,6 +151,17 @@ public class LoginNet {
         Log.e("sendInfo","-----------1");
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
+
+    public void teacherLogin(Activity activity,String username,String password)
+    {
+        this.activity = activity;
+        final String address = HttpUtil.urlIp + PathUtil.TEACHER_LOGIN;
+        String data = loginEncode(address,username,password);
+        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
+
+
+    }
+
 
     String loginEncode(String url,String username,String password)
     {

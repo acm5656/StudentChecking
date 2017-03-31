@@ -67,4 +67,13 @@ public class RegistNet {
         String data = "registerTel="+tel+"&verifycode="+verifyCode+"&password="+password;
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
+
+    public void teacherRegist(String tel,String verifyCode,String password,Activity activity)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp + PathUtil.TEACHER_REGIST;
+        password = Md5Util.EncoderByMd5(password);
+        String data = "registerTel="+tel+"&verifycode="+verifyCode+"&password="+password;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
+    }
 }

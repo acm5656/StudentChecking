@@ -81,8 +81,15 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         {
             case R.id.change_password_get_verifycode_button:
                 changeGetVerifyCodeStyle();
-                SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
-                sendVerifyCodeNet.sendStudentChangePasswordVerifyCode(tel,this);
+                if(LoginActivity.roleStr.equals("学生")) {
+                    SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                    sendVerifyCodeNet.sendStudentChangePasswordVerifyCode(tel, this);
+                }
+                if(LoginActivity.roleStr.equals("教师"))
+                {
+                    SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                    sendVerifyCodeNet.sendTeacherChangePasswordVerifyCode(tel, this);
+                }
                 break;
             case R.id.change_password_submit:
                 boolean judge = true;
@@ -106,6 +113,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         ChangePasswordNet changePasswordNet = new ChangePasswordNet();
                         password = Md5Util.EncoderByMd5(password);
                         changePasswordNet.studentChangePassword(this,tel,password,verifycode);
+                    }
+                    if(LoginActivity.roleStr.equals("教师"))
+                    {
+                        ChangePasswordNet changePasswordNet = new ChangePasswordNet();
+                        password = Md5Util.EncoderByMd5(password);
+                        changePasswordNet.teacherChangePassword(this,tel,password,verifycode);
                     }
                 }
                 break;

@@ -74,5 +74,18 @@ public class SendVerifyCodeNet {
         String path = HttpUtil.urlIp+ PathUtil.GET_STUDENT_CHANGE_PASSWORD_TEL_VERIFY_CODE;
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"tel="+tel,HttpUtil.NO_STATUS);
     }
+    public void sendTeacherRegistVerifyCode(String tel,Activity activity)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp + PathUtil.GET_TEACHER_REGIST_TEL_VERIFY_CODE;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"registerTel="+tel,HttpUtil.NO_STATUS);
+    }
+    public void sendTeacherChangePasswordVerifyCode(String tel, Activity activity)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp+ PathUtil.GET_TEACHER_CHANGE_PASSWORD_TEL_VERIFY_CODE;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"tel="+tel,HttpUtil.NO_STATUS);
+    }
+
 
 }

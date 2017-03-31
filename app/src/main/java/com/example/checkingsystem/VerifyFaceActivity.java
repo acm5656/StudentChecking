@@ -215,8 +215,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        authid = getIntent().getStringExtra("authid");
-
         authid = LoginActivity.studentStatic.getStudentFacecode();
         Log.e("test-----",authid);
 

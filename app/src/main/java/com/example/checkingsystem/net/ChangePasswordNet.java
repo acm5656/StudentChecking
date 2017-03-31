@@ -58,4 +58,12 @@ public class ChangePasswordNet {
         HttpUtil.sendHttpPutRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
 
     }
+    public void teacherChangePassword(Activity activity, String tel, String password, String verifyCode)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp+ PathUtil.TEACHER_CHANGE_PASSWORD;
+        String data = "teacherNewPassword="+password+"&tel="+tel+"&verifycode="+verifyCode;
+        HttpUtil.sendHttpPutRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
+
+    }
 }

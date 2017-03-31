@@ -81,14 +81,23 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        roleStr = ((RadioButton)findViewById(roleRadioGroup.getCheckedRadioButtonId())).getText().toString();
         switch (v.getId())
         {
             case R.id.activity_regist_get_verifycode_button:
                 tel = inputTel.getText().toString();
                 if(tel!=null&&!tel.trim().equals("")) {
                     changeGetVerifyCodeStyle();
-                    SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
-                    sendVerifyCodeNet.sendStudentRegistVerifyCode(tel,this);
+                    if(roleStr.equals("学生")) {
+
+                        SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                        sendVerifyCodeNet.sendStudentRegistVerifyCode(tel, this);
+                    }
+                    if(roleStr.equals("教师")){
+                        SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                        sendVerifyCodeNet.sendTeacherRegistVerifyCode(tel,this);
+                    }
+
                 }else {
                     Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
                 }
@@ -98,7 +107,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 password = inputPassword.getText().toString();
                 checkingPassword = inputCheckingPassword.getText().toString();
                 verifyStr = verifyCodeEdit.getText().toString();
-                roleStr = ((RadioButton)findViewById(roleRadioGroup.getCheckedRadioButtonId())).getText().toString();
                 if(password.trim().equals("")||checkingPassword.trim().equals(""))
                 {
                     judge = false;
@@ -120,6 +128,11 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
                 }
                 if(roleStr.equals("学生")&&judge)
+                {
+                    RegistNet registNet = new RegistNet();
+                    registNet.studentRegist(tel,verifyStr,password,this);
+                }
+                if(roleStr.equals("教师")&&judge)
                 {
                     RegistNet registNet = new RegistNet();
                     registNet.studentRegist(tel,verifyStr,password,this);
