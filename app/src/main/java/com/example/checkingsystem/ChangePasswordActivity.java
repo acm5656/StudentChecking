@@ -160,11 +160,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
     @Override
     public void finish() {
-        if(thread!=null)
-        {
-            thread.stop();
-        }
-
         super.finish();
     }
 

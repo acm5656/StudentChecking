@@ -9,7 +9,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.entity.ResultObj;
 
+import util.ChangeTypeUtil;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.Md5Util;
@@ -29,10 +31,15 @@ public class RegistNet {
             switch (msg.what)
             {
                 case RESULT_TRUE:
-                    Log.e("test","-------------regist----do1");
-                    Intent intent = new Intent(activity, LoginActivity.class);
-                    activity.setResult(Activity.RESULT_OK,intent);
-                    activity.finish();
+                    ResultObj resultObj = ChangeTypeUtil.getResultObj(msg.obj.toString());
+                    if(resultObj.getMeta().getResult()) {
+                        Log.e("test", "-------------regist----do1");
+                        Intent intent = new Intent(activity, LoginActivity.class);
+                        activity.setResult(Activity.RESULT_OK, intent);
+                        activity.finish();
+                    }else {
+                        Toast.makeText(activity,resultObj.getMeta().getMsg(),Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case RESULT_FALSE:
                     Toast.makeText(activity,"注册失败，请稍后再试",Toast.LENGTH_SHORT).show();

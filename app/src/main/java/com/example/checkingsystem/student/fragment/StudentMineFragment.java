@@ -36,6 +36,7 @@ public class StudentMineFragment extends Fragment {
     private View view;
     private Button quitButton;
     public static final int FACE_REGIST_REQUEST_CODE = 1;
+    public static final int CHANGE_INFO_REQUEST_CODE = 2;
     private RelativeLayout registRelativeLayout;
     private RelativeLayout changeIngoRelativeLayout;
     private RelativeLayout changePasswordRelativeLayout;
@@ -70,7 +71,7 @@ public class StudentMineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), StudentChangeInfoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,CHANGE_INFO_REQUEST_CODE);
             }
         });
         changePasswordRelativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout_change_password);
@@ -99,13 +100,18 @@ public class StudentMineFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String dataStr = null;
         if(resultCode== Activity.RESULT_OK)
         {
             switch (requestCode)
             {
                 case FACE_REGIST_REQUEST_CODE:
-                    String dataStr = data.getStringExtra("data_return");
+                    dataStr = data.getStringExtra("data_return");
                     Log.e("toast","---------------2");
+                    Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
+                    break;
+                case CHANGE_INFO_REQUEST_CODE:
+                    dataStr = data.getStringExtra("data");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
                     break;
             }

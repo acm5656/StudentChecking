@@ -364,7 +364,7 @@ public class RegistFaceActivity extends AppCompatActivity {
             bmp.recycle();
 
 
-            CosUtil.upLoad(Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path,name ,getApplicationContext());
+            CosUtil.upLoad(CosUtil.faceCosPath,Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path,name ,getApplicationContext());
             String url = HttpUtil.urlIp + PathUtil.SAVE_PICTURE;
             Picture picture = new Picture();
             picture.setPictureName(name);

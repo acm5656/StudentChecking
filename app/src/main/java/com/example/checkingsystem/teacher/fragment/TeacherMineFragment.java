@@ -8,19 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
+import com.example.checkingsystem.ChangePasswordActivity;
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 
-public class TeacherMineFragment extends Fragment {
+public class TeacherMineFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private View view;
     private Button teacher_fragment_mine_exit;
-
-    public TeacherMineFragment() {
-    }
-
+    private RelativeLayout changePasswordRelative;
+    private RelativeLayout changeInfoRelative;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +41,28 @@ public class TeacherMineFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        changePasswordRelative = (RelativeLayout)view.findViewById(R.id.fragment_teacher_mine_change_password);
+        changeInfoRelative = (RelativeLayout)view.findViewById(R.id.fragment_teacher_mine_changeInfo);
+        changePasswordRelative.setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId())
+        {
+            case R.id.fragment_teacher_mine_change_password:
+                intent.setClass(getContext(),ChangePasswordActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.fragment_teacher_mine_changeInfo:
+
+                break;
+        }
+
     }
 
 

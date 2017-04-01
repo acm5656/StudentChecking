@@ -71,7 +71,7 @@
         android:layout_height="50dp"
         android:background="@color/itemBackgroundColor"
         android:orientation="horizontal"
-        android:id="@+id/relativeLayout_change_password"
+        android:id="@+id/fragment_teacher_mine_change_password"
         >
         <ImageView
             android:id="@+id/imageview_change_password"
@@ -103,7 +103,7 @@
         android:background="@color/itemBackgroundColor"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:id="@+id/relativeLayout_mineInfo"
+        android:id="@+id/fragment_teacher_mine_changeInfo"
         >
         <ImageView
             android:id="@+id/imageview_mine_info"

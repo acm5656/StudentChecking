@@ -82,6 +82,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         roleStr = ((RadioButton)findViewById(roleRadioGroup.getCheckedRadioButtonId())).getText().toString();
+        Log.e("test","--------"+roleStr);
         switch (v.getId())
         {
             case R.id.activity_regist_get_verifycode_button:
@@ -135,7 +136,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 if(roleStr.equals("教师")&&judge)
                 {
                     RegistNet registNet = new RegistNet();
-                    registNet.studentRegist(tel,verifyStr,password,this);
+                    registNet.teacherRegist(tel,verifyStr,password,this);
                 }
                 break;
         }
@@ -176,10 +177,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void finish() {
-        if(thread!=null)
-        {
-            thread.stop();
-        }
 
         super.finish();
     }

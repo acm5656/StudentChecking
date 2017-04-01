@@ -29,23 +29,26 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class CosUtil {
 
-    public static String appID = "1252388599";
-    public static String peristenceID = null;
-    public static String secretID = "AKIDxjHbhYKeqoX2HGHThfePvBCyX2Vw3VS9";
-    public static String secretKey = "bx40hEXbPyIPIxObaKq8C1cz83kCQQBL";
-    public static String bucket = "checkingsystem";
-    public static String cosPath = "UserImage";
+    private static String appID = "1252388599";
+    private static String peristenceID = null;
+    private static String secretID = "AKIDxjHbhYKeqoX2HGHThfePvBCyX2Vw3VS9";
+    private static String secretKey = "bx40hEXbPyIPIxObaKq8C1cz83kCQQBL";
+    private static String bucket = "checkingsystem";
+    private static String cosPath;
+
     private static final String HMAC_SHA1 = "HmacSHA1";
     private static final String PATH_DELIMITER = "/";
     public static String urlFace = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
     public static String urlHeaderImage = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
+    public static String faceCosPath = "UserImage";
+    public static String headerImageCosPath = "123";
 
 
-    public static void upLoad(String path, String srcName, Context context)
+    public static void upLoad(String cosPathInput,String path, String srcName, Context context)
     {
         COSClientConfig cosClientConfig = new COSClientConfig();
         cosClientConfig.setEndPoint(COSEndPoint.COS_TJ);
-
+        cosPath = cosPathInput;
 
         COSClient cosClient = new COSClient(context,appID,cosClientConfig,peristenceID);
 
@@ -98,7 +101,7 @@ public class CosUtil {
 
     }
 
-    public static String getSign() throws AbstractCosException {
+    private static String getSign() throws AbstractCosException {
         Credentials credentials = new Credentials(new Long(appID),secretID,secretKey);
         String sign = getPeriodEffectiveSign(bucket,"",credentials, System.currentTimeMillis()/1000+12000);
         System.out.println(sign);
@@ -143,7 +146,7 @@ public class CosUtil {
         return Base64Encode(signContent);
     }
 
-    public static byte[] HmacSha1(byte[] binaryData, String key) throws Exception {
+    private static byte[] HmacSha1(byte[] binaryData, String key) throws Exception {
         try {
             Mac mac = Mac.getInstance(HMAC_SHA1);
             SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), HMAC_SHA1);
@@ -157,13 +160,13 @@ public class CosUtil {
         return "".getBytes();
     }
 
-    public static String Base64Encode(byte[] binaryData) {
+    private static String Base64Encode(byte[] binaryData) {
 
         String encodedstr = new String(Base64.encodeBase64(binaryData, false), Charsets.UTF_8);
         return encodedstr;
     }
 
-    public static String encodeRemotePath(String urlPath) throws AbstractCosException {
+    private static String encodeRemotePath(String urlPath) throws AbstractCosException {
         StringBuilder pathBuilder = new StringBuilder();
         String[] pathSegmentsArr = urlPath.split(PATH_DELIMITER);
 
