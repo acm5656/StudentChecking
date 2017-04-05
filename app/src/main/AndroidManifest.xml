@@ -47,6 +47,8 @@
         </activity>
         <activity android:name=".RegistActivity">
         </activity>
+        <activity android:name=".teacher.activity.TeacherChangeInfoActivity">
+        </activity>
     </application>
 
 </manifest>

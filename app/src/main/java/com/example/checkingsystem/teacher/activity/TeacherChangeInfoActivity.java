@@ -1,4 +1,4 @@
-package com.example.checkingsystem.student.activity;
+package com.example.checkingsystem.teacher.activity;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;
@@ -29,7 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import util.BitmapUtil;
 import util.CosUtil;
 
-public class StudentChangeInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeacherChangeInfoActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_CLIP_PHOTO = 2;
     public static final int CHOOSE_PHOTO = 3;
     Uri uri = null;
@@ -44,7 +44,7 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_change_info);
+        setContentView(R.layout.activity_teacher_change_info);
         //初始化资源
         initSourse();
         //设置点击事件
@@ -55,12 +55,12 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
     }
 
     private void initSourse() {
-        circleImageView = (CircleImageView) findViewById(R.id.activity_student_change_info_head_picture);
-        nickName = (EditText)findViewById(R.id.activity_student_change_info_nick_name);
-        email = (EditText)findViewById(R.id.activity_student_change_info_email);
-        submitButton = (Button)findViewById(R.id.activity_student_change_info_submit);
-        nickName.setText(LoginActivity.studentStatic.getStudentNickname());
-        email.setText(LoginActivity.studentStatic.getStudentEmail());
+        circleImageView = (CircleImageView) findViewById(R.id.activity_teacher_change_info_head_picture);
+        nickName = (EditText)findViewById(R.id.activity_teacher_change_info_nick_name);
+        email = (EditText)findViewById(R.id.activity_teacher_change_info_email);
+        submitButton = (Button)findViewById(R.id.activity_teacher_change_info_submit);
+        nickName.setText(LoginActivity.teacherStatic.getTeacherNickname());
+        email.setText(LoginActivity.teacherStatic.getTeacherEmail());
 
 
     }
@@ -70,14 +70,14 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.activity_student_change_info_submit:
+            case R.id.activity_teacher_change_info_submit:
                 String nickNameStr = nickName.getText().toString();
                 String emailStr = email.getText().toString();
                 String path = CosUtil.urlHeaderImage+imageName;
                 ChangeInfoNet changeInfoNet = new ChangeInfoNet();
-                changeInfoNet.studentChangeInfo(nickNameStr,emailStr,path,this);
+                changeInfoNet.teacherChangeInfo(nickNameStr,emailStr,path,this);
                 break;
-            case R.id.activity_student_change_info_head_picture:
+            case R.id.activity_teacher_change_info_head_picture:
                 Intent intent = new Intent("android.intent.action.GET_CONTENT");
                 intent.setType("image/*");
                 startActivityForResult(intent,CHOOSE_PHOTO);
