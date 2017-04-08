@@ -13,12 +13,12 @@ import java.io.IOException;
 
 public class ChangeTypeUtil {
     public static ObjectMapper objectMapper = new ObjectMapper();
-    public static ResultObj<String> getResultObj(String obj)
+    public static ResultObj getResultObj(String obj)
     {
-        ResultObj<String> resultObj = new ResultObj<>();
+        ResultObj<Object> resultObj = new ResultObj<>();
 
         try {
-             resultObj = objectMapper.readValue(obj.getBytes(), new TypeReference<ResultObj<String>>(){});
+             resultObj = objectMapper.readValue(obj.getBytes(), new TypeReference<ResultObj<Object>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }

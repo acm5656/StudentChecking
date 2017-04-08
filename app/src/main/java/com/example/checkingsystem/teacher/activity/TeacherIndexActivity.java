@@ -37,6 +37,11 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private TextView teacherIndexMine;
     private TextView teacherIndexChooseWeek;
     private List<Fragment> list;
+    TeacherScheduleFragment teacherScheduleFragment;
+    TeacherMineFragment teacherMineFragment;
+    TeacherInquireFragment teacherInquireFragment;
+    public String weekTime = "1";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +50,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         list = new ArrayList<>();
         initUI();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        TeacherInquireFragment teacherInquireFragment = new TeacherInquireFragment();
-        TeacherMineFragment teacherMineFragment = new TeacherMineFragment();
-        TeacherScheduleFragment teacherScheduleFragment = new TeacherScheduleFragment();
+        teacherInquireFragment = new TeacherInquireFragment();
+        teacherMineFragment = new TeacherMineFragment();
+        teacherScheduleFragment = new TeacherScheduleFragment();
         list.add(teacherScheduleFragment);
         list.add(teacherInquireFragment);
         list.add(teacherMineFragment);
@@ -153,6 +158,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void SendMessageValue(String strValue) {
         Toast.makeText(TeacherIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
+        weekTime = strValue;
     }
 
     @Override

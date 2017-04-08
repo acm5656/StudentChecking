@@ -29,6 +29,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     private TextView studentIndexInquire;
     private TextView studentIndexMine;
     private TextView studentIndexChooseWeek;
+    public String week = "1";
 
 
 
@@ -154,6 +155,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void SendMessageValue(String strValue) {
         Toast.makeText(StudentIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
+        week = strValue;
     }
 
     @Override

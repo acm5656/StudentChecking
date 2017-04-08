@@ -95,17 +95,44 @@
                 android:layout_marginRight="30dp"
                 />
         </RelativeLayout>
-        <Button
-            android:id="@+id/fragment_student_checking_button"
+
+        
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="40dp"
-            android:text="考勤"
-            android:textSize="17dp"
-            android:background="#4890cf"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+            <Button
+                android:id="@+id/fragment_student_checking_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="考勤"
+                android:textSize="17dp"
+                android:background="@drawable/input_login"
+                android:layout_marginRight="10dp"
+                />
 
-            />
+
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/fragment_student_help_student_checking_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="他人考勤"
+                android:textSize="17dp"
+                android:background="@drawable/input_login"
+                />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

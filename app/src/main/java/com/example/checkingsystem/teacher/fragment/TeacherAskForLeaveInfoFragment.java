@@ -10,13 +10,29 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.teacher.activity.TeacherCheckingActivity;
 
 import java.util.List;
+
+import util.HttpCallbackListener;
+import util.HttpUtil;
+import util.PathUtil;
 
 public class TeacherAskForLeaveInfoFragment extends Fragment {
     private View view;
     private OnFragmentInteractionListener mListener;
     private ListView listView;
+    private HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    };
 
     public TeacherAskForLeaveInfoFragment() {
 
@@ -35,6 +51,10 @@ public class TeacherAskForLeaveInfoFragment extends Fragment {
 
     private void initItem() {
         listView = (ListView) view.findViewById(R.id.teacher_ask_for_leave_info_listview);
+        String courseID = ((TeacherCheckingActivity)getActivity()).courseID;
+        String path = HttpUtil.urlIp+ PathUtil.TEACHER_GET_STUDENT_ASK_FOR_LEAVE;
+//        String data
+//        HttpUtil.sendHttpGetRequest();
 
     }
 

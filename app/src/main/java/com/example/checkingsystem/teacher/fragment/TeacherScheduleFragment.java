@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.teacher.activity.TeacherCheckingActivity;
+import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
 
 public class TeacherScheduleFragment extends Fragment implements View.OnClickListener{
 
@@ -43,10 +44,17 @@ public class TeacherScheduleFragment extends Fragment implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.WeekOneClassOne:
+                String weekTime = ((TeacherIndexActivity)getActivity()).weekTime;
                 Intent intent = new Intent(getActivity(), TeacherCheckingActivity.class);
+                String courseID = getCouorseID(weekTime,1,1);
+                intent.putExtra("courseID",courseID);
                 startActivity(intent);
                 break;
         }
+    }
+
+    private String getCouorseID(String weekTime, int course, int weekDay) {
+        return "1";
     }
 
 

@@ -167,7 +167,7 @@ public class LoginNet {
     {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String md5Password = Md5Util.EncoderByMd5(password);
-        String param = "username="+username+"&password="+md5Password+"&timestamp="+timestamp.toString();
+        String param = "username="+username+"&password="+md5Password+"&timestamp="+new Long(timestamp.getTime()).toString();
         String urlCon = url+"?"+param;
 
         String sign = Md5Util.EncoderByMd5(urlCon);

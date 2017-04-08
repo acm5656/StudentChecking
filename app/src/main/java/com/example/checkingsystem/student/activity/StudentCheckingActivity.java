@@ -30,6 +30,7 @@ public class StudentCheckingActivity extends FragmentActivity implements View.On
     private TextView checking;
     private FragmentManager fragmentManager;
     private List<Fragment> list;
+    public String courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,8 @@ public class StudentCheckingActivity extends FragmentActivity implements View.On
         list = new ArrayList<Fragment>();
         list.add(studentCheckingFragment);
         list.add(studentAskForLeaveFragment);
-
+        Intent intent = getIntent();
+        courseID = intent.getStringExtra("courseID");
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {

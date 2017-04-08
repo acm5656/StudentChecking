@@ -125,7 +125,7 @@ public class RegistFaceActivity extends AppCompatActivity {
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
             Log.e("test---",response);
             if(resultObj.getMeta().getResult()) {
-                LoginActivity.studentStatic.setStudentFacecode(resultObj.getData().toString());
+                LoginActivity.studentStatic.setStudentFacecode(uuid);
                 Intent intent = new Intent(RegistFaceActivity.this, StudentIndexActivity.class);
                 intent.putExtra("data_return", "恭喜你注册成功");
                 setResult(RESULT_OK, intent);
@@ -395,4 +395,15 @@ public class RegistFaceActivity extends AppCompatActivity {
         ActivityColectorUtil.removeActivity(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        closeCamera();
+        super.finish();
+    }
 }

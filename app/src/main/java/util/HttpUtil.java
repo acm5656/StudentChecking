@@ -105,8 +105,8 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
-                        Log.e("error",e.getMessage());
-                        Log.e("error",e.toString());
+                        Log.e("test",e.getMessage());
+                        Log.e("test",e.toString());
                         listener.onError(e);
                     }
 

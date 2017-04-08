@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.student.activity.StudentCheckingActivity;
+import com.example.checkingsystem.student.activity.StudentIndexActivity;
 
 public class StudentScheduleFragment extends Fragment implements View.OnClickListener{
     private TextView weekOneClassOne;
@@ -39,7 +40,9 @@ public class StudentScheduleFragment extends Fragment implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.WeekOneClassOne:
+                String week = ((StudentIndexActivity)getActivity()).week;
                 Intent intent = new Intent(getActivity(), StudentCheckingActivity.class);
+                intent.putExtra("courseID","1");
                 startActivity(intent);
                 break;
         }

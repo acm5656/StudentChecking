@@ -20,6 +20,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.example.checkingsystem.net.StudentPutCheckingVerifyNet;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.iflytek.cloud.FaceDetector;
 import com.iflytek.cloud.FaceRequest;
@@ -40,6 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import util.ActivityColectorUtil;
 import util.BitmapUtil;
 import util.FaceRect;
+import util.HttpUtil;
 import util.ParseResult;
 
 public class VerifyFaceActivity extends AppCompatActivity {
@@ -53,7 +55,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
     private int PREVIEW_WIDTH = 640 * extendSize;
     private int PREVIEW_HEIGHT = 480 * extendSize;
 
-    private String authid;
 
 //    private int PREVIEW_WIDTH ;
 //    private int PREVIEW_HEIGHT ;
@@ -84,6 +85,10 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
     private long starTime;
     private long endTime;
+
+    private String studentID;
+    private String macAddress;
+    private String studentFaceID;
 
     @Override
     public void onBackPressed() {
@@ -159,6 +164,12 @@ public class VerifyFaceActivity extends AppCompatActivity {
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
         Log.e("test_ren","--------------2");
+        Intent intent = getIntent();
+        studentID = intent.getStringExtra("studentID");
+        studentFaceID = intent.getStringExtra("studentFaceID");
+        macAddress = intent.getStringExtra("mac");
+        Log.e("test",studentID+" "+" "+studentFaceID+" "+macAddress);
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -194,7 +205,7 @@ public class VerifyFaceActivity extends AppCompatActivity {
                                 Log.e("boolen","-2--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
                                 Log.d("VerifyFaceActivity---","------------verfiFace--1");
                                 isVerfiFace.set(true);
-                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
+                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, studentFaceID);
                                 mFaceRequest.setParameter(SpeechConstant.WFR_SST, "verify");
                                 mFaceRequest.sendRequest(mface, mRequestListener);
                                 Log.e("VerifyFaceActivity---","------------verfiFace--2");
@@ -214,9 +225,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
         Log.e("test_ren","--------------2");
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-        authid = LoginActivity.studentStatic.getStudentFacecode();
-        Log.e("test-----",authid);
 
         PREVIEW_WIDTH = metrics.widthPixels;
 
@@ -293,7 +301,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
             @Override
             public void onPreviewFrame(byte[] data, Camera camera) {
-                Log.e("test_ren","--------------5");
                 if(nv21==null)
                 {
                     nv21 = new byte[data.length];
@@ -338,10 +345,9 @@ public class VerifyFaceActivity extends AppCompatActivity {
         if ("success".equals(obj.get("rst"))) {
             if (obj.getBoolean("verf")) {
                 runBool = true;
-                Intent intent = new Intent(VerifyFaceActivity.this, StudentIndexActivity.class);
-                intent.putExtra("data_return","考勤成功，请好好听课");
-                setResult(RESULT_OK,intent);
-                this.finish();
+                StudentPutCheckingVerifyNet studentPutCheckingVerifyNet = new StudentPutCheckingVerifyNet();
+                studentPutCheckingVerifyNet.sendStudentCheckingVerify(this,studentID,macAddress);
+
             } else {
                 showTip("验证不通过");
                 isGetImage.set(false);

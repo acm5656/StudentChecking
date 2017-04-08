@@ -1,5 +1,6 @@
 package com.example.checkingsystem.teacher.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.teacher.fragment.TeacherAskForLeaveInfoFragment;
 import com.example.checkingsystem.teacher.fragment.TeacherCheckingFragment;
+import com.example.checkingsystem.teacher.fragment.TeacherScheduleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class TeacherCheckingActivity extends AppCompatActivity {
     private TextView teacherChecking;
     private ViewPager teacherCheckingFragmentContainer;
     private List<Fragment> list;
+    TeacherAskForLeaveInfoFragment teacherAskForLeaveInfoFragment;
+    TeacherCheckingFragment teacherCheckingFragment;
+    public String courseID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +39,8 @@ public class TeacherCheckingActivity extends AppCompatActivity {
         initUI();
         list = new ArrayList<>();
 
-        TeacherCheckingFragment teacherCheckingFragment = new TeacherCheckingFragment();
-        TeacherAskForLeaveInfoFragment teacherAskForLeaveInfoFragment = new TeacherAskForLeaveInfoFragment();
+        teacherCheckingFragment = new TeacherCheckingFragment();
+        teacherAskForLeaveInfoFragment = new TeacherAskForLeaveInfoFragment();
         list.add(teacherAskForLeaveInfoFragment);
         list.add(teacherCheckingFragment);
 
@@ -60,7 +65,8 @@ public class TeacherCheckingActivity extends AppCompatActivity {
         teacherAskForLeaveInfo = (TextView) findViewById(R.id.teacher_ask_for_leave_info);
         teacherChecking = (TextView)findViewById(R.id.teacher_checking);
         teacherCheckingFragmentContainer = (ViewPager)findViewById(R.id.teacher_checking_fragment_container);
-
+        Intent intent = getIntent();
+        courseID = intent.getStringExtra("courseID");
 
     }
 
