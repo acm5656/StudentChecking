@@ -47,4 +47,8 @@ public class TeacherCheckingStudentItem {
         this.studentName = studentName;
         this.studentState = studentState;
     }
+    public TeacherCheckingStudentItem()
+    {
+
+    }
 }

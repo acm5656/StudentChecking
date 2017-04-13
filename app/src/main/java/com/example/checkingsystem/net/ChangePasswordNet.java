@@ -20,14 +20,18 @@ import util.PathUtil;
 
 public class ChangePasswordNet {
     private Activity activity;
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what)
             {
-                case 1:
+                case TRUE:
                     Toast.makeText(activity,"恭喜你,修改成功",Toast.LENGTH_SHORT).show();
                     break;
+                case FALSE:
+                    Toast.makeText(activity,"操作失败，请稍后再试",Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -39,7 +43,12 @@ public class ChangePasswordNet {
             if(resultObj.getMeta().getResult())
             {
                 Message message = new Message();
-                message.what = 1;
+                message.what = TRUE;
+                handler.sendMessage(message);
+            }
+            else {
+                Message message = new Message();
+                message.what = FALSE;
                 handler.sendMessage(message);
             }
 
@@ -47,7 +56,9 @@ public class ChangePasswordNet {
 
         @Override
         public void onError(Exception e) {
-
+            Message message = new Message();
+            message.what = FALSE;
+            handler.sendMessage(message);
         }
     };
     public void studentChangePassword(Activity activity, String tel, String password, String verifyCode)

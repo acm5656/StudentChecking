@@ -28,18 +28,24 @@ public class HttpUtil {
                 HttpURLConnection connection = null;
                 try {
                     URL url = new URL(address);
+                    Log.e("get",address);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
+                    Log.e("get","---------1");
                     InputStream in = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();
+                    Log.e("get","---------2");
                     String line;
+
                     while ((line=reader.readLine())!=null)
                     {
                         response.append(line);
+                        Log.e("get","---------3");
                     }
+                    Log.e("get",response.toString());
                     if(listener!=null&&(response.toString()!=null)&&(!response.toString().equals("")))
                     {
                         listener.onFinish(response.toString());
@@ -105,8 +111,6 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
-                        Log.e("test",e.getMessage());
-                        Log.e("test",e.toString());
                         listener.onError(e);
                     }
 
@@ -164,8 +168,6 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
-                        Log.e("error",e.getMessage());
-                        Log.e("error",e.toString());
                         listener.onError(e);
                     }
 

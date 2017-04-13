@@ -19,63 +19,68 @@ import java.io.Serializable;
 //Name("t_attendance")
 public class Attendance implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键-uuid-32
-     */
-	//Id("course_attendance_id")
+	/**
+	 * 主键-uuid-32
+	 */
+	//("course_attendance_id")
 	private String courseAttendanceId;
-    /**
-     * 外键-课程时间表-对应课表上的某节课
-     */
+	/**
+	 * 外键-课程时间表-对应课表上的某节课
+	 */
 	//Field("course_attendance_course_time_id")
 	private String courseAttendanceCourseTimeId;
-    /**
-     * 考勤开始时间
-     */
+	/**
+	 * 考勤开始时间
+	 */
 	//Field("course_attendance_gmt_begin")
 	private Timestamp courseAttendanceGmtBegin;
-    /**
-     * 考勤结束时间
-     */
+	/**
+	 * 考勤结束时间
+	 */
 	//Field("course_attendance_gmt_end")
 	private Timestamp courseAttendanceGmtEnd;
-    /**
-     * 记录创建时间
-     */
+	/**
+	 * 开始考勤的教师mac地址
+	 */
+	//Field("course_attendance_mac")
+	private String courseAttendanceMac;
+	/**
+	 * 记录创建时间
+	 */
 	//Field("course_attendance_gmt_created")
 	private Timestamp courseAttendanceGmtCreated;
-    /**
-     * 记录修改时间
-     */
+	/**
+	 * 记录修改时间
+	 */
 	//Field("course_attendance_gmt_modified")
 	private Timestamp courseAttendanceGmtModified;
-    /**
-     * 备注
-     */
+	/**
+	 * 备注
+	 */
 	//Field("course_attendance_note")
 	private String courseAttendanceNote;
-    /**
-     * 缺勤总数
-     */
-	//Field("attendance_absent_count")
-	private Integer attendanceAbsentCount;
-    /**
-     * 总人数
-     */
-	//Field("attendance_total_count")
-	private Integer attendanceTotalCount;
-    /**
-     * 出勤总数
-     */
-	//Field("attendance_present_count")
-	private Integer attendancePresentCount;
-    /**
-     * 考勤记录状态
-     */
-	//Field("attendance_status")
-	private String attendanceStatus;
+	/**
+	 * 缺勤总数
+	 */
+	//Field("course_attendance_absent_count")
+	private Integer courseAttendanceAbsentCount;
+	/**
+	 * 总人数
+	 */
+	//Field("course_attendance_total_count")
+	private Integer courseAttendanceTotalCount;
+	/**
+	 * 出勤总数
+	 */
+	//Field("course_attendance_present_count")
+	private Integer courseAttendancePresentCount;
+	/**
+	 * 考勤记录状态
+	 */
+	//Field("course_attendance_status")
+	private String courseAttendanceStatus;
 
 
 	public String getCourseAttendanceId() {
@@ -110,6 +115,14 @@ public class Attendance implements Serializable {
 		this.courseAttendanceGmtEnd = courseAttendanceGmtEnd;
 	}
 
+	public String getCourseAttendanceMac() {
+		return courseAttendanceMac;
+	}
+
+	public void setCourseAttendanceMac(String courseAttendanceMac) {
+		this.courseAttendanceMac = courseAttendanceMac;
+	}
+
 	public Timestamp getCourseAttendanceGmtCreated() {
 		return courseAttendanceGmtCreated;
 	}
@@ -134,36 +147,37 @@ public class Attendance implements Serializable {
 		this.courseAttendanceNote = courseAttendanceNote;
 	}
 
-	public Integer getAttendanceAbsentCount() {
-		return attendanceAbsentCount;
+	public Integer getCourseAttendanceAbsentCount() {
+		return courseAttendanceAbsentCount;
 	}
 
-	public void setAttendanceAbsentCount(Integer attendanceAbsentCount) {
-		this.attendanceAbsentCount = attendanceAbsentCount;
+	public void setCourseAttendanceAbsentCount(Integer courseAttendanceAbsentCount) {
+		this.courseAttendanceAbsentCount = courseAttendanceAbsentCount;
 	}
 
-	public Integer getAttendanceTotalCount() {
-		return attendanceTotalCount;
+	public Integer getCourseAttendanceTotalCount() {
+		return courseAttendanceTotalCount;
 	}
 
-	public void setAttendanceTotalCount(Integer attendanceTotalCount) {
-		this.attendanceTotalCount = attendanceTotalCount;
+	public void setCourseAttendanceTotalCount(Integer courseAttendanceTotalCount) {
+		this.courseAttendanceTotalCount = courseAttendanceTotalCount;
 	}
 
-	public Integer getAttendancePresentCount() {
-		return attendancePresentCount;
+	public Integer getCourseAttendancePresentCount() {
+		return courseAttendancePresentCount;
 	}
 
-	public void setAttendancePresentCount(Integer attendancePresentCount) {
-		this.attendancePresentCount = attendancePresentCount;
+	public void setCourseAttendancePresentCount(Integer courseAttendancePresentCount) {
+		this.courseAttendancePresentCount = courseAttendancePresentCount;
 	}
 
-	public String getAttendanceStatus() {
-		return attendanceStatus;
+	public String getCourseAttendanceStatus() {
+		return courseAttendanceStatus;
 	}
 
-	public void setAttendanceStatus(String attendanceStatus) {
-		this.attendanceStatus = attendanceStatus;
+	public void setCourseAttendanceStatus(String courseAttendanceStatus) {
+		this.courseAttendanceStatus = courseAttendanceStatus;
 	}
+
 
 }

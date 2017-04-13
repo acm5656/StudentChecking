@@ -36,6 +36,8 @@ import util.PathUtil;
  */
 
 public class LoginNet {
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
     private Activity activity;
     private ObjectMapper objectMapper = new ObjectMapper();
     public Handler handler = new Handler(){
@@ -43,7 +45,7 @@ public class LoginNet {
         public void handleMessage(Message msg) {
             switch (msg.what)
             {
-                case 0:
+                case TRUE:
 //                    Toast.makeText(activity,(String)msg.obj,Toast.LENGTH_SHORT).show();
                     if(LoginActivity.roleStr.equals("学生")) {
                         ResultObj<StudentVo> resultObj = new ResultObj();
@@ -126,6 +128,9 @@ public class LoginNet {
 
                     }
                     break;
+                case FALSE:
+                    Toast.makeText(activity,"操作失败，请稍后再试",Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     };
@@ -133,13 +138,16 @@ public class LoginNet {
         @Override
         public void onFinish(String response) {
             Message message = new Message();
-            message.what = 0;
+            message.what = TRUE;
             message.obj = response;
             handler.sendMessage(message);
         }
 
         @Override
         public void onError(Exception e) {
+            Message message = new Message();
+            message.what = FALSE;
+            handler.sendMessage(message);
         }
     };
     public void studentSendInfo(Activity activity, String username, String password)

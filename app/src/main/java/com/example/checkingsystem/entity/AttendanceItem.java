@@ -19,99 +19,112 @@ import java.io.Serializable;
 //Name("t_attendance_item")
 public class AttendanceItem implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键-uuid-32
-     */
-	//Id("attendance_item_id")
-	private String attendanceItemId;
-    /**
-     * 外键-student-id
-     */
-	//Field("attendance_item_student_id")
-	private String attendanceItemStudentId;
-    /**
-     * 外键-attendance_id
-     */
-	//Field("attendance_id")
-	private String attendanceId;
-    /**
-     * 记录创建时间
-     */
-	//Field("attendance_item_gmt_created")
-	private Timestamp attendanceItemGmtCreated;
-    /**
-     * 记录修改时间
-     */
-	//Field("attendance_item_gmt_modified")
-	private Timestamp attendanceItemGmtModified;
-    /**
-     * 考勤结果
-     */
-	//Field("attendance_item_result")
-	private String attendanceItemResult;
-    /**
-     * 考勤记录状态
-     */
-	//Field("attendance_item_status")
-	private String attendanceItemStatus;
+	/**
+	 * 主键-uuid-32
+	 */
+	//Id("course_attendance_item_id")
+	private String courseAttendanceItemId;
+	/**
+	 * 外键-student-id
+	 */
+	//Field("course_attendance_item_student_id")
+	private String courseAttendanceItemStudentId;
+	/**
+	 * 外键-attendance_id
+	 */
+	//Field("course_attendance_id")
+	private String courseAttendanceId;
+	/**
+	 * 参与考勤学生设备的mac地址
+	 */
+	//Field("course_attendance_item_mac")
+	private String courseAttendanceItemMac;
+	/**
+	 * 记录创建时间
+	 */
+	//Field("course_attendance_item_gmt_created")
+	private Timestamp courseAttendanceItemGmtCreated;
+	/**
+	 * 记录修改时间
+	 */
+	//Field("course_attendance_item_gmt_modified")
+	private Timestamp courseAttendanceItemGmtModified;
+	/**
+	 * 考勤结果
+	 */
+	//Field("course_attendance_item_result")
+	private String courseAttendanceItemResult;
+	/**
+	 * 考勤记录状态
+	 */
+	//Field("course_attendance_item_status")
+	private String courseAttendanceItemStatus;
 
 
-	public String getAttendanceItemId() {
-		return attendanceItemId;
+	public String getCourseAttendanceItemId() {
+		return courseAttendanceItemId;
 	}
 
-	public void setAttendanceItemId(String attendanceItemId) {
-		this.attendanceItemId = attendanceItemId;
+	public void setCourseAttendanceItemId(String courseAttendanceItemId) {
+		this.courseAttendanceItemId = courseAttendanceItemId;
 	}
 
-	public String getAttendanceItemStudentId() {
-		return attendanceItemStudentId;
+	public String getCourseAttendanceItemStudentId() {
+		return courseAttendanceItemStudentId;
 	}
 
-	public void setAttendanceItemStudentId(String attendanceItemStudentId) {
-		this.attendanceItemStudentId = attendanceItemStudentId;
+	public void setCourseAttendanceItemStudentId(String courseAttendanceItemStudentId) {
+		this.courseAttendanceItemStudentId = courseAttendanceItemStudentId;
 	}
 
-	public String getAttendanceId() {
-		return attendanceId;
+	public String getCourseAttendanceId() {
+		return courseAttendanceId;
 	}
 
-	public void setAttendanceId(String attendanceId) {
-		this.attendanceId = attendanceId;
+	public void setCourseAttendanceId(String courseAttendanceId) {
+		this.courseAttendanceId = courseAttendanceId;
 	}
 
-	public Timestamp getAttendanceItemGmtCreated() {
-		return attendanceItemGmtCreated;
+	public String getCourseAttendanceItemMac() {
+		return courseAttendanceItemMac;
 	}
 
-	public void setAttendanceItemGmtCreated(Timestamp attendanceItemGmtCreated) {
-		this.attendanceItemGmtCreated = attendanceItemGmtCreated;
+	public void setCourseAttendanceItemMac(String courseAttendanceItemMac) {
+		this.courseAttendanceItemMac = courseAttendanceItemMac;
 	}
 
-	public Timestamp getAttendanceItemGmtModified() {
-		return attendanceItemGmtModified;
+	public Timestamp getCourseAttendanceItemGmtCreated() {
+		return courseAttendanceItemGmtCreated;
 	}
 
-	public void setAttendanceItemGmtModified(Timestamp attendanceItemGmtModified) {
-		this.attendanceItemGmtModified = attendanceItemGmtModified;
+	public void setCourseAttendanceItemGmtCreated(Timestamp courseAttendanceItemGmtCreated) {
+		this.courseAttendanceItemGmtCreated = courseAttendanceItemGmtCreated;
 	}
 
-	public String getAttendanceItemResult() {
-		return attendanceItemResult;
+	public Timestamp getCourseAttendanceItemGmtModified() {
+		return courseAttendanceItemGmtModified;
 	}
 
-	public void setAttendanceItemResult(String attendanceItemResult) {
-		this.attendanceItemResult = attendanceItemResult;
+	public void setCourseAttendanceItemGmtModified(Timestamp courseAttendanceItemGmtModified) {
+		this.courseAttendanceItemGmtModified = courseAttendanceItemGmtModified;
 	}
 
-	public String getAttendanceItemStatus() {
-		return attendanceItemStatus;
+	public String getCourseAttendanceItemResult() {
+		return courseAttendanceItemResult;
 	}
 
-	public void setAttendanceItemStatus(String attendanceItemStatus) {
-		this.attendanceItemStatus = attendanceItemStatus;
+	public void setCourseAttendanceItemResult(String courseAttendanceItemResult) {
+		this.courseAttendanceItemResult = courseAttendanceItemResult;
+	}
+
+	public String getCourseAttendanceItemStatus() {
+		return courseAttendanceItemStatus;
+	}
+
+	public void setCourseAttendanceItemStatus(String courseAttendanceItemStatus) {
+		this.courseAttendanceItemStatus = courseAttendanceItemStatus;
 	}
 
 }

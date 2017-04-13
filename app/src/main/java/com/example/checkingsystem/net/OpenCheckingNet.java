@@ -1,12 +1,20 @@
 package com.example.checkingsystem.net;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.checkingsystem.entity.Attendance;
 import com.example.checkingsystem.entity.ResultObj;
+import com.example.checkingsystem.entity.Student;
+import com.example.checkingsystem.teacher.activity.TeacherCheckingStudentAttendanceList;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 import util.ChangeTypeUtil;
 import util.HttpCallbackListener;
@@ -18,10 +26,16 @@ import util.PathUtil;
  */
 
 public class OpenCheckingNet {
+    public static final int START_TEACHER_CHECKING_STUDENT_ATTENTANCE_LIST = 1;
+    private ResultObj<Attendance> resultObj;
+    private ObjectMapper objectMapper = new ObjectMapper();
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-
+            Intent intent = new Intent(activity, TeacherCheckingStudentAttendanceList.class);
+            String attentanceID = resultObj.getData().getCourseAttendanceId();
+            intent.putExtra("attentanceID",attentanceID);
+            activity.startActivityForResult(intent,START_TEACHER_CHECKING_STUDENT_ATTENTANCE_LIST);
 
         }
     };
@@ -29,7 +43,11 @@ public class OpenCheckingNet {
         @Override
         public void onFinish(String response) {
             Log.e("test",response);
-            ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
+            try {
+                resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<Attendance>>() {});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if(resultObj.getMeta().getResult())
             {
                 Message message = new Message();
@@ -50,7 +68,5 @@ public class OpenCheckingNet {
         String data = "courseAttendanceCourseTimeId="+courseID+"&courseAttendanceMac="+macAdress+"&courseAttendanceGmtEnd="+endTime+"&teacherId="+teacherID;
 
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
-
-
     }
 }

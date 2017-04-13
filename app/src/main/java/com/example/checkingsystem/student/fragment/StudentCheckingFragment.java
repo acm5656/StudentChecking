@@ -45,6 +45,8 @@ import util.PathUtil;
 
 public class StudentCheckingFragment extends Fragment implements View.OnClickListener {
 
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
     private OnFragmentInteractionListener mListener;
     private View view;
     private Button verfiButton;
@@ -68,9 +70,18 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     Handler handlerStuID = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            doQuery = true;
-            sendMac = false;
-            getCheckingAuthority();
+            switch (msg.what)
+            {
+                case TRUE:
+                    doQuery = true;
+                    sendMac = false;
+                    getCheckingAuthority();
+                    break;
+                case FALSE:
+                    Toast.makeText(getContext(), "操作失败请稍后再试", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
         }
     };
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
@@ -85,8 +96,14 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
             if(resultObj.getMeta().getResult())
             {
                 Message message = new Message();
+                message.what = TRUE;
                 studentID = resultObj.getData().getStudentId();
                 studentFaceID = resultObj.getData().getStudentFacecode();
+                handlerStuID.sendMessage(message);
+            }else
+            {
+                Message message = new Message();
+                message.what = FALSE;
                 handlerStuID.sendMessage(message);
             }
         }
@@ -94,6 +111,9 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         @Override
         public void onError(Exception e) {
 
+            Message message = new Message();
+            message.what = FALSE;
+            handlerStuID.sendMessage(message);
         }
     };
     DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
@@ -110,9 +130,18 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
 
         @Override
         public void handleMessage(Message msg) {
-            doQuery = false;
-            progressDialog.dismiss();
-            startVerifyFace();
+            switch (msg.what)
+            {
+                case TRUE:
+                    doQuery = false;
+                    progressDialog.dismiss();
+                    startVerifyFace();
+                    break;
+                case FALSE:
+                    Toast.makeText(getContext(),"未获得考勤权限，请确保周围有已授权设备",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
 
         }
     };
@@ -140,18 +169,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         public void onError(Exception e) {
             sendMac = false;
             Log.e("test","error");
-        }
-    };
-
-    HttpCallbackListener httpCallbackListenerGetStudentID = new HttpCallbackListener() {
-        @Override
-        public void onFinish(String response) {
-
-        }
-
-        @Override
-        public void onError(Exception e) {
-
         }
     };
 
@@ -312,6 +329,9 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
                         {
                             doQuery = false;
                             progressDialog.dismiss();
+                            Message mesage = new Message();
+                            mesage.what = FALSE;
+                            handler.sendMessage(mesage);
                         }
                     }
                 }
