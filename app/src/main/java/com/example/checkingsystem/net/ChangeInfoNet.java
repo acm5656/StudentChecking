@@ -2,7 +2,10 @@ package com.example.checkingsystem.net;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.entity.ResultObj;
@@ -21,6 +24,22 @@ import util.PathUtil;
 
 public class ChangeInfoNet{
     private Activity activity;
+    private String url;
+    private String role ;
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case FALSE:
+                    Toast.makeText(activity,"操作失败请稍后再试",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
     private HttpCallbackListener studentHttpCallListener = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
@@ -28,22 +47,44 @@ public class ChangeInfoNet{
             Log.e("test",resultObj.getMeta().getResult()+"");
             if(resultObj.getMeta().getResult())
             {
-                Intent intent = new Intent(activity, StudentIndexActivity.class);
-                intent.putExtra("data","修改成功");
-                activity.setResult(Activity.RESULT_OK,intent);
-                activity.finish();
+                Intent intent = null;
+                if("教师".equals(role))
+                {
+                    LoginActivity.studentStatic.setStudentHeadimageUrl(url);
+                    intent = new Intent(activity, StudentIndexActivity.class);
+
+                }else if("学生".equals(role))
+                {
+                    LoginActivity.studentStatic.setStudentHeadimageUrl(url);
+                    intent = new Intent(activity, StudentIndexActivity.class);
+                }
+                if(intent!=null) {
+                    intent.putExtra("data", "修改成功");
+                    activity.setResult(Activity.RESULT_OK, intent);
+                    activity.finish();
+                }
+            }
+            else {
+                Message message = new Message();
+                message.what = FALSE;
+                handler.sendMessage(message);
             }
         }
 
         @Override
         public void onError(Exception e) {
-
+            Message message = new Message();
+            message.what = FALSE;
+            handler.sendMessage(message);
         }
     };
+
+
     public void studentChangeInfo(String nickName, String email, String headImagePath, Activity activity)
     {
+        role = "学生";
         this.activity = activity;
-        String url = HttpUtil.urlIp + PathUtil.CHANGE_STUDENT_INFO;
+        url = HttpUtil.urlIp + PathUtil.CHANGE_STUDENT_INFO;
         Student student  = new Student();
         student.setStudentId(LoginActivity.studentStatic.getStudentId());
         student.setStudentNickname(nickName);
@@ -54,8 +95,9 @@ public class ChangeInfoNet{
     }
     public void teacherChangeInfo(String nickName, String email, String headImagePath, Activity activity)
     {
+        role = "教师";
         this.activity = activity;
-        String url = HttpUtil.urlIp + PathUtil.TEACHER_CHANGE_INFO;
+        url = HttpUtil.urlIp + PathUtil.TEACHER_CHANGE_INFO;
         Teacher teacher  = new Teacher();
         teacher.setTeacherId(LoginActivity.teacherStatic.getTeacherId());
         teacher.setTeacherNickname(nickName);

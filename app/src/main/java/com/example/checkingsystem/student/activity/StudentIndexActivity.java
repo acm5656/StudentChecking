@@ -1,5 +1,6 @@
 package com.example.checkingsystem.student.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +31,9 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     private TextView studentIndexMine;
     private TextView studentIndexChooseWeek;
     public String week = "1";
+    StudentMineFragment studentMineFragment;
+    StudentScheduleFragment studentScheduleFragment;
+    StudentInquireFragment studentInquireFragment;
 
 
 
@@ -40,9 +44,9 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         ActivityColectorUtil.addActivity(this);
         initUI();
         final List<Fragment> list = new ArrayList<>();
-        StudentInquireFragment studentInquireFragment = new StudentInquireFragment();
-        StudentMineFragment studentMineFragment = new StudentMineFragment();
-        StudentScheduleFragment studentScheduleFragment = new StudentScheduleFragment();
+        studentInquireFragment = new StudentInquireFragment();
+        studentMineFragment = new StudentMineFragment();
+        studentScheduleFragment = new StudentScheduleFragment();
         list.add(studentScheduleFragment);
         list.add(studentInquireFragment);
         list.add(studentMineFragment);
@@ -154,8 +158,14 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void SendMessageValue(String strValue) {
-        Toast.makeText(StudentIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
         week = strValue;
+        if("0".equals(strValue))
+            studentIndexChooseWeek.setText("放假中");
+        else {
+            studentIndexChooseWeek.setText("第" + strValue + "周");
+        }
+        studentScheduleFragment.updateUI(new Integer(strValue));
+
     }
 
     @Override
@@ -163,4 +173,6 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         super.onBackPressed();
         ActivityColectorUtil.finishAll();
     }
+
+
 }

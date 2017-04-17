@@ -66,14 +66,14 @@ public class StudentCheckingActivity extends FragmentActivity implements View.On
 
             @Override
             public void onPageSelected(int position) {
-                if(position==1)
+                if(position==0)
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         checking.setTextAppearance(R.style.OnClickText);
                         askForLeave.setTextAppearance(R.style.unClickText);
                     }
                 }
-                if(position==0)
+                if(position==1)
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         checking.setTextAppearance(R.style.unClickText);

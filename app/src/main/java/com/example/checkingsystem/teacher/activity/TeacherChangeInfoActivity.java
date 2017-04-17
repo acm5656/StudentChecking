@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
@@ -40,6 +41,8 @@ public class TeacherChangeInfoActivity extends AppCompatActivity implements View
     private Button submitButton;
     private Bitmap headPictureBitmap;
     String imageName = null;
+    private TextView tel;
+    private TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,10 @@ public class TeacherChangeInfoActivity extends AppCompatActivity implements View
         submitButton = (Button)findViewById(R.id.activity_teacher_change_info_submit);
         nickName.setText(LoginActivity.teacherStatic.getTeacherNickname());
         email.setText(LoginActivity.teacherStatic.getTeacherEmail());
-
+        tel = (TextView) findViewById(R.id.activity_teacher_change_info_tel);
+        name = (TextView)findViewById(R.id.activity_teacher_change_info_name);
+        tel.setText(LoginActivity.teacherStatic.getTeacherTel());
+        name.setText("姓名："+LoginActivity.teacherStatic.getTeacherName());
 
     }
 
@@ -105,6 +111,7 @@ public class TeacherChangeInfoActivity extends AppCompatActivity implements View
                     BitmapUtil.saveMyBitmap(bitmap,imageName);
                     CosUtil.upLoad(CosUtil.headerImageCosPath,Environment.getExternalStorageDirectory().getPath()+LoginActivity.path,imageName,this);
                     circleImageView.setImageBitmap(bitmap);
+                    LoginActivity.headPictureBitmap = bitmap;
                     break;
             }
         }

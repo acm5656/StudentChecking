@@ -131,6 +131,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         teacherIndexInquire = (TextView)findViewById(R.id.teacher_index_inquire);
         teacherIndexMine = (TextView)findViewById(R.id.teacher_index_mine);
         teacherIndexChooseWeek = (TextView)findViewById(R.id.teacher_index_choose_week);
+        teacherIndexMine.setOnClickListener(this);
+        teacherIndexInquire.setOnClickListener(this);
+        teacherIndexStudy.setOnClickListener(this);
     }
 
     @Override
@@ -149,16 +152,19 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
             case R.id.teacher_index_choose_week:
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 ChooseWeekFragment dialog = new ChooseWeekFragment();
-
                 dialog.show(fragmentManager,"dialog");
                 break;
-
         }
     }
     @Override
     public void SendMessageValue(String strValue) {
-        Toast.makeText(TeacherIndexActivity.this,strValue,Toast.LENGTH_SHORT).show();
         weekTime = strValue;
+        if("0".equals(strValue))
+            teacherIndexChooseWeek.setText("放假中");
+        else {
+            teacherIndexChooseWeek.setText("第" + strValue + "周");
+        }
+        teacherScheduleFragment.updateUI(new Integer(weekTime));
     }
 
     @Override

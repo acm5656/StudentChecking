@@ -68,7 +68,7 @@
                     android:textSize="16dp"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:id="@+id/textView2"/>
+                    android:id="@+id/activity_teacher_change_info_tel"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,6 +78,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="15dp"
+                    android:id="@+id/activity_teacher_change_info_name"
                     />
             </LinearLayout>
 

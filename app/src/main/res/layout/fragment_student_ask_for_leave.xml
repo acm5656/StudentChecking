@@ -37,6 +37,7 @@
                     android:textSize="@dimen/title_text_size"
                     android:textColor="#000000"
                     android:layout_marginRight="30dp"
+                    android:id="@+id/fragment_student_ask_for_leave_name"
                     />
             </RelativeLayout>
         <RelativeLayout
@@ -56,16 +57,20 @@
                 android:textSize="@dimen/title_text_size"
                 android:layout_marginLeft="30dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="周一第1节"
-                android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:textSize="@dimen/title_text_size"
                 android:textColor="#000000"
-                android:layout_marginRight="30dp"
-                />
+                android:layout_marginRight="33dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="33dp"
+                android:id="@+id/fragment_student_ask_for_leave_day"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -93,6 +98,7 @@
                 android:textSize="@dimen/title_text_size"
                 android:textColor="#000000"
                 android:layout_marginRight="30dp"
+                android:id="@+id/fragment_student_ask_for_leave_week"
                 />
         </RelativeLayout>
         <LinearLayout
@@ -138,7 +144,7 @@
             android:layout_marginTop="40dp"
             android:text="提交操作"
             android:textSize="17dp"
-            android:background="#4890cf"
+            android:background="@drawable/input_login"
             android:id="@+id/fragment_student_ask_for_leave_submit"
 
             />

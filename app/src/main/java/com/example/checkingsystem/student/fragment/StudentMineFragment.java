@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +27,8 @@ import com.example.checkingsystem.ChangePasswordActivity;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -31,7 +36,12 @@ import java.util.List;
  * to handle interaction events.
  */
 public class StudentMineFragment extends Fragment {
-
+//    Handler setImageHandler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
+//        }
+//    };
     private OnFragmentInteractionListener mListener;
     private View view;
     private Button quitButton;
@@ -42,6 +52,7 @@ public class StudentMineFragment extends Fragment {
     private RelativeLayout changePasswordRelativeLayout;
     private TextView schoolIDTextView;
     private TextView studentName;
+    private CircleImageView headImageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,9 +95,18 @@ public class StudentMineFragment extends Fragment {
         });
 
         schoolIDTextView = (TextView)view.findViewById(R.id.fragment_student_mine_school_id);
-        schoolIDTextView.setText(LoginActivity.studentStatic.getStudentTel());
-
-
+        schoolIDTextView.setText("学号："+LoginActivity.studentStatic.getStudentSchoolUsername());
+        studentName = (TextView)view.findViewById(R.id.fragment_student_mine_name);
+        studentName.setText("姓名："+LoginActivity.studentStatic.getStudentName());
+        headImageView = (CircleImageView) view.findViewById(R.id.fragment_student_mine_head_picture);
+        if(headImageView==null)
+        {
+            Log.e("test","headImageView is null");
+        }
+        if(LoginActivity.headPictureBitmap!=null)
+        {
+            headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
+        }
         return view;
     }
 
@@ -97,6 +117,21 @@ public class StudentMineFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e("test","oncreate");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(LoginActivity.headPictureBitmap!=null)
+        {
+            Log.e("test","----------1");
+            headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -113,6 +148,7 @@ public class StudentMineFragment extends Fragment {
                 case CHANGE_INFO_REQUEST_CODE:
                     dataStr = data.getStringExtra("data");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
+
                     break;
             }
         }

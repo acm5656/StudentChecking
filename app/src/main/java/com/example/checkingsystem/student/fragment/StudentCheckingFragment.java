@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
@@ -29,6 +30,7 @@ import com.example.checkingsystem.VerifyFaceActivity;
 import com.example.checkingsystem.entity.AuthorityInfo;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
+import com.example.checkingsystem.entity.StudentCourseTimeTable;
 import com.example.checkingsystem.student.activity.StudentCheckingActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +61,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     private boolean doQuery = true;
     private ProgressDialog progressDialog;
     private boolean sendMac = false;
-    private String courseID;
     private String macAddress;
     private int i = 0;
     private String studentID;
@@ -67,6 +68,12 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     ObjectMapper objectMapper = new ObjectMapper();
     ResultObj<Student> resultObj;
     private String studentFaceID;
+    IntentFilter intentFileter;
+    private TextView weekTextView;
+    private TextView dayTextView;
+    private TextView courseNameTextView;
+    private String courseID;
+
     Handler handlerStuID = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -203,9 +210,22 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         checkingButton = (Button)view.findViewById(R.id.fragment_student_help_student_checking_button);
         checkingButton.setOnClickListener(this);
         courseID = ((StudentCheckingActivity)getActivity()).courseID;
-        IntentFilter intentFileter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        intentFileter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         bluetoothReceiver = new BluetoothReceiver();
-        getActivity().registerReceiver(bluetoothReceiver, intentFileter);
+        weekTextView = (TextView) view.findViewById(R.id.fragment_student_checking_week);
+        dayTextView = (TextView)view.findViewById(R.id.fragment_student_checking_day);
+        courseNameTextView = (TextView)view.findViewById(R.id.fragment_student_checking_name);
+
+        for(StudentCourseTimeTable studentCourseTimeTable:LoginActivity.studentCourseTimeTableList)
+        {
+            if(studentCourseTimeTable.getCourseTimeId().equals(courseID))
+            {
+                weekTextView.setText("第"+studentCourseTimeTable.getCourseTimeWeek()+"周");
+                courseNameTextView.setText(studentCourseTimeTable.getCourseName());
+                String classTime = StudentScheduleFragment.getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
+                dayTextView.setText("周"+studentCourseTimeTable.getCourseTimeDay()+"第"+classTime+"节");
+            }
+        }
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return view;
@@ -291,6 +311,7 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
 
     public void getCheckingAuthority()
     {
+        getActivity().registerReceiver(bluetoothReceiver, intentFileter);
         openBluetooth();
         progressDialog = ProgressDialog.show(getActivity(),"考勤获权", "请稍等，确保一米内有已经获权的设备", true, false);
 
