@@ -32,25 +32,54 @@
         android:orientation="horizontal"
         android:background="#f5f2f2"
         >
-
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/OnClickText"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="@string/checking"
             android:id="@+id/activity_student_checking_page"
-            />
-        <TextView
+            >
+            <ImageView
+                android:id="@+id/activity_student_checking_page_image_view"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/checking"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OnClickText"
+                android:gravity="center"
+                android:text="@string/checking"
+                android:id="@+id/activity_student_checking_page_text_view"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/AskForLeave"
+            android:layout_weight="1"
+            android:orientation="vertical"
             android:gravity="center"
-            style="@style/unClickText"
             android:id="@+id/activity_student_checking_ask_for_leave_page"
-            />
+            >
+            <ImageView
+                android:id="@+id/activity_student_checking_ask_for_leave_page_image_view"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/un_ask_for_leave"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/AskForLeave"
+                android:gravity="center"
+                style="@style/unClickText"
+                android:id="@+id/activity_student_checking_ask_for_leave_page_text_view"
+                />
+        </LinearLayout>
 
 
     </LinearLayout>

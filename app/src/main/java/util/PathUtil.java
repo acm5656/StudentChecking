@@ -26,7 +26,7 @@ public class PathUtil {
     public static final String STUDENT_GET_CHECKING_AUTHORITY ="api/attendance-consumer-cattendance/courseAttendanceItem/authority";
 //    public static final String TEACHER_ ="";返回补录，待讨论
     public static final String STUDENT_ASK_FOR_LEAVE ="api/attendance-provider-user/courseLeave/student";
-    public static final String STUDENT_GET_STUDENT_ID ="api/attendance-provider-user/student/studentId";
+    public static final String STUDENT_GET_STUDENT_ID ="api/attendance-provider-user/student/student";
     public static final String TEACHER_GET_STUDENT_ASK_FOR_LEAVE = "api/attendance-provider-user/courseLeave/students/id";
     public static final String GET_STUDENT_INFO_BY_STUDENT_ID = "api/attendance-provider-user/student/students/no/name";
     public static final String TEACHER_GET_COURSE_TIME_INFO = "api/attendance-consumer-eduaffairs/courseTime/teacher/courseTable";

@@ -31,6 +31,7 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
     private CircleImageView headImageView;
     private TextView schoolNumber;
     private TextView name;
+    public static final int CHANGE_PASSWORD_CODE = 1;
     public static final int CHANGE_INFO_REQUEST_CODE = 2;
 
     @Override
@@ -56,7 +57,7 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         changeInfoRelative = (RelativeLayout)view.findViewById(R.id.fragment_teacher_mine_changeInfo);
         changeInfoRelative.setOnClickListener(this);
         changePasswordRelative.setOnClickListener(this);
-        headImageView = (CircleImageView) view.findViewById(R.id.activity_teacher_change_info_head_picture);
+        headImageView = (CircleImageView) view.findViewById(R.id.fragment_teacher_mine_head_picture);
         if(LoginActivity.headPictureBitmap!=null)
         {
             headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
@@ -82,7 +83,7 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         {
             case R.id.fragment_teacher_mine_change_password:
                 intent.setClass(getContext(),ChangePasswordActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,CHANGE_PASSWORD_CODE);
                 break;
             case R.id.fragment_teacher_mine_changeInfo:
                 intent.setClass(getContext(), TeacherChangeInfoActivity.class);
@@ -112,6 +113,10 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
                     {
                         headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
                     }
+                    break;
+                case CHANGE_PASSWORD_CODE:
+                    dataStr = data.getStringExtra("data");
+                    Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
                     break;
             }
         }

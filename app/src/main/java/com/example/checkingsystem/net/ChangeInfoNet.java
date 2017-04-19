@@ -28,6 +28,8 @@ public class ChangeInfoNet{
     private String role ;
     public static final int TRUE = 1;
     public static final int FALSE = 0;
+    String nickName;
+    String email;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -51,11 +53,16 @@ public class ChangeInfoNet{
                 if("教师".equals(role))
                 {
                     LoginActivity.studentStatic.setStudentHeadimageUrl(url);
+                    LoginActivity.teacherStatic.setTeacherNickname(nickName);
+                    LoginActivity.teacherStatic.setTeacherEmail(email);
+
                     intent = new Intent(activity, StudentIndexActivity.class);
 
                 }else if("学生".equals(role))
                 {
                     LoginActivity.studentStatic.setStudentHeadimageUrl(url);
+                    LoginActivity.studentStatic.setStudentNickname(nickName);
+                    LoginActivity.studentStatic.setStudentEmail(email);
                     intent = new Intent(activity, StudentIndexActivity.class);
                 }
                 if(intent!=null) {
@@ -90,6 +97,8 @@ public class ChangeInfoNet{
         student.setStudentNickname(nickName);
         student.setStudentEmail(email);
         student.setStudentHeadimageUrl(headImagePath);
+        this.nickName = nickName;
+        this.email = email;
         HttpUtil.sendHttpPutRequest(url,studentHttpCallListener, ChangeTypeUtil.getJSONString(student),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
 
     }
@@ -103,6 +112,8 @@ public class ChangeInfoNet{
         teacher.setTeacherNickname(nickName);
         teacher.setTeacherEmail(email);
         teacher.setTeacherHeadimageUrl(headImagePath);
+        this.nickName = nickName;
+        this.email = email;
         HttpUtil.sendHttpPutRequest(url,studentHttpCallListener, ChangeTypeUtil.getJSONString(teacher),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
     }
 }

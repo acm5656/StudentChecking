@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.checkingsystem.R;
@@ -26,8 +28,15 @@ import util.ActivityColectorUtil;
  */
 
 public class TeacherCheckingActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView teacherAskForLeaveInfo;
-    private TextView teacherChecking;
+    private TextView teacherAskForLeaveInfoTextView;
+    private TextView teacherCheckingTextView;
+
+    private LinearLayout teacherAskForLeaveInfoLayout;
+    private LinearLayout teacherCheckingLayout;
+
+    private ImageView teacherAskForLeaveInfoImageView;
+    private ImageView teacherCheckingImageView;
+
     private ViewPager teacherCheckingFragmentContainer;
     private List<Fragment> list;
     TeacherAskForLeaveInfoFragment teacherAskForLeaveInfoFragment;
@@ -74,16 +83,29 @@ public class TeacherCheckingActivity extends AppCompatActivity implements View.O
                     case 0:
                         teacherCheckingFragmentContainer.setCurrentItem(0);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            teacherAskForLeaveInfo.setTextAppearance(R.style.OnClickText);
-                            teacherChecking.setTextAppearance(R.style.unClickText);
+                            teacherAskForLeaveInfoTextView.setTextAppearance(R.style.OnClickText);
+                            teacherCheckingTextView.setTextAppearance(R.style.unClickText);
+                        }else {
+                            teacherAskForLeaveInfoTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                            teacherCheckingTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
+                        teacherAskForLeaveInfoImageView.setImageResource(R.drawable.query);
+                        teacherCheckingImageView.setImageResource(R.drawable.un_checking);
+
+
                         break;
                     case 1:
                         teacherCheckingFragmentContainer.setCurrentItem(1);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            teacherAskForLeaveInfo.setTextAppearance(R.style.unClickText);
-                            teacherChecking.setTextAppearance(R.style.OnClickText);
+                            teacherAskForLeaveInfoTextView.setTextAppearance(R.style.unClickText);
+                            teacherCheckingTextView.setTextAppearance(R.style.OnClickText);
+                        }else {
+                            teacherAskForLeaveInfoTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            teacherCheckingTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                         }
+                        teacherAskForLeaveInfoImageView.setImageResource(R.drawable.un_query);
+                        teacherCheckingImageView.setImageResource(R.drawable.checking);
+
                         break;
                 }
             }
@@ -97,13 +119,20 @@ public class TeacherCheckingActivity extends AppCompatActivity implements View.O
     }
 
     private void initUI() {
-        teacherAskForLeaveInfo = (TextView) findViewById(R.id.teacher_ask_for_leave_info);
-        teacherChecking = (TextView)findViewById(R.id.teacher_checking);
+        teacherAskForLeaveInfoTextView = (TextView) findViewById(R.id.teacher_ask_for_leave_info_text_view);
+        teacherCheckingTextView = (TextView)findViewById(R.id.teacher_checking_text_view);
+
+        teacherAskForLeaveInfoLayout = (LinearLayout) findViewById(R.id.teacher_ask_for_leave_info);
+        teacherCheckingLayout = (LinearLayout) findViewById(R.id.teacher_checking);
+
+        teacherAskForLeaveInfoImageView = (ImageView) findViewById(R.id.teacher_ask_for_leave_info_image_view);
+        teacherCheckingImageView = (ImageView) findViewById(R.id.teacher_checking_image_view);
+
         teacherCheckingFragmentContainer = (ViewPager)findViewById(R.id.teacher_checking_fragment_container);
         Intent intent = getIntent();
         courseID = intent.getStringExtra("courseID");
-        teacherAskForLeaveInfo.setOnClickListener(this);
-        teacherChecking.setOnClickListener(this);
+        teacherAskForLeaveInfoLayout.setOnClickListener(this);
+        teacherCheckingLayout.setOnClickListener(this);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.checkingsystem.student.activity;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +29,16 @@ import util.ActivityColectorUtil;
 public class StudentCheckingActivity extends FragmentActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
-    private TextView askForLeave;
-    private TextView checking;
+
+    private TextView askForLeaveTextView;
+    private TextView checkingTextView;
+
+    private LinearLayout askForLeaveLayout;
+    private LinearLayout checkingLayout;
+
+    private ImageView askForLeaveImageView;
+    private ImageView checkingImageView;
+
     private FragmentManager fragmentManager;
     private List<Fragment> list;
     public String courseID;
@@ -69,16 +80,28 @@ public class StudentCheckingActivity extends FragmentActivity implements View.On
                 if(position==0)
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        checking.setTextAppearance(R.style.OnClickText);
-                        askForLeave.setTextAppearance(R.style.unClickText);
+                        checkingTextView.setTextAppearance(R.style.OnClickText);
+                        askForLeaveTextView.setTextAppearance(R.style.unClickText);
                     }
+                    else {
+                        checkingTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                        askForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                    }
+                    checkingImageView.setImageResource(R.drawable.checking);
+                    askForLeaveImageView.setImageResource(R.drawable.un_ask_for_leave);
                 }
                 if(position==1)
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        checking.setTextAppearance(R.style.unClickText);
-                        askForLeave.setTextAppearance(R.style.OnClickText);
+                        checkingTextView.setTextAppearance(R.style.unClickText);
+                        askForLeaveTextView.setTextAppearance(R.style.OnClickText);
+
+                    }else {
+                        checkingTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                        askForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                     }
+                    checkingImageView.setImageResource(R.drawable.un_checking);
+                    askForLeaveImageView.setImageResource(R.drawable.ask_for_leave);
 
                 }
             }
@@ -95,10 +118,17 @@ public class StudentCheckingActivity extends FragmentActivity implements View.On
 
     private void initUI() {
         viewPager = (ViewPager)findViewById(R.id.checking_fragment_container);
-        askForLeave = (TextView)findViewById(R.id.activity_student_checking_ask_for_leave_page);
-        checking = (TextView)findViewById(R.id.activity_student_checking_page);
-        askForLeave.setOnClickListener(this);
-        checking.setOnClickListener(this);
+        askForLeaveTextView = (TextView)findViewById(R.id.activity_student_checking_ask_for_leave_page_text_view);
+        checkingTextView = (TextView)findViewById(R.id.activity_student_checking_page_text_view);
+
+        askForLeaveLayout = (LinearLayout)findViewById(R.id.activity_student_checking_ask_for_leave_page);
+        checkingLayout = (LinearLayout)findViewById(R.id.activity_student_checking_page);
+
+        askForLeaveImageView = (ImageView) findViewById(R.id.activity_student_checking_ask_for_leave_page_image_view);
+        checkingImageView = (ImageView) findViewById(R.id.activity_student_checking_page_image_view);
+
+        askForLeaveLayout.setOnClickListener(this);
+        checkingLayout.setOnClickListener(this);
     }
 
 

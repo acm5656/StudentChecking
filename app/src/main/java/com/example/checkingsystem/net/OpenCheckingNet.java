@@ -1,6 +1,7 @@
 package com.example.checkingsystem.net;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -35,7 +36,16 @@ public class OpenCheckingNet {
             Intent intent = new Intent(activity, TeacherCheckingStudentAttendanceList.class);
             String attentanceID = resultObj.getData().getCourseAttendanceId();
             intent.putExtra("attentanceID",attentanceID);
-            activity.startActivityForResult(intent,START_TEACHER_CHECKING_STUDENT_ATTENTANCE_LIST);
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            while (!bluetoothAdapter.isEnabled())
+            {
+
+            }
+
+            if(bluetoothAdapter.isEnabled()) {
+
+                activity.startActivityForResult(intent, START_TEACHER_CHECKING_STUDENT_ATTENTANCE_LIST);
+            }
 
         }
     };

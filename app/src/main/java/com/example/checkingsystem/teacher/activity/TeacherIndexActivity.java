@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +34,23 @@ import util.ActivityColectorUtil;
 
 public class TeacherIndexActivity extends AppCompatActivity implements View.OnClickListener,ChooseWeekFragment.CallBackValue{
     private ViewPager viewPager;
-    private TextView teacherIndexStudy;
-    private TextView teacherIndexInquire;
-    private TextView teacherIndexMine;
+
+    private TextView teacherIndexStudyTextView;
+    private TextView teacherIndexInquireTextView;
+    private TextView teacherIndexMineTextView;
+
+    private LinearLayout teacherIndexStudyLayout;
+    private LinearLayout teacherIndexInquireLayout;
+    private LinearLayout teacherIndexMineLayout;
+
+    private ImageView teacherIndexStudyImageView;
+    private ImageView teacherIndexInquireImageView;
+    private ImageView teacherIndexMineImageView;
+
+    private ImageView teacherIndexPullImageView;
+
+
+
     private TextView teacherIndexChooseWeek;
     private List<Fragment> list;
     TeacherScheduleFragment teacherScheduleFragment;
@@ -84,32 +100,68 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                     case 0:
                         viewPager.setCurrentItem(0);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            teacherIndexMine.setTextAppearance(R.style.unClickText);
-                            teacherIndexStudy.setTextAppearance(R.style.OnClickText);
-                            teacherIndexInquire.setTextAppearance(R.style.unClickText);
-                            teacherIndexChooseWeek.setText("课表");
-                            teacherIndexChooseWeek.setOnClickListener(TeacherIndexActivity.this);
+                            teacherIndexMineTextView.setTextAppearance(R.style.unClickText);
+                            teacherIndexStudyTextView.setTextAppearance(R.style.OnClickText);
+                            teacherIndexInquireTextView.setTextAppearance(R.style.unClickText);
+
+                        }else {
+                            teacherIndexMineTextView.setTextAppearance(getApplicationContext(), R.style.unClickText);
+                            teacherIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                            teacherIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
+                        teacherIndexChooseWeek.setText("课表");
+                        teacherIndexChooseWeek.setOnClickListener(TeacherIndexActivity.this);
+
+                        teacherIndexPullImageView.setImageResource(R.drawable.pull);
+
+                        teacherIndexMineImageView.setImageResource(R.drawable.un_mine);
+                        teacherIndexStudyImageView.setImageResource(R.drawable.schedule);
+                        teacherIndexInquireImageView.setImageResource(R.drawable.un_query);
+
                         break;
                     case 1:
                         viewPager.setCurrentItem(1);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            teacherIndexMine.setTextAppearance(R.style.unClickText);
-                            teacherIndexStudy.setTextAppearance(R.style.unClickText);
-                            teacherIndexInquire.setTextAppearance(R.style.OnClickText);
-                            teacherIndexChooseWeek.setText("查询");
-                            teacherIndexChooseWeek.setOnClickListener(null);
+                            teacherIndexMineTextView.setTextAppearance(R.style.unClickText);
+                            teacherIndexStudyTextView.setTextAppearance(R.style.unClickText);
+                            teacherIndexInquireTextView.setTextAppearance(R.style.OnClickText);
+
+                        }else {
+                            teacherIndexMineTextView.setTextAppearance(getApplicationContext(), R.style.unClickText);
+                            teacherIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            teacherIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                         }
+                        teacherIndexPullImageView.setImageBitmap(null);
+
+                        teacherIndexChooseWeek.setText("查询");
+                        teacherIndexChooseWeek.setOnClickListener(null);
+
+                        teacherIndexMineImageView.setImageResource(R.drawable.un_mine);
+                        teacherIndexStudyImageView.setImageResource(R.drawable.un_schedule);
+                        teacherIndexInquireImageView.setImageResource(R.drawable.query);
+
                         break;
                     case 2:
                         viewPager.setCurrentItem(2);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            teacherIndexMine.setTextAppearance(R.style.OnClickText);
-                            teacherIndexStudy.setTextAppearance(R.style.unClickText);
-                            teacherIndexInquire.setTextAppearance(R.style.unClickText);
-                            teacherIndexChooseWeek.setText("我");
-                            teacherIndexChooseWeek.setOnClickListener(null);
+                            teacherIndexMineTextView.setTextAppearance(R.style.OnClickText);
+                            teacherIndexStudyTextView.setTextAppearance(R.style.unClickText);
+                            teacherIndexInquireTextView.setTextAppearance(R.style.unClickText);
+
                         }
+                        else {
+                            teacherIndexMineTextView.setTextAppearance(getApplicationContext(), R.style.OnClickText);
+                            teacherIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            teacherIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                        }
+                        teacherIndexPullImageView.setImageBitmap(null);
+                        teacherIndexChooseWeek.setText("我");
+                        teacherIndexChooseWeek.setOnClickListener(null);
+
+                        teacherIndexMineImageView.setImageResource(R.drawable.mine);
+                        teacherIndexStudyImageView.setImageResource(R.drawable.un_schedule);
+                        teacherIndexInquireImageView.setImageResource(R.drawable.un_query);
+
                         break;
                 }
             }
@@ -127,13 +179,24 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
     private void initUI() {
         viewPager = (ViewPager)findViewById(R.id.teacher_index_viewpager);
-        teacherIndexStudy = (TextView)findViewById(R.id.teacher_index_study);
-        teacherIndexInquire = (TextView)findViewById(R.id.teacher_index_inquire);
-        teacherIndexMine = (TextView)findViewById(R.id.teacher_index_mine);
+        teacherIndexStudyLayout = (LinearLayout) findViewById(R.id.teacher_index_study);
+        teacherIndexInquireLayout = (LinearLayout) findViewById(R.id.teacher_index_inquire);
+        teacherIndexMineLayout = (LinearLayout) findViewById(R.id.teacher_index_mine);
+
+        teacherIndexStudyImageView = (ImageView) findViewById(R.id.teacher_index_study_image_view);
+        teacherIndexInquireImageView = (ImageView) findViewById(R.id.teacher_index_inquire_image_view);
+        teacherIndexMineImageView = (ImageView) findViewById(R.id.teacher_index_mine_image_view);
+
+        teacherIndexStudyTextView = (TextView)findViewById(R.id.teacher_index_study_text_view);
+        teacherIndexInquireTextView = (TextView)findViewById(R.id.teacher_index_inquire_text_view);
+        teacherIndexMineTextView = (TextView)findViewById(R.id.teacher_index_mine_text_view);
+
+        teacherIndexPullImageView= (ImageView)findViewById(R.id.activity_teacher_index_pull);
+
         teacherIndexChooseWeek = (TextView)findViewById(R.id.teacher_index_choose_week);
-        teacherIndexMine.setOnClickListener(this);
-        teacherIndexInquire.setOnClickListener(this);
-        teacherIndexStudy.setOnClickListener(this);
+        teacherIndexMineLayout.setOnClickListener(this);
+        teacherIndexInquireLayout.setOnClickListener(this);
+        teacherIndexStudyLayout.setOnClickListener(this);
     }
 
     @Override

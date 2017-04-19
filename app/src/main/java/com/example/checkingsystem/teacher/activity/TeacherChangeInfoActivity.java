@@ -52,6 +52,7 @@ public class TeacherChangeInfoActivity extends AppCompatActivity implements View
         initSourse();
         //设置点击事件
         circleImageView.setOnClickListener(this);
+        circleImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         submitButton.setOnClickListener(this);
 
 

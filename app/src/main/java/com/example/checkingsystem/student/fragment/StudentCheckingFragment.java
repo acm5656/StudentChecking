@@ -165,6 +165,7 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
             if(resultObj.getMeta().getResult()) {
                 Log.e("test","进入考勤");
                 Message message = new Message();
+                message.what = TRUE;
                 handler.sendMessage(message);
 
             }else {
@@ -189,7 +190,7 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
                 device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 //System.out.println(device.getAddress());
 //                mArrayAdapter.add(device.getName() + "\n" + device.getAddress()+"\n"+intent.getExtras().getShort(BluetoothDevice.EXTRA_RSSI));
-                if((intent.getExtras().getShort(BluetoothDevice.EXTRA_RSSI)+100)>=25)
+                if((intent.getExtras().getShort(BluetoothDevice.EXTRA_RSSI)+100)>=40)
                 {
                     pairedMaclist.add(device.getAddress());
                 }
@@ -236,11 +237,16 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.fragment_student_checking_button:
-                doQuery =true;
-                sendMac = false;
-                getCheckingAuthority();
-                studentID = LoginActivity.studentStatic.getStudentId();
-                studentFaceID = LoginActivity.studentStatic.getStudentFacecode();
+                if(LoginActivity.studentStatic.getStudentFacecode()==null||LoginActivity.studentStatic.getStudentFacecode().trim().equals(""))
+                {
+                    Toast.makeText(getContext(),"没有进行人脸注册，不能进行考勤",Toast.LENGTH_SHORT).show();
+                }else {
+                    doQuery = true;
+                    sendMac = false;
+                    getCheckingAuthority();
+                    studentID = LoginActivity.studentStatic.getStudentId();
+                    studentFaceID = LoginActivity.studentStatic.getStudentFacecode();
+                }
                 break;
             case R.id.fragment_student_help_student_checking_button:
                 showInputDialog();
@@ -284,8 +290,9 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         //bluetoothAdapter.enable();
         if(bluetoothAdapter != null){
             if(!bluetoothAdapter.isEnabled()){
-                Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivity(intent);
+                Intent discoveryIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                discoveryIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,0);//设置持续时间（最多300秒）
+                startActivity(discoveryIntent);
             }
 //            Log.e("test_local",MacUtil.getBtAddressViaReflection());
             String macAddress = android.provider.Settings.Secure.getString(getActivity().getContentResolver(), "bluetooth_address");

@@ -142,6 +142,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="提交操作"
             android:textSize="17dp"
             android:background="@drawable/input_login"

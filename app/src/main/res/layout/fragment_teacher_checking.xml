@@ -155,7 +155,9 @@
             android:layout_marginTop="40dp"
             android:text="考勤"
             android:textSize="17dp"
-            android:background="#57add2"
+            android:background="@drawable/input_login"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/fragment_teacher_checking_start_checking"
             />
         <Button
@@ -163,9 +165,11 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="课堂反馈"
             android:textSize="17dp"
-            android:background="#6ab64e"
+            android:background="@drawable/green_button"
             />
     </LinearLayout>
 

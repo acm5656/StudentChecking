@@ -20,6 +20,7 @@ import com.example.checkingsystem.entity.TeacherCourseTimeTable;
 import com.example.checkingsystem.net.OpenCheckingNet;
 import com.example.checkingsystem.teacher.activity.TeacherCheckingActivity;
 
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,8 +106,10 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
         {
             case R.id.fragment_teacher_checking_start_checking:
                 if(!bluetoothAdapter.isEnabled()){
-                    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivity(intent);
+                    Intent discoveryIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                    discoveryIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,0);//设置持续时间（最多300秒）
+                    startActivity(discoveryIntent);
+
                 }
 
                 if(Build.VERSION.SDK_INT >= 23) {
@@ -127,5 +130,19 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    public void setDiscoverableTimeout(int timeout) {
+        BluetoothAdapter adapter=BluetoothAdapter.getDefaultAdapter();
+        try {
+            Method setDiscoverableTimeout = BluetoothAdapter.class.getMethod("setDiscoverableTimeout", int.class);
+            setDiscoverableTimeout.setAccessible(true);
+            Method setScanMode =BluetoothAdapter.class.getMethod("setScanMode", int.class,int.class);
+            setScanMode.setAccessible(true);
+
+            setDiscoverableTimeout.invoke(adapter, timeout);
+            setScanMode.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE,timeout);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

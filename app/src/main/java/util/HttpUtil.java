@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class HttpUtil {
 
-    public static String urlIp="http://192.168.191.1:80/";
+    public static String urlIp="http://123.206.175.47:80/";
     public static final int CONTENT_TYPE_IS_APPLICATION_JSON = 1;
     public static final int NO_STATUS = 0;
 
@@ -54,6 +54,8 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
+                        Log.e("test",e.getMessage());
+                        Log.e("test",e.toString());
                         listener.onError(e);
                     }
 

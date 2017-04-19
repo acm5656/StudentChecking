@@ -62,12 +62,14 @@ public class TeacherCheckingStudentAttendanceList extends AppCompatActivity {
                         studentItem.setStudentNo(stu.getStudentNo());
                         for(AttendanceItem attendanceItem:resultObjAtteantanceItem.getData()) {
                             if(attendanceItem.getCourseAttendanceItemStudentId().equals(stu.getStudentId())) {
-                                if(attendanceItem.getCourseAttendanceItemResult().equals("leaved"))
-                                studentItem.setStudentState("请假");
+                                if(attendanceItem.getCourseAttendanceItemResult().equals("leaved")) {
+                                    studentItem.setStudentState("请假");
+                                }
                             }
                             if(attendanceItem.getCourseAttendanceItemStudentId().equals(stu.getStudentId())) {
-                                if(attendanceItem.getCourseAttendanceItemResult().equals("success"))
+                                if(attendanceItem.getCourseAttendanceItemStatus().equals("success")) {
                                     studentItem.setStudentState("考勤成功");
+                                }
                             }
 
                         }

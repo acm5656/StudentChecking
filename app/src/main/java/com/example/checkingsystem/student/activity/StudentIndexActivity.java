@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +28,22 @@ import util.ActivityColectorUtil;
 public class StudentIndexActivity extends AppCompatActivity implements View.OnClickListener,ChooseWeekFragment.CallBackValue {
 
     private ViewPager viewPager;
-    private TextView studentIndexStudy;
-    private TextView studentIndexInquire;
-    private TextView studentIndexMine;
+
+    private TextView studentIndexStudyTextView;
+    private TextView studentIndexInquireTextView;
+    private TextView studentIndexMineTextView;
+
+    private ImageView studentIndexStudyImageView;
+    private ImageView studentIndexInquireImageView;
+    private ImageView studentIndexMineImageView;
+
+    private LinearLayout studentIndexStudyLayout;
+    private LinearLayout studentIndexInquireLayout;
+    private LinearLayout studentIndexMineLayout;
+
+    private ImageView studentIndexPullImageView;
+
+
     private TextView studentIndexChooseWeek;
     public String week = "1";
     StudentMineFragment studentMineFragment;
@@ -66,9 +81,9 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         studentIndexChooseWeek.setText("课表");
         studentIndexChooseWeek.setOnClickListener(this);
         viewPager.setCurrentItem(0);
-        studentIndexMine.setOnClickListener(this);
-        studentIndexInquire.setOnClickListener(this);
-        studentIndexStudy.setOnClickListener(this);
+        studentIndexMineLayout.setOnClickListener(this);
+        studentIndexInquireLayout.setOnClickListener(this);
+        studentIndexStudyLayout.setOnClickListener(this);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -83,32 +98,63 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                     case 0:
                         viewPager.setCurrentItem(0);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            studentIndexMine.setTextAppearance(R.style.unClickText);
-                            studentIndexStudy.setTextAppearance(R.style.OnClickText);
-                            studentIndexInquire.setTextAppearance(R.style.unClickText);
-                            studentIndexChooseWeek.setText("课表");
-                            studentIndexChooseWeek.setOnClickListener(StudentIndexActivity.this);
+                            studentIndexMineTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(R.style.OnClickText);
+                            studentIndexInquireTextView.setTextAppearance(R.style.unClickText);
+                        }else {
+                            studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                            studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
+
+                        studentIndexMineImageView.setImageResource(R.drawable.un_mine);
+                        studentIndexStudyImageView.setImageResource(R.drawable.schedule);
+                        studentIndexInquireImageView.setImageResource(R.drawable.un_query);
+                        studentIndexPullImageView.setImageResource(R.drawable.pull);
+                        studentIndexChooseWeek.setText("课表");
+                        studentIndexChooseWeek.setOnClickListener(StudentIndexActivity.this);
+
                         break;
                     case 1:
                         viewPager.setCurrentItem(1);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            studentIndexMine.setTextAppearance(R.style.unClickText);
-                            studentIndexStudy.setTextAppearance(R.style.unClickText);
-                            studentIndexInquire.setTextAppearance(R.style.OnClickText);
-                            studentIndexChooseWeek.setText("查询");
-                            studentIndexChooseWeek.setOnClickListener(null);
+                            studentIndexMineTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(R.style.OnClickText);
+                        }else {
+                            studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                         }
+
+
+                        studentIndexMineImageView.setImageResource(R.drawable.un_mine);
+                        studentIndexStudyImageView.setImageResource(R.drawable.un_schedule);
+                        studentIndexInquireImageView.setImageResource(R.drawable.query);
+                        studentIndexPullImageView.setImageBitmap(null);
+
+                        studentIndexChooseWeek.setText("查询");
+                        studentIndexChooseWeek.setOnClickListener(null);
                         break;
                     case 2:
                         viewPager.setCurrentItem(2);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            studentIndexMine.setTextAppearance(R.style.OnClickText);
-                            studentIndexStudy.setTextAppearance(R.style.unClickText);
-                            studentIndexInquire.setTextAppearance(R.style.unClickText);
-                            studentIndexChooseWeek.setText("我");
-                            studentIndexChooseWeek.setOnClickListener(null);
+                            studentIndexMineTextView.setTextAppearance(R.style.OnClickText);
+                            studentIndexStudyTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(R.style.unClickText);
+                        }else {
+                            studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                            studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
+
+                        studentIndexMineImageView.setImageResource(R.drawable.mine);
+                        studentIndexStudyImageView.setImageResource(R.drawable.un_schedule);
+                        studentIndexInquireImageView.setImageResource(R.drawable.un_query);
+                        studentIndexPullImageView.setImageBitmap(null);
+
+                        studentIndexChooseWeek.setText("我");
+                        studentIndexChooseWeek.setOnClickListener(null);
                         break;
                 }
 
@@ -125,9 +171,20 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     public void initUI()
     {
         viewPager = (ViewPager)findViewById(R.id.student_index_viewpager);
-        studentIndexStudy = (TextView)findViewById(R.id.student_index_study);
-        studentIndexMine = (TextView)findViewById(R.id.student_index_mine);
-        studentIndexInquire = (TextView)findViewById(R.id.student_index_inquire);
+        studentIndexStudyLayout = (LinearLayout) findViewById(R.id.student_index_study);
+        studentIndexMineLayout = (LinearLayout)findViewById(R.id.student_index_mine);
+        studentIndexInquireLayout = (LinearLayout)findViewById(R.id.student_index_inquire);
+
+        studentIndexStudyTextView = (TextView)findViewById(R.id.student_index_study_text_view);
+        studentIndexMineTextView = (TextView)findViewById(R.id.student_index_mine_text_view);
+        studentIndexInquireTextView = (TextView)findViewById(R.id.student_index_inquire_text_view);
+
+        studentIndexInquireImageView = (ImageView)findViewById(R.id.student_index_inquire_image_view);
+        studentIndexMineImageView = (ImageView)findViewById(R.id.student_index_mine_image_view);
+        studentIndexStudyImageView = (ImageView)findViewById(R.id.student_index_study_image_view);
+
+        studentIndexPullImageView = (ImageView)findViewById(R.id.activity_student_index_pull);
+
         studentIndexChooseWeek = (TextView)findViewById(R.id.student_index_choose_week);
     }
 

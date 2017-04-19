@@ -75,17 +75,16 @@
             android:background="@color/itemBackgroundColor"
             android:orientation="horizontal"
             android:id="@+id/relativeLayout_change_password"
+
             >
                 <ImageView
+
                     android:id="@+id/imageview_change_password"
                     android:layout_marginLeft="15dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/search_icon"
-                    android:layout_gravity="center"
+                    android:src="@drawable/change_password"
                     android:layout_alignParentLeft="true"
                     />
                 <TextView
@@ -99,6 +98,7 @@
                     android:layout_marginLeft="15dp"
                     />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -108,15 +108,13 @@
             android:id="@+id/relativeLayout_regist_face"
             >
                 <ImageView
+
                     android:id="@+id/imageview_regist_face"
                     android:layout_marginLeft="15dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/search_icon"
-                    android:layout_gravity="center"
+                    android:src="@drawable/face_regist"
                     android:layout_alignParentLeft="true"
                     />
                 <TextView
@@ -131,6 +129,7 @@
                     android:id="@+id/fragment_student_mine_regist_face"
                     />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -142,12 +141,10 @@
                 <ImageView
                     android:id="@+id/imageview_mine_info"
                     android:layout_marginLeft="15dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/search_icon"
+                    android:src="@drawable/alter"
                     android:layout_gravity="center"
                     android:layout_alignParentLeft="true"
                     />
@@ -167,10 +164,13 @@
             android:layout_marginTop="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="注销"
-            android:background="#fd6464"
+            android:background="@drawable/exit_button"
             android:textSize="16dp"
             android:id="@+id/fragment_student_mine_quit"
+
             />
 
 

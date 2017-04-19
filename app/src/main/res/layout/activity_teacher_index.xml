@@ -15,6 +15,13 @@
         android:background="@color/actionBarBackgroundColor"
         android:orientation="horizontal"
         >
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_teacher_index_pull"
+            android:src="@drawable/pull"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -24,6 +31,7 @@
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:paddingLeft="20dp"
+            android:layout_alignLeft="@id/activity_teacher_index_pull"
             />
     </RelativeLayout>
     <android.support.v4.view.ViewPager
@@ -43,38 +51,83 @@
         android:background="#fcfcfc"
         android:layout_marginTop="1sp"
         >
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="学习"
             android:layout_weight="1"
-            android:background="@drawable/bottom_button"
-            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical"
             android:id="@+id/teacher_index_study"
-            android:layout_margin="0dp"
-            android:padding="0dp"
-            style="@style/OnClickText"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/teacher_index_study_image_view"
+                android:layout_marginTop="10dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/schedule"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="学习"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/teacher_index_study_text_view"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                style="@style/OnClickText"
+                />
+         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="查询"
             android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
             android:id="@+id/teacher_index_inquire"
-            android:background="@drawable/bottom_button"
-            style="@style/unClickText"
-            />
-        <TextView
-            android:layout_width="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/teacher_index_inquire_image_view"
+                android:layout_marginTop="10dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/un_query"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查询"
+                android:id="@+id/teacher_index_inquire_text_view"
+                android:background="@drawable/bottom_button"
+                style="@style/unClickText"
+                />
+         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="我"
-            android:background="@drawable/bottom_button"
             android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
             android:id="@+id/teacher_index_mine"
-            style="@style/unClickText"
-            />
+            >
+            <ImageView
+                android:id="@+id/teacher_index_mine_image_view"
+                android:layout_marginTop="10dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/un_mine"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我"
+                android:background="@drawable/bottom_button"
+                android:id="@+id/teacher_index_mine_text_view"
+                style="@style/unClickText"
+                />
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 
