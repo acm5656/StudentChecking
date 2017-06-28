@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 /**
  * Created by eggyer on 2017/3/18.
  */
+
+//用来解析token传来数据的秘钥
 public class EncodeRuleProvider {
     public static String getRuleByTimestamp(Timestamp timestamp){
         String ruleStr = String.valueOf(timestamp.getTime());

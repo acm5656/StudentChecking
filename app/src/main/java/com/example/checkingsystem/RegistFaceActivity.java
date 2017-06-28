@@ -52,9 +52,11 @@ import util.ParseResult;
 import util.PathUtil;
 import util.SurfaceViewCircle;
 
+
+//注册人脸的活动
 public class RegistFaceActivity extends AppCompatActivity {
+    //显示小圆圈的surface
     private SurfaceViewCircle mPreviewSurface;
-    private SurfaceView mFaceSurface;
     private Camera mcamera;
 
     private int mCameraID = Camera.CameraInfo.CAMERA_FACING_FRONT;
@@ -86,19 +88,19 @@ public class RegistFaceActivity extends AppCompatActivity {
     private boolean isGetImage = false;
 
     private boolean isVerfiFace = false;
-
+    //存储照片的位图
     private Bitmap bmp = null;
+    //生成照片的名字
     private String name = null;
+    //注册的uuid
     private String uuid = null;
-
+    //上传照片对象后获取id后调用的接口
     HttpCallbackListener httpCallbackListenerPicture = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
             String data = (String) resultObj.getData();
-            Log.e("test","response:   "+response);
             if(resultObj.getMeta().getResult()) {
-                Log.e("test---","face----do");
                 StudentFacecode facecode = new StudentFacecode();
                 facecode.setStudentFacecodeStuId(LoginActivity.studentStatic.getStudentId());
                 facecode.setStudentFacecodePicId(data);
@@ -119,11 +121,11 @@ public class RegistFaceActivity extends AppCompatActivity {
 
         }
     };
+    //上传照片对象成功后调用的
     HttpCallbackListener httpCallbackListenerFaceCode = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
-            Log.e("test---",response);
             if(resultObj.getMeta().getResult()) {
                 LoginActivity.studentStatic.setStudentFacecode(uuid);
                 Intent intent = new Intent(RegistFaceActivity.this, StudentIndexActivity.class);
@@ -138,11 +140,10 @@ public class RegistFaceActivity extends AppCompatActivity {
 
         @Override
         public void onError(Exception e) {
-            Log.e("test---",e.getMessage());
-            Log.e("test---",e.toString());
+
         }
     };
-
+    //人脸注册上传照片结束调用的接口
     private RequestListener mRequestListener = new RequestListener() {
 
         @Override
@@ -178,14 +179,11 @@ public class RegistFaceActivity extends AppCompatActivity {
         @Override
         public void onCompleted(SpeechError error) {
 
-            Log.e("RegistFaceActivity---","------------onCompleted");
             if(error == null)
             {
-                Log.e("RegistFaceActivity---","------------error null");
             }
             else {
                 isVerfiFace = false;
-                Log.e("RegistFaceActivity---",new Integer(error.getErrorCode()).toString());
             }
         }
     };
@@ -197,7 +195,6 @@ public class RegistFaceActivity extends AppCompatActivity {
         ActivityColectorUtil.addActivity(this);
         uuid = "a"+UUID.randomUUID().toString().substring(0,15);
         uuid = uuid.replaceAll("-","_");
-        Log.e("test","uuid-----"+uuid);
         SpeechUtility.createUtility(RegistFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
@@ -289,14 +286,12 @@ public class RegistFaceActivity extends AppCompatActivity {
                 if(!isGetImage&&(!isVerfiFace))
                 {
                     System.arraycopy(data, 0, nv21, 0, data.length);
-                    Log.e("RegistFaceActivity---","---------------获取图像");
                     isGetImage = true;
                 }
 
                 if(isGetImage&&(!isVerfiFace))
                 {
 
-                    Log.e("RegistFaceActivity---","---------------获取图像成功");
                     Camera.Size size = mcamera.getParameters().getPreviewSize();
                         YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
                                 size.height, null);
@@ -315,7 +310,7 @@ public class RegistFaceActivity extends AppCompatActivity {
                             byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
 
                             String result = mFaceDetector.detectARGB(bmp);
-                            Log.e("RegistFaceActivity---", "result:"+result);
+
                             FaceRect[] faceRect = ParseResult.parseResult(result);
                             if(faceRect.length!=0) {
                                 isVerfiFace = true;

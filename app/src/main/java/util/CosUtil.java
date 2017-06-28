@@ -28,22 +28,27 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class CosUtil {
-
+    //对象存储技术需要用到的参数
     private static String appID = "1252388599";
     private static String peristenceID = null;
     private static String secretID = "AKIDxjHbhYKeqoX2HGHThfePvBCyX2Vw3VS9";
     private static String secretKey = "bx40hEXbPyIPIxObaKq8C1cz83kCQQBL";
     private static String bucket = "checkingsystem";
+
+
     private static String cosPath;
 
     private static final String HMAC_SHA1 = "HmacSHA1";
     private static final String PATH_DELIMITER = "/";
-    public static String urlFace = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
+    //人脸存储路径上传给服务器的路径
+    public static String urlFace = "http://checkingsystem-1252388599.costj.myqcloud.com/UserImage/";
+    //头像存储路径上传给服务器的路径
     public static String urlHeaderImage = "http://checkingsystem-1252388599.costj.myqcloud.com/123/";
+    //人脸存储路径上传给腾讯对象存储的路径
     public static String faceCosPath = "UserImage";
     public static String headerImageCosPath = "123";
 
-
+    //上传的函数
     public static void upLoad(String cosPathInput,String path, String srcName, Context context)
     {
         COSClientConfig cosClientConfig = new COSClientConfig();

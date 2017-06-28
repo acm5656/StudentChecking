@@ -19,12 +19,13 @@ import java.io.IOException;
  */
 
 public class BitmapUtil {
-
+    //bitmap转换为byte的函数
     public static byte[] Bitmap2Bytes(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
     }
+    //图片旋转，degree是角度-代表逆坐标旋转，+代表顺时针旋转
     public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
         Bitmap returnBm = null;
         Matrix matrix = new Matrix();
@@ -43,6 +44,7 @@ public class BitmapUtil {
         return returnBm;
     }
 
+    //压缩图片，w代表宽度压缩后的宽度，h代表高度压缩后高度
     public static Bitmap zoomBitmap(Bitmap bitmap, int w, int h){
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -55,46 +57,10 @@ public class BitmapUtil {
         return newBmp;
     }
 
-    public Bitmap adjustPhotoRotation(Bitmap bitmap, int orientationDegree) {
 
-
-        Matrix matrix = new Matrix();
-        matrix.setRotate(orientationDegree, (float) bitmap.getWidth() / 2,
-                (float) bitmap.getHeight() / 2);
-        float targetX, targetY;
-        if (orientationDegree == 90) {
-            targetX = bitmap.getHeight();
-            targetY = 0;
-        } else {
-            targetX = bitmap.getHeight();
-            targetY = bitmap.getWidth();
-        }
-
-
-        final float[] values = new float[9];
-        matrix.getValues(values);
-
-
-        float x1 = values[Matrix.MTRANS_X];
-        float y1 = values[Matrix.MTRANS_Y];
-
-
-        matrix.postTranslate(targetX - x1, targetY - y1);
-
-
-        Bitmap canvasBitmap = Bitmap.createBitmap(bitmap.getHeight(), bitmap.getWidth(),
-                Bitmap.Config.ARGB_8888);
-
-
-        Paint paint = new Paint();
-        Canvas canvas = new Canvas(canvasBitmap);
-        canvas.drawBitmap(bitmap, matrix, paint);
-
-
-        return canvasBitmap;
-    }
-
+    //存储照片
     public static void saveMyBitmap(Bitmap mBitmap,String bitName)  {
+        //根目录+项目文件的路径
         File file = new File(Environment.getExternalStorageDirectory()+ LoginActivity.path);
         if(!file.exists())
         {

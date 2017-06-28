@@ -12,7 +12,7 @@ import android.view.SurfaceView;
 /**
  * Created by 那年.盛夏 on 2017/3/13.
  */
-
+//人脸识别的时候的界面，重写了surfaceview
 public class SurfaceViewCircle extends SurfaceView {
 
     public SurfaceViewCircle(Context context) {

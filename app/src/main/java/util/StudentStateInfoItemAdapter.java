@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by 那年.盛夏 on 2017/4/9.
  */
-
+//查询学生具体信息的item，用来考勤的时候显示学生的状态
 public class StudentStateInfoItemAdapter extends ArrayAdapter<TeacherCheckingStudentItem> {
     private int resourseID;
 

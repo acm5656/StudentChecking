@@ -18,23 +18,32 @@ import com.example.checkingsystem.net.RegistNet;
 import com.example.checkingsystem.net.SendVerifyCodeNet;
 
 public class RegistActivity extends AppCompatActivity implements View.OnClickListener {
-
+    //选择身份的控件
     private RadioGroup roleRadioGroup;
     private RadioButton radioButton;
+    //输入手机号的控件
     private EditText inputTel;
+    //输入密码的控件
     private EditText inputPassword;
+    //输入确认密码的控件
     private EditText inputCheckingPassword;
+    //输入验证码的控件
     private EditText verifyCodeEdit;
+    //获取验证码的控件
     private Button getVerifyCode;
+    //提交注册的控件
     private Button submit;
+    //临时存放的上述输入的资源
     private String tel;
     private String password;
     private String checkingPassword;
     private String roleStr;
     private String verifyStr;
+    //同修改密码的一样，判断是否获取验证码的常量
     public static final int IS_GET_VERIFYCODE = 1;
     public static final int IS_AFTER_TIME = 2;
     Thread thread;
+    //同修改密码逻辑相同，不再陈述
     Handler handler = new Handler()
     {
         @Override

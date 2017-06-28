@@ -3,7 +3,7 @@ package util;
 /**
  * Created by 那年.盛夏 on 2017/3/28.
  */
-
+//用来存储各种url，避免hardcode
 public class PathUtil {
     public static final String STUDENT_FACE_CODE = "api/attendance-provider-user/studentFacecode";
     public static final String STUDENT_REGIST = "api/attendance-provider-user/student";
