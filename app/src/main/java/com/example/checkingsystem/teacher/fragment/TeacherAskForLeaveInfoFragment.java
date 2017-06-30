@@ -1,7 +1,6 @@
 package com.example.checkingsystem.teacher.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +29,7 @@ import java.util.List;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.PathUtil;
-import util.StudentStateInfoItemAdapter;
+import com.example.checkingsystem.adapter.StudentStateInfoItemAdapter;
 
 public class TeacherAskForLeaveInfoFragment extends Fragment {
     public final static int RIGHT = 1;
@@ -100,13 +99,11 @@ public class TeacherAskForLeaveInfoFragment extends Fragment {
     HttpCallbackListener httpCallbackListenerGetStudentID = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
-            Log.e("get","---------4");
             try {
                 resultObjID = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<String>>>(){});
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.e("get","---------5");
             if(resultObjID.getMeta().getResult())
             {
                 GetStudentInfoByID getStudentInfoByID = new GetStudentInfoByID();
@@ -135,7 +132,6 @@ public class TeacherAskForLeaveInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("test","--------------1");
         view = inflater.inflate(R.layout.fragment_teacher_ask_for_leave_info, container, false);
         progressDialog = ProgressDialog.show(getActivity(),"查询请假信息", "请稍等", true, false);
         initItem();
@@ -146,11 +142,9 @@ public class TeacherAskForLeaveInfoFragment extends Fragment {
 
     private void initItem() {
         listView = (ListView) view.findViewById(R.id.teacher_ask_for_leave_info_listview);
-        Log.e("test","--------------2");
         String courseID = ((TeacherCheckingActivity)getActivity()).courseID;
         String path = HttpUtil.urlIp+ PathUtil.TEACHER_GET_STUDENT_ASK_FOR_LEAVE;
         String data = "courseTimeId="+courseID;
-        Log.e("test","--------------3");
         HttpUtil.sendHttpGetRequest(path+"?"+data,httpCallbackListenerGetStudentID);
 
 

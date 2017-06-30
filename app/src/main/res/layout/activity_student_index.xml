@@ -16,14 +16,8 @@
         android:background="@color/actionBarBackgroundColor"
         android:orientation="horizontal"
         >
-        <ImageView
-            android:layout_marginLeft="30dp"
-            android:layout_width="13dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_student_index_pull"
-            android:src="@drawable/pull"
-            />
         <TextView
+            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/student_index_choose_week"
@@ -31,8 +25,15 @@
             android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:paddingLeft="20dp"
-            android:layout_alignLeft="@id/activity_student_index_pull"
+            />
+        <ImageView
+            android:id="@+id/acivity_student_index_add"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/add"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="20dp"
             />
     </RelativeLayout>
 

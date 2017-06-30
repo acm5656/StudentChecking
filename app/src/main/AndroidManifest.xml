@@ -51,7 +51,9 @@
         </activity>
         <activity android:name=".teacher.activity.TeacherChangeInfoActivity">
         </activity>
-        <activity android:name=".teacher.activity.TeacherCheckingStudentAttendanceList">
+        <activity android:name=".teacher.activity.TeacherCheckingStudentAttendanceListActivity">
+        </activity>
+        <activity android:name=".teacher.activity.TeacherAddCourseActivity">
         </activity>
     </application>
 

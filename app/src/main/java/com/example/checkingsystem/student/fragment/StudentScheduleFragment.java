@@ -269,18 +269,14 @@ public class StudentScheduleFragment extends Fragment implements View.OnClickLis
     }
     private String getCouorseID(String weekTime, String day, String classTime) {
         for(StudentCourseTimeTable studentCourseTimeTable:LoginActivity.studentCourseTimeTableList) {
-            Log.e("test",weekTime+" "+day+" "+classTime);
             if(studentCourseTimeTable.getCourseTimeWeek().equals(new Integer(weekTime)))
             {
                 String classTimestudent = getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
-                Log.e("test2",studentCourseTimeTable.getCourseTimeWeek()+" "+studentCourseTimeTable.getCourseTimeDay()+" "+classTimestudent);
                 if(classTimestudent.equals(classTime))
                 {
-                    Log.e("test",studentCourseTimeTable.getCourseTimeId()+"");
                     if(studentCourseTimeTable.getCourseTimeDay().equals(new Integer(day)))
                     {
 
-                        Log.e("test",studentCourseTimeTable.getCourseTimeId()+"");
                         return studentCourseTimeTable.getCourseTimeId();
                     }
                 }

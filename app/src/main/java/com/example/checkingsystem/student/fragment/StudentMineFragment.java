@@ -99,10 +99,6 @@ public class StudentMineFragment extends Fragment {
         studentName = (TextView)view.findViewById(R.id.fragment_student_mine_name);
         studentName.setText("姓名："+LoginActivity.studentStatic.getStudentName());
         headImageView = (CircleImageView) view.findViewById(R.id.fragment_student_mine_head_picture);
-        if(headImageView==null)
-        {
-            Log.e("test","headImageView is null");
-        }
         if(LoginActivity.headPictureBitmap!=null)
         {
             headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
@@ -120,7 +116,6 @@ public class StudentMineFragment extends Fragment {
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("test","oncreate");
     }
 
     @Override
@@ -128,7 +123,6 @@ public class StudentMineFragment extends Fragment {
         super.onResume();
         if(LoginActivity.headPictureBitmap!=null)
         {
-            Log.e("test","----------1");
             headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         }
     }
@@ -142,7 +136,6 @@ public class StudentMineFragment extends Fragment {
             {
                 case FACE_REGIST_REQUEST_CODE:
                     dataStr = data.getStringExtra("data_return");
-                    Log.e("toast","---------------2");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
                     break;
                 case CHANGE_INFO_REQUEST_CODE:

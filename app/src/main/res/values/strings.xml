@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">一考通</string>
+    <string name="app_name">到了吗</string>
     <string name="enter_username">学号</string>
     <string name="enter_password">密码</string>
     <string name="submit">登录</string>

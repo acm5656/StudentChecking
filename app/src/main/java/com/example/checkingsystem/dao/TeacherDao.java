@@ -33,7 +33,7 @@ public class TeacherDao {
     {
         try {
             dao.create(teacher);
-            Log.e("teacherADDdao",teacher.getTeacherId()+"");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,15 +44,11 @@ public class TeacherDao {
         List<Teacher> teacherList = null;
         try {
             teacherList = dao.queryForAll();
-            for(int i = 0 ; i<teacherList.size() ; i++) {
-                Log.e("dao1",teacherList.get(i).toString());
-            }
+
             dao.delete(teacher);
-            Log.e("daoTeacher",teacher.toString());
+
             teacherList = dao.queryForAll();
-            for(int i = 0 ; i<teacherList.size() ; i++) {
-                Log.e("dao1",teacherList.get(i).toString());
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -31,4 +31,7 @@ public class PathUtil {
     public static final String GET_STUDENT_INFO_BY_STUDENT_ID = "api/attendance-provider-user/student/students/no/name";
     public static final String TEACHER_GET_COURSE_TIME_INFO = "api/attendance-consumer-eduaffairs/courseTime/teacher/courseTable";
     public static final String STUDENT_GET_COURSE_TIME_INFO = "api/attendance-consumer-eduaffairs/courseTime/student/courseTable";
+    public static final String TEACHER_ADD_COURSE = "api/attendance-consumer-eduaffairs/virtualCourse";
+    public static final String STUDENT_ADD_COURSE = "api/attendance-consumer-eduaffairs/virtualGrade";
+
 }

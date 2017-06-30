@@ -2,16 +2,13 @@ package com.example.checkingsystem.net;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Path;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentVo;
-import com.example.checkingsystem.entity.Teacher;
 import com.example.checkingsystem.entity.TeacherVo;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
@@ -61,25 +58,19 @@ public class LoginNet {
                             Long longTime = new Long(resultObj.getData().getTimestamp());
 
                             Date date = new Date(longTime);
-
-                            Log.e("test","----"+msg.obj.toString());
-                            Log.e("test","----"+EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())));
                             String token = null;
                             try {
                                 token = AES.decode(
                                         EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())),
                                         resultObj.getData().getUuid());
                             } catch (Exception e) {
-                                Log.e("test----",e.getMessage());
                                 e.printStackTrace();
 
                             }
-                            Log.e("test","----"+token);
                             LoginActivity.token = token;
                             LoginActivity.studentStatic.setStudentPassword(token);
-                            Log.e("test--",LoginActivity.studentStatic.toString());
                             LoginActivity.studentDao.addStudent(LoginActivity.studentStatic);
-                            GetPictureNet.getPicture(LoginActivity.studentStatic.getStudentHeadimageUrl());
+                            GetHeadPictureNet.getPicture(LoginActivity.studentStatic.getStudentHeadimageUrl());
                             GetCourseTimeInfoNet.studentGetCourseTimeInfo();
                             Intent intent = new Intent(activity, StudentIndexActivity.class);
                             activity.startActivity(intent);
@@ -102,24 +93,20 @@ public class LoginNet {
 
                             Date date = new Date(longTime);
 
-                            Log.e("test","----"+msg.obj.toString());
-                            Log.e("test","----"+EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())));
                             String token = null;
                             try {
                                 token = AES.decode(
                                         EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())),
                                         resultObj.getData().getUuid());
                             } catch (Exception e) {
-                                Log.e("test----",e.getMessage());
                                 e.printStackTrace();
 
                             }
-                            Log.e("test","----"+token);
+
                             LoginActivity.token = token;
                             LoginActivity.teacherStatic.setTeacherPassword(token);
-                            Log.e("test--",LoginActivity.studentStatic.toString());
                             LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
-                            GetPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
+                            GetHeadPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
                             GetCourseTimeInfoNet.teacherGetCourseTimeInfo();
                             Intent intent = new Intent(activity, TeacherIndexActivity.class);
                             activity.startActivity(intent);
@@ -128,6 +115,13 @@ public class LoginNet {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
                         }
 
+                    }
+                    if(LoginActivity.roleStr.equals("导员"))
+                    {
+                        //登录成功的操作
+                        /*
+                        缺
+                         */
                     }
                     break;
                 case FALSE:
@@ -152,13 +146,12 @@ public class LoginNet {
             handler.sendMessage(message);
         }
     };
-    public void studentSendInfo(Activity activity, String username, String password)
+    public void studentLogin(Activity activity, String username, String password)
     {
         this.activity = activity;
         final String address = HttpUtil.urlIp+ PathUtil.STUDENT_LOGIN;
 
         String data = loginEncode(address,username,password);
-        Log.e("sendInfo","-----------1");
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 
@@ -168,8 +161,13 @@ public class LoginNet {
         final String address = HttpUtil.urlIp + PathUtil.TEACHER_LOGIN;
         String data = loginEncode(address,username,password);
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
-
-
+    }
+    public void assistantLogin(Activity activity,String username,String password)
+    {
+        this.activity = activity;
+        final String address = HttpUtil.urlIp;
+        String data = loginEncode(address,username,password);
+        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 
 
@@ -183,7 +181,6 @@ public class LoginNet {
         String sign = Md5Util.EncoderByMd5(urlCon);
 
         String urlFinal = param+"&sign="+sign;
-        Log.e("netData",urlFinal);
 
         return urlFinal;
     }

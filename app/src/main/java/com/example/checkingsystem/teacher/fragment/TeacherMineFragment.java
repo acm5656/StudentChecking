@@ -67,11 +67,7 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         schoolNumber.setText(LoginActivity.teacherStatic.getTeacherSchoolUsername());
         if(LoginActivity.teacherStatic.getTeacherName()!=null&&name!=null) {
             name.setText(LoginActivity.teacherStatic.getTeacherName());
-        }else
-        {
-            Log.e("test","is null");
         }
-
 
 
     }

@@ -33,7 +33,6 @@ public class RegistNet {
                 case RESULT_TRUE:
                     ResultObj resultObj = ChangeTypeUtil.getResultObj(msg.obj.toString());
                     if(resultObj.getMeta().getResult()) {
-                        Log.e("test", "-------------regist----do1");
                         Intent intent = new Intent(activity, LoginActivity.class);
                         activity.setResult(Activity.RESULT_OK, intent);
                         activity.finish();

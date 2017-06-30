@@ -106,7 +106,6 @@ public class RegistFaceActivity extends AppCompatActivity {
                 facecode.setStudentFacecodePicId(data);
                 facecode.setStudentFacecode(uuid);
                 String path = HttpUtil.urlIp+ PathUtil.STUDENT_FACE_CODE;
-                Log.e("test---","data：  "+ChangeTypeUtil.getJSONString(facecode));
                 HttpUtil.sendHttpPostRequest(
                         path,
                         httpCallbackListenerFaceCode,

@@ -3,6 +3,7 @@
     <string-array name="roles">
         <item>教师</item>
         <item>学生</item>
+        <item>导员</item>
     </string-array>
 
 </resources>

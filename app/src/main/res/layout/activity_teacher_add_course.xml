@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionBarBackgroundColor"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="添加课程"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            />
+
+    </RelativeLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/backgroundColor"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+
+                    android:text="      请在此处编辑课程信息，在提交过后会生成一个课程编号供您提交给学生从而加入课程。"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+                <ImageView
+                    android:id="@+id/activity_teacher_add_course_img"
+                    android:src="@drawable/add_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:textSize="17dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="点击图标，选择课程图片"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+                <TextView
+                    android:textSize="17dp"
+                    android:gravity="center"
+                    android:text="课程名称"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/activity_teacher_add_course_name"
+                    android:background="@drawable/input_change_password"
+                    android:textColor="#000000"
+                    android:textSize="17dp"
+                    android:layout_weight="3"
+                    android:hint="输入课程名称"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="#6c6363"
+                android:layout_width="match_parent"
+                android:layout_height="1px">
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+                <TextView
+                    android:textSize="17dp"
+                    android:gravity="center"
+                    android:text="课程要求"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/activity_teacher_add_course_ask"
+                    android:background="@drawable/input_change_password"
+                    android:textColor="#000000"
+                    android:textSize="17dp"
+                    android:layout_weight="3"
+                    android:hint="输入课程要求"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="#6c6363"
+                android:layout_width="match_parent"
+                android:layout_height="1px">
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+                <TextView
+                    android:textSize="17dp"
+                    android:gravity="center"
+                    android:text="课程安排"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/activity_teacher_add_course_schedule"
+                    android:background="@drawable/input_change_password"
+                    android:textColor="#000000"
+                    android:textSize="17dp"
+                    android:layout_weight="3"
+                    android:hint="输入课程安排"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:background="#6c6363"
+                android:layout_width="match_parent"
+                android:layout_height="1px">
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+                <TextView
+                    android:textSize="17dp"
+                    android:gravity="center"
+                    android:text="考试安排"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/activity_teacher_add_course_exam"
+                    android:background="@drawable/input_change_password"
+                    android:textColor="#000000"
+                    android:textSize="17dp"
+                    android:layout_weight="3"
+                    android:hint="输入考试安排"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                ></LinearLayout>
+
+            <Button
+                android:id="@+id/activity_teacher_add_course_submit_button"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/input_login"
+                android:text="开课"
+                android:textSize="17dp"
+                android:textColor="#ffffff"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

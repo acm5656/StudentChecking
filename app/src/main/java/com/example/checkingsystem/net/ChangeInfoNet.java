@@ -46,7 +46,6 @@ public class ChangeInfoNet{
         @Override
         public void onFinish(String response) {
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
-            Log.e("test",resultObj.getMeta().getResult()+"");
             if(resultObj.getMeta().getResult())
             {
                 Intent intent = null;

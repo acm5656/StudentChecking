@@ -2,6 +2,8 @@ package util;
 
 import android.util.Log;
 
+import com.tencent.cos.utils.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -15,7 +17,9 @@ import java.net.URL;
 
 public class HttpUtil {
 
-    public static String urlIp="http://123.206.175.47:80/";
+//    public static String urlIp="http://123.206.175.47:80/";
+//    public static String urlIp="http://localhost:80/";
+    public static String urlIp="http://192.168.43.158/";
     public static final int CONTENT_TYPE_IS_APPLICATION_JSON = 1;
     public static final int NO_STATUS = 0;
 
@@ -83,7 +87,8 @@ public class HttpUtil {
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
                     if(status==CONTENT_TYPE_IS_APPLICATION_JSON)
-                        connection.setRequestProperty("Content-Type","application/json");
+                        connection.setRequestProperty("Content-Type","application/json:charset=utf-8");
+
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
                     connection.setConnectTimeout(8000);

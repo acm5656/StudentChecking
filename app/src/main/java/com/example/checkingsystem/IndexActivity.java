@@ -44,14 +44,12 @@ public class IndexActivity extends AppCompatActivity {
         List<Student> studentList = studentDao.queryStudent();
         if(studentList.size()!=0)
         {
-            Log.e("mainActivity","------1");
             student = studentList.get(0);
             roleStr = "学生";
         }
         List<Teacher> teacherList = teacherDao.queryTeacher();
         if(teacherList.size()!=0)
         {
-            Log.e("mainActivity","------2");
             teacher = teacherList.get(0);
             roleStr = "教师";
         }

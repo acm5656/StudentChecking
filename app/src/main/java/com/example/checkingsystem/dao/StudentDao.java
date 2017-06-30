@@ -45,20 +45,8 @@ public class StudentDao {
         List<Student> studentList = new ArrayList<>();
         try {
             studentList = studentDao.queryForAll();
-            for (Student student1:studentList)
-            {
-                Log.e("studentDao1--",student1.toString());
-            }
             studentDao.delete(student);
             studentList = studentDao.queryForAll();
-            if(studentList.size()==0)
-            {
-                Log.e("studentDao2--","null");
-            }
-            for (Student student1:studentList)
-            {
-                Log.e("studentDao2--",student1.toString());
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -157,13 +157,8 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         @Override
         public void onFinish(String response) {
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
-            if(resultObj.getMeta()==null)
-                Log.e("test","meta = null");
-            if(resultObj.getMeta().getResult()==null)
-                Log.e("test","result = null");
 
             if(resultObj.getMeta().getResult()) {
-                Log.e("test","进入考勤");
                 Message message = new Message();
                 message.what = TRUE;
                 handler.sendMessage(message);
@@ -176,7 +171,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         @Override
         public void onError(Exception e) {
             sendMac = false;
-            Log.e("test","error");
         }
     };
 
@@ -195,7 +189,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
                     pairedMaclist.add(device.getAddress());
                 }
 
-                Log.e("test",device.getAddress()+"/"+intent.getExtras().getShort(BluetoothDevice.EXTRA_RSSI));
 //                list.setAdapter(mArrayAdapter);
             }
         }
@@ -268,7 +261,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
             case FACE_VERIFY_RESULT:
                 if(resultCode == getActivity().RESULT_OK) {
                     String dataStr = data.getStringExtra("data_return");
-                    Log.e("toast","---------------2");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
                 }
 
@@ -283,7 +275,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         intent.putExtra("studentID",studentID);
         intent.putExtra("mac",macAddress);
         intent.putExtra("studentFaceID",studentFaceID);
-        Log.e("test",studentID+" "+studentFaceID);
         startActivityForResult(intent,FACE_VERIFY_RESULT);
     }
     private void openBluetooth() {
@@ -296,8 +287,6 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
             }
 //            Log.e("test_local",MacUtil.getBtAddressViaReflection());
             String macAddress = android.provider.Settings.Secure.getString(getActivity().getContentResolver(), "bluetooth_address");
-            Log.e("test_local",macAddress);
-            Log.e("test_local",bluetoothAdapter.getName());
             //得到所有已经被对的蓝牙适配器对象
             Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
 

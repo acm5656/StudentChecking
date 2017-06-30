@@ -33,9 +33,8 @@ import java.util.List;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.PathUtil;
-import util.StudentStateInfoItemAdapter;
 
-public class TeacherCheckingStudentAttendanceList extends AppCompatActivity {
+public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActivity {
 
     public final static int RIGHT = 1;
     public final static int FALSE = 0;
@@ -109,13 +108,11 @@ public class TeacherCheckingStudentAttendanceList extends AppCompatActivity {
     HttpCallbackListener httpCallbackListenerQueryStudentID = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
-            Log.e("get","---------4");
             try {
                 resultObjAtteantanceItem = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<AttendanceItem>>>(){});
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.e("get","---------5");
             if(resultObjAtteantanceItem.getMeta().getResult())
             {
 
@@ -123,7 +120,6 @@ public class TeacherCheckingStudentAttendanceList extends AppCompatActivity {
                 List<String> list = new ArrayList<>();
                 for(AttendanceItem attendanceItem : resultObjAtteantanceItem.getData())
                 {
-                    Log.e("test",attendanceItem.getCourseAttendanceItemResult());
                     list.add(attendanceItem.getCourseAttendanceItemStudentId());
                 }
                 getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,list);

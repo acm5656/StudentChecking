@@ -43,7 +43,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             {
                 //第一个是用来显示点击获取验证码后的读秒
                 case IS_GET_VERIFYCODE:
-                    Log.e("test","---------------do");
                     getVerifyCode.setText((60-new Integer(msg.obj.toString()))+"s");
                     break;
                 //用来重新获取点击事件
@@ -150,7 +149,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 long endTime = System.currentTimeMillis();
                 //用来判断是否达到60秒的循环
                 while (((endTime - beginTime) / 1000) < 60) {
-                    Log.e("test", "--------do1");
                     endTime = System.currentTimeMillis();
                     long result = (endTime - beginTime) / 1000;
                     //发送消息，进行倒计时处理

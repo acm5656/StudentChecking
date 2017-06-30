@@ -51,7 +51,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
             switch (msg.what)
             {
                 case IS_GET_VERIFYCODE:
-                    Log.e("test","---------------do");
                     getVerifyCode.setText((60-new Integer(msg.obj.toString()))+"s");
                     break;
                 case IS_AFTER_TIME:
@@ -91,7 +90,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         roleStr = ((RadioButton)findViewById(roleRadioGroup.getCheckedRadioButtonId())).getText().toString();
-        Log.e("test","--------"+roleStr);
         switch (v.getId())
         {
             case R.id.activity_regist_get_verifycode_button:
@@ -162,7 +160,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 long beginTime = System.currentTimeMillis();
                 long endTime = System.currentTimeMillis();
                 while (((endTime - beginTime) / 1000) < 60) {
-                    Log.e("test", "--------do1");
                     endTime = System.currentTimeMillis();
                     long result = (endTime - beginTime) / 1000;
                     Message message = new Message();

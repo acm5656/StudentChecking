@@ -6,18 +6,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.checkingsystem.entity.Attendance;
 import com.example.checkingsystem.entity.ResultObj;
-import com.example.checkingsystem.entity.Student;
-import com.example.checkingsystem.teacher.activity.TeacherCheckingStudentAttendanceList;
+import com.example.checkingsystem.teacher.activity.TeacherCheckingStudentAttendanceListActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-import util.ChangeTypeUtil;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.PathUtil;
@@ -33,7 +30,7 @@ public class OpenCheckingNet {
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            Intent intent = new Intent(activity, TeacherCheckingStudentAttendanceList.class);
+            Intent intent = new Intent(activity, TeacherCheckingStudentAttendanceListActivity.class);
             String attentanceID = resultObj.getData().getCourseAttendanceId();
             intent.putExtra("attentanceID",attentanceID);
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -52,7 +49,6 @@ public class OpenCheckingNet {
     private HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
-            Log.e("test",response);
             try {
                 resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<Attendance>>() {});
             } catch (IOException e) {

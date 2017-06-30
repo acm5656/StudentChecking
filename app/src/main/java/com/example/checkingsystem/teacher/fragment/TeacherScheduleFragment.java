@@ -175,8 +175,6 @@ public class TeacherScheduleFragment extends Fragment implements View.OnClickLis
         String teacherWeek = ((TeacherIndexActivity)getActivity()).weekTime;
         Intent intent = new Intent(getActivity(), TeacherCheckingActivity.class);
         String courseID = null;
-        Log.e("test","-----"+v.getId());
-        Log.e("test","-----"+teacherWeek);
         switch (v.getId())
         {
             case R.id.teacherWeekOneClassOne:
@@ -273,18 +271,14 @@ public class TeacherScheduleFragment extends Fragment implements View.OnClickLis
     }
     private String getCouorseID(String weekTime, String day, String classTime) {
         for(TeacherCourseTimeTable teacherCourseTimeTable:LoginActivity.teacherCourseTimeTableList) {
-            Log.e("test",weekTime+" "+day+" "+classTime);
             if(teacherCourseTimeTable.getCourseTimeWeek().equals(new Integer(weekTime)))
             {
                 String classTimeTeacher = getClassTime(teacherCourseTimeTable.getCourseTimeGmtBegin());
-                Log.e("test2",teacherCourseTimeTable.getCourseTimeWeek()+" "+teacherCourseTimeTable.getCourseTimeDay()+" "+classTimeTeacher);
                 if(classTimeTeacher.equals(classTime))
                 {
-                    Log.e("test",teacherCourseTimeTable.getCourseTimeId()+"");
                     if(teacherCourseTimeTable.getCourseTimeDay().equals(new Integer(day)))
                     {
 
-                        Log.e("test",teacherCourseTimeTable.getCourseTimeId()+"");
                         return teacherCourseTimeTable.getCourseTimeId();
                     }
                 }

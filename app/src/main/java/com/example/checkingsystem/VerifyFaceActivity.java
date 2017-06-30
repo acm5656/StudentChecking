@@ -117,14 +117,12 @@ public class VerifyFaceActivity extends AppCompatActivity {
         @Override
         public void onBufferReceived(byte[] buffer) {
 
-            Log.d("VerifyFaceActivity---","------------onBufferReceived1");
             String result = null;
             try {
                 result = new String(buffer, "utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            Log.d("VerifyFaceActivity---","------------onBufferReceived2");
 
             JSONObject object = null;
             try {
@@ -156,19 +154,16 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e("test_ren","--------------1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_face);
         ActivityColectorUtil.addActivity(this);
         SpeechUtility.createUtility(VerifyFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
-        Log.e("test_ren","--------------2");
         Intent intent = getIntent();
         studentID = intent.getStringExtra("studentID");
         studentFaceID = intent.getStringExtra("studentFaceID");
         macAddress = intent.getStringExtra("mac");
-        Log.e("test",studentID+" "+" "+studentFaceID+" "+macAddress);
 
         thread = new Thread(new Runnable() {
             @Override
@@ -197,23 +192,18 @@ public class VerifyFaceActivity extends AppCompatActivity {
                             byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
 
                             String result = mFaceDetector.detectARGB(bmp);
-                            Log.d("VerifyFaceActivity---", "result:"+result);
                             FaceRect[] faceRect = ParseResult.parseResult(result);
 
                             if(faceRect.length!=0)
                             {
-                                Log.e("boolen","-2--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
-                                Log.d("VerifyFaceActivity---","------------verfiFace--1");
                                 isVerfiFace.set(true);
                                 mFaceRequest.setParameter(SpeechConstant.AUTH_ID, studentFaceID);
                                 mFaceRequest.setParameter(SpeechConstant.WFR_SST, "verify");
                                 mFaceRequest.sendRequest(mface, mRequestListener);
-                                Log.e("VerifyFaceActivity---","------------verfiFace--2");
                             }
                             else {
                                 isGetImage.set(false);
                             }
-                            Log.e("VerifyFaceActivity---","------------verfiFace--3");
 
                             bmp.recycle();
                         }
@@ -222,7 +212,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
             }
         });
         thread.start();
-        Log.e("test_ren","--------------2");
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -232,7 +221,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
 
         initUI();
         buffer = new byte[PREVIEW_WIDTH * PREVIEW_HEIGHT];
-        Log.e("test_ren","--------------3");
         mAcc = new Accelerometer(VerifyFaceActivity.this);
 
 
@@ -269,7 +257,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
             mcamera.stopPreview();
             mcamera.release();
             mcamera = null;
-            Log.e("test","-----------camera finish");
         }
 
     }
@@ -295,7 +282,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
 //        params.setPictureSize(PREVIEW_WIDTH,PREVIEW_HEIGHT);
 
         mcamera.setParameters(params);
-        Log.e("test_ren","--------------4");
         mcamera.setDisplayOrientation(90);
         mcamera.setPreviewCallback(new Camera.PreviewCallback() {
 
@@ -308,7 +294,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
                 if(!isGetImage.get())
                 {
                     System.arraycopy(data, 0, nv21, 0, data.length);
-                    Log.e("VerifyFaceActivity---","---------------获取图像");
                     isGetImage.set(true);
                 }
 
@@ -341,7 +326,6 @@ public class VerifyFaceActivity extends AppCompatActivity {
             isGetImage.set(false);
             return;
         }
-        Log.e("boolen","-3--isGetImage-"+isGetImage.get()+"---isVerfiFace-"+isVerfiFace.get());
         if ("success".equals(obj.get("rst"))) {
             if (obj.getBoolean("verf")) {
                 runBool = true;

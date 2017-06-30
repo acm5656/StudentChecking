@@ -2,28 +2,48 @@ package com.example.checkingsystem.net;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.example.checkingsystem.LoginActivity;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import util.BitmapUtil;
+import util.HttpCallbackListener;
+import util.HttpUtil;
 
 /**
  * Created by 那年.盛夏 on 2017/4/16.
  */
 
-public class GetPictureNet {
-    public Bitmap bitmap = null;
+public class GetHeadPictureNet {
     public interface HttpPictureCallbackListener {
         void onFinish(InputStream inputStream);
         void onError(Exception e);
 
     }
+    static HttpPictureCallbackListener listener = new HttpPictureCallbackListener() {
+        @Override
+        public void onFinish(InputStream inputStream) {
+            LoginActivity.headPictureBitmap = BitmapFactory.decodeStream(inputStream);
 
-    void getPicture(final String address, final HttpPictureCallbackListener httpPictureCallbackListener)
+            BitmapUtil.saveMyBitmap(LoginActivity.headPictureBitmap,"head1.jpg");
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    };
+
+    static void getPicture(final String address)
     {
             new Thread(new Runnable() {
                 @Override
@@ -36,15 +56,15 @@ public class GetPictureNet {
                         connection.setConnectTimeout(8000);
                         connection.setReadTimeout(8000);
                         InputStream in = connection.getInputStream();
-                        if(httpPictureCallbackListener!=null)
+                        if(listener!=null)
                         {
-                            httpPictureCallbackListener.onFinish(in);
+                            listener.onFinish(in);
                         }
 
                     } catch (Exception e) {
-                        if(httpPictureCallbackListener!=null)
+                        if(listener!=null)
                         {
-                            httpPictureCallbackListener.onError(e);
+                            listener.onError(e);
                         }
 
                     }finally {

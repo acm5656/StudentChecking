@@ -4,6 +4,7 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentCourseTimeTable;
 import com.example.checkingsystem.entity.TeacherCourseTimeTable;
+import com.example.checkingsystem.entity.VirtualCourse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,15 +26,15 @@ public class GetCourseTimeInfoNet {
 
         @Override
         public void onFinish(String response) {
-            ResultObj<List<StudentCourseTimeTable>> resultObj = null;
+            ResultObj<List<VirtualCourse>> resultObj = null;
             try {
-                 resultObj = objectMapper.readValue(response, new TypeReference<ResultObj<List<StudentCourseTimeTable>>>(){});
+                 resultObj = objectMapper.readValue(response, new TypeReference<ResultObj<List<VirtualCourse>>>(){});
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if(resultObj!=null&&resultObj.getMeta().getResult())
             {
-                LoginActivity.studentCourseTimeTableList = resultObj.getData();
+                LoginActivity.studentVirtualList = resultObj.getData();
             }
 
         }
@@ -47,16 +48,16 @@ public class GetCourseTimeInfoNet {
     static HttpCallbackListener teacherHttpCallbackListener = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
-            ResultObj<List<TeacherCourseTimeTable>> resultObj = null;
+            ResultObj<List<VirtualCourse>> resultObj = null;
 
             try {
-                resultObj = objectMapper.readValue(response, new TypeReference<ResultObj<List<TeacherCourseTimeTable>>>() {});
+                resultObj = objectMapper.readValue(response, new TypeReference<ResultObj<List<VirtualCourse>>>() {});
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if (resultObj!=null&&resultObj.getMeta().getResult())
             {
-                LoginActivity.teacherCourseTimeTableList = resultObj.getData();
+                LoginActivity.teacherVirtualList = resultObj.getData();
             }
         }
 

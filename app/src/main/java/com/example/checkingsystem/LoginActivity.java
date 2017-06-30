@@ -16,12 +16,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.checkingsystem.dao.AssistantDao;
 import com.example.checkingsystem.dao.StudentDao;
 import com.example.checkingsystem.dao.TeacherDao;
 import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.StudentCourseTimeTable;
 import com.example.checkingsystem.entity.Teacher;
 import com.example.checkingsystem.entity.TeacherCourseTimeTable;
+import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.net.LoginNet;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
 import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
@@ -45,10 +47,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static StudentDao studentDao;
     //用来存储教师信息的dao
     public static TeacherDao teacherDao;
+    //用来存储辅导员的信息的dao
+    /*
+    缺
+     */
     //用来存储登录学生的各种信息
     public static Student studentStatic;
     //用来存储登录教师的各种信息
     public static Teacher teacherStatic;
+    //用来存储辅导员的各种信息
+    /*
+    缺
+     */
     //用来记录令牌
     public static String token;
     //忘记密码的控件
@@ -64,9 +74,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //用来记录角色身份，是哪个用户
     public static String roleStr;
     //用来记录学生课表
-    public static List<StudentCourseTimeTable> studentCourseTimeTableList = null;
+    public static List<VirtualCourse> studentVirtualList = null;
     //用来记录教师课表
-    public static List<TeacherCourseTimeTable> teacherCourseTimeTableList = null;
+    public static List<VirtualCourse> teacherVirtualList = null;
 
 
     @Override
@@ -120,13 +130,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     LoginNet loginNet = new LoginNet();
                     if("学生".equals(roleStr))
                     {
-                        Log.e("netLogin",roleStr+" "+username+" "+password);
-                        loginNet.studentSendInfo(this,username,password);
+                        loginNet.studentLogin(this,username,password);
 
                     }
                     if("教师".equals(roleStr))
                     {
                         loginNet.teacherLogin(this,username,password);
+                    }
+                    if("导员".equals(roleStr))
+                    {
+                        loginNet.assistantLogin(this,username,password);
                     }
                 }
                 break;
