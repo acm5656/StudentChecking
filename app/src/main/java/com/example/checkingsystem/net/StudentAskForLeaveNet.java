@@ -7,6 +7,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.entity.ResultObj;
+import com.example.checkingsystem.entity.VirtualCourseAttendance;
+import com.example.checkingsystem.entity.VirtualCourseLeave;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 import util.ChangeTypeUtil;
 import util.HttpCallbackListener;
@@ -56,12 +61,17 @@ public class StudentAskForLeaveNet {
         }
     };
 
-    public void studentAskForLeave(Activity activity,String studentID,String askForLeaverReason,String courseID)
+    public void studentAskForLeave(Activity activity, String studentID, String askForLeaverReason, Date beginDate,Date endDate)
     {
         this.activity = activity;
+        VirtualCourseLeave virtualCourseLeave = new VirtualCourseLeave();
+        virtualCourseLeave.setVirtualCourseLeaveBegin(new Timestamp(beginDate.getTime()));
+        virtualCourseLeave.setVirtualCourseLeaveEnd(new Timestamp(endDate.getTime()));
+        virtualCourseLeave.setVirtualCourseLeaveReason(askForLeaverReason);
+        virtualCourseLeave.setVirtualCourseLeaveStuId(studentID);
         String address = HttpUtil.urlIp+PathUtil.STUDENT_ASK_FOR_LEAVE;
-        String data = "courseLeaveCtimeId="+courseID+"&courseLeaveStuId="+studentID+"&courseLeaveReason="+askForLeaverReason;
-        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
+        String data = ChangeTypeUtil.getJSONString(virtualCourseLeave);
+        HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
     }
 
 }

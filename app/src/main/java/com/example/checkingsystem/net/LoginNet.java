@@ -71,7 +71,7 @@ public class LoginNet {
                             LoginActivity.studentStatic.setStudentPassword(token);
                             LoginActivity.studentDao.addStudent(LoginActivity.studentStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.studentStatic.getStudentHeadimageUrl());
-                            GetCourseTimeInfoNet.studentGetCourseTimeInfo();
+                            GetVirtualCourseInfoNet.studentGetCourseTimeInfo();
                             Intent intent = new Intent(activity, StudentIndexActivity.class);
                             activity.startActivity(intent);
                         }
@@ -107,7 +107,7 @@ public class LoginNet {
                             LoginActivity.teacherStatic.setTeacherPassword(token);
                             LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
-                            GetCourseTimeInfoNet.teacherGetCourseTimeInfo();
+                            GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
                             Intent intent = new Intent(activity, TeacherIndexActivity.class);
                             activity.startActivity(intent);
                         }

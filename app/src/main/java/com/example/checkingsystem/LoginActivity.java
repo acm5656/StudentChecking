@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.checkingsystem.dao.AssistantDao;
 import com.example.checkingsystem.dao.StudentDao;
 import com.example.checkingsystem.dao.TeacherDao;
+import com.example.checkingsystem.entity.CourseShow;
+import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
 import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.StudentCourseTimeTable;
 import com.example.checkingsystem.entity.Teacher;
@@ -75,8 +77,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static String roleStr;
     //用来记录学生课表
     public static List<VirtualCourse> studentVirtualList = null;
+    public static List<CourseShow> studentCourseShow = null;
+    public static List<CourseShow> studentItemCountGroupByCidAndIStatusList = null;
     //用来记录教师课表
     public static List<VirtualCourse> teacherVirtualList = null;
+    public static List<CourseShow> teacherCourseShow = null;
+
 
 
     @Override

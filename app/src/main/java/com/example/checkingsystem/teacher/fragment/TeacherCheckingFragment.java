@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.TeacherCourseTimeTable;
 import com.example.checkingsystem.net.OpenCheckingNet;
 import com.example.checkingsystem.teacher.activity.TeacherCheckingActivity;
@@ -43,20 +45,17 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
     private PickerView pickerView;
     private int attentanceTime = 3;
     private String macAddress;
-    private TextView weekTextView;
-    private TextView dayTextView;
+
     private TextView courseNameTextView;
-    private String courseID;
+    private TextView courseCodeTextView;
+    CourseShow courseShow;
 
     public TeacherCheckingFragment() {
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        courseID = ((TeacherCheckingActivity)getActivity()).courseID;
         view = inflater.inflate(R.layout.fragment_teacher_checking, container, false);
         initSource();
 
@@ -64,20 +63,15 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
     }
 
     private void initSource() {
+
+        courseShow = TeacherCourseIndexFragment.courseShow;
+        courseCodeTextView = (TextView)view.findViewById(R.id.fragment_teacher_checking_course_code);
         checkingButton = (Button)view.findViewById(R.id.fragment_teacher_checking_start_checking);
-        weekTextView = (TextView)view.findViewById(R.id.fragment_teacher_checking_week);
-        dayTextView = (TextView)view.findViewById(R.id.fragment_teacher_checking_course_class);
         courseNameTextView = (TextView)view.findViewById(R.id.fragment_teacher_checking_course_name);
-        for(TeacherCourseTimeTable teacherCourseTimeTable:LoginActivity.teacherCourseTimeTableList)
-        {
-            if(teacherCourseTimeTable.getCourseTimeId().equals(courseID))
-            {
-                weekTextView.setText("第"+teacherCourseTimeTable.getCourseTimeWeek()+"周");
-                courseNameTextView.setText(teacherCourseTimeTable.getCourseName());
-                String classTime = TeacherScheduleFragment.getClassTime(teacherCourseTimeTable.getCourseTimeGmtBegin());
-                dayTextView.setText("周"+teacherCourseTimeTable.getCourseTimeDay()+"第"+classTime+"节");
-            }
-        }
+
+        courseNameTextView.setText(courseShow.getName());
+        courseCodeTextView.setText(courseShow.getId());
+
         checkingButton.setOnClickListener(this);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         pickerView = (PickerView)view.findViewById(R.id.minute_pv);
@@ -97,7 +91,6 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
             }
         });
 
-
     }
 
     @Override
@@ -109,7 +102,6 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
                     Intent discoveryIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                     discoveryIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,0);//设置持续时间（最多300秒）
                     startActivity(discoveryIntent);
-
                 }
 
                 if(Build.VERSION.SDK_INT >= 23) {
@@ -118,11 +110,12 @@ public class TeacherCheckingFragment extends Fragment implements View.OnClickLis
                 }else {
                     macAddress = bluetoothAdapter.getAddress();
                 }
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis()+attentanceTime*1000*60);
+                Timestamp beginTimeStamp = new Timestamp(System.currentTimeMillis());
+                Timestamp endTimestamp = new Timestamp(System.currentTimeMillis()+attentanceTime*1000*60);
 
                 String teacherID = LoginActivity.teacherStatic.getTeacherId();
                 OpenCheckingNet openCheckingNet = new OpenCheckingNet();
-                openCheckingNet.OpenTeacherChecking(getActivity(),macAddress,courseID,teacherID,new Long(timestamp.getTime()).toString());
+                openCheckingNet.OpenTeacherChecking(getActivity(),courseShow.getDbID(),macAddress,beginTimeStamp,endTimestamp);
                 break;
         }
     }

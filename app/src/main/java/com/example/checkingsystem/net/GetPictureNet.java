@@ -23,7 +23,7 @@ public class GetPictureNet {
 
     }
 
-    void getPicture(final String address, final HttpPictureCallbackListener httpPictureCallbackListener)
+    public void getPicture(final String address, final HttpPictureCallbackListener httpPictureCallbackListener)
     {
             new Thread(new Runnable() {
                 @Override

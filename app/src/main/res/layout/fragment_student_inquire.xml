@@ -3,10 +3,13 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#ffffff"
+    android:orientation="vertical"
+    android:weightSum="11"
     >
     <ListView
+        android:layout_weight="11"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:divider="#000000"
         android:dividerHeight="1px"
         android:id="@+id/fragment_student_inquire_list_view"

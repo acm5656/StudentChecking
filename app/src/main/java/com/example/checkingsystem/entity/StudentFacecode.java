@@ -1,9 +1,8 @@
 package com.example.checkingsystem.entity;
 
+
 import java.sql.Timestamp;
-//.mybatisplus.annotations.TableId;
-//.mybatisplus.annotations.TableField;
-//.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 
@@ -17,9 +16,12 @@ import java.io.Serializable;
  * @since 2017-03-19
  */
 //Name("t_student_facecode")
-public class StudentFacecode implements Serializable {
+public class StudentFacecode {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_NEW = "new";//无效,被删除等
+	public static final String STATUS_OLD = "old";//无效,被删除等
+	public static final String STATUS_INVALID = "invalid";//无效,被删除等
 
     /**
      * 主键-uuid-32
@@ -113,5 +115,7 @@ public class StudentFacecode implements Serializable {
 	public void setStudentFacecodeStatus(String studentFacecodeStatus) {
 		this.studentFacecodeStatus = studentFacecodeStatus;
 	}
+
+
 
 }

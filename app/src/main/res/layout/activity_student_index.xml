@@ -70,6 +70,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/schedule"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -83,7 +84,31 @@
                 />
 
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/student_index_ask_for_leave"
+            >
+            <ImageView
+                android:id="@+id/student_index_ask_for_leave_img"
+                android:layout_marginTop="10dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/un_ask_for_leave"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="请假"
+                android:layout_weight="1"
+                android:id="@+id/student_index_ask_for_leave_text_view"
+                android:background="@drawable/bottom_button"
+                style="@style/unClickText"
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

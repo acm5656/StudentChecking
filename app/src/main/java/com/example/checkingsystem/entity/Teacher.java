@@ -1,12 +1,11 @@
 package com.example.checkingsystem.entity;
 
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.Timestamp;
-//.mybatisplus.annotations.TableId;
-//.mybatisplus.annotations.TableField;
-//.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 
@@ -16,114 +15,114 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-19
+ * @since 2017-03-20
  */
 //Name("t_teacher")
 @DatabaseTable
-public class Teacher implements Serializable {
+public class Teacher  {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	public static final String STATUS_INVALID = "invalid";//班级无效,被删除等
 
-    /**
-     * 主键-sequence-id
-     */
+	/**
+	 * 主键-sequence-id
+	 */
 	//Id("teacher_id")
 	@DatabaseField(id = true)
 	private String teacherId;
-    /**
-     * 人脸ID
-     */
+	/**
+	 * 人脸ID
+	 */
 	//Field("teacher_face_id")
 	@DatabaseField
 	private String teacherFaceId;
-    /**
-     * 声纹ID
-     */
+	/**
+	 * 声纹ID
+	 */
 	//Field("teacher_voiceprint_id")
 	@DatabaseField
 	private String teacherVoiceprintId;
-    /**
-     * 教师手机号码
-     */
+	/**
+	 * 教师手机号码
+	 */
 	//Field("teacher_tel")
 	@DatabaseField
 	private String teacherTel;
-    /**
-     * 密码-md5
-     */
+	/**
+	 * 密码-md5
+	 */
 	//Field("teacher_password")
 	@DatabaseField
 	private String teacherPassword;
-    /**
-     * 教师编号
-     */
+	/**
+	 * 教师编号
+	 */
 	//Field("teacher_no")
 	@DatabaseField
 	private String teacherNo;
-    /**
-     * 教师姓名
-     */
+	/**
+	 * 教师姓名
+	 */
 	//Field("teacher_name")
 	@DatabaseField
 	private String teacherName;
-    /**
-     * 教师昵称
-     */
+	/**
+	 * 教师昵称
+	 */
 	//Field("teacher_nickname")
 	@DatabaseField
 	private String teacherNickname;
-    /**
-     * 教师邮箱
-     */
+	/**
+	 * 教师邮箱
+	 */
 	//Field("teacher_email")
 	@DatabaseField
 	private String teacherEmail;
-    /**
-     * 教师头像URL
-     */
+	/**
+	 * 教师头像URL
+	 */
 	//Field("teacher_headimage_url")
 	@DatabaseField
 	private String teacherHeadimageUrl;
-    /**
-     * 性别
-     */
+	/**
+	 * 性别
+	 */
 	//Field("teacher_gender")
 	@DatabaseField
 	private String teacherGender;
-    /**
-     * 教师所在系/部门
-     */
-	//Field("teacher_ department")
+	/**
+	 * 教师所在系/部门
+	 */
+	//Field("teacher_department")
 	@DatabaseField
 	private String teacherDepartment;
-    /**
-     * 教师教务管理系统用户名
-     */
+	/**
+	 * 教师教务管理系统用户名
+	 */
 	//Field("teacher_school_username")
 	@DatabaseField
 	private String teacherSchoolUsername;
-    /**
-     * 教师教务管理系统密码
-     */
+	/**
+	 * 教师教务管理系统密码
+	 */
 	//Field("teacher_school_password")
 	@DatabaseField
 	private String teacherSchoolPassword;
-    /**
-     * 记录创建时间
-     */
-
+	/**
+	 * 记录创建时间
+	 */
 	//Field("teacher_gmt_created")
 	@DatabaseField
 	private Timestamp teacherGmtCreated;
-    /**
-     * 记录修改时间
-     */
+	/**
+	 * 记录修改时间
+	 */
 	//Field("teacher_gmt_modified")
 	@DatabaseField
 	private Timestamp teacherGmtModified;
-    /**
-     * 教师状态
-     */
+	/**
+	 * 教师状态
+	 */
 	//Field("teacher_status")
 	@DatabaseField
 	private String teacherStatus;
@@ -264,5 +263,7 @@ public class Teacher implements Serializable {
 	public void setTeacherStatus(String teacherStatus) {
 		this.teacherStatus = teacherStatus;
 	}
+
+
 
 }

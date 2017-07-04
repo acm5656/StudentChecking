@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_weight="9"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_weight="2"
+        android:text="记录时间："
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:id="@+id/textView2"/>
+
+    <TextView
+        android:layout_weight="3"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:id="@+id/student_query_every_attentance_item_date"
+        />
+
+    <TextView
+        android:layout_weight="2"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="记录状态："
+        />
+    <TextView
+
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:id="@+id/student_query_every_attentance_item_state"
+        />
+</LinearLayout>

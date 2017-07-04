@@ -1,11 +1,9 @@
 package com.example.checkingsystem.entity;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.Timestamp;
-//.mybatisplus.annotations.TableId;
-//.mybatisplus.annotations.TableField;
-//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
@@ -17,111 +15,95 @@ import java.io.Serializable;
  * @author Ren Gui Jie 812022339@qq.com
  * @since 2017-03-19
  */
-//Name("t_student")
-public class Student implements Serializable {
+@DatabaseTable
+public class Student{
 
     private static final long serialVersionUID = 1L;
+    public static final String STATUS_WAIT_AUTH = "wait_auth";//
+    public static final String STATUS_WAIT_AUTH_DEAL = "wait_auth_deal";//可以被加入
+    public static final String STATUS_AUTH_FAIL = "auth_fail";//可以被加入
+    public static final String STATUS_AUTH_PASS = "auth_pass";//可以被加入
+    public static final String STATUS_INVALID = "invalid";//无效,被删除等
+
 
     /**
      * 主键,一个生成全局唯一Sequence ID
      */
-	//Id("student_id")
 	@DatabaseField(id = true)
 	private String studentId;
     /**
-     * 外键-学生所属班级
-     */
-	//Field("student_class_id")
-	@DatabaseField
-	private String studentClassId;
-    /**
      * 人脸验证id
      */
-	//Field("student_facecode")
 	@DatabaseField
 	private String studentFacecode;
     /**
      * 声纹id
      */
-	//Field("student_voiceprint_id")
 	@DatabaseField
 	private String studentVoiceprintId;
     /**
      * 学生手机号
      */
-	//Field("student_tel")
 	@DatabaseField
 	private String studentTel;
     /**
      * 学生密码
      */
-	//Field("student_password")
 	@DatabaseField
 	private String studentPassword;
     /**
      * 学生学号
      */
-	//Field("student_no")
 	@DatabaseField
 	private String studentNo;
     /**
      * 学生真实姓名
      */
-	//Field("student_name")
 	@DatabaseField
 	private String studentName;
     /**
      * 学生昵称
      */
-	//Field("student_nickname")
 	@DatabaseField
 	private String studentNickname;
     /**
      * 学生email地址
      */
-	//Field("student_email")
 	@DatabaseField
 	private String studentEmail;
     /**
      * 学生头像URL
      */
-	//Field("student_headimage_url")
 	@DatabaseField
 	private String studentHeadimageUrl;
     /**
      * 学生性别
      */
-	//Field("student_gender")
 	@DatabaseField
 	private String studentGender;
     /**
      * 教务系统帐号
      */
-	//Field("student_school_username")
 	@DatabaseField
 	private String studentSchoolUsername;
     /**
      * 教务系统密码
      */
-	//Field("student_school_password")
 	@DatabaseField
 	private String studentSchoolPassword;
     /**
      * 记录修改时间
      */
-	//Field("student_gmt_modified")
 	@DatabaseField
 	private Timestamp studentGmtModified;
     /**
      * 记录创建时间
      */
-	//Field("student_gmt_created")
 	@DatabaseField
 	private Timestamp studentGmtCreated;
     /**
      * 记录状态
      */
-	//Field("student_status")
 	@DatabaseField
 	private String studentStatus;
 
@@ -132,14 +114,6 @@ public class Student implements Serializable {
 
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
-	}
-
-	public String getStudentClassId() {
-		return studentClassId;
-	}
-
-	public void setStudentClassId(String studentClassId) {
-		this.studentClassId = studentClassId;
 	}
 
 	public String getStudentFacecode() {
@@ -262,26 +236,5 @@ public class Student implements Serializable {
 		this.studentStatus = studentStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Student{" +
-				"studentId='" + studentId + '\'' +
-				", studentClassId='" + studentClassId + '\'' +
-				", studentFacecode='" + studentFacecode + '\'' +
-				", studentVoiceprintId='" + studentVoiceprintId + '\'' +
-				", studentTel='" + studentTel + '\'' +
-				", studentPassword='" + studentPassword + '\'' +
-				", studentNo='" + studentNo + '\'' +
-				", studentName='" + studentName + '\'' +
-				", studentNickname='" + studentNickname + '\'' +
-				", studentEmail='" + studentEmail + '\'' +
-				", studentHeadimageUrl='" + studentHeadimageUrl + '\'' +
-				", studentGender='" + studentGender + '\'' +
-				", studentSchoolUsername='" + studentSchoolUsername + '\'' +
-				", studentSchoolPassword='" + studentSchoolPassword + '\'' +
-				", studentGmtModified=" + studentGmtModified +
-				", studentGmtCreated=" + studentGmtCreated +
-				", studentStatus='" + studentStatus + '\'' +
-				'}';
-	}
+
 }

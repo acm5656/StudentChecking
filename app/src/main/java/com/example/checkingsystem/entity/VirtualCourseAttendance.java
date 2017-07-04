@@ -16,9 +16,13 @@ import java.io.Serializable;
  * @since 2017-06-28
  */
 //Name("t_virtual_course_attendance")
-public class VirtualCourseAttendance {
+public class VirtualCourseAttendance  {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_READY = "ready";//考勤准备中
+	public static final String STATUS_OPEN = "open";//考勤开启中
+	public static final String STATUS_CLOSE = "close";//考勤结束
+	public static final String STATUS_INVALID = "invalid";//记录无效
 
     /**
      * 主键-uuid-32
@@ -177,6 +181,7 @@ public class VirtualCourseAttendance {
 	public void setVirtualCourseAttendanceStatus(String virtualCourseAttendanceStatus) {
 		this.virtualCourseAttendanceStatus = virtualCourseAttendanceStatus;
 	}
+
 
 
 }

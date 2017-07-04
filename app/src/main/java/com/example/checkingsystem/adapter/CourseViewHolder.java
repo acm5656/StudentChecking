@@ -14,5 +14,9 @@ public class CourseViewHolder {
     public TextView id;
     public TextView courseAttentanceCount;
     public TextView courseAskForLeaveCount;
+    public TextView courseLateCount;
+    public TextView courseAbsentCount;
     public TextView studentNumber;
+    public TextView studentName;
+    public TextView studentID;
 }

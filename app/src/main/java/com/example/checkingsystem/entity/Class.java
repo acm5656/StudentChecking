@@ -1,75 +1,86 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-//.mybatisplus.annotations.TableId;
-//.mybatisplus.annotations.TableField;
-//.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 
 /**
  * <p>
  * 班级信息
-导员通过此信息对学生具有管理权限
+导员管理此信息
+
+public static final String STATUS_OPEN = "open";//可以被加入
+public static final String STATUS_CLOSE = "close";//不可再被加入
+public static final String STATUS_FINAL = "final";//班级结束
+public static final String STATUS_INVALID = "invalid";//无效,被删除等
  * </p>
  *
  * @author Ren Gui Jie 812022339@qq.com
- * @since 2017-03-19
+ * @since 2017-07-03
  */
-//Name("t_class")
-public class Class implements Serializable {
+
+public class Class {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_OPEN = "open";//可以被加入
+	public static final String STATUS_CLOSE = "close";//不可再被加入
+	public static final String STATUS_FINAL = "final";//班级结束
+	public static final String STATUS_INVALID = "invalid";//无效,被删除等
 
-    /**
+	/**
      * 主键-uuid-32
      */
-	//Id("class_id")
+
 	private String classId;
     /**
      * 班级所属导员的id
      */
-	//Field("class_assistant_id")
+
 	private String classAssistantId;
     /**
      * 班级所属学校id
      */
-	//Field("class_school_id")
+
 	private String classSchoolId;
+    /**
+     * class代码
+     */
+
+	private String classCode;
     /**
      * 班级所在系(院)
      */
-	//Field("class_department")
+
 	private String classDepartment;
     /**
      * 班级所属专业(如软件工程)
      */
-	//Field("class_major")
+
 	private String classMajor;
     /**
      * 班级所属级(如2014)
      */
-	//Field("class_year")
+
 	private String classYear;
     /**
      * 班级编号(如1)
      */
-	//Field("class_no")
+
 	private String classNo;
     /**
      * 记录创建时间
      */
-	//Field("class_gmt_created")
+
 	private Timestamp classGmtCreated;
     /**
      * 记录修改时间
      */
-	//Field("class_gmt_modified")
+
 	private Timestamp classGmtModified;
     /**
      * 记录状态
      */
-	//Field("class_status")
+
 	private String classStatus;
 
 
@@ -95,6 +106,14 @@ public class Class implements Serializable {
 
 	public void setClassSchoolId(String classSchoolId) {
 		this.classSchoolId = classSchoolId;
+	}
+
+	public String getClassCode() {
+		return classCode;
+	}
+
+	public void setClassCode(String classCode) {
+		this.classCode = classCode;
 	}
 
 	public String getClassDepartment() {
@@ -152,5 +171,7 @@ public class Class implements Serializable {
 	public void setClassStatus(String classStatus) {
 		this.classStatus = classStatus;
 	}
+
+
 
 }

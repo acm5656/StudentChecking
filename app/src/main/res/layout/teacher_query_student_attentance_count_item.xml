@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="60dp">
+    <LinearLayout
+        android:layout_gravity="center"
+        android:weightSum="2"
+        android:orientation="vertical"
+        android:layout_width="100dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/teacher_query_student_attentance_count_item_student_id"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="2014214318"
+            android:gravity="center"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/teacher_query_student_attentance_count_item_student_name"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="艾成铭"
+            android:gravity="center"
+            android:textSize="18dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="考勤次数："
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/teacher_query_student_attentance_count_item_attentance"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                />
+            <TextView
+
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="缺勤次数："
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/teacher_query_student_attentance_count_item_absent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="迟到次数："
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_marginRight="20dp"
+                android:id="@+id/teacher_query_student_attentance_count_item_late"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="请假次数："
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/teacher_query_student_attentance_count_item_leave"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

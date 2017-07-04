@@ -45,7 +45,6 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
     private PullToRefreshListView refresh_lv;
     private List<TeacherCheckingStudentItem> list;
     private DataAdapter adapter;
-    Thread thread;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -70,7 +69,6 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
                                     studentItem.setStudentState("考勤成功");
                                 }
                             }
-
                         }
                         list.add(studentItem);
                     }
@@ -156,21 +154,14 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
 //                new LoadDataAsyncTask(MainActivity.this).execute();
             }
         });
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-
 
     }
 
     private void queryInfo()
     {
         String path = HttpUtil.urlIp + PathUtil.TEACHER_GET_CHECKING_COURSE_ATTENTANCE;
-        String data = "attendanceId="+attentanceID;
-        HttpUtil.sendHttpGetRequest(path+"?"+data,httpCallbackListenerQueryStudentID);
+        String data = "vcourseAttendanceId="+attentanceID;
+        HttpUtil.sendHttpGetRequest(path+"/"+data,httpCallbackListenerQueryStudentID);
 
 
     }

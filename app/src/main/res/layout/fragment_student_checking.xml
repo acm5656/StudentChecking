@@ -15,7 +15,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="1sp"
+
+            android:background="@color/itemBackgroundColor"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="课程编号"
+                android:textColor="@color/textUnClickColor"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="周一第1节"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="#000000"
+                android:layout_marginRight="30dp"
+                android:id="@+id/fragment_student_checking_course_code"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:background="@color/itemBackgroundColor"
             >
             <TextView
@@ -41,65 +70,7 @@
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            android:background="@color/itemBackgroundColor"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="上课时间"
-                android:textColor="@color/textUnClickColor"
-                android:layout_alignParentLeft="true"
-                android:gravity="center"
-                android:textSize="@dimen/title_text_size"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="周一第1节"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:textSize="@dimen/title_text_size"
-                android:textColor="#000000"
-                android:layout_marginRight="30dp"
-                android:id="@+id/fragment_student_checking_day"
-                />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            android:background="@color/itemBackgroundColor"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="周        数"
-                android:textColor="@color/textUnClickColor"
-                android:layout_alignParentLeft="true"
-                android:gravity="center"
-                android:textSize="@dimen/title_text_size"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="第1周"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:textSize="@dimen/title_text_size"
-                android:textColor="#000000"
-                android:layout_marginRight="30dp"
-                android:id="@+id/fragment_student_checking_week"
-                />
-        </RelativeLayout>
 
         
         <LinearLayout

@@ -15,9 +15,15 @@ import java.io.Serializable;
  * @since 2017-06-28
  */
 //Name("t_virtual_course")
-public class VirtualCourse implements Serializable{
+public class VirtualCourse implements Serializable  {
 
     private static final long serialVersionUID = 1L;
+
+	public static final String STATUS_OPEN = "open";//可以被加入
+	public static final String STATUS_CLOSE = "close";//不可再被加入
+    public static final String STATUS_AUTO_REFUSE = "auto_refuse";//自动拒绝此人的请求
+    public static final String STATUS_FINAL = "final";//此班级不再进行任何操作即这个课被结课
+	public static final String STATUS_INVALID = "invalid";//班级无效,被删除等
 
 	//Id("virtual_course_id")
 	private String virtualCourseId;
@@ -151,22 +157,6 @@ public class VirtualCourse implements Serializable{
 		this.virtualCourseStatus = virtualCourseStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "VirtualCourse{" +
-				"virtualCourseId='" + virtualCourseId + '\'' +
-				", virtualCourseTeacherId='" + virtualCourseTeacherId + '\'' +
-				", virtualCourseTextbookId='" + virtualCourseTextbookId + '\'' +
-				", virtualCourseImgUrl='" + virtualCourseImgUrl + '\'' +
-				", virtualCourseName='" + virtualCourseName + '\'' +
-				", virtualCourseType='" + virtualCourseType + '\'' +
-				", virtualCourseAsk='" + virtualCourseAsk + '\'' +
-				", virtualCourseSchedule='" + virtualCourseSchedule + '\'' +
-				", virtualCourseExam='" + virtualCourseExam + '\'' +
-				", virtualCourseCode='" + virtualCourseCode + '\'' +
-				", virtualCourseGmtCreated=" + virtualCourseGmtCreated +
-				", virtualCourseGmtModified=" + virtualCourseGmtModified +
-				", virtualCourseStatus='" + virtualCourseStatus + '\'' +
-				'}';
-	}
+
+
 }

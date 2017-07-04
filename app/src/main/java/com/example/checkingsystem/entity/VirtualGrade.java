@@ -1,7 +1,6 @@
 package com.example.checkingsystem.entity;
 
 import java.sql.Timestamp;
-
 import java.io.Serializable;
 
 
@@ -17,6 +16,8 @@ import java.io.Serializable;
 public class VirtualGrade {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_OK = "ok";//有效
+	public static final String STATUS_INVALID = "invalid";//无效,被删除等
 
     /**
      * 主键-成绩id

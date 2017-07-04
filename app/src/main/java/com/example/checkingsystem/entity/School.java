@@ -1,9 +1,8 @@
 package com.example.checkingsystem.entity;
 
+
 import java.sql.Timestamp;
-//.mybatisplus.annotations.TableId;
-//.mybatisplus.annotations.TableField;
-//.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 
@@ -16,9 +15,13 @@ import java.io.Serializable;
  * @since 2017-03-19
  */
 //Name("t_school")
-public class School implements Serializable {
+public class School  {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_OPEN = "open";//可以被加入
+	public static final String STATUS_CLOSE = "close";//不可再被加入
+	public static final String STATUS_FINAL = "final";//班级结束
+	public static final String STATUS_INVALID = "invalid";//无效,被删除等
 
     /**
      * 主键-uuid-32
@@ -125,5 +128,7 @@ public class School implements Serializable {
 	public void setSchoolStatus(String schoolStatus) {
 		this.schoolStatus = schoolStatus;
 	}
+
+
 
 }

@@ -64,7 +64,11 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         }
         schoolNumber = (TextView) view.findViewById(R.id.fragment_teacher_mine_number);
         name = (TextView)view.findViewById(R.id.fragment_teacher_mine_name);
-        schoolNumber.setText(LoginActivity.teacherStatic.getTeacherSchoolUsername());
+        if(LoginActivity.teacherStatic.getTeacherSchoolUsername()!=null&&name!=null)
+        {
+            schoolNumber.setText(LoginActivity.teacherStatic.getTeacherSchoolUsername());
+        }
+
         if(LoginActivity.teacherStatic.getTeacherName()!=null&&name!=null) {
             name.setText(LoginActivity.teacherStatic.getTeacherName());
         }

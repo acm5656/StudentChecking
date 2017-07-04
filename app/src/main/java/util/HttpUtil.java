@@ -17,9 +17,11 @@ import java.net.URL;
 
 public class HttpUtil {
 
-//    public static String urlIp="http://123.206.175.47:80/";
+    public static String urlIp="http://123.206.175.47:80/";
 //    public static String urlIp="http://localhost:80/";
-    public static String urlIp="http://192.168.43.158/";
+//    public static String urlIp="http://192.168.43.158/";
+//    public static String urlIp="http://172.20.10.2/";
+//    public static String urlIp="http://10.19.207.36/";
     public static final int CONTENT_TYPE_IS_APPLICATION_JSON = 1;
     public static final int NO_STATUS = 0;
 
@@ -58,8 +60,6 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
-                        Log.e("test",e.getMessage());
-                        Log.e("test",e.toString());
                         listener.onError(e);
                     }
 
@@ -87,7 +87,7 @@ public class HttpUtil {
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
                     if(status==CONTENT_TYPE_IS_APPLICATION_JSON)
-                        connection.setRequestProperty("Content-Type","application/json:charset=utf-8");
+                        connection.setRequestProperty("Content-Type","application/json");
 
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
@@ -95,7 +95,7 @@ public class HttpUtil {
                     connection.setReadTimeout(8000);
                     Log.e("httpUtil","------------2");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                    out.writeBytes(data);
+                    out.write(data.getBytes());
                     InputStream in = connection.getInputStream();
                     Log.e("httpUtil","------------3");
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -118,6 +118,9 @@ public class HttpUtil {
                 } catch (Exception e) {
                     if(listener!=null)
                     {
+                        Log.e("test",e.toString());
+                        Log.e("test",e.getMessage());
+
                         listener.onError(e);
                     }
 
@@ -152,7 +155,7 @@ public class HttpUtil {
                     connection.setReadTimeout(8000);
                     Log.e("httpUtil","------------2");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                    out.writeBytes(data);
+                    out.write(data.getBytes());
                     InputStream in = connection.getInputStream();
                     Log.e("httpUtil","------------3");
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));

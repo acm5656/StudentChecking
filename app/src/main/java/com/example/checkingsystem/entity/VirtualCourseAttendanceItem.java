@@ -1,8 +1,6 @@
 package com.example.checkingsystem.entity;
 
-
 import java.sql.Timestamp;
-
 import java.io.Serializable;
 
 
@@ -19,6 +17,11 @@ import java.io.Serializable;
 public class VirtualCourseAttendanceItem {
 
     private static final long serialVersionUID = 1L;
+	public static final String STATUS_BE_LATE = "late";
+	public static final String STATUS_ATTENDANCE = "attendance";
+	public static final String STATUS_ABSENCE = "absence";
+	public static final String STATUS_LEAVE = "leave";
+	public static final String STATUS_INVALID = "invalid";
 
     /**
      * 主键-uuid-32
@@ -126,6 +129,24 @@ public class VirtualCourseAttendanceItem {
 		this.virtualCourseAttendanceItemStatus = virtualCourseAttendanceItemStatus;
 	}
 
+	public String getChineseShow()
+	{
+		String result = "";
+		if(virtualCourseAttendanceItemStatus.equals(STATUS_BE_LATE))
+			result  = "迟到";
+		if(virtualCourseAttendanceItemStatus.equals(STATUS_ATTENDANCE))
+		{
+			result = "考勤成功";
+		}
+		if(virtualCourseAttendanceItemStatus.equals(STATUS_ABSENCE))
+		{
+			result = "缺勤";
+		}
+		if(virtualCourseAttendanceItemStatus.equals(STATUS_LEAVE))
+		{
+			result = "请假";
+		}
 
-
+		return result;
+	}
 }

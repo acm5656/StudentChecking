@@ -136,7 +136,6 @@ public class TeacherAskForLeaveInfoFragment extends Fragment {
         progressDialog = ProgressDialog.show(getActivity(),"查询请假信息", "请稍等", true, false);
         initItem();
 
-
         return view;
     }
 

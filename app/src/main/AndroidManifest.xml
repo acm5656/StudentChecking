@@ -55,6 +55,12 @@
         </activity>
         <activity android:name=".teacher.activity.TeacherAddCourseActivity">
         </activity>
+        <activity android:name=".student.activity.StudentQueryCourseItemInfoActivity">
+        </activity>
+        <activity android:name=".teacher.activity.TeacherQueryCourseStudentTotalActivity">
+        </activity>
+        <activity android:name=".teacher.activity.TeacherQueryCourseStudentInfoActivity">
+        </activity>
     </application>
 
 </manifest>

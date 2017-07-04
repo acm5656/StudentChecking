@@ -23,6 +23,7 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.net.StudentAddCourseNet;
+import com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment;
 import com.example.checkingsystem.student.fragment.StudentCourseIndexFragment;
 import com.example.checkingsystem.student.fragment.StudentInquireFragment;
 import com.example.checkingsystem.student.fragment.StudentMineFragment;
@@ -42,14 +43,17 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     private TextView studentIndexStudyTextView;
     private TextView studentIndexInquireTextView;
     private TextView studentIndexMineTextView;
+    private TextView studentIndexAskForLeaveTextView;
 
     private ImageView studentIndexStudyImageView;
     private ImageView studentIndexInquireImageView;
     private ImageView studentIndexMineImageView;
+    private ImageView studentIndexAskForLeaveImageView;
 
     private LinearLayout studentIndexStudyLayout;
     private LinearLayout studentIndexInquireLayout;
     private LinearLayout studentIndexMineLayout;
+    private LinearLayout studentIndexAskForLeaveLayout;
     private ImageView studentAddCourseimage;
 
     private TextView studentIndexChooseWeek;
@@ -57,6 +61,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     public StudentMineFragment studentMineFragment;
     public StudentCourseIndexFragment studentCourseIndexFragment;
     public StudentInquireFragment studentInquireFragment;
+    public StudentAskForLeaveFragment studentAskForLeaveFragment;
     EditText courseCodeEditText;
     String courseCode;
 
@@ -71,7 +76,9 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         studentInquireFragment = new StudentInquireFragment();
         studentMineFragment = new StudentMineFragment();
         studentCourseIndexFragment = new StudentCourseIndexFragment();
+        studentAskForLeaveFragment = new StudentAskForLeaveFragment();
         list.add(studentCourseIndexFragment);
+        list.add(studentAskForLeaveFragment);
         list.add(studentInquireFragment);
         list.add(studentMineFragment);
         studentAddCourseimage.setOnClickListener(this);
@@ -110,15 +117,18 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                             studentIndexMineTextView.setTextAppearance(R.style.unClickText);
                             studentIndexStudyTextView.setTextAppearance(R.style.OnClickText);
                             studentIndexInquireTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(R.style.unClickText);
                         }else {
                             studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                             studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                             studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
 
                         studentIndexMineImageView.setImageResource(R.drawable.un_mine);
                         studentIndexStudyImageView.setImageResource(R.drawable.schedule);
                         studentIndexInquireImageView.setImageResource(R.drawable.un_query);
+                        studentIndexAskForLeaveImageView.setImageResource(R.drawable.un_ask_for_leave);
                         studentIndexChooseWeek.setText("课程");
                         studentIndexChooseWeek.setOnClickListener(StudentIndexActivity.this);
                         studentAddCourseimage.setImageResource(R.drawable.add);
@@ -129,36 +139,63 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             studentIndexMineTextView.setTextAppearance(R.style.unClickText);
                             studentIndexStudyTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(R.style.OnClickText);
+                        }else {
+                            studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                        }
+
+                        studentAddCourseimage.setImageBitmap(null);
+                        studentIndexMineImageView.setImageResource(R.drawable.un_mine);
+                        studentIndexStudyImageView.setImageResource(R.drawable.un_schedule);
+                        studentIndexInquireImageView.setImageResource(R.drawable.un_query);
+                        studentIndexAskForLeaveImageView.setImageResource(R.drawable.ask_for_leave);
+                        studentIndexChooseWeek.setText("请假");
+                        studentIndexChooseWeek.setOnClickListener(null);
+                        break;
+                    case 2:
+                        viewPager.setCurrentItem(2);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            studentIndexMineTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexStudyTextView.setTextAppearance(R.style.unClickText);
                             studentIndexInquireTextView.setTextAppearance(R.style.OnClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(R.style.unClickText);
                         }else {
                             studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                             studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                             studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
 
                         studentAddCourseimage.setImageBitmap(null);
                         studentIndexMineImageView.setImageResource(R.drawable.un_mine);
                         studentIndexStudyImageView.setImageResource(R.drawable.un_schedule);
                         studentIndexInquireImageView.setImageResource(R.drawable.query);
-
+                        studentIndexAskForLeaveImageView.setImageResource(R.drawable.un_ask_for_leave);
                         studentIndexChooseWeek.setText("查询");
                         studentIndexChooseWeek.setOnClickListener(null);
                         break;
-                    case 2:
-                        viewPager.setCurrentItem(2);
+                    case 3:
+                        viewPager.setCurrentItem(3);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             studentIndexMineTextView.setTextAppearance(R.style.OnClickText);
                             studentIndexStudyTextView.setTextAppearance(R.style.unClickText);
                             studentIndexInquireTextView.setTextAppearance(R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(R.style.unClickText);
                         }else {
                             studentIndexMineTextView.setTextAppearance(getApplicationContext(),R.style.OnClickText);
                             studentIndexStudyTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                             studentIndexInquireTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
+                            studentIndexAskForLeaveTextView.setTextAppearance(getApplicationContext(),R.style.unClickText);
                         }
                         studentAddCourseimage.setImageBitmap(null);
                         studentIndexMineImageView.setImageResource(R.drawable.mine);
                         studentIndexStudyImageView.setImageResource(R.drawable.un_schedule);
                         studentIndexInquireImageView.setImageResource(R.drawable.un_query);
+                        studentIndexAskForLeaveImageView.setImageResource(R.drawable.un_ask_for_leave);
                         studentIndexChooseWeek.setText("我");
                         studentIndexChooseWeek.setOnClickListener(null);
                         break;
@@ -180,14 +217,17 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         studentIndexStudyLayout = (LinearLayout) findViewById(R.id.student_index_study);
         studentIndexMineLayout = (LinearLayout)findViewById(R.id.student_index_mine);
         studentIndexInquireLayout = (LinearLayout)findViewById(R.id.student_index_inquire);
+        studentIndexAskForLeaveLayout = (LinearLayout)findViewById(R.id.student_index_ask_for_leave);
 
         studentIndexStudyTextView = (TextView)findViewById(R.id.student_index_study_text_view);
         studentIndexMineTextView = (TextView)findViewById(R.id.student_index_mine_text_view);
         studentIndexInquireTextView = (TextView)findViewById(R.id.student_index_inquire_text_view);
+        studentIndexAskForLeaveTextView = (TextView)findViewById(R.id.student_index_ask_for_leave_text_view);
 
         studentIndexInquireImageView = (ImageView)findViewById(R.id.student_index_inquire_image_view);
         studentIndexMineImageView = (ImageView)findViewById(R.id.student_index_mine_image_view);
         studentIndexStudyImageView = (ImageView)findViewById(R.id.student_index_study_image_view);
+        studentIndexAskForLeaveImageView = (ImageView)findViewById(R.id.student_index_ask_for_leave_img);
 
         studentIndexChooseWeek = (TextView)findViewById(R.id.student_index_choose_week);
         studentAddCourseimage = (ImageView)findViewById(R.id.acivity_student_index_add);
@@ -204,19 +244,23 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                 dialog.show(fragmentManager,"dialog");
                 break;
             case  R.id.student_index_mine:
-                viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(3);
 
                 break;
             case R.id.student_index_inquire:
-                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(2);
 
                 break;
             case R.id.student_index_study:
                 viewPager.setCurrentItem(0);
 
                 break;
+            case R.id.student_index_ask_for_leave:
+                viewPager.setCurrentItem(1);
+                break;
             case R.id.acivity_student_index_add:
                 showInputDialog();
+
                 break;
         }
     }

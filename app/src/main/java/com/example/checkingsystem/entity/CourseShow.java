@@ -1,12 +1,16 @@
 package com.example.checkingsystem.entity;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 /**
  * Created by 那年.盛夏 on 2017/6/28.
  */
 
-public class CourseShow {
+public class CourseShow implements Parcelable{
     private String id;
     private String dbID;
     private String name;
@@ -14,8 +18,51 @@ public class CourseShow {
     private Bitmap imgBitmap;
     private String courseAttentanceCount;
     private String courseAskForLeaveCount;
+    private String courseAbsentCount;
+    private String courseLateCount;
     private String studentNumber;
+    private String imgUrl;
+    private String studentID;
 
+    public String getCourseLateCount() {
+        return courseLateCount;
+    }
+
+    public void setCourseLateCount(String courseLateCount) {
+        this.courseLateCount = courseLateCount;
+    }
+
+    public String getCourseAbsentCount() {
+        return courseAbsentCount;
+    }
+
+    public void setCourseAbsentCount(String courseAbsentCount) {
+        this.courseAbsentCount = courseAbsentCount;
+    }
+
+    protected CourseShow(Parcel in) {
+        id = in.readString();
+        dbID = in.readString();
+        name = in.readString();
+        teahcerName = in.readString();
+        imgBitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        courseAttentanceCount = in.readString();
+        courseAskForLeaveCount = in.readString();
+        studentNumber = in.readString();
+        imgUrl = in.readString();
+    }
+
+    public static final Creator<CourseShow> CREATOR = new Creator<CourseShow>() {
+        @Override
+        public CourseShow createFromParcel(Parcel in) {
+            return new CourseShow(in);
+        }
+
+        @Override
+        public CourseShow[] newArray(int size) {
+            return new CourseShow[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -127,5 +174,32 @@ public class CourseShow {
                 ", courseAskForLeaveCount='" + courseAskForLeaveCount + '\'' +
                 ", studentNumber='" + studentNumber + '\'' +
                 '}';
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(dbID);
+        dest.writeString(name);
+        dest.writeString(teahcerName);
+        dest.writeParcelable(imgBitmap, flags);
+        dest.writeString(courseAttentanceCount);
+        dest.writeString(courseAskForLeaveCount);
+        dest.writeString(studentNumber);
+        dest.writeString(imgUrl);
     }
 }

@@ -268,20 +268,20 @@ public class StudentScheduleFragment extends Fragment implements View.OnClickLis
         }
     }
     private String getCouorseID(String weekTime, String day, String classTime) {
-        for(StudentCourseTimeTable studentCourseTimeTable:LoginActivity.studentCourseTimeTableList) {
-            if(studentCourseTimeTable.getCourseTimeWeek().equals(new Integer(weekTime)))
-            {
-                String classTimestudent = getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
-                if(classTimestudent.equals(classTime))
-                {
-                    if(studentCourseTimeTable.getCourseTimeDay().equals(new Integer(day)))
-                    {
-
-                        return studentCourseTimeTable.getCourseTimeId();
-                    }
-                }
-            }
-        }
+//        for(StudentCourseTimeTable studentCourseTimeTable:LoginActivity.studentCourseTimeTableList) {
+//            if(studentCourseTimeTable.getCourseTimeWeek().equals(new Integer(weekTime)))
+//            {
+//                String classTimestudent = getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
+//                if(classTimestudent.equals(classTime))
+//                {
+//                    if(studentCourseTimeTable.getCourseTimeDay().equals(new Integer(day)))
+//                    {
+//
+//                        return studentCourseTimeTable.getCourseTimeId();
+//                    }
+//                }
+//            }
+//        }
 
         return null;
     }
@@ -298,17 +298,17 @@ public class StudentScheduleFragment extends Fragment implements View.OnClickLis
                 }
             }
         }
-        if(LoginActivity.studentCourseTimeTableList!=null) {
-            for (StudentCourseTimeTable studentCourseTimeTable : LoginActivity.studentCourseTimeTableList) {
-                if (studentCourseTimeTable.getCourseTimeWeek() == week) {
-                    String classTime = getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
-                    TextView textView = textViewMap.get(studentCourseTimeTable.getCourseTimeDay() + classTime);
-                    if(textView!=null) {
-                        textView.setText(studentCourseTimeTable.getCourseName());
-                    }
-                }
-            }
-        }
+//        if(LoginActivity.studentCourseTimeTableList!=null) {
+//            for (StudentCourseTimeTable studentCourseTimeTable : LoginActivity.studentCourseTimeTableList) {
+//                if (studentCourseTimeTable.getCourseTimeWeek() == week) {
+//                    String classTime = getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
+//                    TextView textView = textViewMap.get(studentCourseTimeTable.getCourseTimeDay() + classTime);
+//                    if(textView!=null) {
+//                        textView.setText(studentCourseTimeTable.getCourseName());
+//                    }
+//                }
+//            }
+//        }
     }
 
     public interface OnFragmentInteractionListener {

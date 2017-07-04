@@ -28,6 +28,7 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.VerifyFaceActivity;
 import com.example.checkingsystem.entity.AuthorityInfo;
+import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.StudentCourseTimeTable;
@@ -69,9 +70,8 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     ResultObj<Student> resultObj;
     private String studentFaceID;
     IntentFilter intentFileter;
-    private TextView weekTextView;
-    private TextView dayTextView;
     private TextView courseNameTextView;
+    private TextView couseCodeTextView;
     private String courseID;
 
     Handler handlerStuID = new Handler(){
@@ -206,20 +206,12 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
         courseID = ((StudentCheckingActivity)getActivity()).courseID;
         intentFileter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         bluetoothReceiver = new BluetoothReceiver();
-        weekTextView = (TextView) view.findViewById(R.id.fragment_student_checking_week);
-        dayTextView = (TextView)view.findViewById(R.id.fragment_student_checking_day);
-        courseNameTextView = (TextView)view.findViewById(R.id.fragment_student_checking_name);
 
-        for(StudentCourseTimeTable studentCourseTimeTable:LoginActivity.studentCourseTimeTableList)
-        {
-            if(studentCourseTimeTable.getCourseTimeId().equals(courseID))
-            {
-                weekTextView.setText("第"+studentCourseTimeTable.getCourseTimeWeek()+"周");
-                courseNameTextView.setText(studentCourseTimeTable.getCourseName());
-                String classTime = StudentScheduleFragment.getClassTime(studentCourseTimeTable.getCourseTimeGmtBegin());
-                dayTextView.setText("周"+studentCourseTimeTable.getCourseTimeDay()+"第"+classTime+"节");
-            }
-        }
+        courseNameTextView = (TextView)view.findViewById(R.id.fragment_student_checking_name);
+        couseCodeTextView = (TextView)view.findViewById(R.id.fragment_student_checking_course_code);
+        CourseShow courseShow = StudentCourseIndexFragment.courseShow;
+        couseCodeTextView.setText(courseShow.getId());
+        courseNameTextView.setText(courseShow.getName());
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return view;
