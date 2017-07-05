@@ -39,17 +39,14 @@ public class HttpUtil {
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
-                    Log.e("get","---------1");
                     InputStream in = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();
-                    Log.e("get","---------2");
                     String line;
 
                     while ((line=reader.readLine())!=null)
                     {
                         response.append(line);
-                        Log.e("get","---------3");
                     }
                     Log.e("get",response.toString());
                     if(listener!=null&&(response.toString()!=null)&&(!response.toString().equals("")))
@@ -83,7 +80,6 @@ public class HttpUtil {
             public void run() {
                 HttpURLConnection connection = null;
                 try {
-                    Log.e("httpUtil","------------1");
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
                     if(status==CONTENT_TYPE_IS_APPLICATION_JSON)
@@ -93,15 +89,12 @@ public class HttpUtil {
                     connection.setDoOutput(true);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
-                    Log.e("httpUtil","------------2");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
                     out.write(data.getBytes());
                     InputStream in = connection.getInputStream();
-                    Log.e("httpUtil","------------3");
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
                     StringBuilder response = new StringBuilder();
-                    Log.e("httpUtil","------------4");
                     String line;
 
                     while ((line=reader.readLine())!=null)
@@ -144,7 +137,6 @@ public class HttpUtil {
             public void run() {
                 HttpURLConnection connection = null;
                 try {
-                    Log.e("httpUtil","------------1");
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
                     if(status==CONTENT_TYPE_IS_APPLICATION_JSON)
@@ -153,15 +145,12 @@ public class HttpUtil {
                     connection.setDoOutput(true);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
-                    Log.e("httpUtil","------------2");
                     DataOutputStream out = new DataOutputStream(connection.getOutputStream());
                     out.write(data.getBytes());
                     InputStream in = connection.getInputStream();
-                    Log.e("httpUtil","------------3");
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
                     StringBuilder response = new StringBuilder();
-                    Log.e("httpUtil","------------4");
                     String line;
 
                     while ((line=reader.readLine())!=null)

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.checkingsystem.entity.Attendance;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.VirtualCourseAttendance;
+import com.example.checkingsystem.entity.VirtualCourseAttendanceItem;
 import com.example.checkingsystem.teacher.activity.TeacherCheckingStudentAttendanceListActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +48,7 @@ public class OpenCheckingNet {
                     String attentanceID = virtualCourseAttendance.getVirtualCourseAttendanceId();
                     Intent intent = new Intent(activity, TeacherCheckingStudentAttendanceListActivity.class);
                     intent.putExtra("attentanceID",attentanceID);
+                    intent.putExtra("endTime",new Long(virtualCourseAttendance.getVirtualCourseAttendanceGmtEnd().getTime()));
                     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                     while (!bluetoothAdapter.isEnabled()) {}
                     if(bluetoothAdapter.isEnabled()) {

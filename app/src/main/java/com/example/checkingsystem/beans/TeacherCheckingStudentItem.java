@@ -8,6 +8,7 @@ public class TeacherCheckingStudentItem {
     private String studentNo;
     private String studentName;
     private String studentState;
+    private String studentID;
 
     public String getStudentNo() {
         return studentNo;
@@ -50,5 +51,13 @@ public class TeacherCheckingStudentItem {
     public TeacherCheckingStudentItem()
     {
 
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 }

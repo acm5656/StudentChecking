@@ -84,7 +84,16 @@ public class VirtualCourseAttendance  {
      */
 	//Field("virtual_course_attendance_status")
 	private String virtualCourseAttendanceStatus;
+	private Integer virtualCourseAttendanceLateCount;
+	private Integer virtualCourseAttendanceLeaveCount;
 
+	public Integer getVirtualCourseAttendanceLeaveCount() {
+		return virtualCourseAttendanceLeaveCount;
+	}
+
+	public void setVirtualCourseAttendanceLeaveCount(Integer virtualCourseAttendanceLeaveCount) {
+		this.virtualCourseAttendanceLeaveCount = virtualCourseAttendanceLeaveCount;
+	}
 
 	public String getVirtualCourseAttendanceId() {
 		return virtualCourseAttendanceId;
@@ -182,6 +191,11 @@ public class VirtualCourseAttendance  {
 		this.virtualCourseAttendanceStatus = virtualCourseAttendanceStatus;
 	}
 
+	public Integer getVirtualCourseAttendanceLateCount() {
+		return virtualCourseAttendanceLateCount;
+	}
 
-
+	public void setVirtualCourseAttendanceLateCount(Integer virtualCourseAttendanceLateCount) {
+		this.virtualCourseAttendanceLateCount = virtualCourseAttendanceLateCount;
+	}
 }

@@ -19,6 +19,7 @@ import com.example.checkingsystem.beans.TeacherCheckingStudentItem;
 import com.example.checkingsystem.entity.AttendanceItem;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
+import com.example.checkingsystem.entity.VirtualCourseAttendanceItem;
 import com.example.checkingsystem.net.GetStudentInfoByID;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,12 +40,23 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
     public final static int RIGHT = 1;
     public final static int FALSE = 0;
     ObjectMapper objectMapper= new ObjectMapper();
-    ResultObj<List<AttendanceItem>> resultObjAtteantanceItem;
+    ResultObj<List<VirtualCourseAttendanceItem>> resultObjAtteantanceItem;
     ResultObj<List<Student>> resultObjStu;
     private String attentanceID;
     private PullToRefreshListView refresh_lv;
-    private List<TeacherCheckingStudentItem> list;
     private DataAdapter adapter;
+    List<TeacherCheckingStudentItem> list;
+    String endTimeStr;
+    Long endTime;
+    long currentTime;
+    TextView timeTextView;
+    Handler updateTimeHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            int remainTime = (int) (endTime - currentTime)/1000;
+            timeTextView.setText(remainTime+"s");
+        }
+    };
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -52,22 +64,17 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
             {
                 case RIGHT :
                     List<Student> listStu = resultObjStu.getData();
-                    List<TeacherCheckingStudentItem> list = new ArrayList<>();
+                    list = new ArrayList<>();
                     for(Student stu:listStu)
                     {
+                        Log.e("checking","----------queryfor");
                         TeacherCheckingStudentItem studentItem = new TeacherCheckingStudentItem();
                         studentItem.setStudentName(stu.getStudentName());
                         studentItem.setStudentNo(stu.getStudentNo());
-                        for(AttendanceItem attendanceItem:resultObjAtteantanceItem.getData()) {
-                            if(attendanceItem.getCourseAttendanceItemStudentId().equals(stu.getStudentId())) {
-                                if(attendanceItem.getCourseAttendanceItemResult().equals("leaved")) {
-                                    studentItem.setStudentState("请假");
-                                }
-                            }
-                            if(attendanceItem.getCourseAttendanceItemStudentId().equals(stu.getStudentId())) {
-                                if(attendanceItem.getCourseAttendanceItemStatus().equals("success")) {
-                                    studentItem.setStudentState("考勤成功");
-                                }
+                        studentItem.setStudentID(stu.getStudentId());
+                        for(VirtualCourseAttendanceItem virtualCourseAttendanceItem:resultObjAtteantanceItem.getData()) {
+                            if(virtualCourseAttendanceItem.getVirtualCourseAttendanceItemStudentId().equals(stu.getStudentId())) {
+                                studentItem.setStudentState(virtualCourseAttendanceItem.getChineseShow());
                             }
                         }
                         list.add(studentItem);
@@ -81,6 +88,17 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
             }
         }
     };
+
+    Handler updateHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            adapter = new DataAdapter(getApplicationContext(),list);
+            refresh_lv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            refresh_lv.onRefreshComplete();//刷新完成
+        }
+    };
+
     HttpCallbackListener httpCallbackListenerGetStudentInfo = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
@@ -91,7 +109,7 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
             }
             if(resultObjStu.getMeta().getResult())
             {
-
+                Log.e("checking","----------2");
                 Message message = new Message();
                 message.what = RIGHT;
                 handler.sendMessage(message);
@@ -107,7 +125,7 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
         @Override
         public void onFinish(String response) {
             try {
-                resultObjAtteantanceItem = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<AttendanceItem>>>(){});
+                resultObjAtteantanceItem = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<VirtualCourseAttendanceItem>>>(){});
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -116,10 +134,11 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
 
                 GetStudentInfoByID getStudentInfoByID = new GetStudentInfoByID();
                 List<String> list = new ArrayList<>();
-                for(AttendanceItem attendanceItem : resultObjAtteantanceItem.getData())
+                for(VirtualCourseAttendanceItem virtualCourseAttendanceItem : resultObjAtteantanceItem.getData())
                 {
-                    list.add(attendanceItem.getCourseAttendanceItemStudentId());
+                    list.add(virtualCourseAttendanceItem.getVirtualCourseAttendanceItemStudentId());
                 }
+                Log.e("checking","----------1");
                 getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,list);
 
             }
@@ -130,14 +149,68 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
 
         }
     };
+
+    HttpCallbackListener httpCallbackListenerUpdateStudentID = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+            try {
+                resultObjAtteantanceItem = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<VirtualCourseAttendanceItem>>>(){});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(resultObjAtteantanceItem.getMeta().getResult())
+            {
+
+                for(VirtualCourseAttendanceItem virtualCourseAttendanceItem : resultObjAtteantanceItem.getData())
+                {
+                    for(int i = 0 ;i<list.size() ;i++)
+                    {
+                        if(list.get(i).getStudentID().equals(virtualCourseAttendanceItem.getVirtualCourseAttendanceItemStudentId()))
+                        {
+                            list.get(i).setStudentState(virtualCourseAttendanceItem.getChineseShow());
+                        }
+                    }
+                }
+                Message message = new Message();
+                updateHandler.sendMessage(message);
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_checking_student_attendance_list);
         refresh_lv = (PullToRefreshListView) findViewById(R.id.main_pull_refresh_lv);
         refresh_lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        timeTextView = (TextView)findViewById(R.id.activity_teacher_checking_student_attendance_list_time);
         Intent intent = getIntent();
         attentanceID = intent.getStringExtra("attentanceID");
+        endTime = intent.getLongExtra("endTime",0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                currentTime = System.currentTimeMillis();
+                while (currentTime<endTime)
+                {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Message message = new Message();
+                    updateTimeHandler.sendMessage(message);
+                    currentTime = System.currentTimeMillis();
+
+                }
+
+            }
+        }).start();
         //设置刷新时显示的文本
         ILoadingLayout startLayout = refresh_lv.getLoadingLayoutProxy(true,false);
         startLayout.setPullLabel("正在下拉刷新...");
@@ -146,7 +219,7 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
         refresh_lv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                queryInfo();
+                updateInfo();
             }
 
             @Override
@@ -154,16 +227,19 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
 //                new LoadDataAsyncTask(MainActivity.this).execute();
             }
         });
+        queryInfo();
 
     }
-
+    public void updateInfo(){
+        String path = HttpUtil.urlIp + PathUtil.TEACHER_GET_CHECKING_COURSE_ATTENTANCE;
+        String data = attentanceID;
+        HttpUtil.sendHttpGetRequest(path+"/"+data,httpCallbackListenerUpdateStudentID);
+    }
     private void queryInfo()
     {
         String path = HttpUtil.urlIp + PathUtil.TEACHER_GET_CHECKING_COURSE_ATTENTANCE;
-        String data = "vcourseAttendanceId="+attentanceID;
+        String data = attentanceID;
         HttpUtil.sendHttpGetRequest(path+"/"+data,httpCallbackListenerQueryStudentID);
-
-
     }
 
     private static class DataAdapter extends BaseAdapter {
