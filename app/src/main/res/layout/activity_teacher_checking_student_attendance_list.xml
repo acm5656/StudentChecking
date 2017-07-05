@@ -43,12 +43,15 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <TextView
+                android:textSize="17dp"
+                android:gravity="center"
                 android:id="@+id/activity_teacher_checking_student_attendance_list_time"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <LinearLayout
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
