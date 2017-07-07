@@ -26,6 +26,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     //验证码的输入框
     private EditText inputVerifyCode;
     //提交按钮
+    //test
     private Button submitButton;
     //常亮，用来判断当前是否可以获得验证码用
     public static final int IS_GET_VERIFYCODE = 1;
