@@ -25,7 +25,6 @@ public class HttpUtil {
     public static final int CONTENT_TYPE_IS_APPLICATION_JSON = 1;
     public static final int NO_STATUS = 0;
 
-
     public static void sendHttpGetRequest(final String address,final HttpCallbackListener listener)
     {
         new Thread(new Runnable() {

@@ -94,6 +94,9 @@ public class RegistFaceActivity extends AppCompatActivity {
     private String name = null;
     //注册的uuid
     private String uuid = null;
+
+    Thread thread;
+    private boolean runBool = false;
     //上传照片对象后获取id后调用的接口
     HttpCallbackListener httpCallbackListenerPicture = new HttpCallbackListener() {
         @Override
@@ -197,6 +200,46 @@ public class RegistFaceActivity extends AppCompatActivity {
         SpeechUtility.createUtility(RegistFaceActivity.this, SpeechConstant.APPID +"=587f2efc");
         mFaceDetector = FaceDetector.createDetector(this, null);
         mFaceRequest = new FaceRequest(this);
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!runBool) {
+                    if (isGetImage && (!isVerfiFace)) {
+
+                        Camera.Size size = mcamera.getParameters().getPreviewSize();
+                        YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
+                                size.height, null);
+                        if (image != null) {
+
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            image.compressToJpeg(new Rect(0, 0, size.width, size.height),
+                                    80, stream);
+                            bmp = BitmapFactory.decodeByteArray(
+                                    stream.toByteArray(), 0, stream.size());
+
+                            bmp = BitmapUtil.zoomBitmap(bmp, size.width / 2, size.height / 2);
+
+                            bmp = BitmapUtil.rotateBitmapByDegree(bmp, -90);
+
+                            byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
+
+                            String result = mFaceDetector.detectARGB(bmp);
+
+                            FaceRect[] faceRect = ParseResult.parseResult(result);
+                            if (faceRect.length != 0) {
+                                isVerfiFace = true;
+                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
+                                mFaceRequest.setParameter(SpeechConstant.WFR_SST, "reg");
+                                mFaceRequest.sendRequest(mface, mRequestListener);
+                            }
+
+                            isGetImage = false;
+                        }
+                    }
+                }
+            }
+        });
+        thread.start();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -288,39 +331,7 @@ public class RegistFaceActivity extends AppCompatActivity {
                     isGetImage = true;
                 }
 
-                if(isGetImage&&(!isVerfiFace))
-                {
 
-                    Camera.Size size = mcamera.getParameters().getPreviewSize();
-                        YuvImage image = new YuvImage(nv21, ImageFormat.NV21, size.width,
-                                size.height, null);
-                        if (image != null) {
-
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            image.compressToJpeg(new Rect(0, 0, size.width, size.height),
-                                    80, stream);
-                            bmp = BitmapFactory.decodeByteArray(
-                                    stream.toByteArray(), 0, stream.size());
-
-                            bmp = BitmapUtil.zoomBitmap(bmp,size.width/2,size.height/2);
-
-                            bmp = BitmapUtil.rotateBitmapByDegree(bmp, -90);
-
-                            byte[] mface = BitmapUtil.Bitmap2Bytes(bmp);
-
-                            String result = mFaceDetector.detectARGB(bmp);
-
-                            FaceRect[] faceRect = ParseResult.parseResult(result);
-                            if(faceRect.length!=0) {
-                                isVerfiFace = true;
-                                mFaceRequest.setParameter(SpeechConstant.AUTH_ID, authid);
-                                mFaceRequest.setParameter(SpeechConstant.WFR_SST, "reg");
-                                mFaceRequest.sendRequest(mface, mRequestListener);
-                            }
-
-                            isGetImage = false;
-                        }
-                }
 
             }
         });
@@ -351,6 +362,7 @@ public class RegistFaceActivity extends AppCompatActivity {
             return;
         }
         if ("success".equals(obj.get("rst"))) {
+            runBool = true;
             name = uuid+".jpg";
             if(bmp!=null) {
                 BitmapUtil.saveMyBitmap(bmp,name);
@@ -397,6 +409,7 @@ public class RegistFaceActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
+        runBool = true;
         closeCamera();
         super.finish();
     }

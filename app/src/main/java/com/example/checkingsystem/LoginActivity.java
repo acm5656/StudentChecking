@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.checkingsystem.dao.AssistantDao;
 import com.example.checkingsystem.dao.StudentDao;
 import com.example.checkingsystem.dao.TeacherDao;
+import com.example.checkingsystem.entity.Assistant;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
 import com.example.checkingsystem.entity.Student;
@@ -50,17 +51,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //用来存储教师信息的dao
     public static TeacherDao teacherDao;
     //用来存储辅导员的信息的dao
-    /*
-    缺
-     */
+    public static AssistantDao assistantDao;
     //用来存储登录学生的各种信息
     public static Student studentStatic;
     //用来存储登录教师的各种信息
     public static Teacher teacherStatic;
     //用来存储辅导员的各种信息
-    /*
-    缺
-     */
+    public static Assistant assistantStatic;
+
     //用来记录令牌
     public static String token;
     //忘记密码的控件
@@ -85,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         studentStatic = new Student();
         studentDao = new StudentDao(this);
         teacherDao = new TeacherDao(this);
+        assistantDao = new AssistantDao(this);
         roleStr = "";
         initResourse();
 

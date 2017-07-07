@@ -105,6 +105,11 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                         SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
                         sendVerifyCodeNet.sendTeacherRegistVerifyCode(tel,this);
                     }
+                    if(roleStr.equals("导员"))
+                    {
+                        SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                        sendVerifyCodeNet.sendAssistantRegistVerifyCode(tel,this);
+                    }
 
                 }else {
                     Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
@@ -144,6 +149,11 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     RegistNet registNet = new RegistNet();
                     registNet.teacherRegist(tel,verifyStr,password,this);
+                }
+                if(roleStr.equals("导员")&&judge)
+                {
+                    RegistNet registNet = new RegistNet();
+                    registNet.assistantRegist(tel,verifyStr,password,this);
                 }
                 break;
         }

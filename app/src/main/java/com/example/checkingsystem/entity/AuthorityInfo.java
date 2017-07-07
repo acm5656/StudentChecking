@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class AuthorityInfo {
     private List<String> macList;
-    private String courseAttendanceCourseTimeId;
+    private String virtualCourseId;
     private String stuMac;
 
     public List<String> getMacList() {
@@ -18,12 +18,12 @@ public class AuthorityInfo {
         this.macList = macList;
     }
 
-    public String getCourseAttendanceCourseTimeId() {
-        return courseAttendanceCourseTimeId;
+    public String getVirtualCourseId() {
+        return virtualCourseId;
     }
 
-    public void setCourseAttendanceCourseTimeId(String courseAttendanceCourseTimeId) {
-        this.courseAttendanceCourseTimeId = courseAttendanceCourseTimeId;
+    public void setVirtualCourseId(String virtualCourseId) {
+        this.virtualCourseId = virtualCourseId;
     }
 
     public String getStuMac() {

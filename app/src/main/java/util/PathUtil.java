@@ -38,4 +38,11 @@ public class PathUtil {
     public static final String TEACHER_GET_COURSE_STUDENT_ATTENTANCE_LIST_TOTAL = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/students/countList";
     public static final String TEACHER_GET_COURSE_STUDENT_ATTENTANCE_INFO = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/items";
     public static final String TEACHER_INIT_OPEN_CHECKING = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/initialItems";
+    public static final String TEACHER_CLOSE_CHECK = "api/attendance-consumer-cattendance/virtualCourseAttendance/status/close";
+    public static final String TEACHER_CHANGE_STUDENT_LATE = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/status/late";
+    public static final String TEACHER_CHANGE_STUDENT_ATTENTANCE = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/status/attendance";
+    public static final String ASSISTANT_REGIST_GET_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/register/assistant";
+    public static final String ASSISTANT_REGIST = "api/attendance-provider-user/assistant";
+    public static final String ASSISTANT_LOGIN = "api/attendance-provider-user/assistant/login";
 }
+

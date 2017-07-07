@@ -1,5 +1,8 @@
 package com.example.checkingsystem.entity;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.sql.Timestamp;
 import java.io.Serializable;
 
@@ -13,6 +16,7 @@ import java.io.Serializable;
  * @since 2017-03-19
  */
 //Name("t_assistant")
+@DatabaseTable
 public class Assistant {
 
     private static final long serialVersionUID = 1L;
@@ -22,66 +26,79 @@ public class Assistant {
      * 主键-sequence-id
      */
 	//Id("assistant_id")
+	@DatabaseField(id = true)
 	private String assistantId;
     /**
      * 导员电话号码
      */
 	//Field("assistant_tel")
+	@DatabaseField
 	private String assistantTel;
     /**
      * 导员密码
      */
 	//Field("assistant_password")
+	@DatabaseField
 	private String assistantPassword;
     /**
      * 导员编号(工作证ID)
      */
 	//Field("assistant_no")
+	@DatabaseField
 	private String assistantNo;
     /**
      * 导员姓名
      */
 	//Field("assistant_name")
+	@DatabaseField
 	private String assistantName;
     /**
      * 导员邮箱
      */
 	//Field("assistant_email")
+	@DatabaseField
 	private String assistantEmail;
     /**
      * 导员头像URL
      */
 	//Field("assistant_headimage_url")
+	@DatabaseField
 	private String assistantHeadimageUrl;
     /**
      * 导员性别
      */
 	//Field("assistant_gender")
+	@DatabaseField
 	private String assistantGender;
     /**
      * 导员教务系统用户名
      */
 	//Field("assistant_school_username")
+	@DatabaseField
 	private String assistantSchoolUsername;
     /**
      * 导员教务系统密码
      */
 	//Field("assistant_school_password")
+	@DatabaseField
 	private String assistantSchoolPassword;
     /**
      * 记录创建时间
      */
 	//Field("assistant_gmt_created")
+	@DatabaseField
 	private Timestamp assistantGmtCreated;
     /**
      * 记录更改时间
      */
 	//Field("assistant_gmt_modified")
+	@DatabaseField
 	private Timestamp assistantGmtModified;
     /**
      * 导员信息状态码
      */
 	//Field("assistant_status")
+	@DatabaseField
 	private String assistantStatus;
 
 

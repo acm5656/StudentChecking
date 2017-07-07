@@ -7,6 +7,7 @@ import android.os.Message;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.entity.AssistantVo;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentVo;
 import com.example.checkingsystem.entity.TeacherVo;
@@ -122,6 +123,47 @@ public class LoginNet {
                         /*
                         缺
                          */
+                        ResultObj <AssistantVo> resultObj = null;
+
+                        try {
+                            resultObj = objectMapper.readValue(msg.obj.toString().getBytes(), new TypeReference<ResultObj<AssistantVo>>() {});
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if(resultObj.getMeta().getResult())
+                        {
+                            LoginActivity.assistantStatic = resultObj.getData().getAssistant();
+                            Long longTime = new Long(resultObj.getData().getTimestamp());
+
+                            Date date = new Date(longTime);
+
+                            String token = null;
+                            try {
+                                token = AES.decode(
+                                        EncodeRuleProvider.getRuleByTimestamp(new Timestamp(date.getTime())),
+                                        resultObj.getData().getUuid());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
+
+                            LoginActivity.token = token;
+                            LoginActivity.assistantStatic.setAssistantPassword(token);
+                            LoginActivity.assistantDao.addAssistant(LoginActivity.assistantStatic);
+                            GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
+
+
+//                            Intent intent = new Intent(activity, TeacherIndexActivity.class);
+//                            activity.startActivity(intent);
+                            Toast.makeText(activity,"登录成功",Toast.LENGTH_SHORT).show();
+
+
+
+                        }else {
+                            Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
                     break;
                 case FALSE:
@@ -165,7 +207,7 @@ public class LoginNet {
     public void assistantLogin(Activity activity,String username,String password)
     {
         this.activity = activity;
-        final String address = HttpUtil.urlIp;
+        final String address = HttpUtil.urlIp+PathUtil.ASSISTANT_LOGIN;
         String data = loginEncode(address,username,password);
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }

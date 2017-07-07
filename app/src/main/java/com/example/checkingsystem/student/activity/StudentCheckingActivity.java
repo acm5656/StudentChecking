@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment;
 import com.example.checkingsystem.student.fragment.StudentCheckingFragment;
+import com.example.checkingsystem.student.fragment.StudentCourseIndexFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class StudentCheckingActivity extends FragmentActivity {
         list = new ArrayList<Fragment>();
         list.add(studentCheckingFragment);
         Intent intent = getIntent();
-        courseID = intent.getStringExtra("courseID");
+        courseID = StudentCourseIndexFragment.courseShow.getDbID();
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {

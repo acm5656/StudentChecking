@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.RegistActivity;
 import com.example.checkingsystem.entity.ResultObj;
 
 import util.ChangeTypeUtil;
@@ -78,6 +79,14 @@ public class RegistNet {
     {
         this.activity = activity;
         String path = HttpUtil.urlIp + PathUtil.TEACHER_REGIST;
+        password = Md5Util.EncoderByMd5(password);
+        String data = "registerTel="+tel+"&verifycode="+verifyCode+"&password="+password;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
+    }
+
+    public void assistantRegist(String tel, String verifyCode, String password, RegistActivity activity) {
+        this.activity = activity;
+        String path = HttpUtil.urlIp+PathUtil.ASSISTANT_REGIST;
         password = Md5Util.EncoderByMd5(password);
         String data = "registerTel="+tel+"&verifycode="+verifyCode+"&password="+password;
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);

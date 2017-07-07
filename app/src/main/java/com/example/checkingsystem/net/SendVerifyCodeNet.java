@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import com.example.checkingsystem.RegistActivity;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -88,4 +89,9 @@ public class SendVerifyCodeNet {
     }
 
 
+    public void sendAssistantRegistVerifyCode(String tel, RegistActivity activity) {
+        this.activity = activity;
+        String path = HttpUtil.urlIp+ PathUtil.ASSISTANT_REGIST_GET_VERIFY_CODE;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"registerTel="+tel,HttpUtil.NO_STATUS);
+    }
 }

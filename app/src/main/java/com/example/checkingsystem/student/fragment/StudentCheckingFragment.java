@@ -329,7 +329,7 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
                         AuthorityInfo authorityInfo = new AuthorityInfo();
                         authorityInfo.setMacList(pairedMaclist);
                         authorityInfo.setStuMac(macAddress);
-                        authorityInfo.setCourseAttendanceCourseTimeId(courseID);
+                        authorityInfo.setVirtualCourseId(courseID);
 
                         String data = ChangeTypeUtil.getJSONString(authorityInfo);
                         HttpUtil.sendHttpPostRequest(path,httpCallbackListenerGetAuthority,data,HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);

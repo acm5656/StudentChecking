@@ -78,6 +78,14 @@
                     android:layout_marginLeft="20dp"
                     android:id="@+id/activity_regist_role_student"
                     />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="导员"
+                    android:background="@null"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/activity_regist_role_assistant"
+                    />
             </RadioGroup>
         </LinearLayout>
         <LinearLayout

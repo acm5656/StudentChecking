@@ -5,6 +5,7 @@ package com.example.checkingsystem.beans;
  */
 
 public class TeacherCheckingStudentItem {
+    private String itemID;
     private String studentNo;
     private String studentName;
     private String studentState;
@@ -59,5 +60,13 @@ public class TeacherCheckingStudentItem {
 
     public void setStudentID(String studentID) {
         this.studentID = studentID;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 }

@@ -472,4 +472,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			}
 		}
 	}
+	public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
+		mRefreshableView.setOnItemLongClickListener(listener);
+	}
 }
