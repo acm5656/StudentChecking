@@ -43,6 +43,8 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
     String imageName = null;
     private TextView schoolID;
     private TextView name;
+    private EditText nameEditText;
+    private EditText schoolNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,9 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
         email.setText(LoginActivity.studentStatic.getStudentEmail());
         schoolID = (TextView)findViewById(R.id.activity_student_change_info_schoolID);
         name = (TextView)findViewById(R.id.activity_student_change_info_name);
+        nameEditText = (EditText) findViewById(R.id.activity_student_change_info_name_edit_text);
+        schoolNameEditText = (EditText)findViewById(R.id.activity_student_change_info_school_id_edit_text);
+
         schoolID.setText("学号："+LoginActivity.studentStatic.getStudentSchoolUsername());
         name.setText("姓名：" + LoginActivity.studentStatic.getStudentName());
     }
@@ -82,6 +87,8 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
                 String nickNameStr = nickName.getText().toString();
                 String emailStr = email.getText().toString();
                 String path = CosUtil.urlHeaderImage+imageName;
+                String name = nameEditText.getText().toString();
+                String schoolID = schoolNameEditText.getText().toString();
                 ChangeInfoNet changeInfoNet = new ChangeInfoNet();
                 changeInfoNet.studentChangeInfo(nickNameStr,emailStr,path,this);
                 break;

@@ -1,0 +1,91 @@
+package com.example.checkingsystem.assistant.activity;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.checkingsystem.R;
+import com.example.checkingsystem.assistant.fragments.AssistantAgreeForLeaveFragment;
+import com.example.checkingsystem.entity.ClassLeaveShow;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import util.ActivityColectorUtil;
+
+/**
+ * Created by 竞豪 on 2017/7/8.
+ */
+public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements View.OnClickListener {
+    private CircleImageView circleImageView;
+    private TextView textViewMineId;
+    private TextView textViewMineName;
+    private TextView textViewLeaveTime;
+    private TextView textViewLeaveReason;
+    private EditText editTextLeaveNote;
+    private Button buttonAgree;
+    private Button buttonDisagree;
+    private ClassLeaveShow classLeaveShow;
+
+    @Override
+    protected void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_assistant_agree_for_leave);
+        ActivityColectorUtil.addActivity(this);
+        classLeaveShow = AssistantAgreeForLeaveFragment.classLeaveShow;
+        initUI();
+        initListener();
+    }
+
+    private void initUI(){
+        circleImageView = (CircleImageView) findViewById(R.id.clv_activity_assistant_agree_for_leave);
+        textViewMineId = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_mine_id);
+        textViewMineName = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_mine_name);
+        textViewLeaveTime = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_time);
+        textViewLeaveReason = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_reason);
+        editTextLeaveNote = (EditText) findViewById(R.id.et_activity_assistant_change_info_nick_name);
+        buttonAgree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_agree);
+        buttonDisagree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_disagree);
+        circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
+        textViewMineId.setText(classLeaveShow.getStudentSchoolName());
+        textViewMineName.setText(classLeaveShow.getStudentName());
+        Date beginDate = new Date(classLeaveShow.getVirtualCourseLeaveBegin().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        String beginDateStr = sdf.format(beginDate);
+
+        Date endDate = new Date(classLeaveShow.getVirtualCourseLeaveEnd().getTime());
+        String endDateStr = sdf.format(endDate);
+        textViewLeaveTime.setText(beginDateStr+"-"+endDateStr);
+        textViewLeaveReason.setText(classLeaveShow.getVirtualCourseLeaveReason());
+
+
+    }
+
+    private void initListener(){
+        buttonAgree.setOnClickListener(this);
+        buttonDisagree.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_activity_assistant_agree_for_leave_agree:
+
+                break;
+            case R.id.btn_activity_assistant_agree_for_leave_disagree:
+
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityColectorUtil.finishAll();
+    }
+}

@@ -1,23 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+            android:background="@color/backgroundColor"
              tools:context="com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment">
 
     <LinearLayout
         android:orientation="vertical"
-        android:weightSum="12"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:background="#ffffff"
             android:orientation="horizontal"
             android:weightSum="5"
-            android:layout_weight="2"
             >
             <TextView
                 android:layout_width="0dp"
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:text="年"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -57,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:text="月"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -71,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="日"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -88,11 +87,10 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:background="#ffffff"
             android:orientation="horizontal"
             android:weightSum="5"
-            android:layout_weight="2"
             >
             <TextView
                 android:layout_width="0dp"
@@ -103,6 +101,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/unclick_text_size"
                 />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -118,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:text="年"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -132,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="月"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -146,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:text="日"
                     android:textColor="#ffaa33"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     />
@@ -172,8 +171,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_height="150dp"
             >
             <EditText
                 android:id="@+id/fragement_student_ask_for_leave_reason"
@@ -193,8 +191,7 @@
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -206,4 +203,4 @@
             />
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>

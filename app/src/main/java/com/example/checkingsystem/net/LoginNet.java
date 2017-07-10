@@ -7,6 +7,7 @@ import android.os.Message;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.assistant.activity.AssistantIndexActivity;
 import com.example.checkingsystem.entity.AssistantVo;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentVo;
@@ -68,6 +69,14 @@ public class LoginNet {
                                 e.printStackTrace();
 
                             }
+                            if(LoginActivity.studentStatic.getStudentSchoolUsername()==null||LoginActivity.studentStatic.getStudentSchoolUsername().trim().equals(""))
+                            {
+                                LoginActivity.studentStatic.setStudentSchoolUsername("无");
+                            }
+                            if(LoginActivity.studentStatic.getStudentName()==null||LoginActivity.studentStatic.getStudentName().trim().equals(""))
+                            {
+                                LoginActivity.studentStatic.setStudentName("无");
+                            }
                             LoginActivity.token = token;
                             LoginActivity.studentStatic.setStudentPassword(token);
                             LoginActivity.studentDao.addStudent(LoginActivity.studentStatic);
@@ -106,6 +115,16 @@ public class LoginNet {
 
                             LoginActivity.token = token;
                             LoginActivity.teacherStatic.setTeacherPassword(token);
+
+                            if(LoginActivity.teacherStatic.getTeacherSchoolUsername()==null||LoginActivity.teacherStatic.getTeacherSchoolUsername().trim().equals(""))
+                            {
+                                LoginActivity.teacherStatic.setTeacherSchoolUsername("无");
+                            }
+                            if(LoginActivity.teacherStatic.getTeacherName()==null||LoginActivity.teacherStatic.getTeacherName().trim().equals(""))
+                            {
+                                LoginActivity.teacherStatic.setTeacherName("无");
+                            }
+
                             LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
                             GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
@@ -153,11 +172,8 @@ public class LoginNet {
                             GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
 
 
-//                            Intent intent = new Intent(activity, TeacherIndexActivity.class);
-//                            activity.startActivity(intent);
-                            Toast.makeText(activity,"登录成功",Toast.LENGTH_SHORT).show();
-
-
+                            Intent intent = new Intent(activity, AssistantIndexActivity.class);
+                            activity.startActivity(intent);
 
                         }else {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();

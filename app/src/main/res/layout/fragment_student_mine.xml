@@ -1,3 +1,8 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
@@ -161,6 +166,66 @@
                     />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/itemBackgroundColor"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:id="@+id/relativeLayout_student_add_class"
+            >
+                <ImageView
+                    android:id="@+id/imageview_student_add_class"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/add_class"
+                    android:layout_gravity="center"
+                    android:layout_alignParentLeft="true"
+                    />
+                <TextView
+                    android:layout_toRightOf="@id/imageview_student_add_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="加入班级"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/itemBackgroundColor"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:id="@+id/relativeLayout_student_query_ask_info"
+            >
+                <ImageView
+                    android:id="@+id/imageview_student_query_ask_info"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/query"
+                    android:layout_gravity="center"
+                    android:layout_alignParentLeft="true"
+                    />
+                <TextView
+                    android:layout_toRightOf="@id/imageview_student_query_ask_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="查询请假"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    />
+        </RelativeLayout>
+
         <Button
             android:layout_marginTop="35dp"
             android:layout_width="match_parent"
@@ -171,11 +236,6 @@
             android:background="@drawable/exit_button"
             android:textSize="16dp"
             android:id="@+id/fragment_student_mine_quit"
-
             />
-
-
-
-
-
 </LinearLayout>
+</ScrollView>

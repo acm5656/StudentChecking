@@ -44,5 +44,10 @@ public class PathUtil {
     public static final String ASSISTANT_REGIST_GET_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/register/assistant";
     public static final String ASSISTANT_REGIST = "api/attendance-provider-user/assistant";
     public static final String ASSISTANT_LOGIN = "api/attendance-provider-user/assistant/login";
+    public static final String STUDENT_ADD_CLASS = "api/attendance-provider-user/classGrade";
+    public static final String ASSISTANT_ADD_CLASS = "api/attendance-provider-user/class";
+    public static final String ASSISTANT_GET_ALL_COURSE_LEAVE = "api/attendance-consumer-cattendance/virtualCourseLeave/virtualCourseLeaves/all";
+
+
 }
 

@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -6,15 +6,13 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:weightSum="8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
         >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="60dp"
 
             android:background="@color/itemBackgroundColor"
             >
@@ -43,8 +41,8 @@
         <RelativeLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="60dp"
+
             android:background="@color/itemBackgroundColor"
             >
             <TextView
@@ -79,11 +77,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:background="#ffffff"
             android:orientation="horizontal"
             android:weightSum="5"
-            android:layout_weight="2"
             >
             <TextView
                 android:layout_width="0dp"
@@ -122,7 +119,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:text="考勤"
             android:textSize="17dp"
@@ -133,4 +130,4 @@
             />
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>

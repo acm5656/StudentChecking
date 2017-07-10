@@ -143,6 +143,64 @@
                 android:id="@+id/activity_student_change_info_email"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/itemBackgroundColor"
+            android:weightSum="3"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="姓名"
+                android:gravity="center"
+                android:textSize="17dp"
+                android:layout_weight="1"
+
+                android:id="@+id/activity_student_change_info_name_textview"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:textSize="17dp"
+                android:text="哈哈"
+                android:background="@null"
+                android:id="@+id/activity_student_change_info_name_edit_text"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/itemBackgroundColor"
+            android:weightSum="3"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="学号"
+                android:gravity="center"
+                android:textSize="17dp"
+                android:layout_weight="1"
+
+                android:id="@+id/activity_student_change_info_school_id_text_view"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:textSize="17dp"
+                android:text="哈哈"
+                android:background="@null"
+                android:id="@+id/activity_student_change_info_school_id_edit_text"
+                />
+        </LinearLayout>
 
         <Button
             android:layout_marginLeft="20dp"

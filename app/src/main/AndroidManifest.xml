@@ -61,6 +61,20 @@
         </activity>
         <activity android:name=".teacher.activity.TeacherQueryCourseStudentInfoActivity">
         </activity>
+        <activity android:name=".assistant.activity.AssistantIndexActivity">
+        </activity>
+        <activity android:name=".assistant.activity.AssistantAgreeForLeaveActivity">
+        </activity>
+        <activity android:name=".assistant.activity.AssistantChangeInfoActivity">
+        </activity>
+        <activity android:name=".assistant.activity.AssistantAddClassActivity">
+        </activity>
+        <activity android:name=".assistant.activity.AssistantAgreeForClassActivity">
+        </activity>
+
+
+
+
     </application>
 
 </manifest>

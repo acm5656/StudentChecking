@@ -1,6 +1,8 @@
 package com.example.checkingsystem.student.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,8 +25,10 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.RegistFaceActivity;
 import com.example.checkingsystem.beans.Item;
+import com.example.checkingsystem.net.StudentAddCourseNet;
 import com.example.checkingsystem.student.activity.StudentChangeInfoActivity;
 import com.example.checkingsystem.ChangePasswordActivity;
+import com.example.checkingsystem.student.activity.StudentIndexActivity;
 
 import java.util.List;
 
@@ -50,9 +55,14 @@ public class StudentMineFragment extends Fragment {
     private RelativeLayout registRelativeLayout;
     private RelativeLayout changeIngoRelativeLayout;
     private RelativeLayout changePasswordRelativeLayout;
+    private RelativeLayout stduentAddClassRelativeLayout;
+    private RelativeLayout studentQueryAskInfoRelativeLayout;
     private TextView schoolIDTextView;
     private TextView studentName;
     private CircleImageView headImageView;
+    EditText addClassEditText;
+    private String classCode;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +103,24 @@ public class StudentMineFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        stduentAddClassRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_student_add_class);
+        stduentAddClassRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        studentQueryAskInfoRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_student_query_ask_info);
+        studentQueryAskInfoRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
         schoolIDTextView = (TextView)view.findViewById(R.id.fragment_student_mine_school_id);
         schoolIDTextView.setText("学号："+LoginActivity.studentStatic.getStudentSchoolUsername());
@@ -146,4 +174,24 @@ public class StudentMineFragment extends Fragment {
             }
         }
     }
+
+    DialogInterface.OnClickListener getOnclickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            classCode = addClassEditText.getText().toString();
+
+        }
+    };
+
+    private void showInputDialog() {
+    /*@setView 装入一个EditView
+     */
+        addClassEditText = new EditText(getActivity());
+        AlertDialog.Builder inputDialog =
+                new AlertDialog.Builder(getActivity());
+        inputDialog.setTitle("请输入课程编号").setView(addClassEditText);
+        inputDialog.setPositiveButton("确定",
+                getOnclickListener).show();
+    }
+
 }

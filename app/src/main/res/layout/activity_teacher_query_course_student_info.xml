@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:text="学生考勤详细列表"
             android:textColor="#ffffff"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             />

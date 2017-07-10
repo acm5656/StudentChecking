@@ -20,6 +20,7 @@ import com.example.checkingsystem.dao.AssistantDao;
 import com.example.checkingsystem.dao.StudentDao;
 import com.example.checkingsystem.dao.TeacherDao;
 import com.example.checkingsystem.entity.Assistant;
+import com.example.checkingsystem.entity.CourseLeave;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
 import com.example.checkingsystem.entity.Student;
@@ -77,9 +78,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static List<VirtualCourse> studentVirtualList = null;
     public static List<CourseShow> studentCourseShow = null;
     public static List<CourseShow> studentItemCountGroupByCidAndIStatusList = null;
+    public static List<CourseLeave> studentCourseLeaveList = null;
+
     //用来记录教师课表
     public static List<VirtualCourse> teacherVirtualList = null;
     public static List<CourseShow> teacherCourseShow = null;
+    //记录辅导员一些信息
+    public static List<CourseLeave> assistantCourseLeaveList = null;
 
 
 

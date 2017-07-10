@@ -50,7 +50,7 @@
                 android:src="@drawable/icon_head"
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:id="@+id/activity_teacher_change_info_head_picture"
+                android:id="@+id/activity_assistant_change_info_head_picture"
                 />
 
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:textSize="16dp"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:id="@+id/activity_teacher_change_info_tel"/>
+                    android:id="@+id/tv_activity_assistant_change_info_tel"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,13 +78,10 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="15dp"
-                    android:id="@+id/activity_teacher_change_info_name"
+                    android:id="@+id/tv_activity_assistant_change_info_name"
                     />
             </LinearLayout>
-
         </LinearLayout>
-
-
         <LinearLayout
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
@@ -110,7 +107,7 @@
                 android:textSize="17dp"
                 android:text="哈哈"
                 android:background="@null"
-                android:id="@+id/activity_teacher_change_info_nick_name"
+                android:id="@+id/et_activity_assistant_change_info_nick_name"
                 />
         </LinearLayout>
         <LinearLayout
@@ -139,65 +136,7 @@
                 android:textSize="17dp"
                 android:text="哈哈"
                 android:background="@null"
-                android:id="@+id/activity_teacher_change_info_email"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/itemBackgroundColor"
-            android:weightSum="3"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="姓名"
-                android:gravity="center"
-                android:textSize="17dp"
-                android:layout_weight="1"
-
-                android:id="@+id/activity_teacher_change_info_name_text_view"/>
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:textSize="17dp"
-                android:text="哈哈"
-                android:background="@null"
-                android:id="@+id/activity_teacher_change_info_name_edit_text"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/itemBackgroundColor"
-            android:weightSum="3"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="工号"
-                android:gravity="center"
-                android:textSize="17dp"
-                android:layout_weight="1"
-
-                android:id="@+id/activity_teacher_change_info_school_id_text_view"/>
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:textSize="17dp"
-                android:text="哈哈"
-                android:background="@null"
-                android:id="@+id/activity_teacher_change_info_school_id_edit_text"
+                android:id="@+id/et_activity_assistant_change_info_email"
                 />
         </LinearLayout>
 
@@ -209,12 +148,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="提交"
-            android:id="@+id/activity_teacher_change_info_submit"
+            android:id="@+id/btn_activity_assistant_change_info_submit"
             android:background="@drawable/input_login"
             />
-
-
-
     </LinearLayout>
 
 </LinearLayout>
