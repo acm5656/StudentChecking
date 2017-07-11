@@ -29,12 +29,10 @@ public class GetStudetnCourseAttentanceTotalNet {
             try {
                 itemCountGroupByCidAndIStatusResultObjList = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<ItemCountGroupByCidAndIStatus>>>() {});
                 List<ItemCountGroupByCidAndIStatus> list = itemCountGroupByCidAndIStatusResultObjList.getData();
-                Log.e("test---NET","-"+list.size()+"-"+LoginActivity.studentCourseShow.size());
                 for(int i =0 ; i<list.size() ;i++)
                 {
                     for(int j = 0 ;j<LoginActivity.studentCourseShow.size();j++)
                     {
-                        Log.e("test---NET","-"+list.get(i).getCourseId()+"-"+LoginActivity.studentCourseShow.get(j).getDbID());
                         if(list.get(i).getCourseId().equals(LoginActivity.studentCourseShow.get(j).getDbID()))
                         {
                             if(list.get(i).getItemStatus().equals("attendance"))

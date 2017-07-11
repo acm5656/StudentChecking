@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.assistant.fragments.AssistantAgreeForLeaveFragment;
 import com.example.checkingsystem.entity.ClassLeaveShow;
+import com.example.checkingsystem.entity.VirtualCourseLeave;
+import com.example.checkingsystem.net.AssistantHandlerLeaveNet;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +33,7 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
     private Button buttonAgree;
     private Button buttonDisagree;
     private ClassLeaveShow classLeaveShow;
+    private VirtualCourseLeave virtualCourseLeave = new VirtualCourseLeave();
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
         textViewMineName = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_mine_name);
         textViewLeaveTime = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_time);
         textViewLeaveReason = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_reason);
-        editTextLeaveNote = (EditText) findViewById(R.id.et_activity_assistant_change_info_nick_name);
+        editTextLeaveNote = (EditText) findViewById(R.id.et_activity_assistant_agree_for_leave_note);
         buttonAgree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_agree);
         buttonDisagree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_disagree);
         circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
@@ -73,19 +76,25 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View view) {
+        virtualCourseLeave.setVirtualCourseLeaveId(classLeaveShow.getVirtualCourseLeaveId());
+        virtualCourseLeave.setVirtualCourseLeaveFeedback(editTextLeaveNote.getText().toString());
         switch (view.getId()){
             case R.id.btn_activity_assistant_agree_for_leave_agree:
-
+                virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_PERMITTED);
                 break;
             case R.id.btn_activity_assistant_agree_for_leave_disagree:
-
+                virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_REFUSE);
                 break;
         }
+
+        AssistantHandlerLeaveNet assistantHandlerLeaveNet = new AssistantHandlerLeaveNet();
+        assistantHandlerLeaveNet.assistantHnadlerLeave(this,virtualCourseLeave);
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ActivityColectorUtil.finishAll();
+        ActivityColectorUtil.removeActivity(this);
     }
 }

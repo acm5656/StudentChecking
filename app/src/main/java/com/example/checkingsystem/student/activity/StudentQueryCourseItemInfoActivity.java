@@ -147,7 +147,6 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
             String dateStr = sdf.format(date);
             viewHoder.timeTextView.setText(dateStr);
             viewHoder.stateTextView.setText(virtualCourseAttentanceItem.getChineseShow());
-            Log.e("test",virtualCourseAttentanceItem.getChineseShow());
             return view;
         }
 

@@ -35,7 +35,6 @@ public class MyAnimView extends View {
     public MyAnimView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-        Log.e("view","-------------构造函数");
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.GREEN);
         mPaint.setStrokeWidth(4l);
@@ -50,10 +49,8 @@ public class MyAnimView extends View {
         Paint paint = new Paint();
         paint.setColor(Color.parseColor("#DFE6EB"));
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(20);
         RectF oval2 = new RectF(X-R+10,Y-R+10,X+R-10,Y+R-10);//画外围环
-        Log.e("test"," X="+X + "  Y=" +Y);
-        Log.e("test"," r="+R);
         canvas.drawArc(oval2,135,270, false,paint);
         drawHuTest(canvas);
 //        drawShanTest(canvas);
@@ -89,12 +86,12 @@ public class MyAnimView extends View {
 
     private void drawLine(Canvas canvas,float z) {
 //        canvas.drawCircle(x, y, RADIUS, mPaint);
-        float rd = Math.abs(z-(R-20));
-        float hd = (float) Math.sqrt(new Double((R-20)*(R-20)-rd*rd));
+        float rd = Math.abs(z-(R-40));
+        float hd = (float) Math.sqrt(new Double((R-40)*(R-40)-rd*rd));
         float x1 = X-hd;
         float x2 = X+hd;
-        float y1 = Y-(R-20)+z;
-        float y2 = Y-(R-20)+z;
+        float y1 = Y-(R-40)+z;
+        float y2 = Y-(R-40)+z;
         canvas.drawLine(x1,y1,x2,y2,mPaint);
     }
 
@@ -134,8 +131,8 @@ public class MyAnimView extends View {
         // 创建画笔
         Paint p = new Paint();
         p.setStyle(Paint.Style.STROKE);//设置填满
-        p.setStrokeWidth(10);
-        p.setColor(Color.parseColor("#000000"));
+        p.setStrokeWidth(20);
+        p.setColor(Color.parseColor("#AA14B7F5"));
         /* 设置渐变色 这个正方形的颜色是改变的 */
 //        mShader.setLocalMatrix(matrix);
         Shader mShader = new SweepGradient((getLeft()+getRight())/2, (getLeft()+getRight())/2,
@@ -156,8 +153,6 @@ public class MyAnimView extends View {
 
         Point startPoint = new Point((getLeft()+getRight())/2, (getBottom()+getTop())/2+Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2));
         Point endPoint = startPoint;
-        Log.e("myAnim","x="+(getLeft()+getRight())/2+"    y="+(getTop()+getBottom())/2);
-        Log.e("myAnim","left="+getLeft()+"   right="+getRight()+"    top="+getTop()+"   botton"+getBottom());
 
         ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2)), startPoint, endPoint);
 
@@ -177,8 +172,6 @@ public class MyAnimView extends View {
 
         Point startPoint = new Point((getLeft()+getRight())/2, (getBottom()+getTop())/2+Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2));
         Point endPoint = startPoint;
-        Log.e("myAnim","x="+(getLeft()+getRight())/2+"    y="+(getTop()+getBottom())/2);
-        Log.e("myAnim","left="+getLeft()+"   right="+getRight()+"    top="+getTop()+"   botton"+getBottom());
 
         ValueAnimator anim = ValueAnimator.ofObject(new ShanEvaluator(),startPoint, endPoint);
 
@@ -199,10 +192,8 @@ public class MyAnimView extends View {
 
         Point startPoint = new Point((getLeft()+getRight())/2, (getBottom()+getTop())/2+Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2));
         Point endPoint = startPoint;
-        Log.e("myAnim","x="+(getLeft()+getRight())/2+"    y="+(getTop()+getBottom())/2);
-        Log.e("myAnim","left="+getLeft()+"   right="+getRight()+"    top="+getTop()+"   botton"+getBottom());
 
-        ValueAnimator anim = ValueAnimator.ofObject(new HuEvaluator(2*(R-20)),startPoint, endPoint);
+        ValueAnimator anim = ValueAnimator.ofObject(new HuEvaluator(2*(R-40)),startPoint, endPoint);
 
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -221,7 +212,7 @@ public class MyAnimView extends View {
     public void startAnimation4() {
         Point startPoint = new Point((getLeft()+getRight())/2, (getBottom()+getTop())/2+Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2));
         Point endPoint = startPoint;
-        ValueAnimator anim = ValueAnimator.ofObject(new LineEvaluator(2*(R-20)),startPoint,endPoint);
+        ValueAnimator anim = ValueAnimator.ofObject(new LineEvaluator(2*(R-40)),startPoint,endPoint);
 
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

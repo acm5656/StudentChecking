@@ -47,7 +47,12 @@ public class PathUtil {
     public static final String STUDENT_ADD_CLASS = "api/attendance-provider-user/classGrade";
     public static final String ASSISTANT_ADD_CLASS = "api/attendance-provider-user/class";
     public static final String ASSISTANT_GET_ALL_COURSE_LEAVE = "api/attendance-consumer-cattendance/virtualCourseLeave/virtualCourseLeaves/all";
-
-
+    public static final String ASSISTANT_HANDLER_STUDENT_LEAVE = "api/attendance-consumer-cattendance/virtualCourseLeave";
+    public static final String ASSISTANT_GET_STUDENT_APPLY_CLASS = "api/attendance-provider-user/classGrade/waitIitems";
+    public static final String ASSISTANT_HANDLER_STUDENT_CLASS = "api/attendance-provider-user/classGrade";
+    public static final String STUDENT_GET_COURSE_LEAVE_INFO = "api/attendance-consumer-cattendance/virtualCourseLeave";
+    public static final String ASSISTANT_CHANGE_INFO = "api/attendance-provider-user/assistant/nonsensitive/info";
+    public static final String ASSISTANT_CHANGE_PASSWORD = "api/attendance-provider-user/assistant/sensitive/password";
+    public static final String ASSISTANT_CHANGE_PASSWORD_GET_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/assistant/password";
 }
 

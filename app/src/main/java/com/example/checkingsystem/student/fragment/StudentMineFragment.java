@@ -25,10 +25,12 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.RegistFaceActivity;
 import com.example.checkingsystem.beans.Item;
+import com.example.checkingsystem.net.StudentAddClassNet;
 import com.example.checkingsystem.net.StudentAddCourseNet;
 import com.example.checkingsystem.student.activity.StudentChangeInfoActivity;
 import com.example.checkingsystem.ChangePasswordActivity;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
+import com.example.checkingsystem.student.activity.StudentQueryLeaveInfoListActivity;
 
 import java.util.List;
 
@@ -56,7 +58,7 @@ public class StudentMineFragment extends Fragment {
     private RelativeLayout changeIngoRelativeLayout;
     private RelativeLayout changePasswordRelativeLayout;
     private RelativeLayout stduentAddClassRelativeLayout;
-    private RelativeLayout studentQueryAskInfoRelativeLayout;
+    private RelativeLayout studentQueryAskLeaveInfoRelativeLayout;
     private TextView schoolIDTextView;
     private TextView studentName;
     private CircleImageView headImageView;
@@ -108,15 +110,16 @@ public class StudentMineFragment extends Fragment {
         stduentAddClassRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showInputDialog();
             }
         });
 
-        studentQueryAskInfoRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_student_query_ask_info);
-        studentQueryAskInfoRelativeLayout.setOnClickListener(new View.OnClickListener() {
+        studentQueryAskLeaveInfoRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_student_query_ask_leave_info);
+        studentQueryAskLeaveInfoRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), StudentQueryLeaveInfoListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -179,7 +182,8 @@ public class StudentMineFragment extends Fragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             classCode = addClassEditText.getText().toString();
-
+            StudentAddClassNet studentAddClassNet = new StudentAddClassNet();
+            studentAddClassNet.studentAddClass(getActivity(),LoginActivity.studentStatic.getStudentId(),classCode);
         }
     };
 

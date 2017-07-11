@@ -88,10 +88,15 @@ public class SendVerifyCodeNet {
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"tel="+tel,HttpUtil.NO_STATUS);
     }
 
-
-    public void sendAssistantRegistVerifyCode(String tel, RegistActivity activity) {
+    public void sendAssistantRegistVerifyCode(String tel, Activity activity) {
         this.activity = activity;
         String path = HttpUtil.urlIp+ PathUtil.ASSISTANT_REGIST_GET_VERIFY_CODE;
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"registerTel="+tel,HttpUtil.NO_STATUS);
+    }
+    public void sendAssistantChangePasswordVerifyCode(String tel,Activity activity)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp + PathUtil.ASSISTANT_CHANGE_PASSWORD_GET_VERIFY_CODE;
+        HttpUtil.sendHttpPostRequest(path,httpCallbackListener,"tel="+tel,HttpUtil.NO_STATUS);
     }
 }

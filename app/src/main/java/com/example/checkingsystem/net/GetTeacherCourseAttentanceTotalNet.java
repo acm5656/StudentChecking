@@ -43,7 +43,6 @@ public class GetTeacherCourseAttentanceTotalNet {
                     {
                         for(int j = 0 ;j<LoginActivity.teacherCourseShow.size();j++)
                         {
-                            Log.e("test---NET","-"+list.get(i).getCourseId()+"-"+LoginActivity.teacherCourseShow.get(j).getDbID());
                             if(list.get(i).getCourseId().equals(LoginActivity.teacherCourseShow.get(j).getDbID()))
                             {
                                 if(list.get(i).getItemStatus().equals("attendance"))

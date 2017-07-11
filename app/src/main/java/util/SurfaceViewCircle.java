@@ -40,13 +40,8 @@ public class SurfaceViewCircle extends SurfaceView {
         //设置裁剪的圆心，半径
         Rect globeRect = new Rect();
         getLocalVisibleRect(globeRect);
-        Log.e("surfaceView",globeRect.centerX()+"   "+globeRect.centerY());
 //        path.addCircle(height / 2, height / 2, height / 2, Path.Direction.CCW);
-        Log.e("surfaceView","x="+getX()+"    y="+getY());
-        Log.e("surfaceView","left="+getLeft()+"   right="+getRight()+"    top="+getTop()+"   botton"+getBottom());
-
-        path.addCircle((getLeft()+getRight())/2, (getTop()+getBottom())/2, Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2)-20, Path.Direction.CCW);
-        Log.e("surfaceView",Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2)-20+"");
+        path.addCircle((getLeft()+getRight())/2, (getTop()+getBottom())/2, Math.min(((getRight()-getLeft()))/2,(getBottom()-getTop())/2)-40, Path.Direction.CCW);
         //裁剪画布，并设置其填充方式
         canvas.clipPath(path, Region.Op.REPLACE);
 

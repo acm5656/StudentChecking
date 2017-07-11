@@ -156,7 +156,6 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
                     list = new ArrayList<>();
                     for(Student stu:listStu)
                     {
-                        Log.e("checking","----------queryfor");
                         TeacherCheckingStudentItem studentItem = new TeacherCheckingStudentItem();
                         studentItem.setStudentName(stu.getStudentName());
                         studentItem.setStudentNo(stu.getStudentNo());
@@ -199,7 +198,6 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
             }
             if(resultObjStu.getMeta().getResult())
             {
-                Log.e("checking","----------2");
                 Message message = new Message();
                 message.what = RIGHT;
                 handler.sendMessage(message);
@@ -228,7 +226,6 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
                 {
                     list.add(virtualCourseAttendanceItem.getVirtualCourseAttendanceItemStudentId());
                 }
-                Log.e("checking","----------1");
                 getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,list);
 
             }

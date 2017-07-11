@@ -62,8 +62,6 @@ public class TeacherAddCourseNet {
                     message.obj = virtualCourseResultObj.getData();
                     handler.sendMessage(message);
                 } catch (IOException e) {
-                    Log.e("exception",e.getMessage());
-                    Log.e("exception",e.toString());
                     e.printStackTrace();
                 }
                 resultObj.getData();

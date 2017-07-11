@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/clv_item_assistant_agree_for_class"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:civ_border_width="1px"
+        app:civ_border_color="#FF000000"
+        android:src="@drawable/icon_head"
+        android:layout_margin="10dp"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="20dp">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/tv_item_assistant_agree_for_class_mine_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="2014214318"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_item_assistant_agree_for_class_mine_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="艾成铭"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/tv_item_assistant_agree_for_class_mine_status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="状态：status"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/tv_item_assistant_agree_for_class_mine_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="申请时间：time"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

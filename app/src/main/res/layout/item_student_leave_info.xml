@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="60dp">
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_student_leave_info_item_create_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="申请时间：time"
+            android:layout_weight="2"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:id="@+id/tv_student_leave_info_item_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="状态：status"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:textSize="15dp"
+            android:gravity="center_vertical"
+            android:text="请假时间："
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_student_leave_info_item_leave_time"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="啥时候到啥时候"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

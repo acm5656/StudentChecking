@@ -2,6 +2,7 @@ package com.example.checkingsystem.net;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.example.checkingsystem.LoginActivity;
 
@@ -25,6 +26,7 @@ public class GetPictureNet {
 
     public void getPicture(final String address, final HttpPictureCallbackListener httpPictureCallbackListener)
     {
+        Log.e("test",address);
             new Thread(new Runnable() {
                 @Override
                 public void run() {

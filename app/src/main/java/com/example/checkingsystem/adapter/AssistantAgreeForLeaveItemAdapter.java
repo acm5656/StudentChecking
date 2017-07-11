@@ -62,9 +62,7 @@ public class AssistantAgreeForLeaveItemAdapter extends BaseAdapter{
             view.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) view.getTag();
-        /**
-         * 注意， 此处设置头像可能有错误
-         */
+
         viewHolder.head.setImageBitmap(classLeaveShowList.get(i).getStudentBitmap());
         viewHolder.no.setText(classLeaveShowList.get(i).getStudentSchoolName());
         viewHolder.name.setText(classLeaveShowList.get(i).getStudentName());

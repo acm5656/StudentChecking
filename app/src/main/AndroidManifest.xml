@@ -71,10 +71,10 @@
         </activity>
         <activity android:name=".assistant.activity.AssistantAgreeForClassActivity">
         </activity>
-
-
-
-
+        <activity android:name=".student.activity.StudentQueryLeaveInfoListActivity">
+        </activity>
+        <activity android:name=".ForgetPasswordActivity">
+        </activity>
     </application>
 
 </manifest>

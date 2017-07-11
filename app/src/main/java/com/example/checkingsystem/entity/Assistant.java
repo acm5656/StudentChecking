@@ -100,7 +100,7 @@ public class Assistant {
 	//Field("assistant_status")
 	@DatabaseField
 	private String assistantStatus;
-
+	private String assistantNickname;
 
 	public String getAssistantId() {
 		return assistantId;
@@ -206,5 +206,11 @@ public class Assistant {
 		this.assistantStatus = assistantStatus;
 	}
 
+	public String getAssistantNickname() {
+		return assistantNickname;
+	}
 
+	public void setAssistantNickname(String assistantNickname) {
+		this.assistantNickname = assistantNickname;
+	}
 }

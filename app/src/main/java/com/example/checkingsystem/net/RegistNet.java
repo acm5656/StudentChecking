@@ -84,7 +84,7 @@ public class RegistNet {
         HttpUtil.sendHttpPostRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 
-    public void assistantRegist(String tel, String verifyCode, String password, RegistActivity activity) {
+    public void assistantRegist(String tel, String verifyCode, String password, Activity activity) {
         this.activity = activity;
         String path = HttpUtil.urlIp+PathUtil.ASSISTANT_REGIST;
         password = Md5Util.EncoderByMd5(password);

@@ -104,12 +104,7 @@ public class AssistantAddClassActivity extends AppCompatActivity implements View
                     Toast.makeText(this,"请输入班级编号",Toast.LENGTH_SHORT).show();
                     break;
                 }
-
-                if(imgUrl==null||imgUrl.trim().equals(""))
-                {
-                    Toast.makeText(this,"请上传课程图片",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+                imgUrl = CosUtil.urlHeaderImage+imgName;
                 Class assistantClass = new Class();
                 assistantClass.setClassAssistantId(LoginActivity.assistantStatic.getAssistantId());
                 assistantClass.setClassDepartment(stringDepartment);

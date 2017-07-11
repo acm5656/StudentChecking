@@ -117,19 +117,16 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                 e.printStackTrace();
             }
             if(resultObjStu.getMeta().getResult()) {
-                Log.e("activityTest","----------0");
                 message.what = SUCCESS;
                 handler.sendMessage(message);
             }else {
                 message.what = ERROR;
                 handler.sendMessage(message);
-                Log.e("activityTest","----------error1");
             }
         }
 
         @Override
         public void onError(Exception e) {
-            Log.e("activityTest","----------error2");
             message.what = ERROR;
             handler.sendMessage(message);
         }
@@ -143,7 +140,6 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                 ResultObj<List<StudentAttendanceCount>> resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<StudentAttendanceCount>>>() {});
                 if(resultObj.getMeta().getResult())
                 {
-                    Log.e("activityTest","----------1---error3");
                     studentAttendanceCountList = resultObj.getData();
                     GetStudentInfoByID getStudentInfoByID = new GetStudentInfoByID();
                     List<String> studentIDList = new ArrayList<>();
@@ -151,18 +147,14 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                     {
                         studentIDList.add(studentAttendanceCountList.get(i).getStudentId());
                     }
-                    Log.e("activityTest","----------1---error4");
                     getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,studentIDList);
                 }
                 else
                 {
-                    Log.e("activityTest","----------1---error0");
                     message.what = ERROR;
                     handler.sendMessage(message);
                 }
             } catch (IOException e) {
-
-                Log.e("activityTest","----------1---error2");
                 e.printStackTrace();
             }
         }

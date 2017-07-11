@@ -8,8 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.entity.ClassGradeShow;
 import com.example.checkingsystem.entity.Student;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -24,10 +27,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class AssistantAgreeForClassItemAdapter extends BaseAdapter {
     Context context;
-    List<Student> studentList;
+    List<ClassGradeShow> studentList;
     int layout;
 
-    public AssistantAgreeForClassItemAdapter(Context context, List<Student> studentList, int layout) {
+    public AssistantAgreeForClassItemAdapter(Context context, List<ClassGradeShow> studentList, int layout) {
         this.context = context;
         this.studentList = studentList;
         this.layout = layout;
@@ -54,18 +57,22 @@ public class AssistantAgreeForClassItemAdapter extends BaseAdapter {
         if (view == null){
             view = View.inflate(context, layout, null);
             viewHolder = new ViewHolder();
-            viewHolder.head = (CircleImageView) view.findViewById(R.id.clv_item_assistant_agree_for_leave);
-            viewHolder.no = (TextView) view.findViewById(R.id.tv_item_assistant_agree_for_leave_mine_id);
-            viewHolder.name = (TextView) view.findViewById(R.id.tv_item_assistant_agree_for_leave_mine_name);
+            viewHolder.head = (CircleImageView) view.findViewById(R.id.clv_item_assistant_agree_for_class);
+            viewHolder.no = (TextView) view.findViewById(R.id.tv_item_assistant_agree_for_class_mine_id);
+            viewHolder.name = (TextView) view.findViewById(R.id.tv_item_assistant_agree_for_class_mine_name);
+            viewHolder.createTime = (TextView)view.findViewById(R.id.tv_item_assistant_agree_for_class_mine_time);
+            viewHolder.status = (TextView)view.findViewById(R.id.tv_item_assistant_agree_for_class_mine_status);
             view.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) view.getTag();
-        /**
-         * 注意， 此处设置头像可能有错误
-         */
-        viewHolder.head.setImageURI(Uri.parse(studentList.get(i).getStudentHeadimageUrl()));
-        viewHolder.no.setText(studentList.get(i).getStudentNo());
-        viewHolder.name.setText(studentList.get(i).getStudentName());
+        viewHolder.head.setImageBitmap(studentList.get(i).getBitmap());
+        viewHolder.no.setText(studentList.get(i).getStudent().getStudentNo());
+        viewHolder.name.setText(studentList.get(i).getStudent().getStudentName());
+        viewHolder.status.setText("状态："+studentList.get(i).getClassGrade().getChinese());
+        Date date = new Date(studentList.get(i).getClassGrade().getClassGradeGmtCreated().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        String dateStr = sdf.format(date);
+        viewHolder.createTime.setText("时间："+dateStr);
         return view;
     }
 
@@ -73,5 +80,7 @@ public class AssistantAgreeForClassItemAdapter extends BaseAdapter {
         CircleImageView head;
         TextView no;
         TextView name;
+        TextView status;
+        TextView createTime;
     }
 }

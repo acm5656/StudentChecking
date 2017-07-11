@@ -202,7 +202,7 @@
             android:background="@color/itemBackgroundColor"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:id="@+id/relativeLayout_student_query_ask_info"
+            android:id="@+id/relativeLayout_student_query_ask_leave_info"
             >
                 <ImageView
                     android:id="@+id/imageview_student_query_ask_info"

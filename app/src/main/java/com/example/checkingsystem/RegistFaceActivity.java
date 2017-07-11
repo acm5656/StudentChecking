@@ -369,7 +369,7 @@ public class RegistFaceActivity extends AppCompatActivity {
             }
             bmp.recycle();
 
-
+            Log.e("test","注册成功");
             CosUtil.upLoad(CosUtil.faceCosPath,Environment.getExternalStorageDirectory().getPath()+ LoginActivity.path,name ,getApplicationContext());
             String url = HttpUtil.urlIp + PathUtil.SAVE_PICTURE;
             Picture picture = new Picture();

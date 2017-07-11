@@ -76,7 +76,8 @@ public class AssistantMineFragment extends Fragment implements View.OnClickListe
             case R.id.btn_fragment_assistant_mine_exit:
                 AssistantDao assistantDao = new AssistantDao(getActivity());
                 assistantDao.deleteAssistant(LoginActivity.assistantStatic);
-                ActivityColectorUtil.finishAll();
+                intent.setClass(getContext(),LoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

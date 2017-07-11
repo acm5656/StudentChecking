@@ -100,6 +100,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         studentIndexMineLayout.setOnClickListener(this);
         studentIndexInquireLayout.setOnClickListener(this);
         studentIndexStudyLayout.setOnClickListener(this);
+        studentIndexAskForLeaveLayout.setOnClickListener(this);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

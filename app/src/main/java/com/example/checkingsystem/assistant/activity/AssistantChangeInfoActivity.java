@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.net.ChangeInfoNet;
 
 import java.io.File;
 import java.util.UUID;
@@ -84,9 +85,8 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
                 String nickNameStr = nickName.getText().toString();
                 String emailStr = email.getText().toString();
                 String path = CosUtil.urlHeaderImage + imageName;
-                /**
-                *需要取数据
-                */
+                ChangeInfoNet changeInfoNet = new ChangeInfoNet();
+                changeInfoNet.assistantChangeInfo(nickNameStr,emailStr,path,this);
                 break;
             case R.id.activity_assistant_change_info_head_picture:
                 Intent intent = new Intent("android.intent.action.GET_CONTENT");

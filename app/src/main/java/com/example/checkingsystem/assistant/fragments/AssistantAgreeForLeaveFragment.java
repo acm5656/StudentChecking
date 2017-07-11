@@ -116,6 +116,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
                             }
                         }
                     }
+                    LoginActivity.classLeaveShowList = classLeaveShowList;
                     for(int i = 0 ;i<classLeaveShowList.size() ;i++)
                     {
                         final GetPictureNet getPictureNet = new GetPictureNet();
@@ -126,7 +127,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
                                 @Override
                                 public void onFinish(InputStream inputStream) {
                                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                                    classLeaveShowList.get(finalI).setStudentBitmap(bitmap);
+                                    LoginActivity.classLeaveShowList.get(finalI).setStudentBitmap(bitmap);
                                     Message message = new Message();
                                     message.what = RIGHT;
                                     handler.sendMessage(message);
@@ -209,11 +210,13 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_assistant_agree_for_leave, container, false);
-        progressDialog = ProgressDialog.show(getActivity(),"查询请假信息", "请稍等", true, true);
         initItem();
-        AssistantGetLeaveNet assistantGetLeaveNet = new AssistantGetLeaveNet();
-        assistantGetLeaveNet.assistantGetLeave(LoginActivity.assistantStatic.getAssistantId(),getLeaveHttpCallbackListener);
-
+        if(classLeaveShowList==null) {
+            progressDialog = ProgressDialog.show(getActivity(), "查询请假信息", "请稍等", true, true);
+            AssistantGetLeaveNet assistantGetLeaveNet = new AssistantGetLeaveNet();
+            assistantGetLeaveNet.assistantGetLeave(LoginActivity.assistantStatic.getAssistantId(),getLeaveHttpCallbackListener);
+        }
+        updateUI();
         return view;
     }
 
@@ -230,8 +233,10 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
     }
     private void updateUI()
     {
-        assistantAgreeForLeaveItemAdapter = new AssistantAgreeForLeaveItemAdapter(getActivity(),classLeaveShowList,R.layout.item_assistant_agree_for_leave);
-        listView.setAdapter(assistantAgreeForLeaveItemAdapter);
+        if(classLeaveShowList!=null) {
+            assistantAgreeForLeaveItemAdapter = new AssistantAgreeForLeaveItemAdapter(getActivity(), LoginActivity.classLeaveShowList, R.layout.item_assistant_agree_for_leave);
+            listView.setAdapter(assistantAgreeForLeaveItemAdapter);
+        }
     }
 
 }

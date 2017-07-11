@@ -64,7 +64,6 @@ public class CosUtil {
         } catch (AbstractCosException e) {
             e.printStackTrace();
         }
-        Log.e("test","---------sing："+sign);
 
         PutObjectRequest putObjectRequest = new PutObjectRequest();
         putObjectRequest.setBucket(bucket);
@@ -85,7 +84,6 @@ public class CosUtil {
             @Override
             public void onSuccess(COSRequest cosRequest, COSResult cosResult) {
                 PutObjectResult result = (PutObjectResult) cosResult;
-                Log.e("test","----------3");
                 if(result != null){
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append(" 上传结果： ret=" + result.code + "; msg =" +result.msg + "n");
@@ -102,7 +100,6 @@ public class CosUtil {
             }
         });
         PutObjectResult result = cosClient.putObject(putObjectRequest);
-        Log.e("test","----------2");
 
     }
 

@@ -12,7 +12,6 @@ public class PointEvaluator implements TypeEvaluator {
     public PointEvaluator(float r)
     {
         this.r = r;
-        Log.e("myAnim"," "+ r);
     }
 
     @Override

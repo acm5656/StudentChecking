@@ -33,12 +33,18 @@ public class ChangePasswordNet {
                 case TRUE:
                     Toast.makeText(activity,"恭喜你,修改成功",Toast.LENGTH_SHORT).show();
                     Intent intent = null;
+                    intent = new Intent(activity,LoginActivity.class);
                     if(LoginActivity.roleStr.equals("教师")) {
                         intent = new Intent(activity, TeacherIndexActivity.class);
                     }
                     if(LoginActivity.roleStr.equals("学生")){
                         intent = new Intent(activity, StudentIndexActivity.class);
                     }
+                    if(LoginActivity.roleStr.equals("导员"))
+                    {
+                        intent = new Intent(activity,StudentIndexActivity.class);
+                    }
+
                     intent.putExtra("data", "修改成功");
                     activity.setResult(Activity.RESULT_OK, intent);
                     activity.finish();
@@ -90,4 +96,12 @@ public class ChangePasswordNet {
         HttpUtil.sendHttpPutRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
 
     }
+    public void assistantChangePassword(Activity activity,String tel,String password,String verifyCode)
+    {
+        this.activity = activity;
+        String path = HttpUtil.urlIp + PathUtil.ASSISTANT_CHANGE_PASSWORD;
+        String data = "teacherNewPassword="+password+"&tel="+tel+"&verifycode="+verifyCode;
+        HttpUtil.sendHttpPutRequest(path,httpCallbackListener,data,HttpUtil.NO_STATUS);
+    }
+
 }

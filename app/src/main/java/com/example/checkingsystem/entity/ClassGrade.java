@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @since 2017-07-03
  */
 
-public class ClassGrade {
+public class ClassGrade implements Serializable{
 
     private static final long serialVersionUID = 1L;
 	public static final String STATUS_OK = "ok";//有效
@@ -112,7 +112,23 @@ public class ClassGrade {
 	public void setClassGradeStatus(String classGradeStatus) {
 		this.classGradeStatus = classGradeStatus;
 	}
-
+	public String getChinese()
+	{
+		String result = "";
+		if(classGradeStatus.equals(STATUS_AUTO_REFUSE))
+		{
+			result = "拒绝加入";
+		}
+		if(classGradeStatus.equals(STATUS_OK))
+		{
+			result = "同意加入";
+		}
+		if(classGradeStatus.equals("wait_permit"))
+		{
+			result = "待批准";
+		}
+		return result;
+	}
 
 
 }

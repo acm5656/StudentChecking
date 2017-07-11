@@ -84,6 +84,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         {
             tel = LoginActivity.studentStatic.getStudentTel();
         }
+        if("导员".equals(LoginActivity.roleStr))
+        {
+            tel = LoginActivity.assistantStatic.getAssistantTel();
+        }
     }
     //点击事件
     @Override
@@ -100,6 +104,11 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 {
                     SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
                     sendVerifyCodeNet.sendTeacherChangePasswordVerifyCode(tel, this);
+                }
+                if(LoginActivity.roleStr.equals("导员"))
+                {
+                    SendVerifyCodeNet sendVerifyCodeNet = new SendVerifyCodeNet();
+                    sendVerifyCodeNet.sendStudentChangePasswordVerifyCode(tel,this);
                 }
                 break;
             case R.id.change_password_submit:
@@ -130,6 +139,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         ChangePasswordNet changePasswordNet = new ChangePasswordNet();
                         password = Md5Util.EncoderByMd5(password);
                         changePasswordNet.teacherChangePassword(this,tel,password,verifycode);
+                    }
+                    if(LoginActivity.roleStr.equals("导员"))
+                    {
+                        ChangePasswordNet changePasswordNet = new ChangePasswordNet();
+                        password = Md5Util.EncoderByMd5(password);
+                        changePasswordNet.assistantChangePassword(this,tel,password,verifycode);
                     }
                 }
                 break;

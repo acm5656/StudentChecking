@@ -8,10 +8,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.assistant.activity.AssistantIndexActivity;
+import com.example.checkingsystem.entity.Assistant;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.Teacher;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
+import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
 
 import util.ChangeTypeUtil;
 import util.HttpCallbackListener;
@@ -51,11 +54,11 @@ public class ChangeInfoNet{
                 Intent intent = null;
                 if("教师".equals(role))
                 {
-                    LoginActivity.studentStatic.setStudentHeadimageUrl(url);
+                    LoginActivity.teacherStatic.setTeacherHeadimageUrl(url);
                     LoginActivity.teacherStatic.setTeacherNickname(nickName);
                     LoginActivity.teacherStatic.setTeacherEmail(email);
 
-                    intent = new Intent(activity, StudentIndexActivity.class);
+                    intent = new Intent(activity, TeacherIndexActivity.class);
 
                 }else if("学生".equals(role))
                 {
@@ -63,6 +66,12 @@ public class ChangeInfoNet{
                     LoginActivity.studentStatic.setStudentNickname(nickName);
                     LoginActivity.studentStatic.setStudentEmail(email);
                     intent = new Intent(activity, StudentIndexActivity.class);
+                }else if ("导员".equals(role))
+                {
+                    LoginActivity.assistantStatic.setAssistantHeadimageUrl(url);
+                    LoginActivity.assistantStatic.setAssistantNickname(nickName);
+                    LoginActivity.assistantStatic.setAssistantEmail(email);
+                    intent = new Intent(activity, AssistantIndexActivity.class);
                 }
                 if(intent!=null) {
                     intent.putExtra("data", "修改成功");
@@ -115,4 +124,18 @@ public class ChangeInfoNet{
         this.email = email;
         HttpUtil.sendHttpPutRequest(url,studentHttpCallListener, ChangeTypeUtil.getJSONString(teacher),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
     }
+    public void assistantChangeInfo(String nickName,String email,String headImagePath, Activity activity){
+        role = "导员";
+        this.activity = activity;
+        url= HttpUtil.urlIp+PathUtil.ASSISTANT_CHANGE_INFO;
+        Assistant assistant = new Assistant();
+        assistant.setAssistantId(LoginActivity.assistantStatic.getAssistantId());
+        assistant.setAssistantNickname(nickName);
+        assistant.setAssistantEmail(email);
+        assistant.setAssistantHeadimageUrl(headImagePath);
+        this.nickName = nickName;
+        this.email = email;
+        HttpUtil.sendHttpPutRequest(url,studentHttpCallListener,ChangeTypeUtil.getJSONString(assistant),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
+    }
+
 }

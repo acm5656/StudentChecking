@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @since 2017-06-28
  */
 //Name("t_virtual_course_leave")
-public class VirtualCourseLeave{
+public class VirtualCourseLeave implements Serializable{
 
     private static final long serialVersionUID = 1L;
     public static final String STATUS_WAIT_HANDLER = "nondeal";
@@ -157,5 +157,25 @@ public class VirtualCourseLeave{
         this.virtualCourseLeaveStatus = virtualCourseLeaveStatus;
     }
 
-
+    public String statusToChinese()
+    {
+        String result = "";
+        if(virtualCourseLeaveStatus.equals(STATUS_WAIT_HANDLER))
+        {
+            result = "待处理";
+        }
+        if(virtualCourseLeaveStatus.equals(STATUS_PERMITTED))
+        {
+            result = "已通过";
+        }
+        if(virtualCourseLeaveStatus.equals(STATUS_REFUSE))
+        {
+            result = "已拒绝";
+        }
+        if(virtualCourseLeaveStatus.equals(STATUS_INVALID))
+        {
+            result = "无效";
+        }
+        return result;
+    }
 }

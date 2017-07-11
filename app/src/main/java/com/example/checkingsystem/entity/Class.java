@@ -19,7 +19,7 @@ public static final String STATUS_INVALID = "invalid";//无效,被删除等
  * @since 2017-07-03
  */
 
-public class Class {
+public class Class implements Serializable{
 
     private static final long serialVersionUID = 1L;
 	public static final String STATUS_OPEN = "open";//可以被加入
