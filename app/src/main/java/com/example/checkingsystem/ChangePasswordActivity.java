@@ -16,7 +16,6 @@ import com.example.checkingsystem.net.SendVerifyCodeNet;
 
 import util.Md5Util;
 //修改密码用的活动
-//haha
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
     //密码的输入框..
     private EditText changePassword;
