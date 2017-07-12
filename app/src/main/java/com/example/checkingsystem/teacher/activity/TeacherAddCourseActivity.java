@@ -32,6 +32,7 @@ import util.BitmapUtil;
 import util.CosUtil;
 
 public class TeacherAddCourseActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
     private ImageView imageView;
     private EditText courseAskEditText;
     private EditText courseNameEditText;
@@ -53,12 +54,14 @@ public class TeacherAddCourseActivity extends AppCompatActivity implements View.
     }
     private void initUI()
     {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_teacher_add_course_back);
         imageView = (ImageView)findViewById(R.id.activity_teacher_add_course_img);
         courseAskEditText = (EditText)findViewById(R.id.activity_teacher_add_course_ask);
         courseNameEditText = (EditText)findViewById(R.id.activity_teacher_add_course_name);
         courseScheduleEditText = (EditText)findViewById(R.id.activity_teacher_add_course_schedule);
         courseExamEditText = (EditText)findViewById(R.id.activity_teacher_add_course_exam);
         submitButton = (Button)findViewById(R.id.activity_teacher_add_course_submit_button);
+        iv_back.setOnClickListener(this);
         imageView.setOnClickListener(this);
         submitButton.setOnClickListener(this);
     }
@@ -103,6 +106,9 @@ public class TeacherAddCourseActivity extends AppCompatActivity implements View.
                 virtualCourse.setVirtualCourseImgUrl(imgUrl);
                 TeacherAddCourseNet teacherAddCourseNet = new TeacherAddCourseNet();
                 teacherAddCourseNet.addCourseNet(this,virtualCourse);
+                break;
+            case R.id.iv_activity_teacher_add_course_back:
+                onBackPressed();
                 break;
         }
     }

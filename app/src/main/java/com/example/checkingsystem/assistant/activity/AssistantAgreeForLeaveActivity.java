@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.checkingsystem.LoginActivity;
@@ -25,6 +26,7 @@ import util.ActivityColectorUtil;
  * Created by 竞豪 on 2017/7/8.
  */
 public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
     private CircleImageView circleImageView;
     private TextView textViewMineId;
     private TextView textViewMineName;
@@ -47,6 +49,7 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
     }
 
     private void initUI(){
+        iv_back = (ImageView) findViewById(R.id.iv_activity_assistant_agree_for_leave_back);
         circleImageView = (CircleImageView) findViewById(R.id.clv_activity_assistant_agree_for_leave);
         textViewMineId = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_mine_id);
         textViewMineName = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_leave_mine_name);
@@ -73,6 +76,7 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
     private void initListener(){
         buttonAgree.setOnClickListener(this);
         buttonDisagree.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +90,9 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
                 break;
             case R.id.btn_activity_assistant_agree_for_leave_disagree:
                 virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_REFUSE);
+                break;
+            case R.id.iv_activity_assistant_agree_for_leave_back:
+                onBackPressed();
                 break;
         }
 

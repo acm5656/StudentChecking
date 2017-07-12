@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.example.checkingsystem.net.RegistNet;
 import com.example.checkingsystem.net.SendVerifyCodeNet;
 
 public class RegistActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
     //选择身份的控件
     private RadioGroup roleRadioGroup;
     private RadioButton radioButton;
@@ -72,11 +74,12 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
         initSourse();
         getVerifyCode.setOnClickListener(this);
         submit.setOnClickListener(this);
-
+        iv_back.setOnClickListener(this);
 
     }
 
     private void initSourse() {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_regist_back);
         roleRadioGroup = (RadioGroup) findViewById(R.id.activity_regist_radioGroup);
         inputTel = (EditText)findViewById(R.id.activity_regist_tel);
         inputPassword = (EditText)findViewById(R.id.activity_regist_input_password);
@@ -155,6 +158,9 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                     RegistNet registNet = new RegistNet();
                     registNet.assistantRegist(tel,verifyStr,password,this);
                 }
+                break;
+            case R.id.iv_activity_regist_back:
+                onBackPressed();
                 break;
         }
     }

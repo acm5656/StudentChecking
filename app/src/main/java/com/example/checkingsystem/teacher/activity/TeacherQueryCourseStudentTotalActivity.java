@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
     static final int SUCCESS = 1;
     static final int ERROR = 0;
     PullToRefreshListView listView;
+    private ImageView iv_back;
     List<StudentAttendanceCount> studentAttendanceCountList;
     List<StudentAttendanceCountShow> studentAttendanceCountShowList;
     public static StudentAttendanceCountShow studentAttendanceCountShow;
@@ -181,6 +184,14 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_query_course_student_total);
+
+        iv_back = (ImageView) findViewById(R.id.iv_activity_teacher_query_course_student_total_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         listView = (PullToRefreshListView) findViewById(R.id.acivity_teacher_query_course_student_total_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);

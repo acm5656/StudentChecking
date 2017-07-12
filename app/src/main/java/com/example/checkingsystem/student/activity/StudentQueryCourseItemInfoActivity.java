@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
     static final int SUCCESS = 1;
     static final int ERROR = 0;
     ProgressDialog progressDialog;
+    private ImageView iv_back;
     PullToRefreshListView listView;
 
     List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
@@ -110,11 +112,18 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
         String courseID = StudentInquireFragment.courseShow.getDbID();
         String studentID = LoginActivity.studentStatic.getStudentId();
         initUI();
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         HttpUtil.sendHttpGetRequest(url+"/"+courseID+"/"+studentID,httpCallbackListener);
 
     }
 
     private void initUI() {
+        iv_back= (ImageView) findViewById(R.id.iv_activity_student_query_course_item_info_back);
         listView = (PullToRefreshListView) findViewById(R.id.activity_student_query_course_item_info_list_view);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);

@@ -35,6 +35,8 @@ import util.CosUtil;
  * Created by 竞豪 on 2017/7/8.
  */
 public class AssistantAddClassActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
+
     private ImageView imageView;
     private EditText editTextDepartment;
     private EditText editTextMajor;
@@ -58,6 +60,7 @@ public class AssistantAddClassActivity extends AppCompatActivity implements View
     }
 
     private void initUI(){
+        iv_back = (ImageView) findViewById(R.id.iv_activity_assistant_add_class);
         imageView = (ImageView) findViewById(R.id.iv_activity_assistant_add_class);
         editTextDepartment = (EditText) findViewById(R.id.et_activity_assistant_add_class_department);
         editTextMajor = (EditText) findViewById(R.id.et_activity_assistant_add_class_major);
@@ -67,6 +70,7 @@ public class AssistantAddClassActivity extends AppCompatActivity implements View
     }
 
     private void initListener(){
+        iv_back.setOnClickListener(this);
         imageView.setOnClickListener(this);
         buttonSubmit.setOnClickListener(this);
     }
@@ -113,7 +117,10 @@ public class AssistantAddClassActivity extends AppCompatActivity implements View
                 assistantClass.setClassNo(stringNo);
                 AssistandAddClassNet assistandAddClassNet = new AssistandAddClassNet();
                 assistandAddClassNet.assistantAddClass(this,assistantClass);
-
+                break;
+            case R.id.iv_activity_assistant_add_class_back:
+                onBackPressed();
+                break;
         }
     }
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.checkingsystem.net.SendVerifyCodeNet;
 import util.Md5Util;
 
 public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
     //选择身份的控件
     private RadioGroup roleRadioGroup;
     private RadioButton radioButton;
@@ -72,11 +74,12 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
         initSourse();
         getVerifyCode.setOnClickListener(this);
         submit.setOnClickListener(this);
-
+        iv_back.setOnClickListener(this);
 
     }
 
     private void initSourse() {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_forget_password_back);
         roleRadioGroup = (RadioGroup) findViewById(R.id.activity_forget_password_radioGroup);
         inputTel = (EditText)findViewById(R.id.activity_forget_password_tel);
         inputPassword = (EditText)findViewById(R.id.activity_forget_password_input_password);
@@ -156,6 +159,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                     ChangePasswordNet changePasswordNet = new ChangePasswordNet();
                     changePasswordNet.assistantChangePassword(this,tel,password,verifyStr);
                 }
+                break;
+            case R.id.iv_activity_forget_password_back:
+                onBackPressed();
                 break;
         }
     }

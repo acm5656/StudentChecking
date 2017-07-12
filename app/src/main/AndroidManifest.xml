@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.checkingsystem">
+    package="com.example.checkingsystem">
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -24,57 +24,41 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".student.activity.StudentCheckingActivity"/>
-        <activity android:name=".student.activity.StudentIndexActivity"/>
-        <activity android:name=".teacher.activity.TeacherCheckingActivity"/>
-        <activity android:name=".teacher.activity.TeacherIndexActivity"/>
+        <activity android:name=".student.activity.StudentCheckingActivity" />
+        <activity android:name=".student.activity.StudentIndexActivity" />
+        <activity android:name=".teacher.activity.TeacherCheckingActivity" />
+        <activity android:name=".teacher.activity.TeacherIndexActivity" />
         <activity
             android:name=".VerifyFaceActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".RegistFaceActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-        <activity android:name=".IndexActivity">
-        </activity>
-        <activity android:name=".student.activity.StudentChangeInfoActivity">
-        </activity>
-        <activity android:name=".ChangePasswordActivity">
-        </activity>
-        <activity android:name=".RegistActivity">
-        </activity>
-        <activity android:name=".teacher.activity.TeacherChangeInfoActivity">
-        </activity>
-        <activity android:name=".teacher.activity.TeacherCheckingStudentAttendanceListActivity">
-        </activity>
-        <activity android:name=".teacher.activity.TeacherAddCourseActivity">
-        </activity>
-        <activity android:name=".student.activity.StudentQueryCourseItemInfoActivity">
-        </activity>
-        <activity android:name=".teacher.activity.TeacherQueryCourseStudentTotalActivity">
-        </activity>
-        <activity android:name=".teacher.activity.TeacherQueryCourseStudentInfoActivity">
-        </activity>
-        <activity android:name=".assistant.activity.AssistantIndexActivity">
-        </activity>
-        <activity android:name=".assistant.activity.AssistantAgreeForLeaveActivity">
-        </activity>
-        <activity android:name=".assistant.activity.AssistantChangeInfoActivity">
-        </activity>
-        <activity android:name=".assistant.activity.AssistantAddClassActivity">
-        </activity>
-        <activity android:name=".assistant.activity.AssistantAgreeForClassActivity">
-        </activity>
-        <activity android:name=".student.activity.StudentQueryLeaveInfoListActivity">
-        </activity>
-        <activity android:name=".ForgetPasswordActivity">
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".IndexActivity" />
+        <activity android:name=".student.activity.StudentChangeInfoActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".RegistActivity" />
+        <activity android:name=".teacher.activity.TeacherChangeInfoActivity" />
+        <activity android:name=".teacher.activity.TeacherCheckingStudentAttendanceListActivity" />
+        <activity android:name=".teacher.activity.TeacherAddCourseActivity" />
+        <activity android:name=".student.activity.StudentQueryCourseItemInfoActivity" />
+        <activity android:name=".teacher.activity.TeacherQueryCourseStudentTotalActivity" />
+        <activity android:name=".teacher.activity.TeacherQueryCourseStudentInfoActivity" />
+        <activity android:name=".assistant.activity.AssistantIndexActivity" />
+        <activity android:name=".assistant.activity.AssistantAgreeForLeaveActivity" />
+        <activity android:name=".assistant.activity.AssistantChangeInfoActivity" />
+        <activity android:name=".assistant.activity.AssistantAddClassActivity" />
+        <activity android:name=".assistant.activity.AssistantAgreeForClassActivity" />
+        <activity android:name=".student.activity.StudentQueryLeaveInfoListActivity" />
+        <activity android:name=".ForgetPasswordActivity" />
+        <activity android:name=".teacher.activity.TeacherChangeSensitiveInfo" />
+        <activity android:name=".student.activity.StudentChangeSensitiveInfo" />
+        <activity android:name=".assistant.activity.AssistantChangeSensitiveInfo"></activity>
     </application>
 
 </manifest>

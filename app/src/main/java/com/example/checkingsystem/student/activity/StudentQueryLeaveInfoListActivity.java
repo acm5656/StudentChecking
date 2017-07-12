@@ -5,6 +5,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import util.HttpCallbackListener;
 public class StudentQueryLeaveInfoListActivity extends AppCompatActivity {
     final static int SUCCESS = 1;
     final static int FAIL = 0;
+    private ImageView iv_back;
     PullToRefreshListView refresh_lv;
     List<VirtualCourseLeave> courseLeaveList = new ArrayList<>();
     StudentQueryLeaveInfoItemAdapter adapter;
@@ -89,6 +92,13 @@ public class StudentQueryLeaveInfoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_query_leave_info_list);
+        iv_back= (ImageView) findViewById(R.id.iv_activity_student_query_leave_info_list_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         refresh_lv = (PullToRefreshListView) findViewById(R.id.student_query_leave_info_list_view);
         refresh_lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ILoadingLayout startLayout = refresh_lv.getLoadingLayoutProxy(true,false);

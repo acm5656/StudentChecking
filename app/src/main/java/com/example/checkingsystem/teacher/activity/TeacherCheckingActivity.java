@@ -31,6 +31,7 @@ import util.ActivityColectorUtil;
  */
 
 public class TeacherCheckingActivity extends AppCompatActivity{
+    private ImageView iv_back;
     private TextView teacherAskForLeaveInfoTextView;
     private TextView teacherCheckingTextView;
 
@@ -71,9 +72,15 @@ public class TeacherCheckingActivity extends AppCompatActivity{
     }
 
     private void initUI() {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_teacher_checking_back);
         teacherCheckingFragmentContainer = (ViewPager)findViewById(R.id.teacher_checking_fragment_container);
         Intent intent = getIntent();
-
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

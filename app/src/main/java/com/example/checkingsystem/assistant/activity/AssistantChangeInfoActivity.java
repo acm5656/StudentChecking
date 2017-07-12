@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.checkingsystem.LoginActivity;
@@ -41,6 +42,7 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
     public static final int CHOOSE_PHOTO = 3;
     Uri uri = null;
     String imagePath = null;
+    private ImageView iv_back;
     private CircleImageView circleImageView;
     private EditText nickName;
     private EditText email;
@@ -62,9 +64,11 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
         circleImageView.setOnClickListener(this);
         circleImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         submitButton.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
     }
 
     private void initSourse(){
+        iv_back = (ImageView) findViewById(R.id.iv_activity_assistant_change_info_back);
         circleImageView = (CircleImageView) findViewById(R.id.activity_assistant_change_info_head_picture);
         nickName = (EditText) findViewById(R.id.et_activity_assistant_change_info_nick_name);
         email = (EditText) findViewById(R.id.et_activity_assistant_change_info_email);
@@ -92,6 +96,9 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
                 Intent intent = new Intent("android.intent.action.GET_CONTENT");
                 intent.setType("image/*");
                 startActivityForResult(intent,CHOOSE_PHOTO);
+                break;
+            case R.id.iv_activity_assistant_change_info_back:
+                onBackPressed();
                 break;
         }
     }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.net.ChangePasswordNet;
@@ -18,6 +19,7 @@ import util.Md5Util;
 //修改密码用的活动
 //haha
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView iv_back;
     //密码的输入框..
     private EditText changePassword;
     //确认密码的输入框
@@ -66,12 +68,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         initSourse();
         getVerifyCode.setOnClickListener(this);
         submitButton.setOnClickListener(this);
-
+        iv_back.setOnClickListener(this);
     }
 
     //初始化资源
     private void initSourse() {
-
+        iv_back = (ImageView) findViewById(R.id.iv_activity_change_password_back);
         changePassword = (EditText) findViewById(R.id.change_password_input_password);
         changePasswordChecking = (EditText)findViewById(R.id.change_password_checking_input_password);
         getVerifyCode = (Button)findViewById(R.id.change_password_get_verifycode_button);
@@ -148,6 +150,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         changePasswordNet.assistantChangePassword(this,tel,password,verifycode);
                     }
                 }
+                break;
+            case R.id.iv_activity_change_password_back:
+                onBackPressed();
                 break;
         }
     }

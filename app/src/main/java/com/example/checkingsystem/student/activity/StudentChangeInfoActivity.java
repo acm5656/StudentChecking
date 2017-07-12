@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.checkingsystem.LoginActivity;
@@ -35,6 +36,7 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
     public static final int CHOOSE_PHOTO = 3;
     Uri uri = null;
     String imagePath = null;
+    private ImageView iv_back;
     private CircleImageView circleImageView;
     private EditText nickName;
     private EditText email;
@@ -53,16 +55,16 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
         //初始化资源
         initSourse();
         //设置点击事件
+        iv_back.setOnClickListener(this);
         circleImageView.setOnClickListener(this);
         if(LoginActivity.headPictureBitmap!=null) {
             circleImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         }
         submitButton.setOnClickListener(this);
-
-
     }
 
     private void initSourse() {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_student_change_info_back);
         circleImageView = (CircleImageView) findViewById(R.id.activity_student_change_info_head_picture);
         nickName = (EditText)findViewById(R.id.activity_student_change_info_nick_name);
         email = (EditText)findViewById(R.id.activity_student_change_info_email);
@@ -96,6 +98,9 @@ public class StudentChangeInfoActivity extends AppCompatActivity implements View
                 Intent intent = new Intent("android.intent.action.GET_CONTENT");
                 intent.setType("image/*");
                 startActivityForResult(intent,CHOOSE_PHOTO);
+                break;
+            case R.id.iv_activity_student_change_info_back:
+                onBackPressed();
                 break;
         }
     }

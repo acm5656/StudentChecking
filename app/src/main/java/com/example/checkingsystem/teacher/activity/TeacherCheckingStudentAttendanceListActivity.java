@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
 
     public final static int RIGHT = 1;
     public final static int FALSE = 0;
+    private ImageView iv_back;
     ObjectMapper objectMapper= new ObjectMapper();
     ResultObj<List<VirtualCourseAttendanceItem>> resultObjAtteantanceItem;
     ResultObj<List<Student>> resultObjStu;
@@ -64,11 +66,18 @@ public class TeacherCheckingStudentAttendanceListActivity extends AppCompatActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_checking_student_attendance_list);
+        iv_back = (ImageView) findViewById(R.id.iv_activity_teacher_checking_student_attendance_list_back);
         refresh_lv = (PullToRefreshListView) findViewById(R.id.main_pull_refresh_lv);
         refresh_lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         timeTextView = (TextView)findViewById(R.id.activity_teacher_checking_student_attendance_list_time);
         closeButton = (Button)findViewById(R.id.activity_teacher_checking_student_attendance_list_close_button);
         Intent intent = getIntent();
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         attentanceID = intent.getStringExtra("attentanceID");
         endTime = intent.getLongExtra("endTime",0);
         timeThread = new Thread(new Runnable() {

@@ -17,17 +17,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#33000000"
         android:layout_x="0dp"
         android:layout_y="0dp">
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
-
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="到啦"
+            android:textSize="40dp"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="40dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +124,7 @@
                 android:text="忘记密码？"
                 android:textSize="16dp"
                 android:textColor="#1ca3d4"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/activity_login_forget_password"/>
             <TextView
                 android:gravity="center"
@@ -124,7 +134,7 @@
                 android:text="新用户注册"
                 android:textSize="16dp"
                 android:textColor="#1ca3d4"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/activity_login_regist"/>
         </RelativeLayout>
 
@@ -142,6 +152,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
     </LinearLayout>
 </RelativeLayout>

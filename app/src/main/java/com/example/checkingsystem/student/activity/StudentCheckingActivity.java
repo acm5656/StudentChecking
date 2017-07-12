@@ -28,7 +28,7 @@ import java.util.List;
 import util.ActivityColectorUtil;
 
 public class StudentCheckingActivity extends FragmentActivity {
-
+    private ImageView iv_back;
     private ViewPager viewPager;
 
     private TextView askForLeaveTextView;
@@ -50,6 +50,12 @@ public class StudentCheckingActivity extends FragmentActivity {
         setContentView(R.layout.activity_student_checking);
         ActivityColectorUtil.addActivity(this);
         initUI();
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         StudentCheckingFragment studentCheckingFragment = new StudentCheckingFragment();
         fragmentManager = getSupportFragmentManager();
         list = new ArrayList<Fragment>();
@@ -73,6 +79,7 @@ public class StudentCheckingActivity extends FragmentActivity {
     }
 
     private void initUI() {
+        iv_back = (ImageView) findViewById(R.id.iv_activity_student_checking_back);
         viewPager = (ViewPager)findViewById(R.id.checking_fragment_container);
     }
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ import util.PathUtil;
 public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
     final int ERROR = 0;
     final int SUCCESS = 1;
+    private ImageView iv_back;
     PullToRefreshListView listView;
     ProgressDialog progressDialog;
     List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
@@ -98,6 +100,14 @@ public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_query_course_student_info);
+        iv_back = (ImageView) findViewById(R.id.iv_activity_teacher_query_course_student_info_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
         listView = (PullToRefreshListView) findViewById(R.id.acivity_teacher_query_course_student_info_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);

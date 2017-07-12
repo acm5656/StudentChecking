@@ -3,6 +3,7 @@ package com.example.checkingsystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //创建播放视频的控件对象
     private CustomVideoView videoview;
-
+    private TextView loginTitle;
 
     //获取身份的控件
     Spinner rolesSpinner;
@@ -124,6 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_tipsprice_spinner, mItems);
         //绑定 Adapter到控件
         initResourse();
+        loginTitle.setTypeface(Typeface.createFromAsset(getAssets(),"qigong.ttf"));
+        loginTitle.setEnabled(false);
         rolesSpinner.setAdapter(adapter);
         submitButton.setOnClickListener(this);
         regist.setOnClickListener(this);
@@ -135,6 +138,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initResourse()
     {
+        loginTitle = (TextView) findViewById(R.id.login_title);
         rolesSpinner = (Spinner) findViewById(R.id.login_roles);
         usernameText = (EditText)findViewById(R.id.login_usernameEdit);
         passwordText = (EditText)findViewById(R.id.login_passwordEdit);

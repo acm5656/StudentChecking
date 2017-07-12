@@ -34,6 +34,7 @@ import util.CosUtil;
 public class AssistantAgreeForClassActivity extends AppCompatActivity implements View.OnClickListener {
     final static int SUCCESS = 1;
     final static int FAIL = 0;
+    private ImageView iv_back;
     private ImageView imageViewHead;
     private TextView textViewNo;
     private TextView textViewName;
@@ -93,6 +94,7 @@ public class AssistantAgreeForClassActivity extends AppCompatActivity implements
 
     private void initUI(){
         dialog = new AlertDialog.Builder(this).create();
+        iv_back = (ImageView) findViewById(R.id.iv_activity_assistant_agree_for_class_back);
         imageViewHead = (ImageView) findViewById(R.id.iv_activity_assistant_agree_for_class_head);
         textViewNo = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_class_no);
         textViewName = (TextView) findViewById(R.id.tv_activity_assistant_agree_for_class_name);
@@ -128,6 +130,7 @@ public class AssistantAgreeForClassActivity extends AppCompatActivity implements
     }
 
     private void initListener(){
+        iv_back.setOnClickListener(this);
         buttonSubmit.setOnClickListener(this);
         buttonRefuse.setOnClickListener(this);
     }
@@ -144,6 +147,9 @@ public class AssistantAgreeForClassActivity extends AppCompatActivity implements
                 break;
             case R.id.btn_activity_assistant_agree_for_class_refuse:
                 classGrade.setClassGradeStatus(ClassGrade.STATUS_AUTO_REFUSE);
+                break;
+            case R.id.iv_activity_assistant_agree_for_class_back:
+                onBackPressed();
                 break;
         }
 

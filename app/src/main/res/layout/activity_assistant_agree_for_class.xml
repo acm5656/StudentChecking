@@ -7,8 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/actionBarBackgroundColor"
-
         >
+        <ImageView
+            android:id="@+id/iv_activity_assistant_agree_for_class_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:padding="13dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -16,8 +22,8 @@
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:gravity="center"
-            android:layout_marginLeft="20dp"
-            />
+            android:layout_toRightOf="@id/iv_activity_assistant_agree_for_class_back"
+            android:layout_marginLeft="20dp"/>
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
