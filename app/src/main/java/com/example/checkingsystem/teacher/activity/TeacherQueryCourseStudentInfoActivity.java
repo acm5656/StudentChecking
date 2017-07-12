@@ -22,6 +22,9 @@ import com.example.checkingsystem.student.fragment.StudentInquireFragment;
 import com.example.checkingsystem.teacher.fragment.TeacherInquireFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,7 +39,7 @@ import util.PathUtil;
 public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
     final int ERROR = 0;
     final int SUCCESS = 1;
-    ListView listView;
+    PullToRefreshListView listView;
     ProgressDialog progressDialog;
     List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
     Handler handler = new Handler()
@@ -58,7 +61,6 @@ public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
         }
     };
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
-        Message message = new Message();
         @Override
         public void onFinish(String response) {
             ResultObj resultObj;
@@ -68,21 +70,26 @@ public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
                 resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<VirtualCourseAttendanceItem>>>(){});
                 if(resultObj.getMeta().getResult())
                 {
+                    Message message = new Message();
                     message.what = SUCCESS;
                     message.obj = resultObj.getData();
+                    handler.sendMessage(message);
 
                 }else {
+                    Message message = new Message();
                     message.what = ERROR;
+                    handler.sendMessage(message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            handler.sendMessage(message);
+
         }
 
         @Override
         public void onError(Exception e) {
+            Message message = new Message();
             message.what = ERROR;
             handler.sendMessage(message);
         }
@@ -91,8 +98,23 @@ public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_query_course_student_info);
-        listView = (ListView) findViewById(R.id.acivity_teacher_query_course_student_info_listview);
-        List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
+        listView = (PullToRefreshListView) findViewById(R.id.acivity_teacher_query_course_student_info_listview);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                getdata();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         progressDialog = ProgressDialog.show(this,"查询请假信息", "请稍等", true, true);
         getdata();
     }
@@ -106,7 +128,10 @@ public class TeacherQueryCourseStudentInfoActivity extends AppCompatActivity {
     public void UpdateUI()
     {
         ViewAdapter viewAdapter = new ViewAdapter();
+
         listView.setAdapter(viewAdapter);
+        viewAdapter.notifyDataSetChanged();
+        listView.onRefreshComplete();
     }
     class ViewAdapter extends BaseAdapter {
 

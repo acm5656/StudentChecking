@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="11"
     >
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:layout_weight="11"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -14,6 +14,6 @@
         android:dividerHeight="1px"
         android:id="@+id/fragment_student_inquire_list_view"
         >
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

@@ -39,7 +39,8 @@ public class ChangeInfoNet{
             switch (msg.what)
             {
                 case FALSE:
-                    Toast.makeText(activity,"操作失败请稍后再试",Toast.LENGTH_SHORT).show();
+                    String msgStr = (String) msg.obj;
+                    Toast.makeText(activity,msgStr,Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -82,6 +83,7 @@ public class ChangeInfoNet{
             else {
                 Message message = new Message();
                 message.what = FALSE;
+                message.obj = resultObj.getMeta().getMsg();
                 handler.sendMessage(message);
             }
         }
@@ -90,6 +92,7 @@ public class ChangeInfoNet{
         public void onError(Exception e) {
             Message message = new Message();
             message.what = FALSE;
+            message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
         }
     };

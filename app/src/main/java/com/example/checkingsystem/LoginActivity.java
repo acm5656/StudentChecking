@@ -25,6 +25,7 @@ import com.example.checkingsystem.dao.TeacherDao;
 import com.example.checkingsystem.entity.Assistant;
 import com.example.checkingsystem.entity.ClassGradeShow;
 import com.example.checkingsystem.entity.ClassLeaveShow;
+import com.example.checkingsystem.entity.ClassShow;
 import com.example.checkingsystem.entity.CourseLeave;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
@@ -100,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static List<CourseLeave> assistantCourseLeaveList = null;
     public static List<ClassLeaveShow> classLeaveShowList = null;
     public static List<ClassGradeShow> classGradeShowList = null;
+    public static List<ClassShow> classShowList = null;
 
 
 

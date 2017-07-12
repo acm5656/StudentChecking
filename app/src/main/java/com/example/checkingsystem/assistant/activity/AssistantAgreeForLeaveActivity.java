@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.assistant.fragments.AssistantAgreeForLeaveFragment;
 import com.example.checkingsystem.entity.ClassLeaveShow;
@@ -78,6 +79,7 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
     public void onClick(View view) {
         virtualCourseLeave.setVirtualCourseLeaveId(classLeaveShow.getVirtualCourseLeaveId());
         virtualCourseLeave.setVirtualCourseLeaveFeedback(editTextLeaveNote.getText().toString());
+        virtualCourseLeave.setVirtualCourseLeaveAssisId(LoginActivity.assistantStatic.getAssistantId());
         switch (view.getId()){
             case R.id.btn_activity_assistant_agree_for_leave_agree:
                 virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_PERMITTED);

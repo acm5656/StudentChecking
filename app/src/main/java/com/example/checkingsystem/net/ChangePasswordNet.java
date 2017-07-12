@@ -22,12 +22,14 @@ import util.PathUtil;
  */
 
 public class ChangePasswordNet {
+
     private Activity activity;
     public static final int TRUE = 1;
     public static final int FALSE = 0;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            String msgStr = (String) msg.obj;
             switch (msg.what)
             {
                 case TRUE:
@@ -44,13 +46,13 @@ public class ChangePasswordNet {
                     {
                         intent = new Intent(activity,StudentIndexActivity.class);
                     }
-
-                    intent.putExtra("data", "修改成功");
+                    intent.putExtra("data", msgStr);
                     activity.setResult(Activity.RESULT_OK, intent);
                     activity.finish();
                     break;
                 case FALSE:
-                    Toast.makeText(activity,"操作失败，请稍后再试",Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(activity,msgStr,Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -63,11 +65,13 @@ public class ChangePasswordNet {
             {
                 Message message = new Message();
                 message.what = TRUE;
+                message.obj = resultObj.getMeta().getMsg();
                 handler.sendMessage(message);
             }
             else {
                 Message message = new Message();
                 message.what = FALSE;
+                message.obj = resultObj.getMeta().getMsg();
                 handler.sendMessage(message);
             }
 
@@ -77,6 +81,7 @@ public class ChangePasswordNet {
         public void onError(Exception e) {
             Message message = new Message();
             message.what = FALSE;
+            message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
         }
     };

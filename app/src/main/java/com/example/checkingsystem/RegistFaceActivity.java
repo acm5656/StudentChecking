@@ -115,6 +115,8 @@ public class RegistFaceActivity extends AppCompatActivity {
                         ChangeTypeUtil.getJSONString(facecode),
                         HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON
                 );
+            }else {
+                Toast.makeText(getApplicationContext(),"注册失败，请稍后再试",Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -135,8 +137,13 @@ public class RegistFaceActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intent);
                 finish();
             }
-            else {
-                Toast.makeText(RegistFaceActivity.this,"注册失败，请稍后重试",Toast.LENGTH_SHORT).show();
+            else
+            {
+                Log.e("test","error");
+                Intent intent = new Intent(RegistFaceActivity.this, StudentIndexActivity.class);
+                intent.putExtra("data_return", resultObj.getMeta().getMsg());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
 

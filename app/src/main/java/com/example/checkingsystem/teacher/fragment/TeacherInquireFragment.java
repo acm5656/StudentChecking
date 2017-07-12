@@ -19,7 +19,11 @@ import com.example.checkingsystem.R;
 import com.example.checkingsystem.adapter.QueryCourseAttentanceItemAdapter;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.net.GetPictureNet;
+import com.example.checkingsystem.net.GetVirtualCourseInfoNet;
 import com.example.checkingsystem.teacher.activity.TeacherQueryCourseStudentTotalActivity;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,7 +35,7 @@ public class TeacherInquireFragment extends Fragment implements AdapterView.OnIt
     public static CourseShow courseShow;
     private View view;
     private List<CourseShow> listItem = null;
-    private ListView listView;
+    private PullToRefreshListView listView;
     public TeacherInquireFragment() {
 
     }
@@ -76,15 +80,49 @@ public class TeacherInquireFragment extends Fragment implements AdapterView.OnIt
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_teacher_inquire, container, false);;
         initItem();
-        listView = (ListView)view.findViewById(R.id.fragment_teacher_inquire_list_view);
 
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoginActivity.teacherCourseShow=null;
+                        LoginActivity.teacherVirtualList = null;
+                        System.gc();
+                        GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
+                        while (LoginActivity.teacherCourseShow==null) {
+
+                        }
+                        length = LoginActivity.teacherCourseShow.size();
+                        while (length<LoginActivity.teacherVirtualList.size())
+                        {
+                            length = LoginActivity.teacherVirtualList.size();
+                        }
+                        listItem = LoginActivity.teacherCourseShow;
+                        Message message = new Message();
+                        handler.sendMessage(message);
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         listView.setOnItemClickListener(this);
         return view;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        courseShow = listItem.get(position);
+        courseShow = listItem.get(position-1);
         Intent intent = new Intent(getActivity(), TeacherQueryCourseStudentTotalActivity.class);
         startActivity(intent);
     }
@@ -94,6 +132,7 @@ public class TeacherInquireFragment extends Fragment implements AdapterView.OnIt
         void onFragmentInteraction(Uri uri);
     }
     private void initItem() {
+        listView = (PullToRefreshListView) view.findViewById(R.id.fragment_teacher_inquire_list_view);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -118,6 +157,7 @@ public class TeacherInquireFragment extends Fragment implements AdapterView.OnIt
         QueryCourseAttentanceItemAdapter queryCourseAttentanceItemAdapter = new QueryCourseAttentanceItemAdapter(getContext(),listItem,R.layout.list_view_query_course_attentance_item);
 
         listView.setAdapter(queryCourseAttentanceItemAdapter);
+        listView.onRefreshComplete();
     }
 
 

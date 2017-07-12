@@ -23,7 +23,11 @@ import com.example.checkingsystem.entity.Course;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.net.GetPictureNet;
+import com.example.checkingsystem.net.GetVirtualCourseInfoNet;
 import com.example.checkingsystem.student.activity.StudentCheckingActivity;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -37,8 +41,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class StudentCourseIndexFragment extends Fragment implements AdapterView.OnItemClickListener {
-    Lock lock = new ReentrantLock();
-    ListView listView;
+    PullToRefreshListView listView;
     StudentCourseItemAdapter courseItemAdapter;
     View view;
     List<CourseShow> courseList;
@@ -63,9 +66,11 @@ public class StudentCourseIndexFragment extends Fragment implements AdapterView.
                     @Override
                     public void onFinish(InputStream inputStream) {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        courseList.get(finalI).setImgBitmap(bitmap);
-                        Message message = new Message();
-                        updateUIHandler.sendMessage(message);
+                        if(courseList!=null) {
+                            courseList.get(finalI).setImgBitmap(bitmap);
+                            Message message = new Message();
+                            updateUIHandler.sendMessage(message);
+                        }
                     }
 
                     @Override
@@ -80,12 +85,46 @@ public class StudentCourseIndexFragment extends Fragment implements AdapterView.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_student_course_index,container,false);
-        listView = (ListView) view.findViewById(R.id.fragment_student_course_index_list_view);
         initUI();
         return view;
     }
     private void initUI() {
-        listView = (ListView) view.findViewById(R.id.fragment_student_course_index_list_view);
+        listView = (PullToRefreshListView) view.findViewById(R.id.fragment_student_course_index_list_view);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                LoginActivity.studentCourseShow=null;
+                LoginActivity.studentCourseShow = null;
+                GetVirtualCourseInfoNet.studentGetCourseTimeInfo();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (LoginActivity.studentCourseShow==null) {
+
+                        }
+                        length = LoginActivity.studentCourseShow.size();
+                        while (length<LoginActivity.studentVirtualList.size())
+                        {
+                            length = LoginActivity.studentCourseShow.size();
+                        }
+                        courseList = LoginActivity.studentCourseShow;
+                        Message message = new Message();
+                        handler.sendMessage(message);
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -119,12 +158,14 @@ public class StudentCourseIndexFragment extends Fragment implements AdapterView.
     {
         courseItemAdapter = new StudentCourseItemAdapter(getContext(),courseList,R.layout.student_list_view_course_item);
         listView.setAdapter(courseItemAdapter);
+        courseItemAdapter.notifyDataSetChanged();
+        listView.onRefreshComplete();
         listView.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        courseShow = courseList.get(position);
+        courseShow = courseList.get(position-1);
         Intent intent = new Intent(getActivity(), StudentCheckingActivity.class);
         startActivity(intent);
     }

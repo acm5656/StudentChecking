@@ -28,6 +28,9 @@ import com.example.checkingsystem.net.GetStudentInfoByID;
 import com.example.checkingsystem.teacher.fragment.TeacherInquireFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,11 +44,11 @@ import util.PathUtil;
 public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     static final int SUCCESS = 1;
     static final int ERROR = 0;
-    ListView listView;
+    PullToRefreshListView listView;
     List<StudentAttendanceCount> studentAttendanceCountList;
     List<StudentAttendanceCountShow> studentAttendanceCountShowList;
     public static StudentAttendanceCountShow studentAttendanceCountShow;
-    Message message = new Message();
+
     List<Student> studentList;
     ProgressDialog progressDialog;
     Handler updateUIHandlerUI = new Handler()
@@ -62,7 +65,9 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
             switch (msg.what)
             {
                 case ERROR:
-                    progressDialog.dismiss();
+                    if(progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
                     Toast.makeText(TeacherQueryCourseStudentTotalActivity.this,"操作失败，请稍后再试",Toast.LENGTH_SHORT).show();
 
                     break;
@@ -90,7 +95,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                             @Override
                             public void onFinish(InputStream inputStream) {
                                 studentAttendanceCountShowList.get(finalI).setBitmap(BitmapFactory.decodeStream(inputStream));
-                                message = new Message();
+                                Message message = new Message();
                                 updateUIHandlerUI.sendMessage(message);
                             }
 
@@ -100,7 +105,9 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                             }
                         });
                     }
-                    progressDialog.dismiss();
+                    if(progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
                     break;
             }
         }
@@ -117,9 +124,11 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                 e.printStackTrace();
             }
             if(resultObjStu.getMeta().getResult()) {
+                Message message = new Message();
                 message.what = SUCCESS;
                 handler.sendMessage(message);
             }else {
+                Message message = new Message();
                 message.what = ERROR;
                 handler.sendMessage(message);
             }
@@ -127,6 +136,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
 
         @Override
         public void onError(Exception e) {
+            Message message = new Message();
             message.what = ERROR;
             handler.sendMessage(message);
         }
@@ -151,6 +161,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                 }
                 else
                 {
+                    Message message = new Message();
                     message.what = ERROR;
                     handler.sendMessage(message);
                 }
@@ -161,6 +172,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
 
         @Override
         public void onError(Exception e) {
+            Message message = new Message();
             message.what = ERROR;
             handler.sendMessage(message);
         }
@@ -169,7 +181,23 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_query_course_student_total);
-        listView = (ListView) findViewById(R.id.acivity_teacher_query_course_student_total_listview);
+        listView = (PullToRefreshListView) findViewById(R.id.acivity_teacher_query_course_student_total_listview);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                getData();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         progressDialog = ProgressDialog.show(this,"查询请假信息", "请稍等", true, true);
         getData();
 
@@ -187,7 +215,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        studentAttendanceCountShow = studentAttendanceCountShowList.get(position);
+        studentAttendanceCountShow = studentAttendanceCountShowList.get(position-1);
         Intent intent = new Intent(this,TeacherQueryCourseStudentInfoActivity.class);
         startActivity(intent);
     }
@@ -196,6 +224,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
     {
         QueryCourseStudentAttentanceInfoItemAdapter queryCourseStudentAttentanceInfoItemAdapter = new QueryCourseStudentAttentanceInfoItemAdapter(this,studentAttendanceCountShowList,R.layout.list_view_teacher_query_course_student_attentance_item);
         listView.setAdapter(queryCourseStudentAttentanceInfoItemAdapter);
+        listView.onRefreshComplete();
     }
 
 

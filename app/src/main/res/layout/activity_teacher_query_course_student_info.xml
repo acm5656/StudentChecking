@@ -22,13 +22,13 @@
             android:gravity="center_vertical"
             />
     </LinearLayout>
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/acivity_teacher_query_course_student_info_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
         >
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 
 </LinearLayout>

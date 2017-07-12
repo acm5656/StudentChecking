@@ -22,8 +22,12 @@ import com.example.checkingsystem.adapter.TeacherCourseItemAdapter;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.net.GetPictureNet;
+import com.example.checkingsystem.net.GetVirtualCourseInfoNet;
 import com.example.checkingsystem.teacher.activity.TeacherCheckingActivity;
 import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class TeacherCourseIndexFragment extends Fragment implements View.OnClick
     final int TEACHER_ADD_COURSE = 1;
     View view;
     TeacherCourseItemAdapter teacherCourseItemAdapter;
-    ListView listView;
+    PullToRefreshListView listView;
     List<CourseShow> courseList;
     int length;
     static CourseShow courseShow;
@@ -90,7 +94,42 @@ public class TeacherCourseIndexFragment extends Fragment implements View.OnClick
     }
 
     private void initUI() {
-        listView = (ListView) view.findViewById(R.id.fragment_teacher_course_index_list_view);
+        listView = (PullToRefreshListView) view.findViewById(R.id.fragment_teacher_course_index_list_view);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                LoginActivity.teacherCourseShow=null;
+                LoginActivity.teacherVirtualList = null;
+                System.gc();
+                GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (LoginActivity.teacherCourseShow==null) {
+
+                        }
+                        length = LoginActivity.teacherCourseShow.size();
+                        while (length<LoginActivity.teacherVirtualList.size())
+                        {
+                            length = LoginActivity.teacherCourseShow.size();
+                        }
+                        courseList = LoginActivity.teacherCourseShow;
+                        Message message = new Message();
+                        handler.sendMessage(message);
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -144,13 +183,14 @@ public class TeacherCourseIndexFragment extends Fragment implements View.OnClick
     private void updateListView() {
         teacherCourseItemAdapter = new TeacherCourseItemAdapter(getContext(),courseList,R.layout.teacher_list_view_course_item);
         listView.setAdapter(teacherCourseItemAdapter);
+        listView.onRefreshComplete();
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), TeacherCheckingActivity.class);
-        courseShow = courseList.get(position);
+        courseShow = courseList.get(position-1);
         startActivity(intent);
     }
 

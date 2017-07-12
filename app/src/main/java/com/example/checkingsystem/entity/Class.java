@@ -82,7 +82,7 @@ public class Class implements Serializable{
      */
 
 	private String classStatus;
-
+	private String classHeadImgUrl;
 
 	public String getClassId() {
 		return classId;
@@ -172,6 +172,11 @@ public class Class implements Serializable{
 		this.classStatus = classStatus;
 	}
 
+	public String getClassHeadImgUrl() {
+		return classHeadImgUrl;
+	}
 
-
+	public void setClassHeadImgUrl(String classHeadImgUrl) {
+		this.classHeadImgUrl = classHeadImgUrl;
+	}
 }

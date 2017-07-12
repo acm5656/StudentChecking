@@ -29,6 +29,9 @@ import com.example.checkingsystem.net.GetPictureNet;
 import com.example.checkingsystem.net.GetStudentInfoByID;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +49,7 @@ public class AssistantAgreeForClassFragment extends Fragment{
     final static int SUCCESS = 1;
     final static int FAIL = 0;
     private View view;
-    private ListView listView;
+    private PullToRefreshListView listView;
     List<ClassGradeShow> classGradeShowList;
     public static ClassGradeShow classGradeShow;
     ObjectMapper objectMapper = new ObjectMapper();
@@ -168,12 +171,29 @@ public class AssistantAgreeForClassFragment extends Fragment{
     }
 
     private void initItem(){
-        listView = (ListView) view.findViewById(R.id.lv_fragment_assistant_agree_for_course);
+        listView = (PullToRefreshListView) view.findViewById(R.id.lv_fragment_assistant_agree_for_course);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                AssistantGetClassGradeApplyNet assistantGetClassGradeApplyNet = new AssistantGetClassGradeApplyNet();
+                assistantGetClassGradeApplyNet.assistantGetClassGradeApply(getClassGradehttpCallbackListener);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), AssistantAgreeForClassActivity.class);
-                classGradeShow = classGradeShowList.get(position);
+                classGradeShow = classGradeShowList.get(position-1);
                 startActivityForResult(intent,ASSISTANT_AGREE_FOR_CLASS);
             }
         });
@@ -182,6 +202,7 @@ public class AssistantAgreeForClassFragment extends Fragment{
     {
         assistantAgreeForClassItemAdapter = new AssistantAgreeForClassItemAdapter(getActivity(),LoginActivity.classGradeShowList,R.layout.item_assistant_agree_for_class);
         listView.setAdapter(assistantAgreeForClassItemAdapter);
+        listView.onRefreshComplete();
     }
 
 }

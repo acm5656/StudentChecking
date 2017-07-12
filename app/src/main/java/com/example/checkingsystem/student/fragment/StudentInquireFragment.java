@@ -19,7 +19,11 @@ import com.example.checkingsystem.R;
 import com.example.checkingsystem.adapter.QueryCourseAttentanceItemAdapter;
 import com.example.checkingsystem.entity.CourseShow;
 import com.example.checkingsystem.net.GetPictureNet;
+import com.example.checkingsystem.net.GetVirtualCourseInfoNet;
 import com.example.checkingsystem.student.activity.StudentQueryCourseItemInfoActivity;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.InputStream;
 import java.util.List;
@@ -29,7 +33,7 @@ public class StudentInquireFragment extends Fragment implements AdapterView.OnIt
     private OnFragmentInteractionListener mListener;
     private View view;
     private List<CourseShow> listItem;
-    private ListView listView;
+    private PullToRefreshListView listView;
     Handler updateUIHandler = new Handler()
     {
         @Override
@@ -73,12 +77,47 @@ public class StudentInquireFragment extends Fragment implements AdapterView.OnIt
 
         view = inflater.inflate(R.layout.fragment_student_inquire, container, false);
         initItem();
-        listView = (ListView)view.findViewById(R.id.fragment_student_inquire_list_view);
-        listView.setOnItemClickListener(this);
+
         return view;
     }
 
     private void initItem() {
+        listView = (PullToRefreshListView) view.findViewById(R.id.fragment_student_inquire_list_view);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoginActivity.studentCourseShow=null;
+                        LoginActivity.studentVirtualList = null;
+                        GetVirtualCourseInfoNet.studentGetCourseTimeInfo();
+                        while (LoginActivity.studentCourseShow==null) {
+
+                        }
+                        length = LoginActivity.studentCourseShow.size();
+                        while (length<LoginActivity.studentVirtualList.size())
+                        {
+                            length = LoginActivity.studentCourseShow.size();
+                        }
+                        listItem = LoginActivity.studentCourseShow;
+                        Message message = new Message();
+                        handler.sendMessage(message);
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
+        listView.setOnItemClickListener(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -99,11 +138,13 @@ public class StudentInquireFragment extends Fragment implements AdapterView.OnIt
     public void updateUI()
     {
         QueryCourseAttentanceItemAdapter queryCourseAttentanceItemAdapter = new QueryCourseAttentanceItemAdapter(getContext(),listItem,R.layout.list_view_query_course_attentance_item);
+        queryCourseAttentanceItemAdapter.notifyDataSetChanged();
         listView.setAdapter(queryCourseAttentanceItemAdapter);
+        listView.onRefreshComplete();
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        courseShow = LoginActivity.studentCourseShow.get(position);
+        courseShow = listItem.get(position-1);
         Intent intent = new Intent(getActivity(), StudentQueryCourseItemInfoActivity.class);
         startActivity(intent);
 

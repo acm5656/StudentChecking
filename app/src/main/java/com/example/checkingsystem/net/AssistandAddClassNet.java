@@ -32,17 +32,18 @@ public class AssistandAddClassNet {
     {
         @Override
         public void handleMessage(Message msg) {
+            String msgStr = (String) msg.obj;
             switch (msg.what)
             {
                 case SUCCESS:
                     Intent intent = new Intent(activity, AssistantIndexActivity.class);
                     intent.putExtra("class",resultObj.getData());
-                    intent.putExtra("msg","添加成功");
+                    intent.putExtra("msg",msgStr);
                     activity.setResult(Activity.RESULT_OK,intent);
                     activity.finish();
                     break;
                 case ERROR:
-                    Toast.makeText(activity,"添加失败，请稍后再试",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity,msgStr,Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -60,11 +61,13 @@ public class AssistandAddClassNet {
             {
                 Message message = new Message();
                 message.what = SUCCESS;
+                message.obj = resultObj.getMeta().getMsg();
                 handler.sendMessage(message);
             }
             else {
                 Message message = new Message();
                 message.what = ERROR;
+                message.obj = resultObj.getMeta().getMsg();
                 handler.sendMessage(message);
             }
         }
@@ -73,6 +76,7 @@ public class AssistandAddClassNet {
         public void onError(Exception e) {
             Message message = new Message();
             message.what = ERROR;
+            message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
 
         }

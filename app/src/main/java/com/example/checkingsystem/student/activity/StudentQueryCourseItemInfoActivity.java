@@ -20,9 +20,13 @@ import com.example.checkingsystem.R;
 import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.VirtualCourseAttendanceItem;
+import com.example.checkingsystem.net.StudentQueryCourseLeaveNet;
 import com.example.checkingsystem.student.fragment.StudentInquireFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -38,7 +42,7 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
     static final int SUCCESS = 1;
     static final int ERROR = 0;
     ProgressDialog progressDialog;
-    ListView listView;
+    PullToRefreshListView listView;
 
     List<VirtualCourseAttendanceItem> listVirtualCourseAttentanceItem;
     Handler handler = new Handler()
@@ -60,7 +64,7 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
         }
     };
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
-        Message message = new Message();
+
         @Override
         public void onFinish(String response) {
             ResultObj resultObj;
@@ -70,21 +74,26 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
                 resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<VirtualCourseAttendanceItem>>>(){});
                 if(resultObj.getMeta().getResult())
                 {
+                    Message message = new Message();
                     message.what = SUCCESS;
                     message.obj = resultObj.getData();
+                    handler.sendMessage(message);
 
                 }else {
+                    Message message = new Message();
                     message.what = ERROR;
+                    handler.sendMessage(message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            handler.sendMessage(message);
+
         }
 
         @Override
         public void onError(Exception e) {
+            Message message = new Message();
             message.what = ERROR;
             handler.sendMessage(message);
         }
@@ -106,8 +115,26 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        listView = (ListView)findViewById(R.id.activity_student_query_course_item_info_list_view);
+        listView = (PullToRefreshListView) findViewById(R.id.activity_student_query_course_item_info_list_view);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                String url = HttpUtil.urlIp+ PathUtil.STUDENT_GET_EVERY_COURSE_ATTENTANCE_INFO;
+                String courseID = StudentInquireFragment.courseShow.getDbID();
+                String studentID = LoginActivity.studentStatic.getStudentId();
+                HttpUtil.sendHttpGetRequest(url+"/"+courseID+"/"+studentID,httpCallbackListener);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
     }
     class ViewAdapter extends BaseAdapter{
 
@@ -160,6 +187,7 @@ public class StudentQueryCourseItemInfoActivity extends AppCompatActivity {
     {
         ViewAdapter viewAdapter = new ViewAdapter();
         listView.setAdapter(viewAdapter);
+        listView.onRefreshComplete();
     }
 
 }

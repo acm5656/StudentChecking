@@ -31,6 +31,9 @@ import com.example.checkingsystem.net.GetPictureNet;
 import com.example.checkingsystem.net.GetStudentInfoByID;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +60,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
     ProgressDialog progressDialog;
 
     private View view;
-    private ListView listView;
+    private PullToRefreshListView listView;
     public static ClassLeaveShow classLeaveShow = null;
     /**
      * listView的适配器
@@ -221,11 +224,28 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
     }
 
     private void initItem(){
-        listView = (ListView) view.findViewById(R.id.lv_fragment_assistant_agree_for_leave);
+        listView = (PullToRefreshListView) view.findViewById(R.id.lv_fragment_assistant_agree_for_leave);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
+        startLayout.setPullLabel("正在下拉刷新...");
+        startLayout.setRefreshingLabel("正在玩命加载中...");
+        startLayout.setReleaseLabel("放开以刷新");
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                AssistantGetLeaveNet assistantGetLeaveNet = new AssistantGetLeaveNet();
+                assistantGetLeaveNet.assistantGetLeave(LoginActivity.assistantStatic.getAssistantId(),getLeaveHttpCallbackListener);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+//                new LoadDataAsyncTask(MainActivity.this).execute();
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                classLeaveShow = classLeaveShowList.get(position);
+                classLeaveShow = classLeaveShowList.get(position-1);
                 Intent intent = new Intent(getActivity(), AssistantAgreeForLeaveActivity.class);
                 startActivityForResult(intent,CHANGE_ASK_LEAVE_INFO);
             }
@@ -237,6 +257,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
             assistantAgreeForLeaveItemAdapter = new AssistantAgreeForLeaveItemAdapter(getActivity(), LoginActivity.classLeaveShowList, R.layout.item_assistant_agree_for_leave);
             listView.setAdapter(assistantAgreeForLeaveItemAdapter);
         }
+        listView.onRefreshComplete();
     }
 
 }

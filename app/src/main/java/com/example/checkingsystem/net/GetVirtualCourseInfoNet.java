@@ -30,7 +30,7 @@ import util.PathUtil;
 public class GetVirtualCourseInfoNet {
 
     static ObjectMapper objectMapper = new ObjectMapper();
-    static HttpCallbackListener studentHttpCallbackListener = new HttpCallbackListener() {
+    public static HttpCallbackListener studentHttpCallbackListener = new HttpCallbackListener() {
 
         @Override
         public void onFinish(String response) {
@@ -104,13 +104,13 @@ public class GetVirtualCourseInfoNet {
 
         }
     };
-    static void studentGetCourseTimeInfo()
+    public static void studentGetCourseTimeInfo()
     {
         String address = HttpUtil.urlIp+ PathUtil.STUDENT_GET_COURSE_TIME_INFO+"?studentId="+ LoginActivity.studentStatic.getStudentId();
         HttpUtil.sendHttpGetRequest(address,studentHttpCallbackListener);
     }
 
-    static void teacherGetCourseTimeInfo()
+    public static void teacherGetCourseTimeInfo()
     {
         String address = HttpUtil.urlIp + PathUtil.TEACHER_GET_COURSE_TIME_INFO + "?teacherId="+LoginActivity.teacherStatic.getTeacherId();
         HttpUtil.sendHttpGetRequest(address,teacherHttpCallbackListener);

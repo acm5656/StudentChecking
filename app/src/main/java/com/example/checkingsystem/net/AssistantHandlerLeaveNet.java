@@ -44,7 +44,8 @@ public class AssistantHandlerLeaveNet {
                     activity.finish();
                     break;
                 case FAIL:
-                    Toast.makeText(activity,"操作失败，请稍后再试",Toast.LENGTH_SHORT).show();
+                    String msgStr = (String) msg.obj;
+                    Toast.makeText(activity,msgStr,Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -65,6 +66,7 @@ public class AssistantHandlerLeaveNet {
                 }else {
                     Message message = new Message();
                     message.what = FAIL;
+                    message.obj = resultObj.getMeta().getMsg();
                     handler.sendMessage(message);
                 }
             } catch (IOException e) {
@@ -76,6 +78,7 @@ public class AssistantHandlerLeaveNet {
         public void onError(Exception e) {
             Message message = new Message();
             message.what = FAIL;
+            message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
         }
     };
