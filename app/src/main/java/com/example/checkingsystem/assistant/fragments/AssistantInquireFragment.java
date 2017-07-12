@@ -1,6 +1,7 @@
 package com.example.checkingsystem.assistant.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,6 +44,7 @@ import util.PathUtil;
 public class AssistantInquireFragment extends Fragment implements AdapterView.OnItemClickListener{
     final static int SUCCESS = 1;
     final static int FAIL = 0;
+    public static ClassShow classShow;
     PullToRefreshListView listView;
     View view;
     ResultObj<List<Class>> resultObj;
@@ -149,7 +151,9 @@ public class AssistantInquireFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        classShow = LoginActivity.classShowList.get(position);
+        Intent intent = new Intent();
+        startActivity(intent);
     }
     public void getData()
     {
