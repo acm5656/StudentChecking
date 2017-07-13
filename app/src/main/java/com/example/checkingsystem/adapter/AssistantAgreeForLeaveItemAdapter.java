@@ -63,14 +63,17 @@ public class AssistantAgreeForLeaveItemAdapter extends BaseAdapter{
         }
         viewHolder = (ViewHolder) view.getTag();
 
-        viewHolder.head.setImageBitmap(classLeaveShowList.get(i).getStudentBitmap());
+        if(classLeaveShowList.get(i).getStudentBitmap()!=null)
+        {
+            viewHolder.head.setImageBitmap(classLeaveShowList.get(i).getStudentBitmap());
+        }
         viewHolder.no.setText(classLeaveShowList.get(i).getStudentSchoolName());
         viewHolder.name.setText(classLeaveShowList.get(i).getStudentName());
         viewHolder.status.setText("状态："+classLeaveShowList.get(i).getChinese());
         Date date = new Date(classLeaveShowList.get(i).getVirtualCourseLeaveGmtCreated().getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         String dateStr = sdf.format(date);
-        viewHolder.createTime.setText("时间："+dateStr);
+        viewHolder.createTime.setText("申请时间："+"\n"+dateStr);
         return view;
     }
 

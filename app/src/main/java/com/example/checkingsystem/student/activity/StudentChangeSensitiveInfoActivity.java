@@ -71,6 +71,7 @@ public class StudentChangeSensitiveInfoActivity extends AppCompatActivity implem
         sensitiveSex= (RadioGroup) findViewById(R.id.activity_student_change_sensitive_sex_radioGroup);
         sensitiveSubmit= (Button) findViewById(R.id.acticity_student_change_sensitive_info_submit);
         sensitiveSubmit.setOnClickListener(this);
+        sensitiveBack.setOnClickListener(this);
     }
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
         @Override
@@ -130,6 +131,9 @@ public class StudentChangeSensitiveInfoActivity extends AppCompatActivity implem
                 student.setStudentStatus(LoginActivity.studentStatic.getStudentStatus());
                 String data = ChangeTypeUtil.getJSONString(student);
                 HttpUtil.sendHttpPutRequest(url,httpCallbackListener,data,HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
+                break;
+            case R.id.iv_activity_student_change_sensitive_info_back:
+                onBackPressed();
                 break;
         }
     }

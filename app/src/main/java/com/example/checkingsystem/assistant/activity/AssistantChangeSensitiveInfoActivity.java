@@ -73,6 +73,7 @@ public class AssistantChangeSensitiveInfoActivity extends AppCompatActivity impl
         sensitiveSex= (RadioGroup) findViewById(R.id.activity_assistant_change_sensitive_sex_radioGroup);
         sensitiveSubmit= (Button) findViewById(R.id.acticity_assistant_change_sensitive_info_submit);
         sensitiveSubmit.setOnClickListener(this);
+        sensitiveBack.setOnClickListener(this);
     }
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
         @Override
@@ -130,6 +131,9 @@ public class AssistantChangeSensitiveInfoActivity extends AppCompatActivity impl
                 assistant.setAssistantName(name);
                 String data = ChangeTypeUtil.getJSONString(assistant);
                 HttpUtil.sendHttpPutRequest(url,httpCallbackListener,data,HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
+                break;
+            case R.id.iv_activity_assistant_change_sensitive_info_back:
+                onBackPressed();
                 break;
         }
     }

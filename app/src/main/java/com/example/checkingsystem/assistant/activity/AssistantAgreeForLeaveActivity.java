@@ -58,7 +58,10 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
         editTextLeaveNote = (EditText) findViewById(R.id.et_activity_assistant_agree_for_leave_note);
         buttonAgree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_agree);
         buttonDisagree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_disagree);
-        circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
+        if (classLeaveShow.getStudentBitmap()!=null)
+        {
+            circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
+        }
         textViewMineId.setText(classLeaveShow.getStudentSchoolName());
         textViewMineName.setText(classLeaveShow.getStudentName());
         Date beginDate = new Date(classLeaveShow.getVirtualCourseLeaveBegin().getTime());
@@ -80,24 +83,23 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View view) {
+        AssistantHandlerLeaveNet assistantHandlerLeaveNet = new AssistantHandlerLeaveNet();
         virtualCourseLeave.setVirtualCourseLeaveId(classLeaveShow.getVirtualCourseLeaveId());
         virtualCourseLeave.setVirtualCourseLeaveFeedback(editTextLeaveNote.getText().toString());
         virtualCourseLeave.setVirtualCourseLeaveAssisId(LoginActivity.assistantStatic.getAssistantId());
         switch (view.getId()){
             case R.id.btn_activity_assistant_agree_for_leave_agree:
                 virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_PERMITTED);
+                assistantHandlerLeaveNet.assistantHnadlerLeave(this,virtualCourseLeave);
                 break;
             case R.id.btn_activity_assistant_agree_for_leave_disagree:
                 virtualCourseLeave.setVirtualCourseLeaveStatus(VirtualCourseLeave.STATUS_REFUSE);
+                assistantHandlerLeaveNet.assistantHnadlerLeave(this,virtualCourseLeave);
                 break;
             case R.id.iv_activity_assistant_agree_for_leave_back:
                 onBackPressed();
                 break;
         }
-
-        AssistantHandlerLeaveNet assistantHandlerLeaveNet = new AssistantHandlerLeaveNet();
-        assistantHandlerLeaveNet.assistantHnadlerLeave(this,virtualCourseLeave);
-
     }
 
     @Override
