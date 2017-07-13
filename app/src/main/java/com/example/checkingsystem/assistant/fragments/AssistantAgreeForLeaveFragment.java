@@ -68,13 +68,16 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
      */
     private AssistantAgreeForLeaveItemAdapter assistantAgreeForLeaveItemAdapter;
     ResultObj<List<VirtualCourseLeave>> resultObj;
-    List<ClassLeaveShow> classLeaveShowList;
+    List<ClassLeaveShow> classLeaveShowList = null;
     Handler noStudethandler = new Handler()
     {
         @Override
         public void handleMessage(Message msg) {
             Toast.makeText(getActivity(),"无请假信息",Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+            listView.onRefreshComplete();
+            if(progressDialog!=null&&progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
     };
     Handler handler = new Handler()
@@ -91,6 +94,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
                     updateUI();
                     break;
                 case FALSE:
+                    listView.onRefreshComplete();
                     Toast.makeText(getActivity(),"查询失败，请稍后再试",Toast.LENGTH_SHORT).show();
                     break;
             }
@@ -255,7 +259,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
     }
     private void updateUI()
     {
-        if(classLeaveShowList!=null) {
+        if(classLeaveShowList!=null&&classLeaveShowList.size()!=0) {
             assistantAgreeForLeaveItemAdapter = new AssistantAgreeForLeaveItemAdapter(getActivity(), LoginActivity.classLeaveShowList, R.layout.item_assistant_agree_for_leave);
             listView.setAdapter(assistantAgreeForLeaveItemAdapter);
         }

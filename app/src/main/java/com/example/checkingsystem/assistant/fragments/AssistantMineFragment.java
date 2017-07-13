@@ -51,6 +51,8 @@ public class AssistantMineFragment extends Fragment implements View.OnClickListe
         headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         textViewId = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_id);
         textViewName = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_name);
+        textViewId.setText(LoginActivity.assistantStatic.getAssistantNo());
+        textViewName.setText(LoginActivity.assistantStatic.getAssistantName());
     }
 
     private void initListener(){
