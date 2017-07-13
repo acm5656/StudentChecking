@@ -127,16 +127,14 @@ public class ChangeInfoNet{
         this.email = email;
         HttpUtil.sendHttpPutRequest(url,studentHttpCallListener, ChangeTypeUtil.getJSONString(teacher),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
     }
-    public void assistantChangeInfo(String nickName,String email,String headImagePath, Activity activity){
+    public void assistantChangeInfo(String email,String headImagePath, Activity activity){
         role = "导员";
         this.activity = activity;
         url= HttpUtil.urlIp+PathUtil.ASSISTANT_CHANGE_INFO;
         Assistant assistant = new Assistant();
         assistant.setAssistantId(LoginActivity.assistantStatic.getAssistantId());
-        assistant.setAssistantNickname(nickName);
         assistant.setAssistantEmail(email);
         assistant.setAssistantHeadimageUrl(headImagePath);
-        this.nickName = nickName;
         this.email = email;
         HttpUtil.sendHttpPutRequest(url,studentHttpCallListener,ChangeTypeUtil.getJSONString(assistant),HttpUtil.CONTENT_TYPE_IS_APPLICATION_JSON);
     }

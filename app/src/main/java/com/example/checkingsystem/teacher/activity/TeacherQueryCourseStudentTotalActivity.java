@@ -85,6 +85,7 @@ public class TeacherQueryCourseStudentTotalActivity extends AppCompatActivity im
                                 StudentAttendanceCountShow studentAttendanceCountShow = new StudentAttendanceCountShow(studentAttendanceCountList.get(i));
                                 studentAttendanceCountShow.setStudentName(studentList.get(j).getStudentName());
                                 studentAttendanceCountShow.setStudentImgUrl(studentList.get(j).getStudentHeadimageUrl());
+                                studentAttendanceCountShow.setStduentSchoolID(studentList.get(j).getStudentNo());
                                 studentAttendanceCountShowList.add(studentAttendanceCountShow);
                             }
                         }

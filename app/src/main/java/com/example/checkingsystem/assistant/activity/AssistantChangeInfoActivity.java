@@ -44,7 +44,6 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
     String imagePath = null;
     private ImageView iv_back;
     private CircleImageView circleImageView;
-    private EditText nickName;
     private EditText email;
     private Button submitButton;
     private Bitmap headPictureBitmap;
@@ -70,13 +69,11 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
     private void initSourse(){
         iv_back = (ImageView) findViewById(R.id.iv_activity_assistant_change_info_back);
         circleImageView = (CircleImageView) findViewById(R.id.activity_assistant_change_info_head_picture);
-        nickName = (EditText) findViewById(R.id.et_activity_assistant_change_info_nick_name);
         email = (EditText) findViewById(R.id.et_activity_assistant_change_info_email);
         submitButton = (Button) findViewById(R.id.btn_activity_assistant_change_info_submit);
         tel = (TextView) findViewById(R.id.tv_activity_assistant_change_info_tel);
         name = (TextView) findViewById(tv_activity_assistant_change_info_name);
 
-        nickName.setText(LoginActivity.assistantStatic.getAssistantName());
         email.setText(LoginActivity.assistantStatic.getAssistantEmail());
         tel.setText(LoginActivity.assistantStatic.getAssistantTel());
         name.setText("姓名：" + LoginActivity.assistantStatic.getAssistantName());
@@ -86,11 +83,10 @@ public class AssistantChangeInfoActivity extends AppCompatActivity implements Vi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_activity_assistant_change_info_submit:
-                String nickNameStr = nickName.getText().toString();
                 String emailStr = email.getText().toString();
                 String path = CosUtil.urlHeaderImage + imageName;
                 ChangeInfoNet changeInfoNet = new ChangeInfoNet();
-                changeInfoNet.assistantChangeInfo(nickNameStr,emailStr,path,this);
+                changeInfoNet.assistantChangeInfo(emailStr,path,this);
                 break;
             case R.id.activity_assistant_change_info_head_picture:
                 Intent intent = new Intent("android.intent.action.GET_CONTENT");

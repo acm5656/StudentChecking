@@ -25,6 +25,7 @@ import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.RegistFaceActivity;
 import com.example.checkingsystem.beans.Item;
+import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.net.StudentAddClassNet;
 import com.example.checkingsystem.net.StudentAddCourseNet;
 import com.example.checkingsystem.student.activity.StudentChangeInfoActivity;
@@ -76,7 +77,7 @@ public class StudentMineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LoginActivity.studentDao.deleteStudent(LoginActivity.studentStatic);
-                LoginActivity.studentStatic = null;
+                LoginActivity.clearStaticResourse();
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
             }
@@ -85,8 +86,14 @@ public class StudentMineFragment extends Fragment {
         registRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
-                startActivityForResult(intent,FACE_REGIST_REQUEST_CODE);
+                if(!LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_PASS))
+                {
+                    Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
+                    startActivityForResult(intent,FACE_REGIST_REQUEST_CODE);
+                } else {
+                    Toast.makeText(getActivity(),"已经通过认证，不能再进行人脸注册",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         changeIngoRelativeLayout = (RelativeLayout)view.findViewById(R.id.relativeLayout_mineInfo);
@@ -110,7 +117,13 @@ public class StudentMineFragment extends Fragment {
         stduentAddClassRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInputDialog();
+                if(LoginActivity.studentStatic.getStudentFacecode()==null||LoginActivity.studentStatic.getStudentFacecode().trim().equals("")||LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_FAIL))
+                {
+                    Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
+                    startActivityForResult(intent,FACE_REGIST_REQUEST_CODE);
+                }else {
+                    showInputDialog();
+                }
             }
         });
 
@@ -126,7 +139,7 @@ public class StudentMineFragment extends Fragment {
 
 
         schoolIDTextView = (TextView)view.findViewById(R.id.fragment_student_mine_school_id);
-        schoolIDTextView.setText("学号："+LoginActivity.studentStatic.getStudentSchoolUsername());
+        schoolIDTextView.setText("学号："+LoginActivity.studentStatic.getStudentNo());
         studentName = (TextView)view.findViewById(R.id.fragment_student_mine_name);
         studentName.setText("姓名："+LoginActivity.studentStatic.getStudentName());
         headImageView = (CircleImageView) view.findViewById(R.id.fragment_student_mine_head_picture);
@@ -168,11 +181,11 @@ public class StudentMineFragment extends Fragment {
                 case FACE_REGIST_REQUEST_CODE:
                     dataStr = data.getStringExtra("data_return");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
+                    showInputDialog();
                     break;
                 case CHANGE_INFO_REQUEST_CODE:
                     dataStr = data.getStringExtra("data");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
-
                     break;
             }
         }

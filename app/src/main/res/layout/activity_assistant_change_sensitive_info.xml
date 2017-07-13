@@ -119,7 +119,6 @@
                 android:layout_height="match_parent"
                 android:hint="请输入工号"
                 android:paddingLeft="10dp"
-                android:inputType="textPassword"
                 android:textColorHint="#a9a9a9"
                 android:background="@null"
                 android:textSize="16dp"

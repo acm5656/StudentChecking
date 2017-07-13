@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.adapter.AssistantQueryClassItemAdapter;
+import com.example.checkingsystem.assistant.activity.AssistantQueryStudentTotalActivity;
 import com.example.checkingsystem.entity.Class;
 import com.example.checkingsystem.entity.ClassShow;
 import com.example.checkingsystem.entity.ResultObj;
@@ -100,7 +101,7 @@ public class AssistantInquireFragment extends Fragment implements AdapterView.On
                     });
                 }
                 Message message = new Message();
-                message.what = FAIL;
+                message.what = SUCCESS;
                 handler.sendMessage(message);
             }else {
                 Message message = new Message();
@@ -129,7 +130,7 @@ public class AssistantInquireFragment extends Fragment implements AdapterView.On
 
     private void initView() {
         listView = (PullToRefreshListView)view.findViewById(R.id.lv_fragment_assistant_inquire);
-
+        listView.setOnItemClickListener(this);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ILoadingLayout startLayout = listView.getLoadingLayoutProxy(true,false);
         startLayout.setPullLabel("正在下拉刷新...");
@@ -151,8 +152,8 @@ public class AssistantInquireFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        classShow = LoginActivity.classShowList.get(position);
-        Intent intent = new Intent();
+        classShow = LoginActivity.classShowList.get(position-1);
+        Intent intent = new Intent(getActivity(), AssistantQueryStudentTotalActivity.class);
         startActivity(intent);
     }
     public void getData()
@@ -167,5 +168,10 @@ public class AssistantInquireFragment extends Fragment implements AdapterView.On
         AssistantQueryClassItemAdapter assistantQueryClassItemAdapter = new AssistantQueryClassItemAdapter(getActivity(),R.layout.item_assistant_query_class,LoginActivity.classShowList);
         listView.setAdapter(assistantQueryClassItemAdapter);
         listView.onRefreshComplete();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        getData();
     }
 }

@@ -53,6 +53,7 @@ public class AssistantQueryClassItemAdapter extends BaseAdapter {
             viewHolder.classNameTextView = (TextView) convertView.findViewById(R.id.tv_item_assistant_query_class_major);
             viewHolder.classTextView = (TextView)convertView.findViewById(R.id.tv_item_assistant_query_class_no);
             viewHolder.imageView = (ImageView)convertView.findViewById(R.id.iv_item_assistant_query_class);
+            viewHolder.codeTextView = (TextView) convertView.findViewById(R.id.tv_item_assistant_query_class_code);
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();
@@ -60,8 +61,9 @@ public class AssistantQueryClassItemAdapter extends BaseAdapter {
         {
             viewHolder.imageView.setImageBitmap(myClass.getBitmap());
         }
-        viewHolder.classTextView.setText(myClass.getClassDepartment()+"  "+myClass.getClassMajor());
-        viewHolder.classNameTextView.setText(myClass.getClassYear()+"-"+myClass.getClassNo()+"班");
+        viewHolder.classNameTextView.setText(myClass.getClassDepartment()+"  "+myClass.getClassMajor());
+        viewHolder.classTextView.setText(myClass.getClassYear()+"-"+myClass.getClassNo()+"班");
+        viewHolder.codeTextView.setText("编号："+myClass.getClassCode());
 
         return convertView;
     }
@@ -69,5 +71,6 @@ public class AssistantQueryClassItemAdapter extends BaseAdapter {
         TextView classTextView;
         ImageView imageView;
         TextView classNameTextView;
+        TextView codeTextView;
     }
 }

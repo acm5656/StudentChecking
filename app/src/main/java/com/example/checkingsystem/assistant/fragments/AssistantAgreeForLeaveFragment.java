@@ -25,6 +25,7 @@ import com.example.checkingsystem.entity.ClassLeaveShow;
 import com.example.checkingsystem.entity.CourseLeave;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
+import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.entity.VirtualCourseLeave;
 import com.example.checkingsystem.net.AssistantGetLeaveNet;
 import com.example.checkingsystem.net.GetPictureNet;
@@ -52,7 +53,7 @@ import util.HttpCallbackListener;
 public class AssistantAgreeForLeaveFragment extends Fragment {
     public final static int RIGHT = 1;
     public final static int FALSE = 0;
-    public final static int CHANGE_ASK_LEAVE_INFO = 0;
+    public final static int CHANGE_ASK_LEAVE_INFO = 3;
     ObjectMapper objectMapper= new ObjectMapper();
     ResultObj<List<String>> resultObjID;
 
@@ -83,7 +84,7 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
             switch (msg.what)
             {
                 case RIGHT:
-                    if(progressDialog.isShowing())
+                    if(progressDialog!=null&&progressDialog.isShowing())
                     {
                         progressDialog.dismiss();
                     }
@@ -112,7 +113,6 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
                         {
                             if(classLeaveShowList.get(i).getVirtualCourseLeaveStuId().equals(list.get(j).getStudentId()))
                             {
-
                                 classLeaveShowList.get(i).setStudentName(list.get(j).getStudentName());
                                 classLeaveShowList.get(i).setStudentImgUrl(list.get(j).getStudentHeadimageUrl());
                                 classLeaveShowList.get(i).setStudentSchoolName(list.get(j).getStudentNo());
@@ -246,8 +246,10 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 classLeaveShow = classLeaveShowList.get(position-1);
-                Intent intent = new Intent(getActivity(), AssistantAgreeForLeaveActivity.class);
-                startActivityForResult(intent,CHANGE_ASK_LEAVE_INFO);
+                if(classLeaveShow.getVirtualCourseLeaveStatus().equals(ClassLeaveShow.STATUS_WAIT_HANDLER)) {
+                    Intent intent = new Intent(getActivity(), AssistantAgreeForLeaveActivity.class);
+                    getActivity().startActivityForResult(intent, CHANGE_ASK_LEAVE_INFO);
+                }
             }
         });
     }
@@ -260,4 +262,17 @@ public class AssistantAgreeForLeaveFragment extends Fragment {
         listView.onRefreshComplete();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        VirtualCourseLeave virtualCourseLeave = (VirtualCourseLeave) data.getSerializableExtra("virtualCourseLeave");
+        for(int i = 0 ;i<LoginActivity.classLeaveShowList.size();i++)
+        {
+            if(virtualCourseLeave.getVirtualCourseLeaveId().equals(LoginActivity.classLeaveShowList.get(i).getVirtualCourseLeaveId()))
+            {
+                LoginActivity.classLeaveShowList.get(i).setVirtualCourseLeaveStatus(virtualCourseLeave.getVirtualCourseLeaveStatus());
+            }
+        }
+        assistantAgreeForLeaveItemAdapter = new AssistantAgreeForLeaveItemAdapter(getActivity(), LoginActivity.classLeaveShowList, R.layout.item_assistant_agree_for_leave);
+        listView.setAdapter(assistantAgreeForLeaveItemAdapter);
+    }
 }

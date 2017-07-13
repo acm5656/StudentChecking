@@ -20,7 +20,7 @@ public class Student{
 
     private static final long serialVersionUID = 1L;
     public static final String STATUS_WAIT_AUTH = "wait_auth";//
-    public static final String STATUS_WAIT_AUTH_DEAL = "wait_auth_deal";//可以被加入
+    public static final String STATUS_WAIT_AUTH_DEAL = "wait_auth_deal";
     public static final String STATUS_AUTH_FAIL = "auth_fail";//可以被加入
     public static final String STATUS_AUTH_PASS = "auth_pass";//可以被加入
     public static final String STATUS_INVALID = "invalid";//无效,被删除等

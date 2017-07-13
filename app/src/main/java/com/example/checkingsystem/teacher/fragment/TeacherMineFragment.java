@@ -48,7 +48,7 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(View v) {
                 LoginActivity.teacherDao.deleteTeacher(LoginActivity.teacherStatic);
-                LoginActivity.teacherStatic = null;
+                LoginActivity.clearStaticResourse();
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
             }
@@ -64,9 +64,9 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         }
         schoolNumber = (TextView) view.findViewById(R.id.fragment_teacher_mine_number);
         name = (TextView)view.findViewById(R.id.fragment_teacher_mine_name);
-        if(LoginActivity.teacherStatic.getTeacherSchoolUsername()!=null&&name!=null)
+        if(LoginActivity.teacherStatic.getTeacherNo()!=null&&name!=null)
         {
-            schoolNumber.setText(LoginActivity.teacherStatic.getTeacherSchoolUsername());
+            schoolNumber.setText(LoginActivity.teacherStatic.getTeacherNo());
         }
 
         if(LoginActivity.teacherStatic.getTeacherName()!=null&&name!=null) {
@@ -83,11 +83,11 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
         {
             case R.id.fragment_teacher_mine_change_password:
                 intent.setClass(getContext(),ChangePasswordActivity.class);
-                startActivityForResult(intent,CHANGE_PASSWORD_CODE);
+                getActivity().startActivityForResult(intent,CHANGE_PASSWORD_CODE);
                 break;
             case R.id.fragment_teacher_mine_changeInfo:
                 intent.setClass(getContext(), TeacherChangeInfoActivity.class);
-                startActivityForResult(intent,CHANGE_INFO_REQUEST_CODE);
+                getActivity().startActivityForResult(intent,CHANGE_INFO_REQUEST_CODE);
                 break;
         }
 
@@ -109,8 +109,10 @@ public class TeacherMineFragment extends Fragment implements View.OnClickListene
                 case CHANGE_INFO_REQUEST_CODE:
                     dataStr = data.getStringExtra("data");
                     Toast.makeText(getContext(),dataStr,Toast.LENGTH_SHORT).show();
+                    Log.e("test","----------1");
                     if(LoginActivity.headPictureBitmap!=null)
                     {
+                        Log.e("test","----------2");
                         headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
                     }
                     break;

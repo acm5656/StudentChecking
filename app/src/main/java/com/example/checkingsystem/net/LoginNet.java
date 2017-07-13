@@ -7,12 +7,15 @@ import android.os.Message;
 import android.widget.Toast;
 
 import com.example.checkingsystem.LoginActivity;
+import com.example.checkingsystem.assistant.activity.AssistantChangeSensitiveInfoActivity;
 import com.example.checkingsystem.assistant.activity.AssistantIndexActivity;
 import com.example.checkingsystem.entity.AssistantVo;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.StudentVo;
 import com.example.checkingsystem.entity.TeacherVo;
+import com.example.checkingsystem.student.activity.StudentChangeSensitiveInfoActivity;
 import com.example.checkingsystem.student.activity.StudentIndexActivity;
+import com.example.checkingsystem.teacher.activity.TeacherChangeSensitiveInfoActivity;
 import com.example.checkingsystem.teacher.activity.TeacherIndexActivity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,21 +72,25 @@ public class LoginNet {
                                 e.printStackTrace();
 
                             }
-                            if(LoginActivity.studentStatic.getStudentSchoolUsername()==null||LoginActivity.studentStatic.getStudentSchoolUsername().trim().equals(""))
-                            {
-                                LoginActivity.studentStatic.setStudentSchoolUsername("无");
-                            }
-                            if(LoginActivity.studentStatic.getStudentName()==null||LoginActivity.studentStatic.getStudentName().trim().equals(""))
-                            {
-                                LoginActivity.studentStatic.setStudentName("无");
-                            }
                             LoginActivity.token = token;
                             LoginActivity.studentStatic.setStudentPassword(token);
                             LoginActivity.studentDao.addStudent(LoginActivity.studentStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.studentStatic.getStudentHeadimageUrl());
                             GetVirtualCourseInfoNet.studentGetCourseTimeInfo();
-                            Intent intent = new Intent(activity, StudentIndexActivity.class);
-                            activity.startActivity(intent);
+                            if(
+                                    LoginActivity.studentStatic.getStudentName()==null||
+                                    LoginActivity.studentStatic.getStudentName().trim().equals("")||
+                                    LoginActivity.studentStatic.getStudentNo()==null||
+                                    LoginActivity.studentStatic.getStudentNo().trim().equals("")
+                                    )
+                            {
+                                Intent intent = new Intent(activity, StudentChangeSensitiveInfoActivity.class);
+                                activity.startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(activity, StudentIndexActivity.class);
+                                activity.startActivity(intent);
+                            }
+
                         }
                         else {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
@@ -116,20 +123,23 @@ public class LoginNet {
                             LoginActivity.token = token;
                             LoginActivity.teacherStatic.setTeacherPassword(token);
 
-                            if(LoginActivity.teacherStatic.getTeacherSchoolUsername()==null||LoginActivity.teacherStatic.getTeacherSchoolUsername().trim().equals(""))
-                            {
-                                LoginActivity.teacherStatic.setTeacherSchoolUsername("无");
-                            }
-                            if(LoginActivity.teacherStatic.getTeacherName()==null||LoginActivity.teacherStatic.getTeacherName().trim().equals(""))
-                            {
-                                LoginActivity.teacherStatic.setTeacherName("无");
-                            }
-
                             LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
                             GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
-                            Intent intent = new Intent(activity, TeacherIndexActivity.class);
-                            activity.startActivity(intent);
+                            if(
+                                    LoginActivity.teacherStatic.getTeacherNo()==null||
+                                    LoginActivity.teacherStatic.getTeacherNo().equals("")||
+                                    LoginActivity.teacherStatic.getTeacherName()==null||
+                                    LoginActivity.teacherStatic.getTeacherName().trim().equals("")
+                                    )
+                            {
+                                Intent intent = new Intent(activity, TeacherChangeSensitiveInfoActivity.class);
+                                activity.startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(activity, TeacherIndexActivity.class);
+                                activity.startActivity(intent);
+                            }
+
                         }
                         else {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
@@ -138,10 +148,6 @@ public class LoginNet {
                     }
                     if(LoginActivity.roleStr.equals("导员"))
                     {
-                        //登录成功的操作
-                        /*
-                        缺
-                         */
                         ResultObj <AssistantVo> resultObj = null;
 
                         try {
@@ -170,10 +176,21 @@ public class LoginNet {
                             LoginActivity.assistantStatic.setAssistantPassword(token);
                             LoginActivity.assistantDao.addAssistant(LoginActivity.assistantStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
+                            GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
+                            if(
+                                    LoginActivity.assistantStatic.getAssistantNo()==null||
+                                    LoginActivity.assistantStatic.getAssistantNo().trim().equals("")||
+                                    LoginActivity.assistantStatic.getAssistantName()==null||
+                                    LoginActivity.assistantStatic.getAssistantName().trim().equals("")
+                                    )
+                            {
+                                Intent intent = new Intent(activity, AssistantChangeSensitiveInfoActivity.class);
+                                activity.startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(activity, AssistantIndexActivity.class);
+                                activity.startActivity(intent);
+                            }
 
-
-                            Intent intent = new Intent(activity, AssistantIndexActivity.class);
-                            activity.startActivity(intent);
 
                         }else {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();

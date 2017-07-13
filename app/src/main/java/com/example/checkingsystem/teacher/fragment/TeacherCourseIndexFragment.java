@@ -38,7 +38,7 @@ import java.util.List;
  */
 
 public class TeacherCourseIndexFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemClickListener {
-    final int TEACHER_ADD_COURSE = 1;
+    public final static int TEACHER_ADD_COURSE = 3;
     View view;
     TeacherCourseItemAdapter teacherCourseItemAdapter;
     PullToRefreshListView listView;
@@ -158,6 +158,7 @@ public class TeacherCourseIndexFragment extends Fragment implements View.OnClick
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("test","------course1");
         if(resultCode == Activity.RESULT_OK)
         {
             switch (requestCode)
@@ -171,7 +172,7 @@ public class TeacherCourseIndexFragment extends Fragment implements View.OnClick
                     courseShow.setId(virtualCourse.getVirtualCourseCode());
                     courseShow.setDbID(virtualCourse.getVirtualCourseId());
                     courseShow.setName(virtualCourse.getVirtualCourseName());
-                    courseShow.setTeahcerName(LoginActivity.teacherStatic.getTeacherName());
+                    courseShow.setTeahcerName("");
                     courseShow.setImgBitmap(bitmap);
                     courseList.add(0,courseShow);
                     updateListView();

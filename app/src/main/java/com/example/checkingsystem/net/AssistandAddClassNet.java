@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.checkingsystem.assistant.activity.AssistantIndexActivity;
@@ -74,6 +75,7 @@ public class AssistandAddClassNet {
 
         @Override
         public void onError(Exception e) {
+            Log.e("test",e.toString());
             Message message = new Message();
             message.what = ERROR;
             message.obj = "操作失败，请稍后再试";

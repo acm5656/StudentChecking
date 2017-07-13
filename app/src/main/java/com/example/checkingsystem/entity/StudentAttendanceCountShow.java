@@ -97,4 +97,8 @@ public class StudentAttendanceCountShow {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+    public StudentAttendanceCountShow()
+    {
+
+    }
 }

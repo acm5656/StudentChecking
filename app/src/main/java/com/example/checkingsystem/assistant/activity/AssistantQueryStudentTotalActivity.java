@@ -6,12 +6,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.adapter.AssistantQueryClassItemAdapter;
+import com.example.checkingsystem.adapter.QueryClassStudentAttentanceInfoItemAdapter;
 import com.example.checkingsystem.assistant.fragments.AssistantInquireFragment;
 import com.example.checkingsystem.entity.ClassShow;
+import com.example.checkingsystem.entity.ItemCountGroupByCidAndIStatus;
+import com.example.checkingsystem.entity.ItemCountGroupBySidAndStatus;
 import com.example.checkingsystem.entity.ResultObj;
 import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.StudentAttendanceCount;
@@ -38,8 +43,9 @@ public class AssistantQueryStudentTotalActivity extends AppCompatActivity {
     final static int FAIL = 0;
     List<Student> studentList;
     private PullToRefreshListView listView;
+    ResultObj<List<Student>> resultObjStu = null;
     private ClassShow classShow;
-    List<StudentAttendanceCount> studentAttendanceCountList;
+    List<ItemCountGroupBySidAndStatus> itemCountGroupBySidAndStatusList;
     List<StudentAttendanceCountShow> studentAttendanceCountShowList;
     ProgressDialog progressDialog;
     Handler handler = new Handler()
@@ -56,93 +62,80 @@ public class AssistantQueryStudentTotalActivity extends AppCompatActivity {
                     break;
                 case FAIL:
                     Toast.makeText(getApplicationContext(),msg.obj.toString(),Toast.LENGTH_SHORT).show();
+                    listView.onRefreshComplete();
                     break;
             }
         }
     };
-    HttpCallbackListener httpCallbackListenerGetStudentInfo = new HttpCallbackListener() {
-        @Override
-        public void onFinish(String response) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            ResultObj<List<Student>> resultObjStu = null;
-            try {
-                resultObjStu = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<Student>>>() {});
-                studentList = resultObjStu.getData();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(resultObjStu.getMeta().getResult()) {
-                studentAttendanceCountShowList = new ArrayList<>();
-                for(int i = 0 ;i <studentAttendanceCountList.size() ; i++)
-                {
-                    for(int j = 0 ;j <studentList.size() ;j++)
-                    {
-                        if(studentAttendanceCountList.get(i).getStudentId().equals(studentList.get(j).getStudentId()))
-                        {
-                            StudentAttendanceCountShow studentAttendanceCountShow = new StudentAttendanceCountShow(studentAttendanceCountList.get(i));
-                            studentAttendanceCountShow.setStudentName(studentList.get(j).getStudentName());
-                            studentAttendanceCountShow.setStudentImgUrl(studentList.get(j).getStudentHeadimageUrl());
-                            studentAttendanceCountShowList.add(studentAttendanceCountShow);
-                        }
-                    }
-                }
-                for(int i = 0 ;i<studentAttendanceCountShowList.size();i++)
-                {
-                    GetPictureNet getPictureNet = new GetPictureNet();
-                    final int finalI = i;
-                    getPictureNet.getPicture(studentAttendanceCountShowList.get(i).getStudentImgUrl(), new GetPictureNet.HttpPictureCallbackListener() {
-                        @Override
-                        public void onFinish(InputStream inputStream) {
-                            studentAttendanceCountShowList.get(finalI).setBitmap(BitmapFactory.decodeStream(inputStream));
-                            Message message = new Message();
-                            message.what = SUCCESS;
-                            handler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-
-                        }
-                    });
-                }
-
-                Message message = new Message();
-                message.what = SUCCESS;
-                handler.sendMessage(message);
-            }else {
-                Message message = new Message();
-                message.what = FAIL;
-                message.obj = resultObjStu.getMeta().getMsg();
-                handler.sendMessage(message);
-            }
-        }
-
-        @Override
-        public void onError(Exception e) {
-            Message message = new Message();
-            message.what = FAIL;
-            message.obj = "操作失败，请稍后再试";
-            handler.sendMessage(message);
-        }
-    };
-
-
-    HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
+    HttpCallbackListener httpCallbackListenerGetCattentance = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                ResultObj<List<StudentAttendanceCount>> resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<StudentAttendanceCount>>>() {});
+                ResultObj<List<ItemCountGroupBySidAndStatus>> resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<ItemCountGroupBySidAndStatus>>>() {});
                 if(resultObj.getMeta().getResult())
                 {
-                    studentAttendanceCountList = resultObj.getData();
-                    GetStudentInfoByID getStudentInfoByID = new GetStudentInfoByID();
-                    List<String> studentIDList = new ArrayList<>();
-                    for(int i = 0 ;i<studentAttendanceCountList.size() ;i++)
+                    itemCountGroupBySidAndStatusList = resultObj.getData();
+                    studentAttendanceCountShowList = new ArrayList<>();
+                    for(int i = 0;i<studentList.size();i++)
                     {
-                        studentIDList.add(studentAttendanceCountList.get(i).getStudentId());
+                        StudentAttendanceCountShow studentAttendanceCountShow = new StudentAttendanceCountShow();
+                        studentAttendanceCountShow.setStudentId(studentList.get(i).getStudentId());
+                        studentAttendanceCountShow.setStudentName(studentList.get(i).getStudentName());
+                        studentAttendanceCountShow.setStudentImgUrl(studentList.get(i).getStudentHeadimageUrl());
+                        studentAttendanceCountShow.setStduentSchoolID(studentList.get(i).getStudentNo());
+                        studentAttendanceCountShow.setAbsentCount("0");
+                        studentAttendanceCountShow.setAttendanceCount("0");
+                        studentAttendanceCountShow.setLateCount("0");
+                        studentAttendanceCountShow.setLeaveCount("0");
+                        for(int j = 0 ;j<itemCountGroupBySidAndStatusList.size();j++)
+                        {
+                            if(itemCountGroupBySidAndStatusList.get(j).getStudentId().equals(studentList.get(i).getStudentId()))
+                            {
+
+                                if(itemCountGroupBySidAndStatusList.get(j).getItemStatus().equals("attendance"))
+                                {
+                                    studentAttendanceCountShow.setAttendanceCount(String.valueOf(itemCountGroupBySidAndStatusList.get(j).getCount()));
+                                }
+                                if(itemCountGroupBySidAndStatusList.get(j).getItemStatus().equals("leave"))
+                                {
+                                    studentAttendanceCountShow.setLeaveCount(String.valueOf(itemCountGroupBySidAndStatusList.get(j).getCount()));
+                                }
+                                if(itemCountGroupBySidAndStatusList.get(j).getItemStatus().equals("absence"))
+                                {
+                                    studentAttendanceCountShow.setAbsentCount(String.valueOf(itemCountGroupBySidAndStatusList.get(j).getCount()));
+                                }
+                                if(itemCountGroupBySidAndStatusList.get(j).getItemStatus().equals("late"))
+                                {
+                                    studentAttendanceCountShow.setLateCount(String.valueOf(itemCountGroupBySidAndStatusList.get(j).getCount()));
+                                }
+
+                            }
+                        }
+                        studentAttendanceCountShowList.add(studentAttendanceCountShow);
                     }
-                    getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,studentIDList);
+                    for(int i = 0 ;i<studentAttendanceCountShowList.size();i++)
+                    {
+                        GetPictureNet getPictureNet = new GetPictureNet();
+                        final int finalI = i;
+                        getPictureNet.getPicture(studentAttendanceCountShowList.get(i).getStudentImgUrl(), new GetPictureNet.HttpPictureCallbackListener() {
+                            @Override
+                            public void onFinish(InputStream inputStream) {
+                                studentAttendanceCountShowList.get(finalI).setBitmap(BitmapFactory.decodeStream(inputStream));
+                                Message message = new Message();
+                                message.what = SUCCESS;
+                                handler.sendMessage(message);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
+                    }
+                    Message message = new Message();
+                    message.what = SUCCESS;
+                    handler.sendMessage(message);
                 }
                 else
                 {
@@ -158,17 +151,100 @@ public class AssistantQueryStudentTotalActivity extends AppCompatActivity {
 
         @Override
         public void onError(Exception e) {
+            Log.e("test",e.toString());
             Message message = new Message();
             message.what = FAIL;
             message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
         }
     };
+
+
+    HttpCallbackListener httpCallbackListenerGetStudentInfo = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            try {
+                resultObjStu = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<Student>>>() {});
+                studentList = resultObjStu.getData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(resultObjStu.getMeta().getResult()) {
+                classShow = AssistantInquireFragment.classShow;
+                String url = HttpUtil.urlIp + PathUtil.ASSISTANT_GET_CLASS_ATTENTANCE_TOTAL;
+                String data = "?classId="+classShow.getClassId();
+                HttpUtil.sendHttpGetRequest(url+data,httpCallbackListenerGetCattentance);
+            }else {
+                Message message = new Message();
+                message.what = FAIL;
+                message.obj = resultObjStu.getMeta().getMsg();
+                handler.sendMessage(message);
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            Log.e("test",e.toString());
+            Message message = new Message();
+            message.what = FAIL;
+            message.obj = "操作失败，请稍后再试";
+            handler.sendMessage(message);
+        }
+    };
+
+
+
+    HttpCallbackListener getAllStudentListHttpCallbackListener = new HttpCallbackListener() {
+        @Override
+        public void onFinish(String response) {
+            ResultObj<List<String>> resultObj = null;
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                resultObj = objectMapper.readValue(response.getBytes(), new TypeReference<ResultObj<List<String>>>() {});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(resultObj.getMeta().getResult())
+            {
+                if(resultObj.getData()==null||resultObj.getData().size()==0)
+                {
+                    Message message = new Message();
+                    message.what = FAIL;
+                    message.obj = "暂无学生";
+                    handler.sendMessage(message);
+                }else {
+                    GetStudentInfoByID getStudentInfoByID = new GetStudentInfoByID();
+                    getStudentInfoByID.teacherGetStudentInfoByID(httpCallbackListenerGetStudentInfo,resultObj.getData());
+                }
+
+            }else {
+                Message message = new Message();
+                message.what = FAIL;
+                message.obj = resultObj.getMeta().getMsg();
+                handler.sendMessage(message);
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            Log.e("test",e.toString());
+            Message message = new Message();
+            message.what = FAIL;
+            message.obj = "操作失败，请稍后再试";
+            handler.sendMessage(message);
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assistant_query_student_total);
+        progressDialog = ProgressDialog.show(this,"查询请假信息", "请稍等", true, true);
         initUI();
+        getDate();
     }
 
     private void initUI() {
@@ -193,13 +269,15 @@ public class AssistantQueryStudentTotalActivity extends AppCompatActivity {
     public void getDate()
     {
         classShow = AssistantInquireFragment.classShow;
-        String url = HttpUtil.urlIp + PathUtil.ASSISTANT_GET_CLASS_ATTENTANCE_TOTAL;
+        String url = HttpUtil.urlIp + PathUtil.ASSISTANT_GET_CLASS_STUDENT_LIST;
         String data = "?classId="+classShow.getClassId();
-        HttpUtil.sendHttpGetRequest(url+data,httpCallbackListener);
+        HttpUtil.sendHttpGetRequest(url+data,getAllStudentListHttpCallbackListener);
     }
     public void updateUI()
     {
-
+        QueryClassStudentAttentanceInfoItemAdapter assistantQueryClassItemAdapter = new QueryClassStudentAttentanceInfoItemAdapter(getApplicationContext(),studentAttendanceCountShowList,R.layout.list_view_assistant_query_class_student_attentance_item);
+        listView.setAdapter(assistantQueryClassItemAdapter);
+        listView.onRefreshComplete();
     }
 
 }

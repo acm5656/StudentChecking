@@ -233,5 +233,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         videoview.stopPlayback();
         super.onStop();
     }
+    public static void clearStaticResourse()
+    {
+        roleStr = null;
+
+        studentVirtualList = null;
+        studentCourseShow = null;
+        studentItemCountGroupByCidAndIStatusList = null;
+        studentCourseLeaveList = null;
+
+        teacherVirtualList = null;
+        teacherCourseShow = null;
+
+        assistantCourseLeaveList = null;
+        classLeaveShowList = null;
+        classGradeShowList = null;
+        classShowList = null;
+
+        headPictureBitmap = null;
+
+        studentDao = null;
+
+        teacherDao = null;
+
+        assistantDao= null;
+
+        studentStatic= null;
+
+        teacherStatic= null;
+
+        assistantStatic= null;
+
+        token = null;
+        System.gc();
+
+    }
 
 }

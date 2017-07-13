@@ -56,5 +56,9 @@ public class PathUtil {
     public static final String ASSISTANT_CHANGE_PASSWORD_GET_VERIFY_CODE = "api/attendance-provider-user/telVerifyCode/assistant/password";
     public static final String ASSISTANT_GET_CLASS_INFO = "api/attendance-provider-user/class/items";
     public static final String ASSISTANT_GET_CLASS_ATTENTANCE_TOTAL = "api/attendance-consumer-cattendance/virtualCourseAttendanceItem/class/students/countList";
+    public static final String ASSISTANT_CHANGE_SENSITIVE_INFO = "api/attendance-provider-user/assistant/sensitive/baseInfo";
+    public static final String STUDENT_CHANGE_SENSITIVE_INFO = "api/attendance-provider-user/student/sensitive/baseInfo";
+    public static final String TEACHER_CHANGE_SENSITIVE_INFO = "api/attendance-provider-user/teacher/sensitive/BaseInfo";
+    public static final String ASSISTANT_GET_CLASS_STUDENT_LIST = "api/attendance-provider-user/class/students";
 }
 

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.checkingsystem.ChooseWeekFragment;
 import com.example.checkingsystem.LoginActivity;
 import com.example.checkingsystem.R;
+import com.example.checkingsystem.entity.Student;
 import com.example.checkingsystem.entity.VirtualCourse;
 import com.example.checkingsystem.net.StudentAddCourseNet;
 import com.example.checkingsystem.student.fragment.StudentAskForLeaveFragment;
@@ -232,6 +233,14 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
 
         studentIndexChooseWeek = (TextView)findViewById(R.id.student_index_choose_week);
         studentAddCourseimage = (ImageView)findViewById(R.id.acivity_student_index_add);
+        if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_FAIL))
+        {
+            Toast.makeText(getApplicationContext(),"申请被拒绝，请再次进行人脸识别，再次申请加入班级",Toast.LENGTH_LONG).show();
+        }
+        if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_WAIT_AUTH))
+        {
+            Toast.makeText(getApplicationContext(),"由于您当前信息还不完善，请在我的页面下，进行人脸识别，并加入班级，成功加入后，可以进行考勤等一系列操作",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -260,7 +269,17 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.acivity_student_index_add:
-                showInputDialog();
+                if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_PASS))
+                {
+                    showInputDialog();
+                }
+                else if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_FAIL))
+                {
+                    Toast.makeText(getApplicationContext(),"申请被拒绝，请再次进行人脸识别，再次申请加入班级",Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Toast.makeText(getApplicationContext(),"还未通过审核，不能够加入班级，请在我的页面下，进行人脸识别，并加入班级，",Toast.LENGTH_SHORT).show();
+                }
 
                 break;
         }

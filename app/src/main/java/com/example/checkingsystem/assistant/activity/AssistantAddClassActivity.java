@@ -115,6 +115,7 @@ public class AssistantAddClassActivity extends AppCompatActivity implements View
                 assistantClass.setClassMajor(stringMajor);
                 assistantClass.setClassYear(stringYear);
                 assistantClass.setClassNo(stringNo);
+                assistantClass.setClassHeadImgUrl(imgUrl);
                 AssistandAddClassNet assistandAddClassNet = new AssistandAddClassNet();
                 assistandAddClassNet.assistantAddClass(this,assistantClass);
                 break;

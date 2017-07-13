@@ -56,9 +56,11 @@
         <activity android:name=".assistant.activity.AssistantAgreeForClassActivity" />
         <activity android:name=".student.activity.StudentQueryLeaveInfoListActivity" />
         <activity android:name=".ForgetPasswordActivity" />
-        <activity android:name=".teacher.activity.TeacherChangeSensitiveInfo" />
-        <activity android:name=".student.activity.StudentChangeSensitiveInfo" />
-        <activity android:name=".assistant.activity.AssistantChangeSensitiveInfo"></activity>
+        <activity android:name=".teacher.activity.TeacherChangeSensitiveInfoActivity" />
+        <activity android:name=".student.activity.StudentChangeSensitiveInfoActivity" />
+        <activity android:name=".assistant.activity.AssistantChangeSensitiveInfoActivity"></activity>
+        <activity android:name=".assistant.activity.AssistantQueryStudentTotalActivity"/>
+
     </application>
 
 </manifest>

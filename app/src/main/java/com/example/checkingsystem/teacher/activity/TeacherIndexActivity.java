@@ -36,7 +36,7 @@ import util.ActivityColectorUtil;
 
 
 public class TeacherIndexActivity extends AppCompatActivity implements View.OnClickListener{
-    final int TEACHER_ADD_COURSE = 1;
+    final int TEACHER_ADD_COURSE = 3;
     private ViewPager viewPager;
 
     private TextView teacherIndexStudyTextView;
@@ -243,6 +243,15 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        teacherCourseIndexFragment.onActivityResult(requestCode,resultCode,data);
+        Log.e("test","-------------------ac1");
+        Log.e("test",requestCode+"");
+        if(requestCode==TeacherCourseIndexFragment.TEACHER_ADD_COURSE) {
+            Log.e("test","-------------------ac3");
+            teacherCourseIndexFragment.onActivityResult(requestCode, resultCode, data);
+        }
+        if(requestCode==TeacherMineFragment.CHANGE_PASSWORD_CODE||requestCode==TeacherMineFragment.CHANGE_INFO_REQUEST_CODE) {
+            Log.e("test","-------------------ac2");
+            teacherMineFragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

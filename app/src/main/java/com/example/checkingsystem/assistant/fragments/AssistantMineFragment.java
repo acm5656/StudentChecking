@@ -48,6 +48,7 @@ public class AssistantMineFragment extends Fragment implements View.OnClickListe
         layoutChangePwd = (RelativeLayout) view.findViewById(R.id.fragment_assistant_mine_change_password);
         layoutChangeInfo = (RelativeLayout) view.findViewById(R.id.fragment_assistant_mine_changeInfo);
         headImageView = (CircleImageView) view.findViewById(R.id.fragment_assistant_mine_head_picture);
+        headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
         textViewId = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_id);
         textViewName = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_name);
     }
@@ -71,14 +72,20 @@ public class AssistantMineFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.fragment_assistant_mine_changeInfo:
                 intent.setClass(getContext(), AssistantChangeInfoActivity.class);
-                startActivityForResult(intent,CHANGE_INFO_REQUEST_CODE);
+                getActivity().startActivityForResult(intent,CHANGE_INFO_REQUEST_CODE);
                 break;
             case R.id.btn_fragment_assistant_mine_exit:
                 AssistantDao assistantDao = new AssistantDao(getActivity());
                 assistantDao.deleteAssistant(LoginActivity.assistantStatic);
+                LoginActivity.clearStaticResourse();
                 intent.setClass(getContext(),LoginActivity.class);
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
     }
 }

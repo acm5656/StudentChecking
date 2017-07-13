@@ -83,7 +83,7 @@ public class QueryCourseStudentAttentanceInfoItemAdapter extends BaseAdapter {
         {
             courseShow.setLateCount("0");
         }
-        viewHolder.studentID.setText(courseShow.getStudentId());
+        viewHolder.studentID.setText(courseShow.getStduentSchoolID());
         viewHolder.studentName.setText(courseShow.getStudentName());
         viewHolder.courseAbsentCount.setText(courseShow.getAbsentCount());
         viewHolder.courseLateCount.setText(courseShow.getLateCount());

@@ -91,34 +91,6 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/itemBackgroundColor"
-            android:weightSum="3"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="昵称"
-                android:gravity="center"
-                android:textSize="17dp"
-                android:layout_weight="1"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:textSize="17dp"
-                android:text="哈哈"
-                android:background="@null"
-                android:id="@+id/et_activity_assistant_change_info_nick_name"
-                />
-        </LinearLayout>
-        <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"

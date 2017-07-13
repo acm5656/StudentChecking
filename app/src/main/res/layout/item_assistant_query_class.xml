@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="65dp"
     android:orientation="horizontal">
 
     <ImageView
@@ -13,9 +13,10 @@
         android:src="@drawable/course"/>
 
     <LinearLayout
+        android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
@@ -23,15 +24,18 @@
             style="@style/blackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="软件工程专业" />
-
         <TextView
             android:id="@+id/tv_item_assistant_query_class_no"
             style="@style/blackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="2014级1班" />
+        <TextView
+            android:text="编号："
+            style="@style/blackText"
+            android:id="@+id/tv_item_assistant_query_class_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

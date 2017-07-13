@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.checkingsystem.R;
 import com.example.checkingsystem.assistant.fragments.AssistantAgreeForClassFragment;
@@ -251,5 +253,26 @@ public class AssistantIndexActivity extends AppCompatActivity implements View.On
     public void onBackPressed() {
         super.onBackPressed();
         ActivityColectorUtil.finishAll();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("test",requestCode+"--");
+        if(resultCode==RESULT_OK)
+        {
+            switch (requestCode)
+            {
+                case ASSISTANT_ADD_CLASS:
+                    assistantInquireFragment.onActivityResult(requestCode,resultCode,data);
+                    Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case AssistantAgreeForLeaveFragment.CHANGE_ASK_LEAVE_INFO:
+                    assistantAgreeForLeaveFragment.onActivityResult(requestCode,resultCode,data);
+                    break;
+                case AssistantMineFragment.CHANGE_INFO_REQUEST_CODE:
+                    assistantMineFragment.onActivityResult(requestCode,resultCode,data);
+                    break;
+            }
+        }
     }
 }

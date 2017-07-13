@@ -4,6 +4,7 @@ package com.example.checkingsystem.entity;
  * Created by eggyer on 2017/6/30.
  */
 public class StudentAttendanceCount {
+    private String id;
     private String studentId;
     private int attendanceCount;
     private int absentCount;
@@ -48,5 +49,13 @@ public class StudentAttendanceCount {
 
     public void setLeaveCount(int leaveCount) {
         this.leaveCount = leaveCount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

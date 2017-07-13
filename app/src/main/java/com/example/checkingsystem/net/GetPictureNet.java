@@ -9,6 +9,8 @@ import com.example.checkingsystem.LoginActivity;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import util.BitmapUtil;
 
@@ -17,6 +19,7 @@ import util.BitmapUtil;
  */
 
 public class GetPictureNet {
+    public static ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
     public Bitmap bitmap = null;
     public interface HttpPictureCallbackListener {
         void onFinish(InputStream inputStream);
@@ -27,9 +30,11 @@ public class GetPictureNet {
     public void getPicture(final String address, final HttpPictureCallbackListener httpPictureCallbackListener)
     {
         Log.e("test",address);
-            new Thread(new Runnable() {
+
+            fixedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
+                    Log.e("test",Thread.currentThread()+"--");
                     HttpURLConnection connection = null;
                     try {
                         URL url = new URL(address);
@@ -56,7 +61,7 @@ public class GetPictureNet {
                         }
                     }
                 }
-            }).start();
+            });
 
     }
 

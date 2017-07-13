@@ -47,7 +47,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="请完善个人信息"
+                android:text="请完善个人信息，以下信息为关键信息，一旦填写，不可更改，请认真填写。"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="17dp"
@@ -119,7 +119,6 @@
                 android:layout_height="match_parent"
                 android:hint="请输入学号"
                 android:paddingLeft="10dp"
-                android:inputType="textPassword"
                 android:textColorHint="#a9a9a9"
                 android:background="@null"
                 android:textSize="16dp"

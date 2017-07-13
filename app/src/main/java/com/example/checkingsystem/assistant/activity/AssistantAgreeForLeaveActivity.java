@@ -70,7 +70,6 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
         textViewLeaveTime.setText(beginDateStr+"-"+endDateStr);
         textViewLeaveReason.setText(classLeaveShow.getVirtualCourseLeaveReason());
 
-
     }
 
     private void initListener(){
