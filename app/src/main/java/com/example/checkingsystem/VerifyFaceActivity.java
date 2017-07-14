@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import util.ActivityColectorUtil;
@@ -279,8 +280,11 @@ public class VerifyFaceActivity extends AppCompatActivity {
         Camera.Parameters params = mcamera.getParameters();
 
         params.setPreviewFormat(ImageFormat.NV21);
-//        params.setPictureSize(PREVIEW_WIDTH,PREVIEW_HEIGHT);
-
+        int width = mPreviewSurface.getWidth();
+        int height = mPreviewSurface.getHeight();
+        List<Camera.Size> sizeList = mcamera.getParameters().getSupportedPreviewSizes();
+        Camera.Size  size = getCloselyPreSize(width,height,sizeList);
+        params.setPreviewSize(size.width,size.height);
         mcamera.setParameters(params);
         mcamera.setDisplayOrientation(90);
         mcamera.setPreviewCallback(new Camera.PreviewCallback() {
@@ -355,6 +359,38 @@ public class VerifyFaceActivity extends AppCompatActivity {
         super.onDestroy();
         ActivityColectorUtil.removeActivity(this);
     }
+    protected Camera.Size getCloselyPreSize(int surfaceWidth, int surfaceHeight,
+                                            List<Camera.Size> preSizeList) {
 
+        int ReqTmpWidth;
+        int ReqTmpHeight;
+        // 当屏幕为垂直的时候需要把宽高值进行调换，保证宽大于高{
+//        ReqTmpWidth = surfaceWidth;
+//        ReqTmpHeight = surfaceHeight;
+        ReqTmpWidth = surfaceHeight;
+        ReqTmpHeight = surfaceWidth;
+        //先查找preview中是否存在与surfaceview相同宽高的尺寸
+        for(Camera.Size size : preSizeList){
+            if((size.width == ReqTmpWidth) && (size.height == ReqTmpHeight)){
+                return size;
+            }
+        }
+
+        // 得到与传入的宽高比最接近的size
+        float reqRatio = ((float) ReqTmpWidth) / ReqTmpHeight;
+        float curRatio, deltaRatio;
+        float deltaRatioMin = Float.MAX_VALUE;
+        Camera.Size retSize = null;
+        for (Camera.Size size : preSizeList) {
+            curRatio = ((float) size.width) / size.height;
+            deltaRatio = Math.abs(reqRatio - curRatio);
+            if (deltaRatio < deltaRatioMin) {
+                deltaRatioMin = deltaRatio;
+                retSize = size;
+            }
+        }
+
+        return retSize;
+    }
 
 }

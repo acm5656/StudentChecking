@@ -37,6 +37,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -73,7 +75,7 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     private TextView courseNameTextView;
     private TextView couseCodeTextView;
     private String courseID;
-
+    Thread thread;
     Handler handlerStuID = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -272,11 +274,36 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     private void openBluetooth() {
         //bluetoothAdapter.enable();
         if(bluetoothAdapter != null){
-            if(!bluetoothAdapter.isEnabled()){
                 Intent discoveryIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 discoveryIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,0);//设置持续时间（最多300秒）
                 startActivity(discoveryIntent);
+
+            Class serviceManager = null;
+            try {
+                serviceManager = Class.forName("android.bluetooth.BluetoothAdapter");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
+            Method method = null;
+            try {
+                method = serviceManager.getMethod("setDiscoverableTimeout", String.class);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                method.invoke(serviceManager.newInstance(), 30);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            }
+
+
+
 //            Log.e("test_local",MacUtil.getBtAddressViaReflection());
             String macAddress = android.provider.Settings.Secure.getString(getActivity().getContentResolver(), "bluetooth_address");
             //得到所有已经被对的蓝牙适配器对象
@@ -301,10 +328,15 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
     {
         getActivity().registerReceiver(bluetoothReceiver, intentFileter);
         openBluetooth();
-        progressDialog = ProgressDialog.show(getActivity(),"考勤获权", "请稍等，确保一米内有已经获权的设备", true, false);
-
-
-        new Thread(new Runnable() {
+        progressDialog = ProgressDialog.show(getActivity(),"考勤获权", "请稍等，确保一米内有已经获权的设备", true, true);
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                doQuery = false;
+            }
+        });
+        i = 0;
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(doQuery) {
@@ -344,8 +376,10 @@ public class StudentCheckingFragment extends Fragment implements View.OnClickLis
                         }
                     }
                 }
+                getActivity().unregisterReceiver(bluetoothReceiver);
             }
-        }).start();
+        });
+        thread.start();
     }
     private void showInputDialog() {
     /*@setView 装入一个EditView

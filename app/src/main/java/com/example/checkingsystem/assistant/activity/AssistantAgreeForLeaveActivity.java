@@ -58,7 +58,9 @@ public class AssistantAgreeForLeaveActivity extends AppCompatActivity implements
         editTextLeaveNote = (EditText) findViewById(R.id.et_activity_assistant_agree_for_leave_note);
         buttonAgree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_agree);
         buttonDisagree = (Button) findViewById(R.id.btn_activity_assistant_agree_for_leave_disagree);
-        circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
+        if(classLeaveShow.getStudentBitmap()!=null) {
+            circleImageView.setImageBitmap(classLeaveShow.getStudentBitmap());
+        }
         textViewMineId.setText(classLeaveShow.getStudentSchoolName());
         textViewMineName.setText(classLeaveShow.getStudentName());
         Date beginDate = new Date(classLeaveShow.getVirtualCourseLeaveBegin().getTime());

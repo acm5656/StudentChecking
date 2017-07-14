@@ -65,7 +65,9 @@ public class AssistantAgreeForClassItemAdapter extends BaseAdapter {
             view.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) view.getTag();
-        viewHolder.head.setImageBitmap(studentList.get(i).getBitmap());
+        if(studentList.get(i).getBitmap()!=null) {
+            viewHolder.head.setImageBitmap(studentList.get(i).getBitmap());
+        }
         viewHolder.no.setText(studentList.get(i).getStudent().getStudentNo());
         viewHolder.name.setText(studentList.get(i).getStudent().getStudentName());
         viewHolder.status.setText("状态："+studentList.get(i).getClassGrade().getChinese());

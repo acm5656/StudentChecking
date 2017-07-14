@@ -48,7 +48,9 @@ public class AssistantMineFragment extends Fragment implements View.OnClickListe
         layoutChangePwd = (RelativeLayout) view.findViewById(R.id.fragment_assistant_mine_change_password);
         layoutChangeInfo = (RelativeLayout) view.findViewById(R.id.fragment_assistant_mine_changeInfo);
         headImageView = (CircleImageView) view.findViewById(R.id.fragment_assistant_mine_head_picture);
-        headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
+        if(LoginActivity.headPictureBitmap!=null) {
+            headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
+        }
         textViewId = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_id);
         textViewName = (TextView) view.findViewById(R.id.tv_fragment_assistant_mine_name);
         textViewId.setText(LoginActivity.assistantStatic.getAssistantNo());
