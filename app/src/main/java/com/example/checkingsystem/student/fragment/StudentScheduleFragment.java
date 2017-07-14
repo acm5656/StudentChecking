@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+//已经舍弃控件
 public class StudentScheduleFragment extends Fragment implements View.OnClickListener{
     private TextView studentWeekOneClassOne;
     private TextView studentWeekOneClassTwo;

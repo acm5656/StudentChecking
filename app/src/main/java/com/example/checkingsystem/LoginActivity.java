@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static List<CourseShow> studentCourseShow = null;
     public static List<CourseShow> studentItemCountGroupByCidAndIStatusList = null;
     public static List<CourseLeave> studentCourseLeaveList = null;
-
     //用来记录教师课表
     public static List<VirtualCourse> teacherVirtualList = null;
     public static List<CourseShow> teacherCourseShow = null;
@@ -233,6 +232,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         videoview.stopPlayback();
         super.onStop();
     }
+    //清空所有静态变量的值，并且调用gc，释放内存，在点击注销的时候使用
     public static void clearStaticResourse()
     {
         roleStr = null;

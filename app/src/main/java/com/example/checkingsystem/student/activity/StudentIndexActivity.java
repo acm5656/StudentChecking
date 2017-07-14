@@ -40,7 +40,7 @@ import static com.tencent.cos.COSClient.getContext;
 public class StudentIndexActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
-
+    //view声明，分别是主页的底部框的textview，imageview，layout
     private TextView studentIndexStudyTextView;
     private TextView studentIndexInquireTextView;
     private TextView studentIndexMineTextView;
@@ -56,9 +56,10 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     private LinearLayout studentIndexMineLayout;
     private LinearLayout studentIndexAskForLeaveLayout;
     private ImageView studentAddCourseimage;
-
+    //旧版本的选择周的功能，已经舍弃
     private TextView studentIndexChooseWeek;
     public String week = "1";
+    //学生功能主页面的四个fragment，每一个fragment代表一个滑动的页面
     public StudentMineFragment studentMineFragment;
     public StudentCourseIndexFragment studentCourseIndexFragment;
     public StudentInquireFragment studentInquireFragment;
@@ -74,10 +75,12 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         ActivityColectorUtil.addActivity(this);
         initUI();
         final List<Fragment> list = new ArrayList<>();
+        //初始化fragment
         studentInquireFragment = new StudentInquireFragment();
         studentMineFragment = new StudentMineFragment();
         studentCourseIndexFragment = new StudentCourseIndexFragment();
         studentAskForLeaveFragment = new StudentAskForLeaveFragment();
+        //向集合中添加
         list.add(studentCourseIndexFragment);
         list.add(studentAskForLeaveFragment);
         list.add(studentInquireFragment);
@@ -95,14 +98,17 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
                 return list.size();
             }
         });
+        //以舍弃，老版本的选课
         studentIndexChooseWeek.setText("课表");
         studentIndexChooseWeek.setOnClickListener(this);
+
+        //设置当前显示的页面
         viewPager.setCurrentItem(0);
         studentIndexMineLayout.setOnClickListener(this);
         studentIndexInquireLayout.setOnClickListener(this);
         studentIndexStudyLayout.setOnClickListener(this);
         studentIndexAskForLeaveLayout.setOnClickListener(this);
-
+        //页面变化时执行的事件
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -113,6 +119,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
             public void onPageSelected(int position) {
                 switch (position)
                 {
+                    //主要是修改底部框的图标，文字的颜色和上方的点击事件和图片
                     case 0:
                         viewPager.setCurrentItem(0);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -212,7 +219,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
-
+    //初始化资源文件
     public void initUI()
     {
         viewPager = (ViewPager)findViewById(R.id.student_index_viewpager);
@@ -233,6 +240,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
 
         studentIndexChooseWeek = (TextView)findViewById(R.id.student_index_choose_week);
         studentAddCourseimage = (ImageView)findViewById(R.id.acivity_student_index_add);
+        //当学生初次注册时，没有通过认证后，登录进来显示的提示信息
         if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_FAIL))
         {
             Toast.makeText(getApplicationContext(),"申请被拒绝，请再次进行人脸识别，再次申请加入班级",Toast.LENGTH_LONG).show();
@@ -247,12 +255,14 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId())
         {
+            //以舍弃的点击事件
             case R.id.student_index_choose_week:
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 ChooseWeekFragment dialog = new ChooseWeekFragment();
 
                 dialog.show(fragmentManager,"dialog");
                 break;
+            //四个页面来回切换的设置当前显示页
             case  R.id.student_index_mine:
                 viewPager.setCurrentItem(3);
 
@@ -268,6 +278,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
             case R.id.student_index_ask_for_leave:
                 viewPager.setCurrentItem(1);
                 break;
+            //进入班级的点击事件，判断学生的状态，如果状态没通过审核，则会显示提示信息
             case R.id.acivity_student_index_add:
                 if(LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_PASS))
                 {
@@ -285,23 +296,14 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-//    @Override
-//    public void SendMessageValue(String strValue) {
-//        week = strValue;
-//        if("0".equals(strValue))
-//            studentIndexChooseWeek.setText("放假中");
-//        else {
-//            studentIndexChooseWeek.setText("第" + strValue + "周");
-//        }
-//        studentScheduleFragment.updateUI(new Integer(strValue));
-//
-//    }
-
+    //摁返回键执行的函数
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        //回收所有的activity,退出
         ActivityColectorUtil.finishAll();
     }
+    //输入班级后执行的事件
     DialogInterface.OnClickListener getOnclickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -311,6 +313,7 @@ public class StudentIndexActivity extends AppCompatActivity implements View.OnCl
 
         }
     };
+    //用来显示加入班级的dialog
     private void showInputDialog() {
     /*@setView 装入一个EditView
      */

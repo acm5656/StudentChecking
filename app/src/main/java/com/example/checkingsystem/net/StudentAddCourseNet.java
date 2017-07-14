@@ -25,13 +25,14 @@ import util.PathUtil;
 /**
  * Created by 那年.盛夏 on 2017/6/29.
  */
-
+//学生用来加入课程的net
 public class StudentAddCourseNet {
     final int ERROR = 0;
     final int SUCCESS = 1;
     Activity activity;
     ResultObj<VirtualCourse> virtualCourseResultObj = null;
     Bitmap bitmap = null;
+    //因为监听器监听到的是在子线程中，不能更新UI，利用handler进行UI更新
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -47,10 +48,11 @@ public class StudentAddCourseNet {
             }
         }
     };
-
+    //当收到服务器返回数据后执行的监听接口
     HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
+            //解析数据
             ResultObj resultObj = ChangeTypeUtil.getResultObj(response);
             if(resultObj.getMeta().getResult())
             {
@@ -82,6 +84,7 @@ public class StudentAddCourseNet {
                 }
 
             }else {
+                //如果操作失败，执行的操作
                 Message message = new Message();
                 message.what = ERROR;
                 message.obj = resultObj.getMeta().getMsg();
@@ -91,19 +94,21 @@ public class StudentAddCourseNet {
 
         @Override
         public void onError(Exception e) {
+            //如果连接过程出现异常，执行的操作
             Message message = new Message();
             message.what = ERROR;
             message.obj = "操作失败，请稍后再试";
             handler.sendMessage(message);
         }
     };
-
+    //生成请求的url和请求的数据
     public void studentAddCourse(Activity activity,String code,String studentID)
     {
 
         this.activity = activity;
         String data = "code="+code+"&studentId="+studentID;
         String address = HttpUtil.urlIp+ PathUtil.STUDENT_ADD_COURSE;
+        //发送数据
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 }

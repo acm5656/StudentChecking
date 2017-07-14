@@ -34,8 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="课程编号: "
-                android:textSize="48px"
-
+                android:textSize="15dp"
                 />
             <TextView
                 android:gravity="center"
@@ -43,8 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="123"
-                android:textSize="48px"
-
+                android:textSize="15dp"
                 />
         </LinearLayout>
         <LinearLayout
@@ -59,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="课程名称: "
-                android:textSize="48px"
+                android:textSize="15dp"
                 />
             <TextView
                 android:gravity="center"
@@ -67,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="软件测试"
-                android:textSize="48px"
+                android:textSize="15dp"
                 />
         </LinearLayout>
         <LinearLayout

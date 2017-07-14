@@ -38,17 +38,19 @@ import util.PathUtil;
  */
 
 public class LoginNet {
+    //操作成功和失败的两个常量的标志
     public static final int TRUE = 1;
     public static final int FALSE = 0;
     private Activity activity;
     private ObjectMapper objectMapper = new ObjectMapper();
+    //登录获取数据后进行的操作
     public Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what)
             {
                 case TRUE:
-//                    Toast.makeText(activity,(String)msg.obj,Toast.LENGTH_SHORT).show();
+                    //学生登录进来进行的操作
                     if(LoginActivity.roleStr.equals("学生")) {
                         ResultObj<StudentVo> resultObj = new ResultObj();
                         try {
@@ -56,10 +58,10 @@ public class LoginNet {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+                        //如果登录成功，进行的操作
                         if(resultObj.getMeta().getResult()) {
                             LoginActivity.studentStatic = resultObj.getData().getStudent();
-
+                            //生成口令，在今后做跳转用
                             Long longTime = new Long(resultObj.getData().getTimestamp());
 
                             Date date = new Date(longTime);
@@ -72,11 +74,17 @@ public class LoginNet {
                                 e.printStackTrace();
 
                             }
+
                             LoginActivity.token = token;
+                            //将存储密码的字段，暂时用来存储token
                             LoginActivity.studentStatic.setStudentPassword(token);
+                            //将字段存入本地数据库
                             LoginActivity.studentDao.addStudent(LoginActivity.studentStatic);
+                            //获取头像照片
                             GetHeadPictureNet.getPicture(LoginActivity.studentStatic.getStudentHeadimageUrl());
+                            //获取课表信息
                             GetVirtualCourseInfoNet.studentGetCourseTimeInfo();
+                            //判断是不是还没有填写关键信息，如果没有，跳转到填写的页面，如果填写了，跳入主页面
                             if(
                                     LoginActivity.studentStatic.getStudentName()==null||
                                     LoginActivity.studentStatic.getStudentName().trim().equals("")||
@@ -96,6 +104,7 @@ public class LoginNet {
                             Toast.makeText(activity,"账号密码错误",Toast.LENGTH_SHORT).show();
                         }
                     }
+                    //教师登录进来进行的操作
                     if(LoginActivity.roleStr.equals("教师")) {
                         ResultObj<TeacherVo> resultObj = new ResultObj<>();
                         try {
@@ -103,6 +112,7 @@ public class LoginNet {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        //如果登录成功，进行的操作
                         if(resultObj.getMeta().getResult()) {
                             LoginActivity.teacherStatic = resultObj.getData().getTeacher();
 
@@ -124,8 +134,11 @@ public class LoginNet {
                             LoginActivity.teacherStatic.setTeacherPassword(token);
 
                             LoginActivity.teacherDao.addTeacher(LoginActivity.teacherStatic);
+                            //获取头像照片
                             GetHeadPictureNet.getPicture(LoginActivity.teacherStatic.getTeacherHeadimageUrl());
+                            //获取课表信息
                             GetVirtualCourseInfoNet.teacherGetCourseTimeInfo();
+                            //判断是不是还没有填写关键信息，如果没有，跳转到填写的页面，如果填写了，跳入主页面
                             if(
                                     LoginActivity.teacherStatic.getTeacherNo()==null||
                                     LoginActivity.teacherStatic.getTeacherNo().equals("")||
@@ -146,6 +159,7 @@ public class LoginNet {
                         }
 
                     }
+                    //导员登录进来进行的操作
                     if(LoginActivity.roleStr.equals("导员"))
                     {
                         ResultObj <AssistantVo> resultObj = null;
@@ -155,6 +169,8 @@ public class LoginNet {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+                        //如果登录成功，进行的操作
                         if(resultObj.getMeta().getResult())
                         {
                             LoginActivity.assistantStatic = resultObj.getData().getAssistant();
@@ -171,12 +187,13 @@ public class LoginNet {
                                 e.printStackTrace();
 
                             }
-
+                            //将存储密码的字段，暂时用来存储token
                             LoginActivity.token = token;
                             LoginActivity.assistantStatic.setAssistantPassword(token);
+
                             LoginActivity.assistantDao.addAssistant(LoginActivity.assistantStatic);
                             GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
-                            GetHeadPictureNet.getPicture(LoginActivity.assistantStatic.getAssistantHeadimageUrl());
+                            //判断是不是还没有填写关键信息，如果没有，跳转到填写的页面，如果填写了，跳入主页面
                             if(
                                     LoginActivity.assistantStatic.getAssistantNo()==null||
                                     LoginActivity.assistantStatic.getAssistantNo().trim().equals("")||
@@ -205,6 +222,7 @@ public class LoginNet {
             }
         }
     };
+    //登录成功后获取到的数据
     public HttpCallbackListener httpCallbackListener = new HttpCallbackListener() {
         @Override
         public void onFinish(String response) {
@@ -221,6 +239,7 @@ public class LoginNet {
             handler.sendMessage(message);
         }
     };
+    //学生登录的请求数据和url处理
     public void studentLogin(Activity activity, String username, String password)
     {
         this.activity = activity;
@@ -229,7 +248,7 @@ public class LoginNet {
         String data = loginEncode(address,username,password);
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
-
+    //教师登录的请求数据和url处理
     public void teacherLogin(Activity activity,String username,String password)
     {
         this.activity = activity;
@@ -237,6 +256,7 @@ public class LoginNet {
         String data = loginEncode(address,username,password);
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
+    //辅导员登录的请求数据和url处理
     public void assistantLogin(Activity activity,String username,String password)
     {
         this.activity = activity;
@@ -245,7 +265,7 @@ public class LoginNet {
         HttpUtil.sendHttpPostRequest(address,httpCallbackListener,data,HttpUtil.NO_STATUS);
     }
 
-
+    //对密码等登录数据进行的处理
     String loginEncode(String url,String username,String password)
     {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

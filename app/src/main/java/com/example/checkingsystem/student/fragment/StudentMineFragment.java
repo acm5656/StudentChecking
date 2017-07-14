@@ -36,32 +36,27 @@ import com.example.checkingsystem.student.activity.StudentQueryLeaveInfoListActi
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StudentMineFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+//student的我的页面的fragment
 public class StudentMineFragment extends Fragment {
-//    Handler setImageHandler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            headImageView.setImageBitmap(LoginActivity.headPictureBitmap);
-//        }
-//    };
+
     private OnFragmentInteractionListener mListener;
+    //加载fragment页面的view
     private View view;
+    //退出的按钮
     private Button quitButton;
+    //人脸注册和修改个人信息的常量
     public static final int FACE_REGIST_REQUEST_CODE = 1;
     public static final int CHANGE_INFO_REQUEST_CODE = 2;
+    //用来设置点击时间的四个layout
     private RelativeLayout registRelativeLayout;
     private RelativeLayout changeIngoRelativeLayout;
     private RelativeLayout changePasswordRelativeLayout;
     private RelativeLayout stduentAddClassRelativeLayout;
     private RelativeLayout studentQueryAskLeaveInfoRelativeLayout;
+    //显示主页的两个textview，姓名和学号
     private TextView schoolIDTextView;
     private TextView studentName;
+    //显示头像
     private CircleImageView headImageView;
     EditText addClassEditText;
     private String classCode;
@@ -71,6 +66,7 @@ public class StudentMineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_student_mine, container, false);
+        //初始化参数和设置点击事件
         quitButton = (Button) view.findViewById(R.id.fragment_student_mine_quit);
 
         quitButton.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +82,7 @@ public class StudentMineFragment extends Fragment {
         registRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //判断状态，如果通过了验证，则不能再次进行人脸注册
                 if(!LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_PASS))
                 {
                     Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
@@ -117,6 +114,7 @@ public class StudentMineFragment extends Fragment {
         stduentAddClassRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //判断状态，如果没有进行人脸注册，则直接跳转到注册页面
                 if(LoginActivity.studentStatic.getStudentFacecode()==null||LoginActivity.studentStatic.getStudentFacecode().trim().equals("")||LoginActivity.studentStatic.getStudentStatus().equals(Student.STATUS_AUTH_FAIL))
                 {
                     Intent intent = new Intent(getActivity(), RegistFaceActivity.class);
@@ -171,6 +169,7 @@ public class StudentMineFragment extends Fragment {
         }
     }
 
+    //对于进行修改个人信息或人脸识别后执行的回调操作
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String dataStr = null;
@@ -191,6 +190,7 @@ public class StudentMineFragment extends Fragment {
         }
     }
 
+    //点击确定好后执行的操作
     DialogInterface.OnClickListener getOnclickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -200,6 +200,7 @@ public class StudentMineFragment extends Fragment {
         }
     };
 
+    //用来显示加入班级编号的dialog
     private void showInputDialog() {
     /*@setView 装入一个EditView
      */
