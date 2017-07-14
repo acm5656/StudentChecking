@@ -75,15 +75,23 @@ public class StudentAskForLeaveFragment extends Fragment {
         final List<String> day = new ArrayList<String>();
         for (int i = 1; i <= 12; i++)
         {
-            month.add("0" + i);
+            if (i<10){
+                month.add("0" + i);
+            }else{
+                month.add("" + i);
+            }
         }
         for(int i = 1;i<=31;i++)
         {
-            day.add("0"+i);
+            if (i<10){
+                day.add("0" + i);
+            }else{
+                day.add("" + i);
+            }
         }
         for(int i = 1 ;i<=20;i++)
         {
-            year.add(2016+i+"");
+            year.add(2016 + i + "");
         }
         startMonthPV.setData(month);
         endMonthPV.setData(month);
@@ -99,7 +107,6 @@ public class StudentAskForLeaveFragment extends Fragment {
         startYearPV.setSelected(0);
         endtYearPV.setSelected(0);
 
-
         startMonthPV.setOnSelectListener(new PickerView.onSelectListener()
         {
             @Override
@@ -112,7 +119,11 @@ public class StudentAskForLeaveFragment extends Fragment {
                 day.clear();
                 for(int i = 1;i<=count ;i++)
                 {
-                    day.add("0"+i);
+                    if(i<10){
+                        day.add("0" + i);
+                    }else {
+                        day.add("" + i);
+                    }
                 }
                 startDayPV.setData(day);
                 startDayPV.setSelected(0);
@@ -127,7 +138,11 @@ public class StudentAskForLeaveFragment extends Fragment {
                 day.clear();
                 for(int i = 1;i<=count ;i++)
                 {
-                    day.add("0"+i);
+                    if(i<10){
+                        day.add("0" + i);
+                    }else {
+                        day.add("" + i);
+                    }
                 }
                 endDayPV.setData(day);
                 endDayPV.setSelected(0);
@@ -159,8 +174,6 @@ public class StudentAskForLeaveFragment extends Fragment {
             }
         });
 
-
-
         reasonEditText = (EditText)view.findViewById(R.id.fragement_student_ask_for_leave_reason);
         submitButton = (Button)view.findViewById(R.id.fragment_student_ask_for_leave_submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -177,20 +190,15 @@ public class StudentAskForLeaveFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-
                 if(reason!=null&&!reason.trim().equals("")) {
                     StudentAskForLeaveNet studentAskForLeaveNet = new StudentAskForLeaveNet();
                     studentAskForLeaveNet.studentAskForLeave(getActivity(), studentID, reason, beginDate,endDate);
                 }else {
                     Toast.makeText(getContext(),"请输入请假理由",Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
     }
-
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
