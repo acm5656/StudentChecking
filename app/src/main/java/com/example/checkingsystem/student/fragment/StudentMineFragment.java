@@ -206,7 +206,7 @@ public class StudentMineFragment extends Fragment {
         addClassEditText = new EditText(getActivity());
         AlertDialog.Builder inputDialog =
                 new AlertDialog.Builder(getActivity());
-        inputDialog.setTitle("请输入课程编号").setView(addClassEditText);
+        inputDialog.setTitle("请输入班级编号").setView(addClassEditText);
         inputDialog.setPositiveButton("确定",
                 getOnclickListener).show();
     }

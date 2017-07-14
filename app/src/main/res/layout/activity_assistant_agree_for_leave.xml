@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -91,12 +92,10 @@
     <TextView
         android:id="@+id/tv_activity_assistant_agree_for_leave_reason"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" 
+        android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        style="@style/blackEditText"
-        android:background="@drawable/ask_for_leave_edit"/>
+        style="@style/blackEditText"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -107,8 +106,7 @@
     <EditText
         android:id="@+id/et_activity_assistant_agree_for_leave_note"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="200dp"
         android:background="@drawable/ask_for_leave_edit"
         android:hint="请输入备注信息"
         android:textColorHint="@color/textUnClickColor"
@@ -120,6 +118,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_activity_assistant_agree_for_leave_agree"

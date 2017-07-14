@@ -6,21 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/actionBarBackgroundColor"
         >
+        <ImageView
+            android:id="@+id/iv_activity_assistant_query_student_total_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/back"
+            android:padding="13dp"
+            android:layout_marginRight="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="学生考勤详细列表"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_activity_assistant_query_student_total_back"
             android:gravity="center_vertical"
             />
-    </LinearLayout>
+    </RelativeLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
