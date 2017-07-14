@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.ActivityColectorUtil;
-
+//
 public class StudentCheckingActivity extends FragmentActivity {
     private ImageView iv_back;
     private ViewPager viewPager;
